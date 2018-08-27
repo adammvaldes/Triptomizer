@@ -1,11 +1,12 @@
 # t13
 
 # Member information
-|       Name       |       eName       |       GitHub user       |       email       |       Nickname       |<br>
-| Edward Lee       | leejr             | leejr0                  | leejr@rams.colostate.edu | EJ            |<br>
-| Vlad Stepanuga   | vstepa            | vstepanuga              | vstepa@rams.colostate.edu | Vlad         |<br>
-|John Miller | jmiller0 | pqalzm6 | jmiller0@rams.colocstate.edu | N/A |<br>
-|Adam Valdes | adammv | adammvaldes | adammv@rams.colostate.edu | N/A |<br>
+|       Name       |       eName       |       GitHub user       |       email       |       Nickname       |
+| ---------------- | ----------------- | ----------------------- | ----------------- | -------------------- |
+| Edward Lee       | leejr             | leejr0                  | leejr@rams.colostate.edu | EJ            |
+| Vlad Stepanuga   | vstepa            | vstepanuga              | vstepa@rams.colostate.edu | Vlad         |
+|John Miller       | jmiller0          | pqalzm6                 | jmiller0@rams.colocstate.edu | N/A       |
+|Adam Valdes       | adammv            | adammvaldes             | adammv@rams.colostate.edu    | N/A       |
 
 
 ### Edward Lee
