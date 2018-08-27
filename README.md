@@ -2,7 +2,6 @@
 
 # Member information
 |       Name       |       eName       |       GitHub user       |       email       |       Nickname       |<br>
-| ---------------- | ----------------- | ----------------------- | ----------------  | -------------------- |<br>
 | Edward Lee       | leejr             | leejr0                  | leejr@rams.colostate.edu | EJ            |<br>
 | Vlad Stepanuga   | vstepa            | vstepanuga              | vstepa@rams.colostate.edu | Vlad         |<br>
 |John Miller | jmiller0 | pqalzm6 | jmiller0@rams.colocstate.edu | N/A |<br>
