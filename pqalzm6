@@ -1,3 +1,4 @@
+Teamwork Questionnaire for John Miller
 Is it generally easier to reach you by text, electronic mail, voice mail or something else? What hours?
     Text works best. after 3pm Mon-Fri works best, i also have some free time 12-2 M,W,F. 
 What are your expectations about what your team will accomplish this semester?
