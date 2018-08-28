@@ -7,6 +7,7 @@
 | Vlad Stepanuga   | vstepa            | vstepanuga              | vstepa@rams.colostate.edu | Vlad         |
 |John Miller       | jmiller0          | pqalzm6                 | jmiller0@rams.colocstate.edu | N/A       |
 |Adam Valdes       | adammv            | adammvaldes             | adammv@rams.colostate.edu    | N/A       |
+|Dmitry Melnikov   | dmelniko          | dmelniko                | dmelniko@rams.colostate.edu    | N/A     |
 
 
 ### Edward Lee
@@ -17,6 +18,9 @@ Vlad Stepanuga is a third year computer science student, who goes by Vlad. He is
 
 ### John Miller 
 John Miller is a fourth-year student, who goes by John. He is currently unemployed, but will most likely pick up some part time work later in the semester. He plays Ultimate Frisbee for the club team at CSU. His best quality is problem solving. He enjoys thinking through the logic behind a program, and figuring out the best way to attack it. His biggest flaw, aside from spelling, is procrastination. He will do most of his work during the week, while already on campus, but he has some free time during the weekends if need be. 
+
+### Dmitry Melnikov
+Dmitry Melnikov is a third year student at CSU majoring in computer science. Previously he graduated from Colorado School of Mines with a degree in petroleum engineering in 2008. He worked as production and drilling engineer in Wyoming and Colorado, including a position as night time rig site supervisor. His focus on drilling optimization and frustration with lack of suitable software in the industry lead him to a career change with the goal of designing software that would fill that void. The industry experience helped him understand the importance of teamwork and communication. 
 
 # Manifesto
 
