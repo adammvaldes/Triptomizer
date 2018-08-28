@@ -35,6 +35,7 @@ Adam Valdes is a third year transfer student at CSU who is majoring in Computer 
   We value efficiency, not only for our code, but also for our team. We value a hard-working team that can deliver a product within the time restraints we have. When we run into problems, our goal is to solve them in a timely manner, whether we have problems with GitHub merging or problems within our team. 
 
 **Quality of Product** 
+  The overarching goal of our team is to creat a high quality website for our customers to use. We hope to produce a smoth and easy to use interface, that is functioal from start to finish. It will be the goal of every member of the team to produce the highest quality code posible, and to be constantly improving on what we have.
 
 **Teamwork**
   Our team will strive to coordinate the work on our assignments through either Slack, direct meetings, or other communication channels.  Our team will try to divide the work on assignments clearly and fairly in order to reduce any problems with conflicting code and to properly balance the workload between our members.  We will work to review the issues and pull requests submitted by our teammates on GitHub in a timely manner and avoid committing anything directly to the master branch.  
