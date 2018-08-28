@@ -34,6 +34,7 @@ Adam Valdes is a third year transfer student at CSU who is majoring in Computer 
 **Efficency** 
 
 **Quality of Product** 
+The overarching goal of our team is to creat a high quality website for our customers to use. We hope to produce a smoth and easy to use interface, that is functioal from start to finish. 
 
 **Teamwork** 
 
