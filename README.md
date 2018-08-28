@@ -26,18 +26,18 @@ Dmitry Melnikov is a third year student at CSU majoring in computer science. Pre
 Adam Valdes is a third year transfer student at CSU who is majoring in Computer Science.  After originally majoring in Computer Engineering at the University of Denver he transferred to Colorado State University and changed his major to Computer Science.  His best quality is his ability to think of different solutions to a given problem.  One of his shortcomings is that he can tend to procastinate if he feels that he is already mostly done with an assignment or project.  He will be doing most of his work later in the day on weekdays or any time throughout the weekends.  
 
 # Manifesto
-**Intro 
+**Intro**
 
-**Personal Growth
+**Personal Growth**
   One of the main values for our team is the desire to learn. We are focused on gaining as much useful knowledge out of this course as possible. There is a lot of competition on the market for computer scientists and the main things that help candidates stand out are their skills. The more comfortable you are with commonly used industry tools and practices the more desirable you are for the employer. With the goal of the team and this course aligning so perfectly we are hoping to develop skills that will be useful for the duration of our careers.  
 
-**Efficency 
+**Efficency** 
 
-**Quality of Product 
+**Quality of Product**
 
-**Teamwork 
+**Teamwork**
 
-**Other value
+**Other value**
 
 # Expectations
 We expect that each member of our team will work together in order to complete our assignments on time and according to the specifications given to us.  Each member should try to keep in contact with the rest of the team in order to coordinate our work on our assignments and minimize confusion and conflicting code.  Members should feel free to discuss and brainstorm any problems that they may run into on any of the assignments with the rest of the team in order to best complete our assignments.
