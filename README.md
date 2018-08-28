@@ -1,4 +1,4 @@
-# t13 - Spaghetti Code
+# t13 - Spaghetti Coders
 
 # Member information
 |       Name       |       eName       |       GitHub user       |       email       |       Nickname       |
