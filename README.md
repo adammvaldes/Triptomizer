@@ -31,7 +31,8 @@ Adam Valdes is a third year transfer student at CSU who is majoring in Computer 
 **Personal Growth**
   One of the main values for our team is the desire to learn. We are focused on gaining as much useful knowledge out of this course as possible. There is a lot of competition on the market for computer scientists and the main things that help candidates stand out are their skills. The more comfortable you are with commonly used industry tools and practices the more desirable you are for the employer. With the goal of the team and this course aligning so perfectly we are hoping to develop skills that will be useful for the duration of our careers.  
 
-**Efficency** 
+**Efficiency** 
+  We value efficiency, not only for our code, but also for our team. We value a hard-working team that can deliver a product within the time restraints we have. When we run into problems, our goal is to solve them in a timely manner, whether we have problems with GitHub merging or problems within our team. 
 
 **Quality of Product** 
 
