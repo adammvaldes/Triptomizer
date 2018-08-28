@@ -23,5 +23,6 @@ John Miller is a fourth-year student, who goes by John. He is currently unemploy
 Dmitry Melnikov is a third year student at CSU majoring in computer science. Previously he graduated from Colorado School of Mines with a degree in petroleum engineering in 2008. He worked as production and drilling engineer in Wyoming and Colorado, including a position as night time rig site supervisor. His focus on drilling optimization and frustration with lack of suitable software in the industry lead him to a career change with the goal of designing software that would fill that void. The industry experience helped him understand the importance of teamwork and communication. 
 
 # Manifesto
+One of the main values for our team is the desire to learn. We are focused on gaining as much useful knowledge out of this course as possible. There is a lot of competition on the market for computer scientists and the main things that help candidates stand out are their skills. The more comfortable you are with commonly used industry tools and practices the more desirable you are for the employer. With the goal of the team and this course aligning so perfectly we are hoping to develop skills that will be useful for the duration of our careers.  
 
 # Expectations
