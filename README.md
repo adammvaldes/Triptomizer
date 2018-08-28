@@ -40,7 +40,8 @@ Adam Valdes is a third year transfer student at CSU who is majoring in Computer 
 **Teamwork**
   Our team will strive to coordinate the work on our assignments through either Slack, direct meetings, or other communication channels.  Our team will try to divide the work on assignments clearly and fairly in order to reduce any problems with conflicting code and to properly balance the workload between our members.  We will work to review the issues and pull requests submitted by our teammates on GitHub in a timely manner and avoid committing anything directly to the master branch.  
 
-**Other value**
+**Industry-like Experience**
+One of the main qualities of CS 314 is to provide students with a similar experience to today's industry, this includes technology like SC(Github), javascript React module for single page applications, as well as Java, a very popular back-end language, and most importantly teamwork in pairs or groups and reacting to all changes or propositions made during a project. Our team values this experience, as most of us will either graduate and will need to find legitimate positions in industry, or get into an internship that will also require us to know everything we will be learning this semester.
 
 # Expectations
 We expect that each member of our team will work together in order to complete our assignments on time and according to the specifications given to us.  Each member should try to keep in contact with the rest of the team in order to coordinate our work on our assignments and minimize confusion and conflicting code.  Members should feel free to discuss and brainstorm any problems that they may run into on any of the assignments with the rest of the team in order to best complete our assignments.
