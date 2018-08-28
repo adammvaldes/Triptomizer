@@ -35,7 +35,8 @@ Adam Valdes is a third year transfer student at CSU who is majoring in Computer 
 
 **Quality of Product** 
 
-**Teamwork** 
+**Teamwork**
+  Our team will strive to coordinate the work on our assignments through either Slack, direct meetings, or other communication channels.  Our team will try to divide the work on assignments clearly and fairly in order to reduce any problems with conflicting code and to properly balance the workload between our members.  We will work to review the issues and pull requests submitted by our teammates on GitHub in a timely manner and avoid committing anything directly to the master branch.  
 
 **Other value**
 
