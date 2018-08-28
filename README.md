@@ -1,4 +1,4 @@
-# t13 Coconut Coders
+# t13 - Spaghetti Code
 
 # Member information
 |       Name       |       eName       |       GitHub user       |       email       |       Nickname       |
