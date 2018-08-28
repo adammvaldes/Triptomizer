@@ -22,6 +22,9 @@ John Miller is a fourth-year student, who goes by John. He is currently unemploy
 ### Dmitry Melnikov
 Dmitry Melnikov is a third year student at CSU majoring in computer science. Previously he graduated from Colorado School of Mines with a degree in petroleum engineering in 2008. He worked as production and drilling engineer in Wyoming and Colorado, including a position as night time rig site supervisor. His focus on drilling optimization and frustration with lack of suitable software in the industry lead him to a career change with the goal of designing software that would fill that void. The industry experience helped him understand the importance of teamwork and communication. 
 
+### Adam Valdes
+Adam Valdes is a third year transfer student at CSU who is majoring in Computer Science.  After originally majoring in Computer Engineering at the University of Denver he transferred to Colorado State University and changed his major to Computer Science.  His best quality is his ability to think of different solutions to a given problem.  One of his shortcomings is that he can tend to procastinate if he feels that he is already mostly done with an assignment or project.  He will be doing most of his work later in the day on weekdays or any time throughout the weekends.  
+
 # Manifesto
 One of the main values for our team is the desire to learn. We are focused on gaining as much useful knowledge out of this course as possible. There is a lot of competition on the market for computer scientists and the main things that help candidates stand out are their skills. The more comfortable you are with commonly used industry tools and practices the more desirable you are for the employer. With the goal of the team and this course aligning so perfectly we are hoping to develop skills that will be useful for the duration of our careers.  
 
