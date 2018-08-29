@@ -1,6 +1,5 @@
 # t13 - Spaghetti Coders
-![](https://github.com/csu18fa314/t13/blob/master/images/team%20photo.jpg)
-![](https://github.com/csu18fa314/t13/blob/master/images/IMG_20180829_123435664.jpg)
+
 
 # Member information
 |       Name       |       eName       |       GitHub user       |       email       |       Nickname       |
