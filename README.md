@@ -1,4 +1,6 @@
 # t13 - Spaghetti Coders
+![](https://github.com/csu18fa314/t13/blob/master/images/team%20photo.jpg)
+![](https://github.com/csu18fa314/t13/blob/master/images/IMG_20180829_123435664.jpg)
 
 # Member information
 |       Name       |       eName       |       GitHub user       |       email       |       Nickname       |
@@ -50,3 +52,5 @@ One of the main goals of CS 314 is to provide students with a similar experience
   We expect our teammates to not only communicate during the physical lecture times, but also keep up communication and contact both in the shared github repository as well as in our designated Slack channel. Many requests to merge code into our master branch in github will be in conflict with another teammate's merge request. When this occurs, it is expected that both teammates will conduct an online meeting to figure out how to merge their code segments into the master branch safely and successfully. It is also expected that teammates will learn how to stamp issues and merge requests appropriately when using github. There should not be any excuses to not communicate the changes any teammate makes to the rest of the group.
   
   We expect that each team member contributes their share of the work. At the beginning of each assignment, we will divide the work for each member to complete. We expect every member to complete that share of the work in a timely manner to ensure we have a working project to turn in by the due date. In addition, we expect that a team member experiencing difficutly with his share will communicate and ask for help when necessary.
+  
+  We expect to have changes reviewed, pull requests merged and issues closed within two days of them being submitted for a review by a team member. If a teammate has a suggestion about the code they are expected to share it with the group to help us improve in the future.  We expect any code changes to be reviewed and commented if any issues appear. We expect to create small meaningful changes instead of one large before the deadline to make reviewing them easier and the development process smoother.
