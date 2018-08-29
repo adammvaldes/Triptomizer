@@ -3,6 +3,7 @@
 <img src="https://github.com/csu18fa314/t13/blob/master/images/IMG_20180829_123435664.jpg" width="150"> <img src="https://github.com/csu18fa314/t13/blob/master/images/team%20photo.jpg" width="270">
 
 Member Names: John, Adam, EJ, Dmitry, Vlad
+Spaghetti Coders is a group of guys with the basic goal of getting the project completed on time, with no Spaghetti-like organization.
 
 # Member information
 |       Name       |       eName       |       GitHub user       |       email       |       Nickname       |
