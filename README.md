@@ -27,6 +27,7 @@ Adam Valdes is a third year transfer student at CSU who is majoring in Computer 
 
 # Manifesto
 **Intro**
+We value our own personal growth in this class, along with the efficiency, quality, teamwork, and experience for the Spaghetti Coders.
 
 **Personal Growth**
   One of the main values for our team is the desire to learn. We are focused on gaining as much useful knowledge out of this course as possible. There is a lot of competition on the market for computer scientists and the main things that help candidates stand out are their skills. The more comfortable you are with commonly used industry tools and practices the more desirable you are for the employer. With the goal of the team and this course aligning so perfectly, we are hoping to develop skills that will be useful for the duration of our careers.  
