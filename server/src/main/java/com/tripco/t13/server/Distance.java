@@ -29,4 +29,15 @@ public class Distance {
         return gson.toJson(dist);
     }
 
+    public int getRadius(String units) {
+
+        int radius = 0;
+        if(units.equals("miles"))
+            radius = 3959;
+        if(units.equals("kilometers"))
+            radius = 6371;
+        if(units.equals("nautical miles"))
+            radius = 3440;
+        return radius;
+    }
 }
