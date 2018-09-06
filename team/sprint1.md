@@ -1,4 +1,4 @@
-# Sprint # - T13 - Spaghetti Coders
+# Sprint #1 - T13 - Spaghetti Coders
 
 ## Goal
 
