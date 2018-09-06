@@ -1,7 +1,11 @@
 package com.tripco.t13.server;
 
+import com.google.gson.Gson;
+import com.google.gson.JsonElement;
+import com.google.gson.JsonParser;
 import com.tripco.t13.planner.Plan;
 
+import com.tripco.t13.planner.Trip;
 import spark.Request;
 import spark.Response;
 import spark.Spark;
@@ -145,6 +149,15 @@ public class MicroServer {
     response.type("application/json");
     response.header("Access-Control-Allow-Origin", "*");
 
-    return new Distance(request).getDistanceObject();
+    Distance distance = new Distance();
+    JsonParser jsonParser = new JsonParser();
+    JsonElement requestBody = jsonParser.parse(request.body());
+
+    // convert the body of the request to a Java class.
+    Gson gson = new Gson();
+     distance = gson.fromJson(requestBody, Distance.class);
+
+     distance.distance = distance.getDistanceNum();
+    return distance.getDistanceObject(distance);
   }
 }

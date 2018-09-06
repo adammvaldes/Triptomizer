@@ -13,25 +13,14 @@ public class Distance {
     Object destination;
     String units;
     int distance;
-    Gson gson = new Gson();
-
-    public Distance(Request request) {
-
-        JsonParser jsonParser = new JsonParser();
-        JsonElement requestBody = jsonParser.parse(request.body());
-
-        Distance distance = gson.fromJson(requestBody, Distance.class);
-
-        distance.getDistanceNum();
-    }
-
 
     public int getDistanceNum() {
         return 10;
     }
 
-    public String getDistanceObject() {
-        return gson.toJson(distance);
+    public String getDistanceObject(Distance dist) {
+        Gson gson = new Gson();
+        return gson.toJson(dist);
     }
 
 }
