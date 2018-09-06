@@ -50,6 +50,7 @@ public class MicroServer {
     get("/config", this::config);
     post("/plan", this::plan);
     post("/distance", this::distance);
+    //post ( path: "/calculate, this::calculate);
 
     System.out.println("\n\nServer running on port: " + this.port + "\n\n");
   }
@@ -121,7 +122,7 @@ public class MicroServer {
     response.type("application/json");
     response.header("Access-Control-Allow-Origin", "*");
 
-    return "{}";
+    return new Plan(request).getTrip();
   }
 
   /** A REST API that returns the team information associated with the server.
@@ -159,5 +160,6 @@ public class MicroServer {
 
     distance.distance = distance.getDistanceNum();
     return distance.getDistanceObject(distance);
+
   }
 }
