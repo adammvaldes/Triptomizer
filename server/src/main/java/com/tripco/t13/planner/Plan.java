@@ -3,6 +3,7 @@ package com.tripco.t13.planner;
 import com.google.gson.Gson;
 import com.google.gson.JsonElement;
 import com.google.gson.JsonParser;
+import com.tripco.t13.server.Distance;
 import com.tripco.t13.server.HTTP;
 import spark.Request;
 
@@ -19,6 +20,7 @@ public class Plan {
 
   private Trip trip;
 
+  private Distance distance;
   /** Handles trip planning request, creating a new trip object from the trip request.
    * Does the conversion from Json to a Java class before planning the trip.
    * @param request
