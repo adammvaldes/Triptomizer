@@ -155,9 +155,9 @@ public class MicroServer {
 
     // convert the body of the request to a Java class.
     Gson gson = new Gson();
-     distance = gson.fromJson(requestBody, Distance.class);
+    distance = gson.fromJson(requestBody, Distance.class);
 
-     distance.distance = distance.getDistanceNum();
+    distance.distance = distance.getDistanceNum();
     return distance.getDistanceObject(distance);
   }
 }
