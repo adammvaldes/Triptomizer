@@ -158,8 +158,8 @@ public class MicroServer {
     Gson gson = new Gson();
     distance = gson.fromJson(requestBody, Distance.class);
 
-    distance.distance = distance.getDistanceNum();
-    return distance.getDistanceObject(distance);
+    //distance.distance = distance.getDistanceNum();
+    return "{}";
 
   }
 }

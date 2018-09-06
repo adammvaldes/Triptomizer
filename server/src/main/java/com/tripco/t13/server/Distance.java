@@ -14,19 +14,13 @@ public class Distance {
     String units;
     int distance;
 
-    public double getDistanceNum(double theta1, double lambda1, double theta2, double lambda2) {
+    public int getDistanceNum(double theta1, double lambda1, double theta2, double lambda2) {
         theta1 = Math.toRadians(theta1);
         theta2 = Math.toRadians(theta2);
         lambda1 = Math.toRadians(lambda1);
         lambda2 = Math.toRadians(lambda2);
-        return Math.atan2((Math.sqrt(Math.pow(Math.cos(theta2) * Math.sin(lambda2 - lambda1), 2) + (Math.cos(theta1) *
+        return (int)Math.atan2((Math.sqrt(Math.pow(Math.cos(theta2) * Math.sin(lambda2 - lambda1), 2) + (Math.cos(theta1) *
                 Math.sin(theta2) - Math.sin(theta1) * Math.cos(theta2) * Math.pow(Math.cos(lambda2 - lambda1), 2)))),
                 (Math.sin(theta1) * Math.sin(theta2) + Math.cos(theta1) * Math.cos(theta2) * Math.cos(lambda2 - lambda1)));
     }
-
-    public String getDistanceObject(Distance dist) {
-        Gson gson = new Gson();
-        return gson.toJson(dist);
-    }
-
 }
