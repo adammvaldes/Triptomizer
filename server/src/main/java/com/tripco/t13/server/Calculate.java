@@ -21,7 +21,7 @@ public class Calculate {
         distance = gson.fromJson(requestBody, Distance.class);
 
         //Perform the Calculation
-        distance.getDistanceNum();
+        distance.getDistanceNum(2,2,2,2); //Added 2 in place of paramaters
 
     }
 
@@ -29,4 +29,5 @@ public class Calculate {
         Gson gson = new Gson();
         return gson.toJson(distance);
     }
+
 }
