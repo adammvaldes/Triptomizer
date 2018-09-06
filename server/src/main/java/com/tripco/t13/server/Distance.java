@@ -1,16 +1,14 @@
 package com.tripco.t13.server;
 
-import com.google.gson.Gson;
+import spark.Request;
 
 public class Distance {
-    Distance(String jsonObj) {
-
+    public Distance(Request request) {
     }
-
-    public String distance;
 
     public String getDistanceObject() {
-        //TODO
-        return "todo";
+
+        return "{ it}";
     }
+
 }
