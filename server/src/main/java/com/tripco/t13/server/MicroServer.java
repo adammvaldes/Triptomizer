@@ -1,7 +1,11 @@
 package com.tripco.t13.server;
 
+import com.google.gson.Gson;
+import com.google.gson.JsonElement;
+import com.google.gson.JsonParser;
 import com.tripco.t13.planner.Plan;
 
+import com.tripco.t13.planner.Trip;
 import spark.Request;
 import spark.Response;
 import spark.Spark;
@@ -45,6 +49,8 @@ public class MicroServer {
     // client is sending data, so a HTTP POST is used instead of a GET
     get("/config", this::config);
     post("/plan", this::plan);
+    post("/distance", this::distance);
+    //post ( path: "/calculate, this::calculate);
 
     System.out.println("\n\nServer running on port: " + this.port + "\n\n");
   }
@@ -116,7 +122,7 @@ public class MicroServer {
     response.type("application/json");
     response.header("Access-Control-Allow-Origin", "*");
 
-    return "{}";
+    return new Plan(request).getTrip();
   }
 
   /** A REST API that returns the team information associated with the server.
@@ -131,5 +137,29 @@ public class MicroServer {
     response.header("Access-Control-Allow-Origin", "*");
 
     return name;
+  }
+
+  /** A REST API that handles distance POST request
+   *
+   * @param request
+   * @param response
+   * @return
+   */
+  private String distance(Request request, Response response) {
+
+    response.type("application/json");
+    response.header("Access-Control-Allow-Origin", "*");
+
+    Distance distance = new Distance();
+    JsonParser jsonParser = new JsonParser();
+    JsonElement requestBody = jsonParser.parse(request.body());
+
+    // convert the body of the request to a Java class.
+    Gson gson = new Gson();
+    distance = gson.fromJson(requestBody, Distance.class);
+
+    distance.distance = distance.getDistanceNum();
+    return distance.getDistanceObject(distance);
+
   }
 }
