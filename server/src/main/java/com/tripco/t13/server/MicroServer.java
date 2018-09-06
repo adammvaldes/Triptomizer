@@ -150,16 +150,8 @@ public class MicroServer {
     response.type("application/json");
     response.header("Access-Control-Allow-Origin", "*");
 
-    Distance distance = new Distance();
-    JsonParser jsonParser = new JsonParser();
-    JsonElement requestBody = jsonParser.parse(request.body());
-
-    // convert the body of the request to a Java class.
-    Gson gson = new Gson();
-    distance = gson.fromJson(requestBody, Distance.class);
-
-    //distance.distance = distance.getDistanceNum();
-    return "{}";
+    Calculate calculate = new Calculate(request);
+    return calculate.getDistanceJson();
 
   }
 }
