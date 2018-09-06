@@ -50,6 +50,7 @@ public class MicroServer {
     get("/config", this::config);
     post("/plan", this::plan);
     post("/distance", this::distance);
+    //post ( path: "/calculate, this::calculate);
 
     System.out.println("\n\nServer running on port: " + this.port + "\n\n");
   }
@@ -155,9 +156,10 @@ public class MicroServer {
 
     // convert the body of the request to a Java class.
     Gson gson = new Gson();
-     distance = gson.fromJson(requestBody, Distance.class);
+    distance = gson.fromJson(requestBody, Distance.class);
 
-     distance.distance = distance.getDistanceNum();
+    distance.distance = distance.getDistanceNum();
     return distance.getDistanceObject(distance);
+
   }
 }
