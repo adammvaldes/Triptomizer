@@ -20,12 +20,14 @@ public class Calculate {
         Gson gson = new Gson();
         distance = gson.fromJson(requestBody, Distance.class);
 
+
+        //distance.origin.getLatitude();
         //Perform the Calculation
         distance.getDistanceNum(2,2,2,2); //Added 2 in place of paramaters
 
     }
 
-    public String getDistance () {
+    public String getDistanceJson () {
         Gson gson = new Gson();
         return gson.toJson(distance);
     }
