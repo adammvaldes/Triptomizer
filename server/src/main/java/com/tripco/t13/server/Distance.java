@@ -20,8 +20,8 @@ public class Distance {
         lambda1 = Math.toRadians(lambda1);
         lambda2 = Math.toRadians(lambda2);
         return Math.atan2((Math.sqrt(Math.pow(Math.cos(theta2) * Math.sin(lambda2 - lambda1), 2) + (Math.cos(theta1) *
-                Math.sin(theta2) - Math.sin(theta1) * Math.cos(theta2) * Math.pow(Math.cos(lambda2 - lambda1), 2)))
-        / (Math.sin(theta1) * Math.sin(theta2) + Math.cos(theta1) * Math.cos(theta2) * Math.cos(lambda2 - lambda1))), Math.PI);
+                Math.sin(theta2) - Math.sin(theta1) * Math.cos(theta2) * Math.pow(Math.cos(lambda2 - lambda1), 2)))),
+                (Math.sin(theta1) * Math.sin(theta2) + Math.cos(theta1) * Math.cos(theta2) * Math.cos(lambda2 - lambda1)));
     }
 
     public String getDistanceObject(Distance dist) {
