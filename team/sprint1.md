@@ -41,20 +41,23 @@ As a team, we split up the individual tasks between the five members. Due to con
 #### What went well
 * We successfully created the pull requests on GitHub
 * We were able to integrate our changed code onto GitHub
+* Good overall team communication and sharing learned knowledge of tools and deployment process
 
 #### Problems encountered and resolutions
 * We had several problems completing the Calculations class. We had many issues trying to access the latitude and longitude of the origin and distance. We eventually solved the issue by creating a Location class to initialize the origin and distance in the distance object. This was thanks to testing by Vlad, Adam, and EJ and help from the TA Chris.
 * There we a few issues in rounding the calculation that was solved by further testing and small changes in the Distance class.
+* Issues syncing IntelliJ with GitHub, the changes were reverting after running the server: fixed by committing changes to github branch first before running the server.
 
 ## Retrospective
 
 #### What went well
 * The team communicated well over slack and in the CS120 lab.
 * There were no issues in creating issues, tasks, and epics in GitHub and Zenhub 
+* Team communication and willingness to assists each other
 
 #### Potential improvements
 * Spending time physically together in the CS120 lab added to our productivity greatly in comparison to working either separately or remotely, so coordinating more of those opportunities should increase our productivity
 * Dividing our workload better for our following assignments in order to better distribute the amount of work each of our members needs to do may help our team's overall performance
 
 #### What we will change next time
-* 
+* Improve time management and focus on creating a working version sooner to allow more time for debugging
