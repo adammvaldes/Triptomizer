@@ -51,13 +51,10 @@ As a team, we split up the individual tasks between the five members. Due to con
 ## Retrospective
 
 #### What went well
-* The team communicated well over slack and in the CS120 lab.
-* There were no issues in creating issues, tasks, and epics in GitHub and Zenhub 
-* Team communication and willingness to assists each other
+Our team communicated well both over Slack and together in the CS120 lab.  We had no problems with creating the issues, tasks and epics for this sprint in Github and Zenhub.  Overall our teammates' communication with each other and our willingness to assist each other with each of our assigned tasks led to good productivity for this assignment.
 
 #### Potential improvements
-* Spending time physically together in the CS120 lab added to our productivity greatly in comparison to working either separately or remotely, so coordinating more of those opportunities should increase our productivity
-* Dividing our workload better for our following assignments in order to better distribute the amount of work each of our members needs to do may help our team's overall performance
+Our team's productivity was increased greatly while our team members were physically in the CS120 lab working together in comparison to our efforts at working either separately or remotely.  Therefore our team will be making an increased effort to coordinate these opportunities more often and with more of our team members together.  Another issue our team will be focusing on going forward is distributing the workload between our members better so that any one member is not left with significantly more or less work than their other team members.  
 
 #### What we will change next time
-* Improve time management and focus on creating a working version sooner to allow more time for debugging
+Going forward our team will be working on several issues such as improving our time management to create a working version sooner in order to allow for more time debugging.  The other issues we will also be working on have been mentioned in previous sections, such as our efforts to meet together with our other team members in the CS120 lab and to distribute the workload for our assignments more evenly.  
