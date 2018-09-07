@@ -53,6 +53,8 @@ As a team, we split up the individual tasks between the five members. Due to con
 * There were no issues in creating issues, tasks, and epics in GitHub and Zenhub 
 
 #### Potential improvements
-* 
+* Spending time physically together in the CS120 lab added to our productivity greatly in comparison to working either separately or remotely, so coordinating more of those opportunities should increase our productivity
+* Dividing our workload better for our following assignments in order to better distribute the amount of work each of our members needs to do may help our team's overall performance
+
 #### What we will change next time
 * 
