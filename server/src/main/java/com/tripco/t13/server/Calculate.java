@@ -3,6 +3,8 @@ package com.tripco.t13.server;
 import com.google.gson.Gson;
 import com.google.gson.JsonElement;
 import com.google.gson.JsonParser;
+import org.json.JSONArray;
+import org.json.JSONObject;
 import spark.Request;
 import java.util.*;
 
@@ -20,10 +22,9 @@ public class Calculate {
         Gson gson = new Gson();
         distance = gson.fromJson(requestBody, Distance.class);
 
-
-        //distance.origin.getLatitude();
+        int radius = distance.getRadius(distance.units);
         //Perform the Calculation
-        distance.getDistanceNum(2,2,2,2); //Added 2 in place of paramaters
+        distance.distance = distance.getDistanceNum(distance.origin.latitude,distance.origin.longitude,distance.destination.latitude,distance.destination.longitude, radius); //Added 2 in place of paramaters
 
     }
 
