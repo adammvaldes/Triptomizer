@@ -9,7 +9,7 @@
 
 * Web application deployed on the production server (black-bottle.cs.colostate.edu).
 * Version in server/pom.xml should be `<version>1.0</version>`.
-* Sprint Review and Restrospectives completed (sprint#.md).
+* Sprint Review and Retrospectives completed (sprint#.md).
 * Product Increment release `v1.0` created on GitHub.
 
 ## Policies
@@ -31,22 +31,17 @@ As a team, we split up the individual tasks between the five members. Due to con
 ## Review
 
 #### Completed epics in Sprint Backlog 
-* We successfully completed all the epics in sprint1. There is a working website at the url: http://black-bottle.cs.colostate.edu:31413
-* 
+We successfully completed all the epics in sprint1. Our code successfully calculates the distance between 2 latitude-longitude pairs. We also updated the site: http://black-bottle.cs.colostate.edu:31413, to have our team name and number on the webpage and in the tab label. 
 
 #### Incomplete epics in Sprint Backlog 
-* There were no incomplete epics in the sprint backlog.
-*
+There were no incomplete epics in the sprint backlog.
 
 #### What went well
-* We successfully created the pull requests on GitHub
-* We were able to integrate our changed code onto GitHub
-* Good overall team communication and sharing learned knowledge of tools and deployment process
+We were able to create pull requests, and merge our changes on GitHub from Intellij, by sharing knowledge of GitHub and Intellij. Most team members were able to use the linux machines in the lab to complete this project without many problems. Our team created a Calculate class, Distance Class, and Location class to successfully unpack a JSON request, calculate a distance, and return a JSON object to the microserver. 
 
 #### Problems encountered and resolutions
-* We had several problems completing the Calculations class. We had many issues trying to access the latitude and longitude of the origin and distance. We eventually solved the issue by creating a Location class to initialize the origin and distance in the distance object. This was thanks to testing by Vlad, Adam, and EJ and help from the TA Chris.
-* There we a few issues in rounding the calculation that was solved by further testing and small changes in the Distance class.
-* Issues syncing IntelliJ with GitHub, the changes were reverting after running the server: fixed by committing changes to github branch first before running the server.
+We had several problems completing the Calculations class. We had many issues trying to access the latitude and longitude of the origin and distance. We eventually solved the issue by creating a Location class to initialize the origin and distance in the distance object. This was thanks to testing by Vlad, Adam, and EJ and help from the TA Chris. In addition, there were rounding problems in the Distance class that were eventually solved by further testing and small changes in the code.
+Also, there were some issues syncing IntelliJ with GitHub. Some of the changes were reverting after running the server. We solved this by committing changes to github branch first before running the server.
 
 ## Retrospective
 
