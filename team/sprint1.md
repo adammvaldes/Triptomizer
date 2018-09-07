@@ -31,11 +31,11 @@ As a team, we split up the individual tasks between the five members. Due to con
 ## Review
 
 #### Completed epics in Sprint Backlog 
-* *user story*:  *comments*
+* We successfully completed all the epics in sprint1. There is a working website at the url: http://black-bottle.cs.colostate.edu:31413
 * 
 
 #### Incomplete epics in Sprint Backlog 
-* *user story*: *explanation...*
+* There were no incomplete epics in the sprint backlog.
 *
 
 #### What went well
@@ -43,8 +43,8 @@ As a team, we split up the individual tasks between the five members. Due to con
 * We were able to integrate our changed code onto GitHub
 
 #### Problems encountered and resolutions
-* *something*
-*
+* We had several problems completing the Calculations class. We had many issues trying to access the latitude and longitude of the origin and distance. We eventually solved the issue by creating a Location class to initialize the origin and distance in the distance object. This was thanks to testing by Vlad, Adam, and EJ and help from the TA Chris.
+* There we a few issues in rounding the calculation that was solved by further testing and small changes in the Distance class.
 
 ## Retrospective
 
