@@ -24,30 +24,32 @@ Epics planned for this release.
 * 1 Responsive Client for distance calculator
 * 2 RESTful Service for distance
 
-*Include a discussion of planning decisions the team made.*
+Objective was selected and Epics were created. Epics were divided into individual tasks, and then each task was given a time estimate. Team members picked task that they were most interested in. The team self organized to complete the work.
 
 ## Review
 
 #### Completed epics in Sprint Backlog 
-* *user story*:  *comments*
-* 
+* Responsive Client for distance calculator:  completed
+* RESTful Service for distance: completed
 
 #### Incomplete epics in Sprint Backlog 
-* *user story*: *explanation...*
-*
+* none
 
 #### What went well
-* *something*
-*
+* team communication, shared learned knowledge of tools and deployment process. 
 
 #### Problems encountered and resolutions
-* *something*
+* Issues syncing IntelliJ with GitHub, the changes were reverting after running the server: fixed by committing changes to github branch first before running the server.
 *
 
 ## Retrospective
 
 #### What went well
+* Learning of tools and development process
+* Team communication and willingness to assists each other
 
 #### Potential improvements
+* Imporved time management
 
 #### What we will change next time
+* Focus on creating a working version sooner to leave more time for debugging
