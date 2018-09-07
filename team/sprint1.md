@@ -26,6 +26,8 @@ Epics planned for this release.
 
 *Include a discussion of planning decisions the team made.*
 
+As a team, we split up the individual tasks between the five members. Due to conflicting schedules, we planned on different times for different members to meet to work on individual projects, i.e. two members worked in the CS120 lab at one point, while two different members worked in the CS120 lab at another point in time. Although all 5 members were unable to meet at the same time, multiple people could help certain tasks at once.
+
 ## Review
 
 #### Completed epics in Sprint Backlog 
@@ -37,8 +39,8 @@ Epics planned for this release.
 *
 
 #### What went well
-* *something*
-*
+* We successfully created the pull requests on GitHub
+* We were able to integrate our changed code onto GitHub
 
 #### Problems encountered and resolutions
 * *something*
@@ -47,7 +49,10 @@ Epics planned for this release.
 ## Retrospective
 
 #### What went well
+* The team communicated well over slack and in the CS120 lab.
+* There were no issues in creating issues, tasks, and epics in GitHub and Zenhub 
 
 #### Potential improvements
-
+* 
 #### What we will change next time
+* 
