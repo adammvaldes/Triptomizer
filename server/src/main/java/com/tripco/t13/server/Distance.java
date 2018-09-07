@@ -14,18 +14,19 @@ public class Distance {
     String units;
     int distance;
 
-    public int getDistanceNum(double theta1, double lambda1, double theta2, double lambda2, int radius) {
+    public int getDistanceNum(float theta1, float lambda1, float theta2, float lambda2, int radius) {
 
         //convert all degree definitions to radians.
-        theta1 = Math.toRadians(theta1);
-        theta2 = Math.toRadians(theta2);
-        lambda1 = Math.toRadians(lambda1);
-        lambda2 = Math.toRadians(lambda2);
+        theta1 = (float)Math.toRadians(theta1);
+        theta2 = (float)Math.toRadians(theta2);
+        lambda1 = (float)Math.toRadians(lambda1);
+        lambda2 = (float)Math.toRadians(lambda2);
 
         //implement Vincenty formulae of d = r * arctan definition.
-        return radius * (int)Math.atan2((Math.sqrt(Math.pow(Math.cos(theta2) * Math.sin(lambda2 - lambda1), 2) + (Math.cos(theta1) *
-                Math.sin(theta2) - Math.sin(theta1) * Math.cos(theta2) * Math.pow(Math.cos(lambda2 - lambda1), 2)))),
-                (Math.sin(theta1) * Math.sin(theta2) + Math.cos(theta1) * Math.cos(theta2) * Math.cos(lambda2 - lambda1)));
+        return (int)Math.round(radius * Math.atan2((Math.sqrt(Math.pow(Math.cos(theta2) * Math.sin(lambda2 - lambda1), 2) +
+                        Math.pow((Math.cos(theta1) * Math.sin(theta2) - Math.sin(theta1) * Math.cos(theta2) *
+                Math.cos(lambda2 - lambda1)), 2))), (Math.sin(theta1) * Math.sin(theta2) +
+                Math.cos(theta1) * Math.cos(theta2) * Math.cos(lambda2 - lambda1))));
     }
 
     public int getRadius(String units) {
