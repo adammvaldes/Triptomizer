@@ -1,9 +1,9 @@
-# Sprint 2 - *your team number* - *your team name*
+# Sprint 2 - t13 - Spaghetti Coders
 
 ## Goal
 
 ### A mobile, responsive map and itinerary!
-### Sprint Leader: *firstname lastname*
+### Sprint Leader: Dmitry Melnikov
 
 ## Definition of Done
 
