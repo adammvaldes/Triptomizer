@@ -33,7 +33,7 @@
 
 ## Plan
 
-We want to successfully integrate the newly aquired requirements into our webpage. We expect to successfully display a map of Colorado and an itinerary on our website, with compatability with mobile devices. On the client side, we want to update any itinerary the server is given, then update the map to have the vectors that point to each specific location on the map. We want to update our calculation of distance to successfully calculate the different distance of a round trip between locations. We plan to take each task on step by step to complete our goals.
+We want to successfully integrate the newly acquired requirements into our webpage. We expect to successfully display a map of Colorado and an itinerary on our website, with compatibility with mobile devices. On the client side, we want to update any itinerary the server is given, then update the map to have the vectors that point to each specific location on the map. We want to update our calculation of distance to successfully calculate the different distance of a round trip between locations. We plan to take each task on step by step to complete our goals.
 * 1. User: I want to supply my own units for the distances.<br>
 I should be able to define an arbitrary unit of measure to use in the itinerary.
 * 2. TripCo: The solution must be responsive for mobile devices. <br>
@@ -58,7 +58,7 @@ Show me a map and itinerary for the trip in the file that I can view on my phone
 We came together as a group to discuss the epics and tasks for this sprint. We began to split each epic into different tasks, then estimated the difficulty of each task. In total, we created 10 tasks based on the epics and information we currently have. We had to split up epics number 1 and 5 the most, with tasks for both the client and the server sides. <br>
 The client side needs to successfully render the map and itinerary on the webpage, and draw the corresponding vectors on the map after the calculations are completed. <br>
 The server side needs to process the new type of TFFI object, and calculate the round trip distances from the data in the object. <br>
-In addtion, our team created a few tasks to clarify the information given from the Product Manager. These are essential to make sure that we complete the sprint goals within the time frame. <br>
+In addition, our team created a few tasks to clarify the information given from the Product Manager. These are essential to make sure that we complete the sprint goals within the time frame. <br>
 Lastly, we have tasks to remind us to maintain clean code and confirm operability between our assigned teams. We plan to use the clean code task to remind us to review each others' code to confirm our code's cleanliness. We will use slack to communicate with members from the other teams for our Interoperate Epic number 3.
 
 
