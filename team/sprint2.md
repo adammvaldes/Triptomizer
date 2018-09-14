@@ -33,8 +33,7 @@
 
 ## Plan
 
-*An introductory paragraph describing what you expect to accomplish this sprint with a list of epics that will achieve the goal.*
-
+We want to successfully integrate the newly aquired requirements into our webpage. We expect to successfully display a map of Colorado and an itinerary on our website, with compatability with mobile devices. On the client side, we want to update any itinerary the server is given, then update the map to have the vectors that point to each specific location on the map. We want to update our calculation of distance to successfully calculate the different distance of a round trip between locations. We plan to take each task on step by step to complete our goals.
 * *## epic title: description*
 *
 
