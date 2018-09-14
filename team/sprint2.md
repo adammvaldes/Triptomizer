@@ -67,8 +67,8 @@ Lastly, we have tasks to remind us to maintain clean code and confirm operabilit
 | Statistic | # Planned | # Completed |
 | --- | ---: | ---: |
 | Epics | 5 | 0 |
-| Tasks |  10 | 0 | 
-| Story Points |  14  | 0 | 
+| Tasks |  11 | 2 | 
+| Story Points |  15  | 2 | 
 
 *Enter the `# Planned` at the beginning of the sprint, `# Completed` at the end of the sprint.*
 
@@ -77,7 +77,7 @@ Lastly, we have tasks to remind us to maintain clean code and confirm operabilit
 
 | Date | Tasks closed  | Tasks in progress | Impediments |
 | :--- | :--- | :--- | :--- |
-| *date* | *#task, ...* | *#task, ...* | *none* | 
+| 9/14/18 | 2 | 9 | *none* | 
 
 *Add a new row for each scrum session.*
 
