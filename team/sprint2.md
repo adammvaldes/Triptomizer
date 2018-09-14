@@ -34,8 +34,25 @@
 ## Plan
 
 We want to successfully integrate the newly aquired requirements into our webpage. We expect to successfully display a map of Colorado and an itinerary on our website, with compatability with mobile devices. On the client side, we want to update any itinerary the server is given, then update the map to have the vectors that point to each specific location on the map. We want to update our calculation of distance to successfully calculate the different distance of a round trip between locations. We plan to take each task on step by step to complete our goals.
-* *## epic title: description*
-*
+* User: I want to supply my own units for the distances.<br>
+I should be able to define an arbitrary unit of measure to use in the itinerary.
+* TripCo: The solution must be responsive for mobile devices. <br>
+Mobile first! The solution should be designed/optimized for a mobile environment, but still work well in a desktop environment. Not the other way around.
+This is an ongoing issue that you might want to reflect in your README and sprint#.md's
+* TripCo: All clients and servers must interoperate! <br>
+This requires an adherence to the TFFI specification.
+Each client must include a configuration option to change to server:port used for RESTful services.
+* TripCo: All code shall be clean! <br>
+Adhere to the Google style guide for Java and JavaScript.
+Write maintainable code.
+Time to read the book if you haven't started.
+More to come!
+You may amend your sprint#.md and README.md with policies as needed to reflect specifics you would like to focus on for the sprint and the future.
+* User:I want a map and itinerary for my trip <br>
+I plan trips in the state of Colorado in another tool.
+The tool produces a file that conforms to the TFFI trip object.
+The trip is always a round trip.
+Show me a map and itinerary for the trip in the file that I can view on my phone.
 
 *Include a discussion of planning decisions.*
 
