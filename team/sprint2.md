@@ -54,7 +54,7 @@ The tool produces a file that conforms to the TFFI trip object.
 The trip is always a round trip.
 Show me a map and itinerary for the trip in the file that I can view on my phone.
 
-###Planning Decisions:
+#### Planning Decisions:
 We came together as a group to discuss the epics and tasks for this sprint. We began to split each epic into different tasks, then estimated the difficulty of each task. In total, we created 10 tasks based on the epics and information we currently have. We had to split up epics number 1 and 5 the most, with tasks for both the client and the server sides. <br>
 The client side needs to successfully render the map and itinerary on the webpage, and draw the corresponding vectors on the map after the calculations are completed. <br>
 The server side needs to process the new type of TFFI object, and calculate the round trip distances from the data in the object. <br>
