@@ -10,9 +10,11 @@ public class Itinerary {
     int version;
     String type;
     String title;
-    public Location[] places;
+    //public Location[] places;
+    ArrayList<Location> places;
     //TODO: ADD OPTIONS
-    int[] distances;
+    //int[] distances;
+    ArrayList<Integer> distances;
     //TODO: ADD MAP
     String map;
     String units;
@@ -42,14 +44,20 @@ public class Itinerary {
     }lambda2
 
     //fills distances array with distance between each Location in places array and fills final space in distances array with round trip distance
-    public int[] getTripDistances(){
+    public ArrayList<Integer> getTripDistances(){
         distances = new int[places.length];
-        for(int i = 0; i < places.length - 1; i++){
+        for(Location l : places) {
+            //TODO: Add support for radii
+            distances.add(getDistanceNum(places[i].latitude, places[i].longitude, places[i+1].latitude, places[i+1].longitude, 1));
+        }
+        //TODO: Add support for radii
+        distances.add(getDistanceNum(places.get(places.size()-1).latitude, places.get(places.size()-1).longitude, places.get(0).latitude, places.get(0).longitude, 1));
+        /*for(int i = 0; i < places.length - 1; i++){
             //TODO: add support for radii
             distances[i] = getDistanceNum(places[i].latitude, places[i].longitude, places[i+1].latitude, places[i+1].longitude, 1)
         }
         //TODO: add support for radii
-        distances[places.length] = getDistanceNum(places[places.length].latitude, places[places.length].longitude, places[0].latitude, places[0].longitude, 1)
+        distances[places.length] = getDistanceNum(places[places.length].latitude, places[places.length].longitude, places[0].latitude, places[0].longitude, 1)*/
     }
 
     public int getRadius(String units) {
