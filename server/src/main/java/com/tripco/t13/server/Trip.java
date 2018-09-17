@@ -33,13 +33,28 @@ public class Trip {
         return this;
     }*/
 
-    public int getDistanceNum(float originLatitude, float originLongitude, float destinationLatitude, float destinationLongitude, int radius) {
+    /*public int getDistanceNum(float originLatitude, float originLongitude, float destinationLatitude, float destinationLongitude, int radius) {
 
         //convert all degree definitions to radians.
         float theta1 = (float)Math.toRadians(originLatitude);
         float theta2 = (float)Math.toRadians(originLongitude);
         float lambda1 = (float)Math.toRadians(destinationLatitude);
         float lambda2 = (float)Math.toRadians(destinationLongitude);
+
+        //implement Vincenty formulae of d = r * arctan definition.
+        return (int)Math.round(radius * Math.atan2((Math.sqrt(Math.pow(Math.cos(theta2) * Math.sin(lambda2 - lambda1), 2) +
+                Math.pow((Math.cos(theta1) * Math.sin(theta2) - Math.sin(theta1) * Math.cos(theta2) *
+                        Math.cos(lambda2 - lambda1)), 2))), (Math.sin(theta1) * Math.sin(theta2) +
+                Math.cos(theta1) * Math.cos(theta2) * Math.cos(lambda2 - lambda1))));
+    }*/
+
+    public int getDistanceNum(float theta1, float lambda1, float theta2, float lambda2, int radius) {
+
+        //convert all degree definitions to radians.
+        theta1 = (float)Math.toRadians(theta1);
+        theta2 = (float)Math.toRadians(theta2);
+        lambda1 = (float)Math.toRadians(lambda1);
+        lambda2 = (float)Math.toRadians(lambda2);
 
         //implement Vincenty formulae of d = r * arctan definition.
         return (int)Math.round(radius * Math.atan2((Math.sqrt(Math.pow(Math.cos(theta2) * Math.sin(lambda2 - lambda1), 2) +
