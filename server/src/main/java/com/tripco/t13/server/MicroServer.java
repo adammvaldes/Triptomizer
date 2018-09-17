@@ -167,7 +167,7 @@ public class MicroServer {
     response.type("application/json");
     response.header("Access-Control-Allow-Origin", "*");
 
-    Trip tcalculate = new TripCalculate(request);
+    TripCalculate tcalculate = new TripCalculate(request);
     return tcalculate.getTripJson();
 
   }
