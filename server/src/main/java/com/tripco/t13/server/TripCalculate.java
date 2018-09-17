@@ -11,7 +11,7 @@ import java.util.*;
 public class TripCalculate {
 
     private Distance distance;
-    private Itinerary itinerary;
+    private Trip trip;
 
     public TripCalculate(Request request){
 
@@ -22,7 +22,7 @@ public class TripCalculate {
         //Converting to a Java class
         Gson gson = new Gson();
 
-        itinerary = gson.fromJson(requestBody, Itinerary.class);
+        trip = gson.fromJson(requestBody, Itinerary.class);
 
         //distance = gson.fromJson(requestBody, Distance.class);
 
@@ -30,7 +30,7 @@ public class TripCalculate {
         //int radius = itinerary.getRadius(itinerary.units);
         int radius = 1;
         //itinerary.distances = itinerary.getTripDistances(distance.origin.latitude,distance.origin.longitude,distance.destination.latitude,distance.destination.longitude, radius); //Added 2 in place of paramaters
-        itinerary.getTripDistances();
+        trip.getTripDistances();
         //int radius = distance.getRadius(distance.units);
         //Perform the Calculation
         //distance.distance = distance.getDistanceNum(distance.origin.latitude,distance.origin.longitude,distance.destination.latitude,distance.destination.longitude, radius); //Added 2 in place of paramaters
@@ -42,7 +42,7 @@ public class TripCalculate {
         return gson.toJson(distance);
     }
 
-    public String getItineraryJson () {
+    public String getTripJson () {
         Gson gson = new Gson();
         return gson.toJson(itinerary);
     }

@@ -7,7 +7,7 @@ import jdk.nashorn.internal.parser.JSONParser;
 import spark.Request;
 import java.util.ArrayList;
 
-public class Itinerary {
+public class Trip {
     int version;
     String type;
     String title;
