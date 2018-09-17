@@ -21,21 +21,8 @@ public class Trip {
     int radius = 3959;
     String units;
 
-    /*public int getDistanceNum(float originLatitude, float originLongitude, float destinationLatitude, float destinationLongitude, int radius) {
 
-        //convert all degree definitions to radians.
-        float theta1 = (float)Math.toRadians(originLatitude);
-        float theta2 = (float)Math.toRadians(originLongitude);
-        float lambda1 = (float)Math.toRadians(destinationLatitude);
-        float lambda2 = (float)Math.toRadians(destinationLongitude);
-
-        //implement Vincenty formulae of d = r * arctan definition.
-        return (int)Math.round(radius * Math.atan2((Math.sqrt(Math.pow(Math.cos(theta2) * Math.sin(lambda2 - lambda1), 2) +
-                Math.pow((Math.cos(theta1) * Math.sin(theta2) - Math.sin(theta1) * Math.cos(theta2) *
-                        Math.cos(lambda2 - lambda1)), 2))), (Math.sin(theta1) * Math.sin(theta2) +
-                Math.cos(theta1) * Math.cos(theta2) * Math.cos(lambda2 - lambda1))));
-    }*/
-
+    //Calculate and return distance between 2 Locations
     public int getDistanceNum(float theta1, float lambda1, float theta2, float lambda2, int radius) {
 
         //convert all degree definitions to radians.
@@ -51,7 +38,7 @@ public class Trip {
                 Math.cos(theta1) * Math.cos(theta2) * Math.cos(lambda2 - lambda1))));
     }
 
-    //fills distances array with distance between each Location in places array and fills final space in distances array with round trip distance. Distances are calculated using getDistanceNum method.
+    //fills distances arraylist with distance between each Location in places arraylist and fills final space in distances arraylist with round trip distance. Distances are calculated using getDistanceNum method.
     public ArrayList<Integer> getTripDistances(){
         System.out.println("OPTIONS NUMBER: " + options.toString());
         for(int i = 0; i < places.size() - 1; i++) {
@@ -61,6 +48,7 @@ public class Trip {
         return distances;
     }
 
+    //Currently placeholder for incoming radius calculations
     public int getRadius(String units) {
 
         int radius = 0;
