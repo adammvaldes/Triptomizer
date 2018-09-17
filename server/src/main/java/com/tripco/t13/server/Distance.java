@@ -14,7 +14,7 @@ public class Distance {
     String units;
     int distance;
 
-    public int getDistanceNum(float theta1, float lambda1, float theta2, float lambda2, int radius) {
+    public static int getDistanceNum(float theta1, float lambda1, float theta2, float lambda2, int radius) {
 
         //convert all degree definitions to radians.
         theta1 = (float)Math.toRadians(theta1);
