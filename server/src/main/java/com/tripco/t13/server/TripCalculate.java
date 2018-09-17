@@ -8,12 +8,12 @@ import org.json.JSONObject;
 import spark.Request;
 import java.util.*;
 
-public class Calculate {
+public class TripCalculate {
 
     private Distance distance;
     private Itinerary itinerary;
 
-    public Calculate(Request request){
+    public TripCalculate(Request request){
 
         // extract the information from the body of the request.
         JsonParser jsonParser = new JsonParser();
