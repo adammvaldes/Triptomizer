@@ -9,8 +9,8 @@ import spark.Request;
 public class Distance {
     String type;
     int version;
-    Location origin;
-    Location destination;
+    public Location origin;
+    public Location destination;
     String units;
     int distance;
 

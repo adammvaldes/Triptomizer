@@ -8,11 +8,11 @@ import org.json.JSONObject;
 import spark.Request;
 import java.util.*;
 
-public class Calculate {
+public class TripCalculate {
 
-    private Distance distance;
+    private Trip trip;
 
-    public Calculate(Request request){
+    public TripCalculate(Request request){
 
         // extract the information from the body of the request.
         JsonParser jsonParser = new JsonParser();
@@ -21,17 +21,16 @@ public class Calculate {
         //Converting to a Java class
         Gson gson = new Gson();
 
-        distance = gson.fromJson(requestBody, Distance.class);
+        trip = gson.fromJson(requestBody, Trip.class);
 
-        int radius = distance.getRadius(distance.units);
-        //Perform the Calculation
-        distance.distance = distance.getDistanceNum(distance.origin.latitude,distance.origin.longitude,distance.destination.latitude,distance.destination.longitude, radius); //Added 2 in place of paramaters
+        //Calculate and fill trip distances
+        trip.getTripDistances();
 
     }
 
-    public String getDistanceJson () {
+    public String getTripJson () {
         Gson gson = new Gson();
-        return gson.toJson(distance);
+        return gson.toJson(trip);
     }
 
 }

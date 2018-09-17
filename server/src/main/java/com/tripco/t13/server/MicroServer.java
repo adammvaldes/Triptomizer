@@ -50,6 +50,7 @@ public class MicroServer {
     get("/config", this::config);
     post("/plan", this::plan);
     post("/distance", this::distance);
+    post("/trip", this::trip);
     //post ( path: "/calculate, this::calculate);
 
     System.out.println("\n\nServer running on port: " + this.port + "\n\n");
@@ -152,6 +153,22 @@ public class MicroServer {
 
     Calculate calculate = new Calculate(request);
     return calculate.getDistanceJson();
+
+  }
+
+  /** A REST API that handles trip POST request
+   *
+   * @param request
+   * @param response
+   * @return
+   */
+  private String trip(Request request, Response response) {
+
+    response.type("application/json");
+    response.header("Access-Control-Allow-Origin", "*");
+
+    TripCalculate tcalculate = new TripCalculate(request);
+    return tcalculate.getTripJson();
 
   }
 }
