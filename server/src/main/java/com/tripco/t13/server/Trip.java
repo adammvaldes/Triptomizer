@@ -53,7 +53,7 @@ public class Trip {
 
     //fills distances array with distance between each Location in places array and fills final space in distances array with round trip distance. Distances are calculated using getDistanceNum method.
     public ArrayList<Integer> getTripDistances(){
-        System.out.println(options.toString());
+        System.out.println("OPTIONS NUMBER: " + options.toString());
         for(int i = 0; i < places.size() - 1; i++) {
             distances.add(getDistanceNum(places.get(i).latitude, places.get(i).longitude, places.get(i+1).latitude, places.get(i+1).longitude, radius));
         }
