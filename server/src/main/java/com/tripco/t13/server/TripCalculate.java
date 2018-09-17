@@ -22,7 +22,7 @@ public class TripCalculate {
         //Converting to a Java class
         Gson gson = new Gson();
 
-        trip = gson.fromJson(requestBody, Itinerary.class);
+        trip = gson.fromJson(requestBody, Trip.class);
 
         //distance = gson.fromJson(requestBody, Distance.class);
 
@@ -44,7 +44,7 @@ public class TripCalculate {
 
     public String getTripJson () {
         Gson gson = new Gson();
-        return gson.toJson(itinerary);
+        return gson.toJson(trip);
     }
 
 }
