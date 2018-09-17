@@ -13,7 +13,7 @@ public class Trip {
     String title;
     ArrayList<Location> places;
     //TODO: Add support for user defined options (units and radius)
-    ArrayList<Object> options;
+    Object options;
     ArrayList<Integer> distances;
     //TODO: ADD MAP
     String map;
@@ -51,7 +51,7 @@ public class Trip {
                 Math.cos(theta1) * Math.cos(theta2) * Math.cos(lambda2 - lambda1))));
     }
 
-    //fills distances array with distance between each Location in places array and fills final space in distances array with round trip distance
+    //fills distances array with distance between each Location in places array and fills final space in distances array with round trip distance. Distances are calculated using getDistanceNum method.
     public ArrayList<Integer> getTripDistances(){
         System.out.println(options.toString());
         for(int i = 0; i < places.size() - 1; i++) {
