@@ -38900,7 +38900,7 @@ var Navigation = function (_Component) {
           _react2.default.createElement(
             _reactstrap.NavbarBrand,
             { className: 'nav_title', href: '/' },
-            't13 Spaghetti Coders Itinerary Test'
+            't13 Spaghetti Coders Itinerary Test 2'
           ),
           _react2.default.createElement(
             'div',
