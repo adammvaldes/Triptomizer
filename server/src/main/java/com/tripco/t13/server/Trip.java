@@ -11,27 +11,15 @@ public class Trip {
     int version;
     String type;
     String title;
-    //public Location[] places;
     ArrayList<Location> places;
-    //TODO: ADD OPTIONS
-    //ArrayList<String> options;
-    Object options;
-    //String[] options;
-    //int[] distances;
+    //TODO: Add support for user defined options (units and radius)
+    ArrayList<Object> options;
     ArrayList<Integer> distances;
     //TODO: ADD MAP
     String map;
     //radius temporarily hardcoded to miles
-    int radius = 6371;
+    int radius = 3959;
     String units;
-    /*public Location origin;
-    public Location destination;
-    String units;
-    int distance;*/
-
-    /*public Itinerary(){
-        return this;
-    }*/
 
     /*public int getDistanceNum(float originLatitude, float originLongitude, float destinationLatitude, float destinationLongitude, int radius) {
 
@@ -68,17 +56,8 @@ public class Trip {
         System.out.println(options.toString());
         for(int i = 0; i < places.size() - 1; i++) {
             distances.add(getDistanceNum(places.get(i).latitude, places.get(i).longitude, places.get(i+1).latitude, places.get(i+1).longitude, radius));
-            //System.out.println(distances.get(i));
         }
         distances.add(getDistanceNum(places.get(places.size()-1).latitude, places.get(places.size()-1).longitude, places.get(0).latitude, places.get(0).longitude, radius));
-        //distances.add(5);
-        /*distances = new int[places.length];
-        for(int i = 0; i < places.length - 1; i++){
-            //TODO: add support for radii
-            distances[i] = getDistanceNum(places[i].latitude, places[i].longitude, places[i+1].latitude, places[i+1].longitude, radius);
-        }
-        //TODO: add support for radii
-        distances[places.length] = getDistanceNum(places[places.length].latitude, places[places.length].longitude, places[0].latitude, places[0].longitude, radius);*/
         return distances;
     }
 
