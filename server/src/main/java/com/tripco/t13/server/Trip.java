@@ -14,7 +14,8 @@ public class Trip {
     //public Location[] places;
     ArrayList<Location> places;
     //TODO: ADD OPTIONS
-    ArrayList<String> options;
+    //ArrayList<String> options;
+    String options;
     //String[] options;
     //int[] distances;
     ArrayList<Integer> distances;
