@@ -52,8 +52,10 @@ public class Trip {
     public ArrayList<Integer> getTripDistances(){
         for(int i = 0; i < places.size() - 1; i++) {
             distances.add(getDistanceNum(places.get(i).latitude, places.get(i).longitude, places.get(i+1).latitude, places.get(i+1).longitude, radius));
+            System.out.println(distances.get(i));
         }
         distances.add(getDistanceNum(places.get(places.size()-1).latitude, places.get(places.size()-1).longitude, places.get(0).latitude, places.get(0).longitude, radius));
+        distances.add(5);
         /*distances = new int[places.length];
         for(int i = 0; i < places.length - 1; i++){
             //TODO: add support for radii

@@ -26,7 +26,7 @@ public class TripCalculate {
 
         //distance = gson.fromJson(requestBody, Distance.class);
 
-        int radius = 3959;
+        //int radius = 3959;
         trip.getTripDistances();
         //int radius = itinerary.getRadius(itinerary.units);
 
