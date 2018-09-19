@@ -78,6 +78,7 @@ Lastly, we have tasks to remind us to maintain clean code and confirm operabilit
 | Date | Tasks closed  | Tasks in progress | Impediments |
 | :--- | :--- | :--- | :--- |
 | 9/14/18 | 2 | 9 | *none* | 
+| 9/17/18 | 2 | 9 | *none* |
 
 *Add a new row for each scrum session.*
 
