@@ -8,8 +8,4 @@ public class Location {
     public float longitude;
 
 
-    public Location(){
-        //System.out.println("Location created:"+id+latitude+longitude+name);
-    }
-
 }

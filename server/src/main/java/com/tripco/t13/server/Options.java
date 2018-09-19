@@ -25,7 +25,6 @@ public class Options {
         if (units.equals("nautical miles")){
             unitRadius = 3440;
             unitName = "nautical miles";
-            //if(units.equals("user defined"))
             return;
         }
         units = "miles";
