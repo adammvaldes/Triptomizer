@@ -79,6 +79,7 @@ Lastly, we have tasks to remind us to maintain clean code and confirm operabilit
 | :--- | :--- | :--- | :--- |
 | 9/14/18 | 2 | 9 | *none* | 
 | 9/17/18 | 2 | 9 | *none* |
+| 9/19/18 | 2 | 9 | Brainstorming and understanding the relationship between server and client. Issues understanding the requirements for the assignment |
 
 *Add a new row for each scrum session.*
 
