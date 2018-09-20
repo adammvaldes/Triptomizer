@@ -45058,7 +45058,7 @@ var Application = function (_Component) {
         },
         places: [],
         distances: [],
-        map: '<svg width="1920" height="200" xmlns="http://www.w3.org/2000/svg" xmlns:svg="http://www.w3.org/2000/svg"><g>' + '<rect width="300" height="100" style="fill:rgb(0,0,255);stroke-width:3;stroke:rgb(0,0,0)" />' + '</g></svg>'
+        map: '<svg id="map-layer-1" width="1920" height="960" xmlns="http://www.w3.org/2000/svg" xmlns:svg="http://www.w3.org/2000/svg"><g>' + '<line x1="0" y1="0" x2="400" y2="400" style="stroke:rgb(255,0,0); stroke-width: 2" />' + '</g></svg>'
       }
     };
     _this.updateTrip = _this.updateTrip.bind(_this);
