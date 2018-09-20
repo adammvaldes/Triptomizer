@@ -22,14 +22,15 @@ class Application extends Component {
         },
         places: [],
         distances: [],
-        map: '<svg width="1920" height="200" xmlns="http://www.w3.org/2000/svg" xmlns:svg="http://www.w3.org/2000/svg"><g>' +
+        map: ''/*'<svg width="1920" height="200" xmlns="http://www.w3.org/2000/svg" xmlns:svg="http://www.w3.org/2000/svg"><g>' +
             '<rect width="300" height="100" style="fill:rgb(0,0,255);stroke-width:3;stroke:rgb(0,0,0)" />' +
-            '</g></svg>'
+            '</g></svg>'*/
       }
     };
     this.updateTrip = this.updateTrip.bind(this);
     this.updateBasedOnResponse = this.updateBasedOnResponse.bind(this);
     this.updateOptions = this.updateOptions.bind(this);
+    this.updateMap = this.updateMap.bind(this);
   }
 
   componentWillMount() {
@@ -58,6 +59,12 @@ class Application extends Component {
     this.setState(trip);
   }
 
+  updateMap(map, value){
+      let trip = this.state.trip;
+      trip.map = value;
+      this.setState(trip);
+  }
+
   render() {
     if(!this.state.config) { return <Container/> }
 
@@ -65,10 +72,10 @@ class Application extends Component {
       <Container id="Application">
         <Info/>
         <Options options={this.state.trip.options} config={this.state.config} updateOptions={this.updateOptions}/>
-        <Map config={this.state.trip.map}/>
+        <Map config={this.state.trip.map} updateMap={this.updateMap}/>
       </Container>
     )
-  }
+  }//config={this.state.config} updateMap={this.updateMap()} config={this.state.trip.map}
 }
 
 export default Application;
