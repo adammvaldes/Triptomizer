@@ -45058,12 +45058,15 @@ var Application = function (_Component) {
         },
         places: [],
         distances: [],
-        map: '<svg id="map-layer-1" width="1920" height="960" xmlns="http://www.w3.org/2000/svg" xmlns:svg="http://www.w3.org/2000/svg"><g>' + '<line x1="0" y1="0" x2="400" y2="400" style="stroke:rgb(255,0,0); stroke-width: 2" />' + '</g></svg>'
+        map: '' /*'<svg width="1920" height="200" xmlns="http://www.w3.org/2000/svg" xmlns:svg="http://www.w3.org/2000/svg"><g>' +
+                '<rect width="300" height="100" style="fill:rgb(0,0,255);stroke-width:3;stroke:rgb(0,0,0)" />' +
+                '</g></svg>'*/
       }
     };
     _this.updateTrip = _this.updateTrip.bind(_this);
     _this.updateBasedOnResponse = _this.updateBasedOnResponse.bind(_this);
     _this.updateOptions = _this.updateOptions.bind(_this);
+    _this.updateMap = _this.updateMap.bind(_this);
     return _this;
   }
 
@@ -45098,6 +45101,13 @@ var Application = function (_Component) {
       this.setState(trip);
     }
   }, {
+    key: 'updateMap',
+    value: function updateMap(map, value) {
+      var trip = this.state.trip;
+      trip.map = value;
+      this.setState(trip);
+    }
+  }, {
     key: 'render',
     value: function render() {
       if (!this.state.config) {
@@ -45109,9 +45119,10 @@ var Application = function (_Component) {
         { id: 'Application' },
         _react2.default.createElement(_Info2.default, null),
         _react2.default.createElement(_Options2.default, { options: this.state.trip.options, config: this.state.config, updateOptions: this.updateOptions }),
-        _react2.default.createElement(_Map2.default, { config: this.state.trip.map })
+        _react2.default.createElement(_Map2.default, { config: this.state.trip.map, updateMap: this.updateMap })
       );
-    }
+    } //config={this.state.config} updateMap={this.updateMap()} config={this.state.trip.map}
+
   }]);
 
   return Application;
@@ -45385,6 +45396,8 @@ var _reactstrap = __webpack_require__(57);
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
+function _asyncToGenerator(fn) { return function () { var gen = fn.apply(this, arguments); return new Promise(function (resolve, reject) { function step(key, arg) { try { var info = gen[key](arg); var value = info.value; } catch (error) { reject(error); return; } if (info.done) { resolve(value); } else { return Promise.resolve(value).then(function (value) { step("next", value); }, function (err) { step("throw", err); }); } } return step("next"); }); }; }
+
 function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
 
 function _possibleConstructorReturn(self, call) { if (!self) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return call && (typeof call === "object" || typeof call === "function") ? call : self; }
@@ -45401,6 +45414,51 @@ var Map = function (_Component) {
     }
 
     _createClass(Map, [{
+        key: 'trip',
+        value: function () {
+            var _ref = _asyncToGenerator( /*#__PURE__*/regeneratorRuntime.mark(function _callee() {
+                var serverResponse, tffi;
+                return regeneratorRuntime.wrap(function _callee$(_context) {
+                    while (1) {
+                        switch (_context.prev = _context.next) {
+                            case 0:
+                                _context.prev = 0;
+                                _context.next = 3;
+                                return this.fetchResponse();
+
+                            case 3:
+                                serverResponse = _context.sent;
+                                _context.next = 6;
+                                return serverResponse.json();
+
+                            case 6:
+                                tffi = _context.sent;
+
+                                this.props.updateMap(tffi.map);
+                                _context.next = 13;
+                                break;
+
+                            case 10:
+                                _context.prev = 10;
+                                _context.t0 = _context['catch'](0);
+
+                                console.error(_context.t0);
+
+                            case 13:
+                            case 'end':
+                                return _context.stop();
+                        }
+                    }
+                }, _callee, this, [[0, 10]]);
+            }));
+
+            function trip() {
+                return _ref.apply(this, arguments);
+            }
+
+            return trip;
+        }()
+    }, {
         key: 'render',
         value: function render() {
             return _react2.default.createElement(_reactstrap.Container, { dangerouslySetInnerHTML: { __html: this.props.config } });
