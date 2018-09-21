@@ -14,8 +14,10 @@ import java.util.*;
 public class TripCalculate {
 
     private Trip trip;
+    private boolean isCorrectFormat; //verify correct format of POST request
 
-    public TripCalculate(Request request){
+    public TripCalculate(Request request) {
+        isCorrectFormat = false;
 
         // extract the information from the body of the request.
         JsonParser jsonParser = new JsonParser();
@@ -23,13 +25,18 @@ public class TripCalculate {
 
         //Converting to a Java class
         Gson gson = new Gson();
+        try {
+            trip = gson.fromJson(requestBody, Trip.class);
+            isCorrectFormat = validateTripRequestFormat(trip);
 
-        trip = gson.fromJson(requestBody, Trip.class);
+            //Calculate and fill trip distances
+            trip.getTripDistances();
+            setMap();
 
-        //Calculate and fill trip distances
-        trip.getTripDistances();
-        setMap();
+        } catch (Exception e) {
 
+            isCorrectFormat = false;
+        }
     }
 
     public void setMap(){
@@ -88,9 +95,32 @@ public class TripCalculate {
         return vectors;
     }
 
+
+
+
+
+    public boolean validateTripRequestFormat(Trip trip) {
+        //check if format of request if correct: type:"trip", version 1 or 2
+        if(     Objects.equals(trip.type, "trip")&&
+                (trip.version==2||trip.version==1)&&
+                trip.places!=null&&trip.options!=null){
+
+            return true;
+        }
+
+        return false;
+    }
+
+
     public String getTripJson () {
         Gson gson = new Gson();
-        return gson.toJson(trip);
+        if(isCorrectFormat){
+            return gson.toJson(trip);
+
+        }
+        else{
+            return "{}"; //return {} if incorrect request format
+        }
     }
 
 }

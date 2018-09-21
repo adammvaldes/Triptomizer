@@ -50,7 +50,6 @@ public class MicroServer {
     get("/config", this::config);
     post("/plan", this::plan);
     post("/distance", this::distance);
-    //post ( path: "/calculate, this::calculate);
 
     System.out.println("\n\nServer running on port: " + this.port + "\n\n");
   }
@@ -111,7 +110,7 @@ public class MicroServer {
   }
 
 
-  /** A REST API to support trip planning.
+  /** A REST API that handles plan POST request.
    *
    * @param request
    * @param response
@@ -122,8 +121,8 @@ public class MicroServer {
     response.type("application/json");
     response.header("Access-Control-Allow-Origin", "*");
 
-    TripCalculate tcalculate = new TripCalculate(request);
-    return tcalculate.getTripJson();
+    TripCalculate tCalculate = new TripCalculate(request);
+    return tCalculate.getTripJson();
   }
 
   /** A REST API that returns the team information associated with the server.
