@@ -1,7 +1,5 @@
 import React, { Component } from 'react';
 import { Media } from 'reactstrap'
-import Map from "./Map";
-
 
 class Itinerary extends Component {
     constructor(props) {
@@ -10,10 +8,6 @@ class Itinerary extends Component {
 
 render(){
         return (
-            /*<Container>
-                <h1>Trip Itinerary.</h1>
-                <p>asdf</p>
-            </Container>*/
             <Media>
                 <Media body>
                     <Media Heading>
@@ -23,7 +17,6 @@ render(){
             </Media>
         );
     }
-
 }
 
 export default Itinerary;
