@@ -1,6 +1,5 @@
 import React, {Component} from 'react'
 import { Media } from 'reactstrap'
-import hippo from './Hippo.png';
 
 
 

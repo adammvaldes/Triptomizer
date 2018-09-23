@@ -86,7 +86,7 @@ class Application extends Component {
         <Info/>
           <Options options={this.state.trip.options} config={this.state.config} updateOptions={this.updateOptions}/>
           <Map trip={this.state.trip} updateMap={this.updateMap}/>
-          <Itinerary config={this.state.trip} />
+          <Itinerary trip={this.state.trip} />
       </Container>
     )
   }
