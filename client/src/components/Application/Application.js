@@ -5,6 +5,7 @@ import Options from './Options';
 
 import { get_config } from '../../api/api';
 import Map from "./Map";
+import Itinerary from "./Itinerary";
 
 /* Renders the application.
  * Holds the destinations and options state shared with the trip.
@@ -72,6 +73,7 @@ class Application extends Component {
         <Info/>
         <Options options={this.state.trip.options} config={this.state.config} updateOptions={this.updateOptions}/>
         <Map config={this.state.trip.map} updateMap={this.updateMap}/>
+          <Itinerary config={this.state.trip} />
       </Container>
     )
   }
