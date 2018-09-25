@@ -12,7 +12,10 @@ public class Distance {
     public Location origin;
     public Location destination;
     String units;
-    int unitRadius;
+
+    String unitName;
+    float unitRadius;
+
     int distance;
 
     public static int getDistanceNum(float theta1, float lambda1, float theta2, float lambda2, float radius) {
@@ -33,12 +36,19 @@ public class Distance {
     public float getRadius(String units) {
 
         float radius = 0;
-        if(units.equals("miles"))
+        if(units.equals("miles")) {
             radius = 3959;
-        if(units.equals("kilometers"))
+            unitRadius = radius;
+        }
+        if(units.equals("kilometers")) {
             radius = 6371;
-        if(units.equals("nautical miles"))
+            unitRadius = radius;
+        }
+        if(units.equals("nautical miles")) {
             radius = 3440;
+            unitRadius = radius;
+        }
+
         if(units.equals("user defined"))
             radius = unitRadius;
 
