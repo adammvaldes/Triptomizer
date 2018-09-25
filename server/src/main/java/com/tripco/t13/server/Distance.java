@@ -12,8 +12,10 @@ public class Distance {
     public Location origin;
     public Location destination;
     String units;
+
     String unitName;
     float unitRadius;
+
     int distance;
 
     public static int getDistanceNum(float theta1, float lambda1, float theta2, float lambda2, float radius) {
@@ -46,6 +48,7 @@ public class Distance {
             radius = 3440;
             unitRadius = radius;
         }
+
         if(units.equals("user defined"))
             radius = unitRadius;
 

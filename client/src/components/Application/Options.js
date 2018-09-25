@@ -17,14 +17,13 @@ class Options extends Component{
       <Button
         key={'distance_button_' + unit}
         className='btn-outline-dark unit-button'
-        active={this.props.options.unit === unit}
+        active={this.props.options.units === unit}
         value={unit}
-        onClick={(event) => this.props.updateOptions('distance', event.target.value)}
+        onClick={(event) => this.props.updateOptions('units', event.target.value)}
       >
         {unit.charAt(0).toUpperCase() + unit.slice(1)}
       </Button>
     );
-
     return(
       <Card>
         <CardBody>
