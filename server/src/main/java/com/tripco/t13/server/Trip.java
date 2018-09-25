@@ -5,7 +5,11 @@ import com.google.gson.JsonElement;
 import com.google.gson.JsonParser;
 import jdk.nashorn.internal.parser.JSONParser;
 import spark.Request;
+
+import java.io.BufferedReader;
+import java.io.InputStreamReader;
 import java.util.ArrayList;
+
 
 public class Trip{
     int version;
@@ -33,8 +37,35 @@ public class Trip{
             distances.add(Distance.getDistanceNum(places.get(i).latitude, places.get(i).longitude, places.get(i+1).latitude, places.get(i+1).longitude, options.unitRadius));
         }
         distances.add(Distance.getDistanceNum(places.get(places.size()-1).latitude, places.get(places.size()-1).longitude, places.get(0).latitude, places.get(0).longitude, options.unitRadius));
+
         return distances;
     }
+
+
+    /*public void setMap(){
+        BufferedReader read;
+        try {
+            read = new BufferedReader(new InputStreamReader(getClass().getResourceAsStream("/CObackground.svg")));
+        }
+        catch(Exception e){
+            return;
+        }
+
+        String temp = "";
+        String answer = "";
+        try {
+            while((temp = read.readLine()) != null){
+                answer += "'";
+                answer += temp;
+                answer += "'";
+            }
+        }
+        catch(Exception e){
+            return;
+        }
+        map = answer;
+        //System.out.println(map);
+    }*/
 
     //Returns hardcoded map
     public String svg(){
