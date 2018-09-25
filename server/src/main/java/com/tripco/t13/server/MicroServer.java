@@ -122,6 +122,7 @@ public class MicroServer {
     response.header("Access-Control-Allow-Origin", "*");
 
     TripCalculate tCalculate = new TripCalculate(request);
+    //System.out.println(tCalculate.getTripJson());
     return tCalculate.getTripJson();
   }
 

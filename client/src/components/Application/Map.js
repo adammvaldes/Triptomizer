@@ -1,32 +1,29 @@
 import React, {Component} from 'react'
 import { Media } from 'reactstrap'
 
-
+import { request } from '../../api/api';
 
 class Map extends Component {
     constructor(props) {
         super(props);
         this.plan = this.plan.bind(this);
     }
-    async plan(){
-        try{
-            //let serverResponse = await this.fetchResponse(this.props.trip,this.props.trip.type,8088);
-            //let tffi = await serverResponse.json();
-            //this.props.updateMap("stuffity");
-            this.props.updateTitle("stuffity");
-        }
-        catch(Err){
-            console.error(Err);
-        }
+    plan(){
+        request(this.props.trip,"plan").then( serverResponse => {
+            this.props.updateMap(serverResponse["map"])
+        });
+
     }
 
+    componentDidMount() {
+        this.plan();
+    }
     render() {
-        //this.plan();
         const dataUri = "data:image/svg+xml;utf8," + this.props.trip.map;
         return (
             <Media>
                 <Media body>
-                    <Media Heading>
+                    <Media heading>
                         This is the map of Colorado!
                     </Media>
                     <Media object src={dataUri} alt="Map of Colorado"/>
@@ -35,6 +32,7 @@ class Map extends Component {
         );
         //<Container dangerouslySetInnerHTML={{__html: this.props.map }} />
         //<Media object src={hippo} alt="Test hippo of good fortune"/>
+        //ctrl-shift-i
     }
 }
 export default Map;

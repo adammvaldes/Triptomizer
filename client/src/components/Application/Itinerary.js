@@ -1,22 +1,24 @@
 import React, { Component } from 'react';
 import { Media } from 'reactstrap'
 
+
 class Itinerary extends Component {
     constructor(props) {
         super(props);
     }
 
-render(){
+    render(){
         return (
             <Media>
                 <Media body>
-                    <Media Heading>
+                    <Media heading>
                         This is Trip Itinerary
                     </Media>
                 </Media>
             </Media>
         );
     }
+
 }
 
 export default Itinerary;
