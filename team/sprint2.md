@@ -82,6 +82,7 @@ Lastly, we have tasks to remind us to maintain clean code and confirm operabilit
 | 9/19/18 | 2 | 9 | Brainstorming and understanding the relationship between server and client. Issues understanding the requirements for the assignment |
 |9/21/18 | 10 | 5 | Understanding the client side |
 |9/24/18 | 10 | 5 | *none* |
+|9/26/18 | 12 | 5 | Understanding client side, file upload and processing|
 
 *Add a new row for each scrum session.*
 
