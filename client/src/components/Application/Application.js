@@ -2,7 +2,6 @@ import React, {Component} from 'react';
 import { Container } from 'reactstrap';
 import Info from './Info'
 import Options from './Options';
-import { ButtonGroup, Button } from 'reactstrap'
 
 import { get_config } from '../../api/api';
 import Map from "./Map";
@@ -25,12 +24,7 @@ class Application extends Component {
         options : {
           units: "miles"
         },
-        places: [
-            {"id":"dnvr", "name":"Denver", "latitude":39.7392, "longitude":-104.9903},
-            {"id":"bldr", "name":"Boulder", "latitude":40.01499, "longitude":-105.27055},
-            {"id":"foco", "name":"Fort Collins", "latitude":40.585258, "longitude":-105.084419},
-            {"id":"stuff", "name":"Anything", "latitude":36.9932,"longitude":-102.0420}
-        ],
+        places: [],
         distances: [],
         map: ''
       }
@@ -39,7 +33,8 @@ class Application extends Component {
     this.updateBasedOnResponse = this.updateBasedOnResponse.bind(this);
     this.updateOptions = this.updateOptions.bind(this);
     this.updateMap = this.updateMap.bind(this);
-    this.updateStuff = this.updateStuff.bind(this);
+    this.updateTFFI = this.updateTFFI.bind(this);
+    this.updateDistances = this.updateDistances.bind(this);
   }
 
   componentWillMount() {
@@ -68,14 +63,20 @@ class Application extends Component {
     this.setState(trip);
   }
 
+  //Functions to update the state in the Trip Class
   updateMap(value){
       let trip = this.state.trip;
       trip.map = value;
-      //trip.title = value;
       this.setState(trip);
   }
 
-  updateStuff(value){
+  updateDistances(value){
+      let trip = this.state.trip;
+      trip.distances = value;
+      this.setState(trip);
+  }
+
+  updateTFFI(value){
       this.setState({'trip' : value});
   }
 
@@ -86,16 +87,15 @@ class Application extends Component {
       <Container id="Application">
         <Info/>
           <Options options={this.state.trip.options} config={this.state.config} updateOptions={this.updateOptions}/>
-          <Trip trip={this.state.trip} updateStuff={this.updateStuff} updateMap={this.updateMap} />
-          <Map trip={this.state.trip} updateMap={this.updateMap}/>
+          <Trip trip={this.state.trip}
+                updateMap={this.updateMap}
+                updateTFFI={this.updateTFFI}
+                updateDistances={this.updateDistances}/>
+          <Map trip={this.state.trip} />
           <Itinerary trip={this.state.trip}/>
       </Container>
     )
   }
 }
-/*<button className="btn"  onClick={()=> {
-    return (
-        <Map trip={{  "type" : "trip",  "version" : 2,  "title" : "Shopping loop",  "options" : {     "units":"miles"     },  "places" :  [     {"id":"dnvr", "name":"Denver", "latitude":39.7392, "longitude":-104.9903},       {"id":"bldr", "name":"Boulder", "latitude":40.01499, "longitude":-105.27055} ] }} updateMap={this.updateMap}/>
-    )
-}} type="button">Plan</button>*/
+
 export default Application;
