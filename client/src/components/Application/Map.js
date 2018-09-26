@@ -16,7 +16,7 @@ class Map extends Component {
     }
 
     componentDidMount() {
-        this.plan();
+        //this.plan();
     }
     render() {
         const dataUri = "data:image/svg+xml;utf8," + this.props.trip.map;

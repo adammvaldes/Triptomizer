@@ -7,6 +7,7 @@ import { ButtonGroup, Button } from 'reactstrap'
 import { get_config } from '../../api/api';
 import Map from "./Map";
 import Itinerary from "./Itinerary";
+import Trip from "./Trip";
 
 /* Renders the application.
  * Holds the destinations and options state shared with the trip.
@@ -20,7 +21,7 @@ class Application extends Component {
       trip: {
         type: "trip",
         version: "2",
-        title: "aslkdfjoawiej",
+        title: "Stuffity",
         options : {
           units: "miles"
         },
@@ -31,15 +32,14 @@ class Application extends Component {
             {"id":"stuff", "name":"Anything", "latitude":36.9932,"longitude":-102.0420}
         ],
         distances: [],
-        map: '<svg width="1920" height="200" xmlns="http://www.w3.org/2000/svg" xmlns:svg="http://www.w3.org/2000/svg"><g>' +
-             '<rect width="300" height="100" style="fill:rgb(0,0,255);stroke-width:3;stroke:rgb(0,0,0)" />' +
-             '</g></svg>'
+        map: ''
       }
     };
     this.updateTrip = this.updateTrip.bind(this);
     this.updateBasedOnResponse = this.updateBasedOnResponse.bind(this);
     this.updateOptions = this.updateOptions.bind(this);
     this.updateMap = this.updateMap.bind(this);
+    this.updateStuff = this.updateStuff.bind(this);
   }
 
   componentWillMount() {
@@ -75,6 +75,10 @@ class Application extends Component {
       this.setState(trip);
   }
 
+  updateStuff(value){
+      this.setState({'trip' : value});
+  }
+
   render() {
     if(!this.state.config) { return <Container/> }
 
@@ -82,8 +86,9 @@ class Application extends Component {
       <Container id="Application">
         <Info/>
           <Options options={this.state.trip.options} config={this.state.config} updateOptions={this.updateOptions}/>
+          <Trip trip={this.state.trip} updateStuff={this.updateStuff} updateMap={this.updateMap} />
           <Map trip={this.state.trip} updateMap={this.updateMap}/>
-          <Itinerary trip={this.state.trip} />
+          <Itinerary trip={this.state.trip}/>
       </Container>
     )
   }
