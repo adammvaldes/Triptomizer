@@ -2,11 +2,11 @@ import React, {Component} from 'react';
 import { Container } from 'reactstrap';
 import Info from './Info'
 import Options from './Options';
-import { ButtonGroup, Button } from 'reactstrap'
 
 import { get_config } from '../../api/api';
 import Map from "./Map";
 import Itinerary from "./Itinerary";
+import Trip from "./Trip";
 
 /* Renders the application.
  * Holds the destinations and options state shared with the trip.
@@ -20,26 +20,21 @@ class Application extends Component {
       trip: {
         type: "trip",
         version: "2",
-        title: "aslkdfjoawiej",
+        title: "Stuffity",
         options : {
           units: "miles"
         },
-        places: [
-            {"id":"dnvr", "name":"Denver", "latitude":39.7392, "longitude":-104.9903},
-            {"id":"bldr", "name":"Boulder", "latitude":40.01499, "longitude":-105.27055},
-            {"id":"foco", "name":"Fort Collins", "latitude":40.585258, "longitude":-105.084419},
-            {"id":"stuff", "name":"Anything", "latitude":36.9932,"longitude":-102.0420}
-        ],
+        places: [],
         distances: [],
-        map: '<svg width="1920" height="200" xmlns="http://www.w3.org/2000/svg" xmlns:svg="http://www.w3.org/2000/svg"><g>' +
-             '<rect width="300" height="100" style="fill:rgb(0,0,255);stroke-width:3;stroke:rgb(0,0,0)" />' +
-             '</g></svg>'
+        map: ''
       }
     };
     this.updateTrip = this.updateTrip.bind(this);
     this.updateBasedOnResponse = this.updateBasedOnResponse.bind(this);
     this.updateOptions = this.updateOptions.bind(this);
     this.updateMap = this.updateMap.bind(this);
+    this.updateTFFI = this.updateTFFI.bind(this);
+    this.updateDistances = this.updateDistances.bind(this);
   }
 
   componentWillMount() {
@@ -68,29 +63,38 @@ class Application extends Component {
     this.setState(trip);
   }
 
+  //Functions to update the state in the Trip Class
   updateMap(value){
       let trip = this.state.trip;
       trip.map = value;
-      //trip.title = value;
       this.setState(trip);
+  }
+
+  updateDistances(value){
+      let trip = this.state.trip;
+      trip.distances = value;
+      this.setState(trip);
+  }
+
+  updateTFFI(value){
+      this.setState({'trip' : value});
   }
 
   render() {
     if(!this.state.config) { return <Container/> }
-
-    return(
-      <Container id="Application">
-        <Info/>
-          <Options options={this.state.trip.options} config={this.state.config} updateOptions={this.updateOptions}/>
-          <Map trip={this.state.trip} updateMap={this.updateMap}/>
-          <Itinerary trip={this.state.trip} />
-      </Container>
-    )
-  }
+      return(
+          <Container id="Application">
+              <Info/>
+              <Options options={this.state.trip.options} config={this.state.config} updateOptions={this.updateOptions}/>
+              <Trip trip={this.state.trip}
+                    updateMap={this.updateMap}
+                    updateTFFI={this.updateTFFI}
+                    updateDistances={this.updateDistances} />
+              <Map trip={this.state.trip} />
+              <Itinerary trip={this.state.trip} />
+          </Container>
+      )
+    }
 }
-/*<button className="btn"  onClick={()=> {
-    return (
-        <Map trip={{  "type" : "trip",  "version" : 2,  "title" : "Shopping loop",  "options" : {     "units":"miles"     },  "places" :  [     {"id":"dnvr", "name":"Denver", "latitude":39.7392, "longitude":-104.9903},       {"id":"bldr", "name":"Boulder", "latitude":40.01499, "longitude":-105.27055} ] }} updateMap={this.updateMap}/>
-    )
-}} type="button">Plan</button>*/
+
 export default Application;
