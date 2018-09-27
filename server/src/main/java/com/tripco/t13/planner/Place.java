@@ -7,7 +7,7 @@ package com.tripco.t13.planner;
 public class Place {
   public String id;
   public String name;
-  public String latitude;
-  public String longitude;
+  public double latitude;
+  public double longitude;
 
 }
