@@ -82,20 +82,19 @@ class Application extends Component {
 
   render() {
     if(!this.state.config) { return <Container/> }
-
-    return(
-      <Container id="Application">
-        <Info/>
-          <Options options={this.state.trip.options} config={this.state.config} updateOptions={this.updateOptions}/>
-          <Trip trip={this.state.trip}
-                updateMap={this.updateMap}
-                updateTFFI={this.updateTFFI}
-                updateDistances={this.updateDistances}/>
-          <Map trip={this.state.trip} />
-          <Itinerary trip={this.state.trip}/>
-      </Container>
-    )
-  }
+      return(
+          <Container id="Application">
+              <Info/>
+              <Options options={this.state.trip.options} config={this.state.config} updateOptions={this.updateOptions}/>
+              <Trip trip={this.state.trip}
+                    updateMap={this.updateMap}
+                    updateTFFI={this.updateTFFI}
+                    updateDistances={this.updateDistances} />
+              <Map trip={this.state.trip} />
+              <Itinerary trip={this.state.trip} />
+          </Container>
+      )
+    }
 }
 
 export default Application;

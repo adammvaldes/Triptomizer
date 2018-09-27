@@ -33,7 +33,7 @@ class Options extends Component{
           </ButtonGroup>
         </CardBody>
       </Card>
-    )
+    );
   }
 }
 
