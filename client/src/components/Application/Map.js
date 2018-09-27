@@ -1,26 +1,41 @@
 import React, {Component} from 'react'
-import {Card, CardHeader, CardBody, Container} from 'reactstrap'
+import { Media } from 'reactstrap'
+
+import { request } from '../../api/api';
 
 class Map extends Component {
     constructor(props) {
         super(props);
+        this.plan = this.plan.bind(this);
     }
-    async trip(){
-        try{
-            let serverResponse = await this.fetchResponse();
-            let tffi = await serverResponse.json();
-            this.props.updateMap(tffi.map);
-        }
-        catch(Err){
-            console.error(Err);
-        }
+    plan(){
+        request(this.props.trip,"plan").then( serverResponse => {
+            this.props.updateMap(serverResponse["map"])
+        });
+
+    }
+
+    componentDidMount() {
+        this.plan();
     }
     render() {
+        const dataUri = "data:image/svg+xml;utf8," + this.props.trip.map;
         return (
-            <Container dangerouslySetInnerHTML={{__html: this.props.config }}/>
-
+            <Media>
+                <Media body>
+                    <Media heading>
+                        This is the map of Colorado!
+                    </Media>
+                    <Media object src={dataUri} alt="Map of Colorado"/>
+                </Media>
+            </Media>
         );
+        //<Container dangerouslySetInnerHTML={{__html: this.props.map }} />
+        //<Media object src={hippo} alt="Test hippo of good fortune"/>
+        //ctrl-shift-i
     }
 }
-
 export default Map;
+//cd client
+//npm run dev
+//
