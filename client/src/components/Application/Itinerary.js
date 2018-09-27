@@ -16,21 +16,23 @@ class Itinerary extends Component {
 
     }
 
-    render(){
-        const trip = this.props.trip;
+    render() {
 
         let tripPlaces = [];
         let tripGeoLocations = [];
         let tripDistances = [];
-        if (trip.distances.length !== 0 && trip.places !== undefined) {
+        if(this.props.trip.distances == undefined){
+            return <Container></Container>;
+        }
+        if (this.props.trip.places != void(0) && this.props.trip.distances.length != 0) {
             tripDistances = this.calculateTotalDistance();
             //return array of all places to print in table...
-            tripPlaces = trip.places.map((place) => {
+            tripPlaces = this.props.trip.places.map((place) => {
                 return <td key={'place ' + place.name}>{place.name}</td>;
             });
 
             //return array of all geo locations in table...
-            tripGeoLocations = trip.places.map((place) => {
+            tripGeoLocations = this.props.trip.places.map((place) => {
                 return <td key={'geo ' + place.latitude}>{place.latitude}, {place.longitude}</td>
             });
 
@@ -51,11 +53,10 @@ class Itinerary extends Component {
                         <th scope="row">Total Distance</th>
                         <td>0</td>
                         {tripDistances}
-                    </tr>
+                        </tr>
                     </tbody>
                 </Table>
-            );
-
+                );
         }
 
         return <Container></Container>;
