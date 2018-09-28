@@ -17,22 +17,23 @@ class Itinerary extends Component {
     }
 
     render() {
-
+        const trip = this.props.trip;
         let tripPlaces = [];
         let tripGeoLocations = [];
         let tripDistances = [];
-        if(this.props.trip.distances == undefined){
+
+        if(trip.distances == undefined){
             return <Container></Container>;
         }
-        if (this.props.trip.places != void(0) && this.props.trip.distances.length != 0) {
+        if (trip.places !== void(0) && trip.distances.length !== 0) {
             tripDistances = this.calculateTotalDistance();
             //return array of all places to print in table...
-            tripPlaces = this.props.trip.places.map((place) => {
+            tripPlaces = trip.places.map((place) => {
                 return <td key={'place ' + place.name}>{place.name}</td>;
             });
 
             //return array of all geo locations in table...
-            tripGeoLocations = this.props.trip.places.map((place) => {
+            tripGeoLocations = trip.places.map((place) => {
                 return <td key={'geo ' + place.latitude}>{place.latitude}, {place.longitude}</td>
             });
 

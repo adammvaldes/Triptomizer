@@ -22,7 +22,9 @@ class Application extends Component {
         version: "2",
         title: "Stuffity",
         options : {
-          units: "miles"
+          units: "miles",
+            unitName: "",
+            unitRadius: ""
         },
         places: [],
         distances: [],
