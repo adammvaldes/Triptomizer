@@ -49,6 +49,13 @@ class Itinerary extends Component {
                         {tripGeoLocations[0]}
                     </tr>
                     <tr>
+                        <th scope="row">Leg Distances</th>
+                        <td>0</td>
+                        {trip.distances.map((el) => {
+                            return <td key={'leg ' + el}>{el}</td>;
+                        })}
+                    </tr>
+                    <tr>
                         <th scope="row">Total Distance, {trip.options.unitName }</th>
                         <td>0</td>
                         {tripDistances}

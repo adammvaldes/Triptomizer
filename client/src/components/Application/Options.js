@@ -54,7 +54,7 @@ class Options extends Component{
                 <Form>
                     <FormGroup>
                     <Input type="text" name="UD" id="unitName" placeholder="Your Unit Name" onChange={ this.updateName } value={this.props.options.unitName} />
-                    <Input type="text" pattern="[0-9]*" name="UR" id="userRadius" placeholder="Radius of Earth through object" onInput={ this.updateRadius } value={this.props.options.unitRadius} />
+                    <Input type="text" pattern="[0-9]*" name="UR" id="userRadius" placeholder="Radius of Earth through object" onChange={ this.updateRadius } value={this.props.options.unitRadius} />
                     </FormGroup>
                 </Form>
             </CardBody>
