@@ -16,12 +16,13 @@ class Itinerary extends Component {
 
     }
 
-    render(){
+    render() {
         const trip = this.props.trip;
 
         let tripPlaces = [];
         let tripGeoLocations = [];
         let tripDistances = [];
+
         if (trip.distances.length !== 0 && trip.places !== undefined && trip.distances !== undefined) {
             tripDistances = this.calculateTotalDistance();
             //return array of all places to print in table...

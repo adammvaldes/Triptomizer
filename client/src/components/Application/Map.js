@@ -7,7 +7,7 @@ class Map extends Component {
     }
 
     render() {
-        if(this.props.trip.map != '' && this.props.trip.map != void(0)){
+        if(this.props.trip.map !== '' && this.props.trip.map !== void(0)){
             const dataUri = "data:image/svg+xml;utf8," + this.props.trip.map;
             return (
                 <Media>
