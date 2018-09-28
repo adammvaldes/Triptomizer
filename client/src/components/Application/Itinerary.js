@@ -23,7 +23,7 @@ class Itinerary extends Component {
         let tripGeoLocations = [];
         let tripDistances = [];
 
-        if (trip.distances.length !== 0 && trip.places !== undefined && trip.distances !== undefined) {
+        if (trip.distances !== undefined && trip.distances.length !== 0 && trip.places !== undefined) {
             tripDistances = this.calculateTotalDistance();
             //return array of all places to print in table...
             tripPlaces = trip.places.map((place) => {
@@ -49,7 +49,7 @@ class Itinerary extends Component {
                         {tripGeoLocations[0]}
                     </tr>
                     <tr>
-                        <th scope="row">Total Distance, {trip.options.units}</th>
+                        <th scope="row">Total Distance, {trip.options.unitName }</th>
                         <td>0</td>
                         {tripDistances}
                     </tr>

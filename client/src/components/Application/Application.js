@@ -22,7 +22,7 @@ class Application extends Component {
         version: "2",
         title: "Stuffity",
         options : {
-          units: "miles",
+          units: "",
             unitName: "",
             unitRadius: ""
         },
@@ -87,11 +87,15 @@ class Application extends Component {
       return(
           <Container id="Application">
               <Info/>
-              <Options options={this.state.trip.options} config={this.state.config} updateOptions={this.updateOptions}/>
+              <Options options={this.state.trip.options}
+                       config={this.state.config}
+                       updateOptions={this.updateOptions}
+                       updateDistances={this.updateDistances} />
               <Trip trip={this.state.trip}
                     updateMap={this.updateMap}
                     updateTFFI={this.updateTFFI}
-                    updateDistances={this.updateDistances} />
+                    updateDistances={this.updateDistances}
+                    updateOptions={this.updateOptions} />
               <Map trip={this.state.trip} />
               <Itinerary trip={this.state.trip} />
           </Container>
