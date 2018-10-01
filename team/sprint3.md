@@ -1,9 +1,9 @@
-# Sprint 3 - *your team number* - *your team name*
+# Sprint 3 - t13 - Spaghetti Coders
 
 ## Goal
 
 ### Build shorter trips!
-### Sprint Leader: *firstname lastname*
+### Sprint Leader: Adam Valdes
 
 ## Definition of Done
 
@@ -36,14 +36,33 @@
 
 ## Plan
 
-*An introductory paragraph describing what you expect to accomplish this sprint that will achieve the goal.*
+We want to have a more organized approach to completing the epics of this Sprint. We will first complete the unfinished epics of Sprint 2, then move on the epics of Sprint 3. We want to continue to keep a well-designed, well-organized, functioning website for users.
 
 *Include any design diagrams prepared during sprint planning (user interface, component diagram, component/state/hierarchy, etc.) with a short paragraph or each.
 
 Epics planned for this sprint.
 
-* *## epic title: description*
-*
+* 1. TripCo: All code must be tested: <br>
+minimum 50% coverage, preferred 70% coverage
+* 2. User: I want to design a trip from scratch so I can stop using the other tool: <br>
+Create an empty itinerary.
+* 3. User: I want to make and save changes to the trip:<br>
+I would like to add or remove destinations. <br>
+I want to choose a different starting location. <br>
+I want to reverse the order of the trip. <br>
+I want to find possible destinations so I can add them. <br>
+I want to save the changes I make to the trip.
+* 4. User: I want my trips to be shorter. <br>
+Use a simply optimization strategy (nearest neighbor) to build a shorter trip.
+* 5. (Sprint2) TripCo: All clients and servers must interoperate!
+This requires an adherence to the TFFI specification: <br>
+Each client must include a configuration option to change to server:port used for RESTful services.
+* 6. (Sprint2) TripCo: All code shall be clean!:
+Adhere to the Google style guide for Java and JavaScript. <br>
+Write maintainable code. <br>
+Time to read the book if you haven't started. <br>
+More to come! <br>
+You may amend your sprint#.md and README.md with policies as needed to reflect specifics you would like to focus on for the sprint and the future.
 
 
 ## Metrics
@@ -63,7 +82,7 @@ Epics planned for this sprint.
 
 | Date | Tasks closed  | Tasks in progress | Impediments |
 | :--- | :--- | :--- | :--- |
-| *date* | *#task, ...* | *#task, ...* | *none* | 
+| 10/1/2018 | 0 | 20 | *none* | 
 
 *Add a new row for the scrum session after each lecture. *
 
