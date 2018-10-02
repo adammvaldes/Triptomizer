@@ -12,6 +12,8 @@
 * Increment deployed for demo and testing as server-3.0.jar.
 * Increment release `v3.0` created on GitHub with appropriate version number and name.
 * Epics and Tasks updated in Zenhub.
+* Team members should be able to reach a consensus on whether a task is done or not when closing it.
+* If team members disagree on whether a task is done or whether a solution is ready to deploy then they should attempt to resolve the issue through discussion between team members before resorting to a "majority rules" decision.
 
 
 ## Policies
@@ -72,6 +74,8 @@ You may amend your sprint#.md and README.md with policies as needed to reflect s
 | Epics | *4* | *0* |
 | Tasks |  *18*   | *0* | 
 | Story Points |  *31*  | *0* | 
+
+For this sprint we ended up planning the same number of beginning story points as the number that we created last sprint. Although the story points we planned are equal to those last sprint at the beginning, we can expect for some additional ones to be added as the sprint progresses and new requirements are found. Although Dmitry was transferred to another team, we still expect to be able to complete most if not all of the tasks we created.  
 
 *Enter the `# Planned` at the beginning of the sprint.  Include a discussion of planning decisions based on the planned number of story points versus how many were completed in previous sprints.*
 
