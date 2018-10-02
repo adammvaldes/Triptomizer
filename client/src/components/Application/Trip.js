@@ -11,6 +11,7 @@ class Trip extends Component {
         this.readFile = this.readFile.bind(this);
     }
     plan(){
+        this.props.updateOptions('unitName',this.props.trip.options.units);
         request(this.props.trip,"plan").then( serverResponse => {
             this.props.updateMap(serverResponse["map"]);
             this.props.updateDistances(serverResponse["distances"]);
@@ -30,6 +31,7 @@ class Trip extends Component {
                 alert("Not a JSON file");
             }
             this.props.updateTFFI(obj);
+            //this.props.updateOptions('unitName',this.props.trip.options.units);
         }.bind(this);
         fReader.readAsText(file);
     }

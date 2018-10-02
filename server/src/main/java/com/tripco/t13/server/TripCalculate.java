@@ -76,19 +76,19 @@ public class TripCalculate {
 
             //if we ran out of places to go, we round the trip up from last place to origin...
             if ((i + 1) == trip.places.size()) {
-                vectors += "<line x1=\"" + ((trip1Lon - mapLon) * pixPerLon) +
-                        "\" y1=\"" + ((trip1Lat - mapLat) * -pixPerLat) +
-                        "\" x2=\"" + ((trip.places.get(0).longitude - mapLon) * pixPerLon) +
-                        "\" y2=\"" + ((trip.places.get(0).latitude - mapLat) * -pixPerLat) +
+                vectors += "<line x1=\"" + ((trip1Lon - mapLon) * pixPerLon + buffer) +
+                        "\" y1=\"" + ((trip1Lat - mapLat) * -pixPerLat + buffer) +
+                        "\" x2=\"" + ((trip.places.get(0).longitude - mapLon) * pixPerLon + buffer) +
+                        "\" y2=\"" + ((trip.places.get(0).latitude - mapLat) * -pixPerLat + buffer) +
                         "\" style=\"stroke:rgb(255,0,0);stroke-width:2\" />";
                 break; //break to not get index out of bounds exception
             } else { //else get data for the second place just like the first.
                 double trip2Lon = trip.places.get(i + 1).longitude, trip2Lat = trip.places.get(i + 1).latitude;
                 //draw vector from place 1 to place 2...
-                vectors += "<line x1=\"" + ((trip1Lon - mapLon) * pixPerLon) +
-                        "\" y1=\"" + ((trip1Lat - mapLat) * -pixPerLat) +
-                        "\" x2=\"" + ((trip2Lon - mapLon) * pixPerLon) +
-                        "\" y2=\"" + ((trip2Lat - mapLat) * -pixPerLat) +
+                vectors += "<line x1=\"" + ((trip1Lon - mapLon) * pixPerLon + buffer) +
+                        "\" y1=\"" + ((trip1Lat - mapLat) * -pixPerLat + buffer) +
+                        "\" x2=\"" + ((trip2Lon - mapLon) * pixPerLon + buffer) +
+                        "\" y2=\"" + ((trip2Lat - mapLat) * -pixPerLat + buffer) +
                         "\" style=\"stroke:rgb(255,0,0);stroke-width:2\" />";
             }
         }
