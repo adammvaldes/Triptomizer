@@ -69,9 +69,9 @@ You may amend your sprint#.md and README.md with policies as needed to reflect s
 
 | Statistic | # Planned | # Completed |
 | --- | ---: | ---: |
-| Epics | *value* | *value* |
-| Tasks |  *value*   | *value* | 
-| Story Points |  *value*  | *value* | 
+| Epics | *4* | *0* |
+| Tasks |  *18*   | *0* | 
+| Story Points |  *31*  | *0* | 
 
 *Enter the `# Planned` at the beginning of the sprint.  Include a discussion of planning decisions based on the planned number of story points versus how many were completed in previous sprints.*
 
@@ -82,7 +82,7 @@ You may amend your sprint#.md and README.md with policies as needed to reflect s
 
 | Date | Tasks closed  | Tasks in progress | Impediments |
 | :--- | :--- | :--- | :--- |
-| 10/1/2018 | 0 | 20 | *none* | 
+| 10/1/2018 | 0 | 18 | *none* | Dmitri was transferred away from our team. We will be working to readjust our team workload to compensate for the decrease in our number of team members.
 
 *Add a new row for the scrum session after each lecture. *
 
