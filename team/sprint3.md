@@ -12,6 +12,8 @@
 * Increment deployed for demo and testing as server-3.0.jar.
 * Increment release `v3.0` created on GitHub with appropriate version number and name.
 * Epics and Tasks updated in Zenhub.
+* Team members should be able to reach a consensus on whether a task is done or not when closing it.
+* If team members disagree on whether a task is done or whether a solution is ready to deploy then they should attempt to resolve the issue through discussion between team members before resorting to a "majority rules" decision.
 
 
 ## Policies
