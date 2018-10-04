@@ -42,6 +42,15 @@ We want to have a more organized approach to completing the epics of this Sprint
 
 *Include any design diagrams prepared during sprint planning (user interface, component diagram, component/state/hierarchy, etc.) with a short paragraph or each.
 
+#### First Time Visiting Website Layout
+![First Time Visiting Website Layout](https://user-images.githubusercontent.com/42558356/46451268-9a9c9980-c752-11e8-8242-9578aa7dd578.jpg)
+
+#### Website After Load Button Was Pressed
+![layout_2](https://user-images.githubusercontent.com/42558356/46451296-b4d67780-c752-11e8-9eae-5bc9475f93f5.jpg)
+
+#### Website After Start From Scratch Button Was Pressed
+![layout_3](https://user-images.githubusercontent.com/42558356/46451299-ba33c200-c752-11e8-8c6b-0c2fbfad4b7b.jpg)
+
 Epics planned for this sprint.
 
 * 1. TripCo: All code must be tested: <br>
@@ -87,6 +96,7 @@ For this sprint we ended up planning the same number of beginning story points a
 | Date | Tasks closed  | Tasks in progress | Impediments |
 | :--- | :--- | :--- | :--- |
 | 10/1/2018 | 0 | 18 | *none* | Dmitri was transferred away from our team. We will be working to readjust our team workload to compensate for the decrease in our number of team members.
+| 10/3/2018 | 1 | 21 | *none* | 
 
 *Add a new row for the scrum session after each lecture. *
 
