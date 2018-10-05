@@ -43,13 +43,13 @@ We want to have a more organized approach to completing the epics of this Sprint
 *Include any design diagrams prepared during sprint planning (user interface, component diagram, component/state/hierarchy, etc.) with a short paragraph or each.
 
 #### First Time Visiting Website Layout
-![First Time Visiting Website Layout](https://user-images.githubusercontent.com/42558356/46451268-9a9c9980-c752-11e8-8242-9578aa7dd578.jpg =250x250)
+<img src="https://user-images.githubusercontent.com/42558356/46451268-9a9c9980-c752-11e8-8242-9578aa7dd578.jpg" width="400"/>
 
 #### Website After Load Button Was Pressed
-![layout_2](https://user-images.githubusercontent.com/42558356/46451296-b4d67780-c752-11e8-9eae-5bc9475f93f5.jpg)
+<img src="https://user-images.githubusercontent.com/42558356/46451296-b4d67780-c752-11e8-9eae-5bc9475f93f5.jpg" width="450"/>
 
 #### Website After Start From Scratch Button Was Pressed
-![layout_3](https://user-images.githubusercontent.com/42558356/46451299-ba33c200-c752-11e8-8c6b-0c2fbfad4b7b.jpg)
+<img src="https://user-images.githubusercontent.com/42558356/46451299-ba33c200-c752-11e8-8c6b-0c2fbfad4b7b.jpg" width="400"/>
 
 Epics planned for this sprint.
 
