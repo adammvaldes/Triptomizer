@@ -43,7 +43,7 @@ We want to have a more organized approach to completing the epics of this Sprint
 *Include any design diagrams prepared during sprint planning (user interface, component diagram, component/state/hierarchy, etc.) with a short paragraph or each.
 
 #### First Time Visiting Website Layout
-![First Time Visiting Website Layout](https://user-images.githubusercontent.com/42558356/46451268-9a9c9980-c752-11e8-8242-9578aa7dd578.jpg)
+![First Time Visiting Website Layout](https://user-images.githubusercontent.com/42558356/46451268-9a9c9980-c752-11e8-8242-9578aa7dd578.jpg =250x250)
 
 #### Website After Load Button Was Pressed
 ![layout_2](https://user-images.githubusercontent.com/42558356/46451296-b4d67780-c752-11e8-9eae-5bc9475f93f5.jpg)
@@ -95,8 +95,9 @@ For this sprint we ended up planning the same number of beginning story points a
 
 | Date | Tasks closed  | Tasks in progress | Impediments |
 | :--- | :--- | :--- | :--- |
-| 10/1/2018 | 0 | 18 | *none* | Dmitri was transferred away from our team. We will be working to readjust our team workload to compensate for the decrease in our number of team members.
-| 10/3/2018 | 1 | 21 | *none* | 
+| 10/1/2018 | *none* | #135 | *none* | Dmitri was transferred away from our team. We will be working to readjust our team workload to compensate for the decrease in our number of team members.
+| 10/3/2018 | #217 | #135, #205 | *none* | 
+| 10/5/2018 | #217 | #135, #205 | *none* |
 
 *Add a new row for the scrum session after each lecture. *
 
