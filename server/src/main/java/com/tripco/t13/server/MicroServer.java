@@ -161,7 +161,7 @@ public class MicroServer {
     response.type("application/json");
     response.header("Access-Control-Allow-Origin", "*");
 
-    performSearch search = new performSearch(request);
+    PerformSearch search = new PerformSearch(request);
     return search.getSearchJson();
 
   }

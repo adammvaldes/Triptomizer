@@ -3,16 +3,16 @@ package com.tripco.t13.server;
 import com.google.gson.Gson;
 import com.google.gson.JsonElement;
 import com.google.gson.JsonParser;
-import spark.Request;
 import java.util.*;
+import spark.Request;
 
-public class performSearch {
+public class PerformSearch {
 
     private Search search;
     private boolean isCorrectFormat; //verify correct format of POST request
 
-
-    public performSearch(Request request){
+    //Class to complete the search request
+    public PerformSearch(Request request){
         isCorrectFormat=false;
 
         // extract the information from the body of the request.
