@@ -11,11 +11,20 @@ class Trip extends Component {
         this.readFile = this.readFile.bind(this);
     }
     plan(){
-        this.props.updateOptions('unitName',this.props.trip.options.units);
-        request(this.props.trip,"plan").then( serverResponse => {
-            this.props.updateMap(serverResponse["map"]);
-            this.props.updateDistances(serverResponse["distances"]);
-        });
+        if(this.props.URL === "" || this.props.port==="314") {
+            this.props.updateOptions('unitName', this.props.trip.options.units);
+            request(this.props.trip, "plan").then(serverResponse => {
+                this.props.updateMap(serverResponse["map"]);
+                this.props.updateDistances(serverResponse["distances"]);
+            });
+        }
+        else{
+            this.props.updateOptions('unitName', this.props.trip.options.units);
+            request(this.props.trip, "plan",this.props.port,this.props.URL).then(serverResponse => {
+                this.props.updateMap(serverResponse["map"]);
+                this.props.updateDistances(serverResponse["distances"]);
+            });
+        }
     }
     readFile(tffi){
         let file = tffi.target.files[0];
@@ -31,7 +40,6 @@ class Trip extends Component {
                 alert("Not a JSON file");
             }
             this.props.updateTFFI(obj);
-            //this.props.updateOptions('unitName',this.props.trip.options.units);
         }.bind(this);
         fReader.readAsText(file);
     }
@@ -48,8 +56,6 @@ class Trip extends Component {
                 <Button className="btn text-white" onClick={this.plan} type="button" style={{backgroundColor: "000000"}}> PLAN </Button>
             </Form>
         );
-        //https://reactstrap.github.io/components/form/
-        //https://medium.com/front-end-hacking/file-input-with-react-js-and-typescript-64dcea4b0a86
     }
 }
 

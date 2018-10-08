@@ -1,7 +1,8 @@
-import React, {Component} from 'react';
+import React, {Component} from 'react';Options
 import { Container } from 'reactstrap';
 import Info from './Info'
 import Options from './Options';
+import Interop from './Interop';
 
 import { get_config } from '../../api/api';
 import Map from "./Map";
@@ -17,6 +18,8 @@ class Application extends Component {
 
     this.state = {
       config: null,
+        port: "",
+        URL: "",
       trip: {
         type: "trip",
         version: "2",
@@ -37,6 +40,9 @@ class Application extends Component {
     this.updateMap = this.updateMap.bind(this);
     this.updateTFFI = this.updateTFFI.bind(this);
     this.updateDistances = this.updateDistances.bind(this);
+
+    this.updateNumber = this.updateNumber.bind(this);
+    this.changeServer = this.changeServer.bind(this);
   }
 
   componentWillMount() {
@@ -82,6 +88,19 @@ class Application extends Component {
       this.setState({'trip' : value});
   }
 
+  //Function to update the server for Interoperation of teams
+    updateNumber(value){
+      this.setState({
+          port:value
+      });
+  }
+  changeServer(value){
+      this.setState({
+          URL:value
+      });
+  }
+
+
   render() {
     if(!this.state.config) { return <Container/> }
       return(
@@ -95,9 +114,12 @@ class Application extends Component {
                     updateMap={this.updateMap}
                     updateTFFI={this.updateTFFI}
                     updateDistances={this.updateDistances}
-                    updateOptions={this.updateOptions} />
-              <Map trip={this.state.trip} />
+                    updateOptions={this.updateOptions}
+                    port={this.state.port}
+                    URL={this.state.URL}/>
+              <Map trip={this.state.trip} URL={this.state.URL} port={this.state.port}/>
               <Itinerary trip={this.state.trip} />
+              <Interop port={this.state.port} URL={this.state.URL} updateNumber={this.updateNumber} changeServer={this.changeServer}/>
           </Container>
       )
     }

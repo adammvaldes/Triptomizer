@@ -23,11 +23,12 @@ class Options extends Component{
 
   updateName(name){
       this.props.updateOptions('unitName',name.target.value);
+      console.log(name.target.value);
   }
   updateRadius(name){
-      const userRadius = (name.target.validity.valid) ? name.target.value : this.props.options.unitRadius;
+      //const userRadius = (name.target.validity.valid) ? name.target.value : this.props.options.unitRadius;
 
-      this.props.updateOptions('unitRadius', userRadius);
+      this.props.updateOptions('unitRadius', name.target.value);
   }
 
 
@@ -54,7 +55,7 @@ class Options extends Component{
                 <Form>
                     <FormGroup>
                     <Input type="text" name="UD" id="unitName" placeholder="Your Unit Name" onChange={ this.updateName } value={this.props.options.unitName} />
-                    <Input type="text" pattern="[0-9]*" name="UR" id="userRadius" placeholder="Radius of Earth through object" onChange={ this.updateRadius } value={this.props.options.unitRadius} />
+                    <Input type="number" placeholder="Radius of Earth through object" onChange={ this.updateRadius } />
                     </FormGroup>
                 </Form>
             </CardBody>
@@ -75,3 +76,5 @@ class Options extends Component{
 }
 
 export default Options;
+//pattern="[0-9]*" name="UR" id="userRadius"
+//value={this.props.options.unitRadius}
