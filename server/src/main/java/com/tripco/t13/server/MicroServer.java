@@ -50,6 +50,7 @@ public class MicroServer {
     get("/config", this::config);
     post("/plan", this::plan);
     post("/distance", this::distance);
+    post("/search", this::search);
 
     System.out.println("\n\nServer running on port: " + this.port + "\n\n");
   }
@@ -122,7 +123,6 @@ public class MicroServer {
     response.header("Access-Control-Allow-Origin", "*");
 
     TripCalculate tCalculate = new TripCalculate(request);
-    //System.out.println(tCalculate.getTripJson());
     return tCalculate.getTripJson();
   }
 
@@ -153,6 +153,16 @@ public class MicroServer {
 
     Calculate calculate = new Calculate(request);
     return calculate.getDistanceJson();
+
+  }
+
+  private String search(Request request, Response response){
+
+    response.type("application/json");
+    response.header("Access-Control-Allow-Origin", "*");
+
+    PerformSearch search = new PerformSearch(request);
+    return search.getSearchJson();
 
   }
 
