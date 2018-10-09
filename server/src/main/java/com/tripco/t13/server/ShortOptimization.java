@@ -20,7 +20,6 @@ public class ShortOptimization {
         boolean[] visitedPlaces = new boolean[places.size()];
         boolean allPlacesVisited = false;
         ArrayList<Location> sortedPlaces = new ArrayList<>();
-        ArrayList<Integer> distances;
 
         Location origin = places.get(0);
         sortedPlaces.add(origin);

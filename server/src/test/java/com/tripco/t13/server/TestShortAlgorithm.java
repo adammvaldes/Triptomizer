@@ -8,9 +8,8 @@ import org.junit.runners.JUnit4;
 
 public class TestShortAlgorithm {
     @Before
-    void initialize() {
-        TripCalculate trip = null;
-    }
+    public void initialize() {
 
+    }
 
 }
