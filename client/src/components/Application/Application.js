@@ -4,13 +4,12 @@ import Info from './Info';
 import Options from './Options';
 import Interop from './Interop';
 
-import { get_config } from '../../api/api';
+import {get_config, request} from '../../api/api';
 import Map from "./Map";
 import Itinerary from "./Itinerary";
 import Trip from "./Trip";
 import ModifyButton from "./ModifyButton";
 import ReverseTripButton from "./ReverseTripButton";
-import RemoveLegButton from "./RemoveLegButton";
 import SetStartLegButton from "./SetStartLegButton";
 import SearchBar from "./SearchBar";
 import ScratchButton from "./ScratchButton";
@@ -64,7 +63,6 @@ class Application extends Component {
     this.updateScratchButton = this.updateScratchButton.bind(this);
     this.updateFromScratch = this.updateFromScratch.bind(this);
     this.closeScratchButton = this.closeScratchButton.bind(this);
-    this.updateFromScratchButtons = this.updateFromScratchButtons.bind(this);
     this.updateModify = this.updateModify.bind(this);
     this.updateShowModify = this.updateShowModify.bind(this);
     this.updateRenderButton = this.updateRenderButton.bind(this);
@@ -152,14 +150,9 @@ class Application extends Component {
       });
   }
 
-  updateFromScratchButtons(value){
-
-  }
-
   updateModify(value){
       this.setState({
           modify:value
-          //modify:true
       });
   }
 
@@ -173,7 +166,6 @@ class Application extends Component {
   updateRenderButton(){
       this.setState({
           fromScratchButtons:false
-          //modify:true
       });
   }
 
@@ -185,11 +177,13 @@ class Application extends Component {
     //TODO: test reverseTrip() function
   reverseTrip(){
       let trip = this.state.trip;
-      trip.places = trip.places.reverse();
-      this.setState(trip);
+      let tempTrip = [5, 2 ,1];
+      console.log("Original:", trip.places);
+      trip.places.reverse();
+      //trip.places = tempTrip;
+      console.log("Reversed", trip.places);
   }
 
-  //Done
   removeLeg(value){
       if(value < 0){
           return;
@@ -231,14 +225,16 @@ class Application extends Component {
                     port={this.state.port}
                     URL={this.state.URL}/>
               <Map trip={this.state.trip} URL={this.state.URL} port={this.state.port}/>
-              <Itinerary trip={this.state.trip} />
+              <Itinerary trip={this.state.trip}
+                         updateMap={this.updateMap}
+                         updateDistances={this.updateDistances}
+                          removeLeg={this.removeLeg}/>
               <Interop port={this.state.port} URL={this.state.URL} updateNumber={this.updateNumber} changeServer={this.changeServer}/>
               {this.state.fromScratchButtons && <SearchBar showButtons={this.state.showModifyButtons}/>}
               {this.state.fromScratchButtons && <RenderButton showButtons={this.updateRenderButton}/>}
               {this.state.modify && <ModifyButton updateShowModify={this.updateShowModify}/>}
-              {this.state.showModifyButtons && <RemoveLegButton removeLeg={this.removeLeg}/>}
               {this.state.showModifyButtons && <SetStartLegButton showButtons={this.state.showModifyButtons}/>}
-              {this.state.showModifyButtons && <ReverseTripButton showButtons={this.state.showModifyButtons}/>}
+              {this.state.showModifyButtons && <ReverseTripButton reverseTrip={this.reverseTrip}/>}
               {this.state.showModifyButtons && <SearchBar showButtons={this.state.showModifyButtons}/>}
               {this.state.showModifyButtons && <SaveButton showButtons={this.state.showModifyButtons}/>}
           </Container>

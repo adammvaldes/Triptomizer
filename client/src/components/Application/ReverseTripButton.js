@@ -6,7 +6,6 @@ class ReverseTripButton extends Component{
 
     constructor(props) {
         super(props);
-
         this.reverseTrip = this.reverseTrip.bind(this);
     }
 
