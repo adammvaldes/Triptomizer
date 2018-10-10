@@ -63,6 +63,7 @@ class Application extends Component {
 
     this.updateScratchButton = this.updateScratchButton.bind(this);
     this.updateFromScratch = this.updateFromScratch.bind(this);
+    this.closeScratchButton = this.closeScratchButton.bind(this);
     this.updateFromScratchButtons = this.updateFromScratchButtons.bind(this);
     this.updateModify = this.updateModify.bind(this);
     this.updateShowModify = this.updateShowModify.bind(this);
@@ -145,6 +146,12 @@ class Application extends Component {
       });
   }
 
+  closeScratchButton(){
+      this.setState({
+          fromScratch:false
+      });
+  }
+
   updateFromScratchButtons(value){
 
   }
@@ -182,9 +189,15 @@ class Application extends Component {
       this.setState(trip);
   }
 
-  //TODO: Implement removeLeg() function
+  //Done
   removeLeg(value){
-
+      if(value < 0){
+          return;
+      }
+      let trip = this.state.trip;
+      //console.log(trip.places);
+      trip.places.splice(value,1);
+      //console.log(trip.places);
   }
 
   //TODO: Implement setStartLeg() function
@@ -210,6 +223,7 @@ class Application extends Component {
               {this.state.fromScratch && <ScratchButton updateScratchButton={this.updateScratchButton}/>}
               <Trip trip={this.state.trip}
                     updateModify={this.updateModify}
+                    closeScratchButton={this.closeScratchButton}
                     updateMap={this.updateMap}
                     updateTFFI={this.updateTFFI}
                     updateDistances={this.updateDistances}
@@ -222,7 +236,7 @@ class Application extends Component {
               {this.state.fromScratchButtons && <SearchBar showButtons={this.state.showModifyButtons}/>}
               {this.state.fromScratchButtons && <RenderButton showButtons={this.updateRenderButton}/>}
               {this.state.modify && <ModifyButton updateShowModify={this.updateShowModify}/>}
-              {this.state.showModifyButtons && <RemoveLegButton showButtons={this.state.showModifyButtons}/>}
+              {this.state.showModifyButtons && <RemoveLegButton removeLeg={this.removeLeg}/>}
               {this.state.showModifyButtons && <SetStartLegButton showButtons={this.state.showModifyButtons}/>}
               {this.state.showModifyButtons && <ReverseTripButton showButtons={this.state.showModifyButtons}/>}
               {this.state.showModifyButtons && <SearchBar showButtons={this.state.showModifyButtons}/>}

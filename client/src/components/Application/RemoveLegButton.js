@@ -2,6 +2,7 @@ import React, {Component} from 'react';
 import {Card, CardBody, FormGroup} from 'reactstrap';
 import {Button, Form, Input} from 'reactstrap';
 
+//Done!
 class RemoveLegButton extends Component{
 
     constructor(props) {
@@ -15,8 +16,8 @@ class RemoveLegButton extends Component{
         this.handleChange  = this.handleChange.bind(this);
     }
 
-    removeLeg(value){
-        //TODO: Remove the leg
+    removeLeg(){
+        this.props.removeLeg(this.state.textField);
     }
 
     handleChange(event) {

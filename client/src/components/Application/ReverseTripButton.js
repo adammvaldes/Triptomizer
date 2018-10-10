@@ -22,7 +22,6 @@ class ReverseTripButton extends Component{
                 </CardBody>
             </Card>
         )
-
     }
 }
 
