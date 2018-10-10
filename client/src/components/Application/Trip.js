@@ -11,6 +11,7 @@ class Trip extends Component {
         this.readFile = this.readFile.bind(this);
     }
     plan(){
+        this.props.updateModify(true);
         if(this.props.URL === "" || this.props.port==="314") {
             this.props.updateOptions('unitName', this.props.trip.options.units);
             request(this.props.trip, "plan").then(serverResponse => {

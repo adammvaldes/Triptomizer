@@ -8,6 +8,8 @@ client/*.log
 client_bundle/
 target/
 
+client/node_modules/*
+
 # Client Jest coverage reports
 /client/coverage/
 /client/dist/
