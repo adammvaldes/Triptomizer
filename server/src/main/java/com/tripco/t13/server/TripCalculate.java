@@ -3,8 +3,6 @@ package com.tripco.t13.server;
 import com.google.gson.Gson;
 import com.google.gson.JsonElement;
 import com.google.gson.JsonParser;
-import org.json.JSONArray;
-import org.json.JSONObject;
 import spark.Request;
 
 import java.io.BufferedReader;
@@ -29,12 +27,16 @@ public class TripCalculate {
             trip = gson.fromJson(requestBody, Trip.class);
             isCorrectFormat = validateTripRequestFormat(trip);
 
+            if (trip.options.optimization.equals("short")) {
+                ShortOptimization shortOptimization = new ShortOptimization(trip.options.units, trip.places);
+                trip.places = shortOptimization.travelingSalesman(trip.places, trip.places.get(0), trip.options.units);
+            }
+
             //Calculate and fill trip distances
             trip.getTripDistances();
             setMap();
 
         } catch (Exception e) {
-
             isCorrectFormat = false;
         }
     }
@@ -102,7 +104,7 @@ public class TripCalculate {
     public boolean validateTripRequestFormat(Trip trip) {
         //check if format of request if correct: type:"trip", version 1 or 2
         if(     Objects.equals(trip.type, "trip")&&
-                (trip.version==2||trip.version==1)&&
+                (trip.version==3)&&
                 trip.places!=null&&trip.options!=null){
 
             return true;

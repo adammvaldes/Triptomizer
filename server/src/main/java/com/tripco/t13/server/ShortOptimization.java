@@ -1,10 +1,6 @@
 package com.tripco.t13.server;
 
-import com.tripco.t13.planner.Place;
-
-import java.awt.*;
 import java.util.ArrayList;
-import java.util.Collections;
 
 public class ShortOptimization {
 
@@ -38,7 +34,7 @@ public class ShortOptimization {
             }
         }
 
-        sortedPlaces.add(origin); //add origin to complete the trip
+        //sortedPlaces.add(origin); //add origin to complete the trip
         return sortedPlaces;
     }
 

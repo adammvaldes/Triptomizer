@@ -16,6 +16,7 @@ class Trip extends Component {
         if(this.props.URL === "" || this.props.port==="314") {
             this.props.updateOptions('unitName', this.props.trip.options.units);
             request(this.props.trip, "plan").then(serverResponse => {
+                this.props.updateTrip('places', serverResponse["places"]);
                 this.props.updateMap(serverResponse["map"]);
                 this.props.updateDistances(serverResponse["distances"]);
             });

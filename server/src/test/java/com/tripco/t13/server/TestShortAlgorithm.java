@@ -68,14 +68,12 @@ public class TestShortAlgorithm {
         assertEquals("closeToOrigin", sortedPlaces.get(1).name);
         assertEquals("midPointOnMap", sortedPlaces.get(2).name);
         assertEquals("longAwayFromOrigin", sortedPlaces.get(3).name);
-        assertEquals("Origin", sortedPlaces.get(4).name);
 
         sortedPlaces = shortOptimization.travelingSalesman(places, place3, units);
         assertEquals("midPointOnMap", sortedPlaces.get(0).name);
         assertEquals("longAwayFromOrigin", sortedPlaces.get(1).name);
         assertEquals("closeToOrigin", sortedPlaces.get(2).name);
         assertEquals("Origin", sortedPlaces.get(3).name);
-        assertEquals("midPointOnMap", sortedPlaces.get(4).name);
     }
 
     @Test

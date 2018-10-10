@@ -43,7 +43,8 @@ class Application extends Component {
         options : {
           units: "",
             unitName: "",
-            unitRadius: ""
+            unitRadius: "",
+            optimization: "none"
         },
         places: [],
         distances: [],
@@ -222,6 +223,7 @@ class Application extends Component {
                        updateDistances={this.updateDistances}/>
               {this.state.fromScratch && <ScratchButton updateScratchButton={this.updateScratchButton}/>}
               <Trip trip={this.state.trip}
+                    updateTrip={this.updateTrip}
                     updateModify={this.updateModify}
                     closeScratchButton={this.closeScratchButton}
                     updateMap={this.updateMap}
