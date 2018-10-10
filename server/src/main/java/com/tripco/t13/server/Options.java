@@ -6,6 +6,7 @@ public class Options {
     public String units;
     public String unitName;
     public float unitRadius;
+    public String optimization;
 
 
     public void setOptions(){
