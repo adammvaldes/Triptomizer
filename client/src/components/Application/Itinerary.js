@@ -1,11 +1,30 @@
 import React, { Component } from 'react';
-import {Container, Media, Table} from 'reactstrap'
+import {Button, Card, CardBody, Container, Form, FormGroup, Input, Media, Table} from 'reactstrap';
+import { request } from '../../api/api';
 
 
 class Itinerary extends Component {
     constructor(props) {
         super(props);
+        this.state = {
+            textField : ""
+        };
+        this.removeLeg = this.removeLeg.bind(this);
+        this.handleChange  = this.handleChange.bind(this);
     }
+
+    removeLeg(){
+        this.props.removeLeg(this.state.textField);
+        request(this.props.trip, "plan").then(serverResponse => {
+            this.props.updateMap(serverResponse["map"]);
+            this.props.updateDistances(serverResponse["distances"]);
+        });
+    }
+
+    handleChange(event) {
+        this.setState({textField: event.target.value})
+    }
+
 
     calculateTotalDistance() { //calculates cumulative distance between towns
         let sum = 0;
@@ -36,6 +55,8 @@ class Itinerary extends Component {
             });
 
             return (
+                <div id="parent">
+                    <div id="div1">
                 <Table responsive>
                     <tbody>
                     <tr>
@@ -61,7 +82,22 @@ class Itinerary extends Component {
                         {tripDistances}
                     </tr>
                     </tbody>
+
                 </Table>
+                </div>
+                <div id="div2">
+                <Card>
+                    <CardBody>
+                            <Button className="btn text-white" type="button" color="info"  onClick={this.removeLeg}>Remove Leg</Button>
+                        <Form>
+                            <FormGroup>
+                                <Input type="number" placeholder="Number of leg to remove" onChange={this.handleChange}/>
+                            </FormGroup>
+                        </Form>
+                    </CardBody>
+                </Card>
+                </div>
+                </div>
             );
 
         }
