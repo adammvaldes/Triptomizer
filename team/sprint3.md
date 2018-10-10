@@ -81,8 +81,8 @@ You may amend your sprint#.md and README.md with policies as needed to reflect s
 | Statistic | # Planned | # Completed |
 | --- | ---: | ---: |
 | Epics | *4* | *0* |
-| Tasks |  *18*   | *0* | 
-| Story Points |  *31*  | *0* | 
+| Tasks |  *22*   | *8* | 
+| Story Points |  *31*  | *12* | 
 
 For this sprint we ended up planning the same number of beginning story points as the number that we created last sprint. Although the story points we planned are equal to the ones from the last sprint at the beginning, we can expect for some additional ones to be added as the sprint progresses and new requirements are found and new features are found to be necessary. Although Dmitry was transferred to another team, we still expect to be able to complete most if not all of the tasks we created.  
 
@@ -98,6 +98,7 @@ For this sprint we ended up planning the same number of beginning story points a
 | 10/1/2018 | *none* | #135 | *none* | Dmitri was transferred away from our team. We will be working to readjust our team workload to compensate for the decrease in our number of team members.
 | 10/3/2018 | #217 | #135, #205 | *none* | 
 | 10/5/2018 | #217 | #135, #205 | *none* |
+| 10/10/2018 | #217, #135, #200, #196, #213, #209, #225, #207, #228 | #202, #205 | *none* |
 
 *Add a new row for the scrum session after each lecture. *
 
