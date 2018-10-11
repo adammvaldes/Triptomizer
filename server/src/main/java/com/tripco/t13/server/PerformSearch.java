@@ -60,9 +60,7 @@ public class PerformSearch {
 
     public boolean validateSearchRequestFormat(Search searchObject) {
         //check if format of request if correct: type:"search" and version 3
-        if(     Objects.equals(searchObject.type, "search") &&
-                (searchObject.version==3)
-        ){
+        if( searchObject.match.length() != 0) {
             return true;
         }
 
