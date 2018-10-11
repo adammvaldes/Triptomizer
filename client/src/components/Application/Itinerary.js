@@ -1,6 +1,5 @@
 import React, { Component } from 'react';
-import {Button, Card, CardBody, Container, Form, FormGroup, Input, Media, Table} from 'reactstrap';
-import { request } from '../../api/api';
+import {Button, Card, CardBody, Container, Form, FormGroup, Input, Table} from 'reactstrap';
 
 
 class Itinerary extends Component {
@@ -16,18 +15,12 @@ class Itinerary extends Component {
 
     removeLeg(){
         this.props.removeLeg(this.state.textField);
-        request(this.props.trip, "plan").then(serverResponse => {
-            this.props.updateMap(serverResponse["map"]);
-            this.props.updateDistances(serverResponse["distances"]);
-        });
+        this.props.planRequest();
     }
 
     reverseTrip(){
         this.props.reverseTrip();
-        request(this.props.trip, "plan").then(serverResponse => {
-            this.props.updateMap(serverResponse["map"]);
-            this.props.updateDistances(serverResponse["distances"]);
-        });
+        this.props.planRequest();
     }
 
     handleChange(event) {

@@ -48,6 +48,7 @@ class Application extends Component {
         map: ''
       }
     };
+    this.planRequest = this.planRequest.bind(this);
     this.updateTrip = this.updateTrip.bind(this);
     this.updateBasedOnResponse = this.updateBasedOnResponse.bind(this);
     this.updateOptions = this.updateOptions.bind(this);
@@ -83,7 +84,22 @@ class Application extends Component {
     );
   }
 
-  //TODO: Create Plan Request function to use across all buttons and components
+    planRequest(){
+        if(this.state.URL === "" || this.state.port==="314") {
+            this.updateOptions('unitName', this.state.trip.options.units);
+            request(this.state.trip, "plan").then(serverResponse => {
+                this.updateMap(serverResponse["map"]);
+                this.updateDistances(serverResponse["distances"]);
+            });
+        }
+        else{
+            this.updateOptions('unitName', this.state.trip.options.units);
+            request(this.state.trip, "plan",this.state.port,this.props.URL).then(serverResponse => {
+                this.updateMap(serverResponse["map"]);
+                this.updateDistances(serverResponse["distances"]);
+            });
+        }
+  }
 
   updateTrip(field, value){
     let trip = this.state.trip;
@@ -210,6 +226,7 @@ class Application extends Component {
                        updateDistances={this.updateDistances}/>
               {this.state.fromScratch && <ScratchButton updateScratchButton={this.updateScratchButton}/>}
               <Trip trip={this.state.trip}
+                    planRequest={this.planRequest}
                     updateModify={this.updateModify}
                     closeScratchButton={this.closeScratchButton}
                     updateMap={this.updateMap}
@@ -220,6 +237,7 @@ class Application extends Component {
                     URL={this.state.URL}/>
               <Map trip={this.state.trip} URL={this.state.URL} port={this.state.port}/>
               <Itinerary trip={this.state.trip}
+                         planRequest={this.planRequest}
                          updateMap={this.updateMap}
                          updateDistances={this.updateDistances}
                          removeLeg={this.removeLeg}
