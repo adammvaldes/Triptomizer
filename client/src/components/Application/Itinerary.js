@@ -47,7 +47,15 @@ class Itinerary extends Component {
             sum += distance;
             return <td key={'distance ' + sum}>{sum}</td>
         });
+        return (
+            <tr>
+                <th scope="row">Total Distance, {this.props.trip.options.unitName }</th>
+                <td>0</td>
+                {tripDistances}
+            </tr>
+        );
     }
+
 
     renderButtons(){
         return(
@@ -74,15 +82,7 @@ class Itinerary extends Component {
         </div>
      );
     }
-        return (
-            <tr>
-                <th scope="row">Total Distance, {this.props.trip.options.unitName }</th>
-                <td>0</td>
-                {tripDistances}
-            </tr>
-        );
 
-    }
 
     renderTripPlaces() {
         let tripPlaces = this.props.trip.places.map((place) => {
@@ -139,7 +139,6 @@ class Itinerary extends Component {
                 {this.calculateTotalDistance()}
                 </tbody>
             </Table>
-            </div>
 
                 {this.renderButtons()}
             </div>
