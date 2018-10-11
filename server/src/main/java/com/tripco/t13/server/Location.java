@@ -6,6 +6,7 @@ public class Location {
     public String name;
     public float latitude;
     public float longitude;
-
+    public String municipality;
+    public String type;
 
 }
