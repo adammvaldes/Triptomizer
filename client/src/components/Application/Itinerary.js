@@ -44,14 +44,11 @@ class Itinerary extends Component {
 
     }
 
-    render() {
-        const trip = this.props.trip;
-
+    renderTripRows(trip){
         let tripPlaces = [];
         let tripGeoLocations = [];
         let tripDistances = [];
 
-        if (trip.distances !== undefined && trip.distances.length !== 0 && trip.places !== undefined) {
             tripDistances = this.calculateTotalDistance();
             //return array of all places to print in table...
             tripPlaces = trip.places.map((place) => {
@@ -110,8 +107,14 @@ class Itinerary extends Component {
                 </div>
             );
 
-        }
+    }
 
+    render() {
+        const trip = this.props.trip;
+
+        if (trip.distances !== undefined && trip.distances.length !== 0 && trip.places !== undefined) {
+            return this.renderTripRows(trip);
+        }
         return <Container></Container>;
 
     }
