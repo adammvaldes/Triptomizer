@@ -37,81 +37,98 @@ class Itinerary extends Component {
 
     calculateTotalDistance() { //calculates cumulative distance between towns
         let sum = 0;
-        return this.props.trip.distances.map((distance)=> {
+        let tripDistances = this.props.trip.distances.map((distance)=> {
             sum += distance;
             return <td key={'distance ' + sum}>{sum}</td>
         });
 
+        return (
+            <tr>
+                <th scope="row">Total Distance, {this.props.trip.options.unitName }</th>
+                <td>0</td>
+                {tripDistances}
+            </tr>
+        );
+
+    }
+
+    renderTripPlaces() {
+        let tripPlaces = this.props.trip.places.map((place) => {
+            return <td key={'place ' + place.name}>{place.name}</td>;
+        });
+
+        return (
+            <tr>
+                <th scope="row">Place</th>
+                {tripPlaces}
+                {tripPlaces[0]}
+            </tr>
+        );
+    }
+
+    renderTripGeoLocations() {
+        let tripGeoLocations = this.props.trip.places.map((place) => {
+
+             return <td key={'geo ' + place.latitude}>{place.latitude}, {place.longitude}</td>;
+        });
+
+        return (
+            <tr>
+                <th scope="row">Geographical Location</th>
+                {tripGeoLocations}
+                {tripGeoLocations[0]}
+            </tr>
+
+        );
+
+    }
+
+    renderLegDistances() {
+        return (
+            <tr>
+                <th scope="row">Leg Distances</th>
+                <td>0</td>
+                {this.props.trip.distances.map((el) => {
+                    return <td key={'leg ' + el}>{el}</td>;
+                })}
+            </tr>
+        );
+    }
+
+    renderTripRows(){
+        return (
+            <div id="parent">
+                <div id="div1">
+            <Table responsive>
+                <tbody>
+                {this.renderTripPlaces()}
+                {this.renderTripGeoLocations()}
+                {this.renderLegDistances()}
+                {this.calculateTotalDistance()}
+                </tbody>
+            </Table>
+            </div>
+            <div id="div2">
+            <Card>
+                <CardBody>
+                        <Button className="btn text-white" type="button" color="info"  onClick={this.removeLeg}>Remove Leg</Button>
+                    <Form>
+                        <FormGroup>
+                            <Input type="number" placeholder="Number of leg to remove" onChange={this.handleChange}/>
+                        </FormGroup>
+                    </Form>
+                        <Button className="btn text-white" type="button" color="info"  onClick={this.reverseTrip}>Reverse Trip Order</Button>
+                </CardBody>
+            </Card>
+            </div>
+            </div>
+        );
     }
 
     render() {
-        const trip = this.props.trip;
-
-        let tripPlaces = [];
-        let tripGeoLocations = [];
-        let tripDistances = [];
-
-        if (trip.distances !== undefined && trip.distances.length !== 0 && trip.places !== undefined) {
-            tripDistances = this.calculateTotalDistance();
-            //return array of all places to print in table...
-            tripPlaces = trip.places.map((place) => {
-                return <td key={'place ' + place.name}>{place.name}</td>;
-            });
-
-            //return array of all geo locations in table...
-            tripGeoLocations = trip.places.map((place) => {
-                return <td key={'geo ' + place.latitude}>{place.latitude}, {place.longitude}</td>
-            });
-
-            return (
-                <div id="parent">
-                    <div id="div1">
-                <Table responsive>
-                    <tbody>
-                    <tr>
-                        <th scope="row">Place</th>
-                        {tripPlaces}
-                        {tripPlaces[0]}
-                    </tr>
-                    <tr>
-                        <th scope="row">Geographical Location</th>
-                        {tripGeoLocations}
-                        {tripGeoLocations[0]}
-                    </tr>
-                    <tr>
-                        <th scope="row">Leg Distances</th>
-                        <td>0</td>
-                        {trip.distances.map((el) => {
-                            return <td key={'leg ' + el}>{el}</td>;
-                        })}
-                    </tr>
-                    <tr>
-                        <th scope="row">Total Distance, {trip.options.unitName }</th>
-                        <td>0</td>
-                        {tripDistances}
-                    </tr>
-                    </tbody>
-
-                </Table>
-                </div>
-                <div id="div2">
-                <Card>
-                    <CardBody>
-                            <Button className="btn text-white" type="button" color="info"  onClick={this.removeLeg}>Remove Leg</Button>
-                        <Form>
-                            <FormGroup>
-                                <Input type="number" placeholder="Number of leg to remove" onChange={this.handleChange}/>
-                            </FormGroup>
-                        </Form>
-                            <Button className="btn text-white" type="button" color="info"  onClick={this.reverseTrip}>Reverse Trip Order</Button>
-                    </CardBody>
-                </Card>
-                </div>
-                </div>
-            );
-
+        if (this.props.trip.distances !== undefined && this.props.trip.distances.length !== 0 && this.props.trip.places !== undefined) {
+            return this.renderTripRows();
         }
-
         return <Container></Container>;
 
     }
