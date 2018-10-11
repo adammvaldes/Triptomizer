@@ -9,7 +9,6 @@ import Map from "./Map";
 import Itinerary from "./Itinerary";
 import Trip from "./Trip";
 import ModifyButton from "./ModifyButton";
-import SetStartLegButton from "./SetStartLegButton";
 import SearchBar from "./SearchBar";
 import ScratchButton from "./ScratchButton";
 import RenderButton from "./RenderButton";
@@ -49,6 +48,7 @@ class Application extends Component {
         map: ''
       }
     };
+    this.planRequest = this.planRequest.bind(this);
     this.updateTrip = this.updateTrip.bind(this);
     this.updateBasedOnResponse = this.updateBasedOnResponse.bind(this);
     this.updateOptions = this.updateOptions.bind(this);
@@ -84,7 +84,22 @@ class Application extends Component {
     );
   }
 
-  //TODO: Create Plan Request function to use across all buttons and components
+    planRequest(){
+        if(this.state.URL === "" || this.state.port==="314") {
+            this.updateOptions('unitName', this.state.trip.options.units);
+            request(this.state.trip, "plan").then(serverResponse => {
+                this.updateMap(serverResponse["map"]);
+                this.updateDistances(serverResponse["distances"]);
+            });
+        }
+        else{
+            this.updateOptions('unitName', this.state.trip.options.units);
+            request(this.state.trip, "plan",this.state.port,this.props.URL).then(serverResponse => {
+                this.updateMap(serverResponse["map"]);
+                this.updateDistances(serverResponse["distances"]);
+            });
+        }
+  }
 
   updateTrip(field, value){
     let trip = this.state.trip;
@@ -189,9 +204,14 @@ class Application extends Component {
       trip.places.splice(value,1);
   }
 
-  //TODO: Implement setStartLeg() function
   setStartLeg(value){
-
+      if(value < 0){
+          return;
+      }
+      let trip = this.state.trip;
+      let temp = trip.places[value];
+      trip.places.splice(value, 1);
+      trip.places.splice(0, 0, temp);
   }
 
   //TODO: Implement saveTrip() function
@@ -211,6 +231,7 @@ class Application extends Component {
                        updateDistances={this.updateDistances}/>
               {this.state.fromScratch && <ScratchButton updateScratchButton={this.updateScratchButton}/>}
               <Trip trip={this.state.trip}
+                    planRequest={this.planRequest}
                     updateTrip={this.updateTrip}
                     updateModify={this.updateModify}
                     closeScratchButton={this.closeScratchButton}
@@ -222,15 +243,16 @@ class Application extends Component {
                     URL={this.state.URL}/>
               <Map trip={this.state.trip} URL={this.state.URL} port={this.state.port}/>
               <Itinerary trip={this.state.trip}
+                         planRequest={this.planRequest}
                          updateMap={this.updateMap}
                          updateDistances={this.updateDistances}
                          removeLeg={this.removeLeg}
-                         reverseTrip={this.reverseTrip}/>
+                         reverseTrip={this.reverseTrip}
+                         setStartLeg={this.setStartLeg}/>
               <Interop port={this.state.port} URL={this.state.URL} updateNumber={this.updateNumber} changeServer={this.changeServer}/>
               {this.state.fromScratchButtons && <SearchBar showButtons={this.state.showModifyButtons}/>}
               {this.state.fromScratchButtons && <RenderButton showButtons={this.updateRenderButton}/>}
               {this.state.modify && <ModifyButton updateShowModify={this.updateShowModify}/>}
-              {this.state.showModifyButtons && <SetStartLegButton showButtons={this.state.showModifyButtons}/>}
               {this.state.showModifyButtons && <SearchBar showButtons={this.state.showModifyButtons}/>}
               {this.state.showModifyButtons && <SaveButton showButtons={this.state.showModifyButtons}/>}
           </Container>

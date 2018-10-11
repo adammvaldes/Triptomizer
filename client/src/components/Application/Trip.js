@@ -2,8 +2,6 @@ import React, {Component} from 'react'
 import { Button, Form, Label, Input, FormText } from 'reactstrap'
 //import ReactFileReader from 'react-file-reader';
 
-import { request } from '../../api/api';
-
 class Trip extends Component {
     constructor(props) {
         super(props);
@@ -13,21 +11,7 @@ class Trip extends Component {
     plan(){
         this.props.updateModify(true);
         this.props.closeScratchButton();
-        if(this.props.URL === "" || this.props.port==="314") {
-            this.props.updateOptions('unitName', this.props.trip.options.units);
-            request(this.props.trip, "plan").then(serverResponse => {
-                this.props.updateTrip('places', serverResponse["places"]);
-                this.props.updateMap(serverResponse["map"]);
-                this.props.updateDistances(serverResponse["distances"]);
-            });
-        }
-        else{
-            this.props.updateOptions('unitName', this.props.trip.options.units);
-            request(this.props.trip, "plan",this.props.port,this.props.URL).then(serverResponse => {
-                this.props.updateMap(serverResponse["map"]);
-                this.props.updateDistances(serverResponse["distances"]);
-            });
-        }
+        this.props.planRequest();
     }
     readFile(tffi){
         let file = tffi.target.files[0];
