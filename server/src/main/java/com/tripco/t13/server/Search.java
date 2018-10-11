@@ -40,7 +40,7 @@ public class Search {
     }
 
     public void updatePlaces(ArrayList<Location> places, ResultSet query) throws SQLException {
-        //Processing the data returned from the database into the places arraylist
+        //Processing the data returned from the database into the places ArrayList
         while(query.next()){
             Location placeSearch = new Location();
             placeSearch.name = query.getString("name");
