@@ -9,7 +9,6 @@ import Map from "./Map";
 import Itinerary from "./Itinerary";
 import Trip from "./Trip";
 import ModifyButton from "./ModifyButton";
-import ReverseTripButton from "./ReverseTripButton";
 import SetStartLegButton from "./SetStartLegButton";
 import SearchBar from "./SearchBar";
 import ScratchButton from "./ScratchButton";
@@ -84,6 +83,8 @@ class Application extends Component {
       }
     );
   }
+
+  //TODO: Create Plan Request function to use across all buttons and components
 
   updateTrip(field, value){
     let trip = this.state.trip;
@@ -175,14 +176,9 @@ class Application extends Component {
 
   }
 
-    //TODO: test reverseTrip() function
   reverseTrip(){
       let trip = this.state.trip;
-      let tempTrip = [5, 2 ,1];
-      console.log("Original:", trip.places);
       trip.places.reverse();
-      //trip.places = tempTrip;
-      console.log("Reversed", trip.places);
   }
 
   removeLeg(value){
@@ -190,9 +186,7 @@ class Application extends Component {
           return;
       }
       let trip = this.state.trip;
-      //console.log(trip.places);
       trip.places.splice(value,1);
-      //console.log(trip.places);
   }
 
   //TODO: Implement setStartLeg() function
@@ -230,13 +224,13 @@ class Application extends Component {
               <Itinerary trip={this.state.trip}
                          updateMap={this.updateMap}
                          updateDistances={this.updateDistances}
-                          removeLeg={this.removeLeg}/>
+                         removeLeg={this.removeLeg}
+                         reverseTrip={this.reverseTrip}/>
               <Interop port={this.state.port} URL={this.state.URL} updateNumber={this.updateNumber} changeServer={this.changeServer}/>
               {this.state.fromScratchButtons && <SearchBar showButtons={this.state.showModifyButtons}/>}
               {this.state.fromScratchButtons && <RenderButton showButtons={this.updateRenderButton}/>}
               {this.state.modify && <ModifyButton updateShowModify={this.updateShowModify}/>}
               {this.state.showModifyButtons && <SetStartLegButton showButtons={this.state.showModifyButtons}/>}
-              {this.state.showModifyButtons && <ReverseTripButton reverseTrip={this.reverseTrip}/>}
               {this.state.showModifyButtons && <SearchBar showButtons={this.state.showModifyButtons}/>}
               {this.state.showModifyButtons && <SaveButton showButtons={this.state.showModifyButtons}/>}
           </Container>

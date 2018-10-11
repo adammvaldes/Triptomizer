@@ -10,11 +10,20 @@ class Itinerary extends Component {
             textField : ""
         };
         this.removeLeg = this.removeLeg.bind(this);
+        this.reverseTrip = this.reverseTrip.bind(this);
         this.handleChange  = this.handleChange.bind(this);
     }
 
     removeLeg(){
         this.props.removeLeg(this.state.textField);
+        request(this.props.trip, "plan").then(serverResponse => {
+            this.props.updateMap(serverResponse["map"]);
+            this.props.updateDistances(serverResponse["distances"]);
+        });
+    }
+
+    reverseTrip(){
+        this.props.reverseTrip();
         request(this.props.trip, "plan").then(serverResponse => {
             this.props.updateMap(serverResponse["map"]);
             this.props.updateDistances(serverResponse["distances"]);
@@ -94,6 +103,7 @@ class Itinerary extends Component {
                                 <Input type="number" placeholder="Number of leg to remove" onChange={this.handleChange}/>
                             </FormGroup>
                         </Form>
+                            <Button className="btn text-white" type="button" color="info"  onClick={this.reverseTrip}>Reverse Trip Order</Button>
                     </CardBody>
                 </Card>
                 </div>
