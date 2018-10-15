@@ -34,7 +34,7 @@ public class Search {
             match += " limit " + Integer.toString(limit) + ";";
         }
         else{
-            match += ";";
+            match += "limit 30;";
         }
         return match;
     }
@@ -51,6 +51,15 @@ public class Search {
             placeSearch.longitude = Float.parseFloat(query.getString("longitude"));
             places.add(placeSearch);
         }
+    }
+
+    public boolean validateSearchRequestFormat(Search searchObject) {
+        //check if format of request if correct: type:"search" and version 3
+        if( searchObject.match.length() != 0) {
+            return true;
+        }
+
+        return false;
     }
 
 }
