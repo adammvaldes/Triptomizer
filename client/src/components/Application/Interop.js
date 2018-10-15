@@ -13,7 +13,6 @@ class Interop extends Component {
 
     changeServer(){
         this.props.changeServer("black-bottle.cs.colostate.edu");
-        //console.log(this.props.URL);
     }
 
     updatePort(team){

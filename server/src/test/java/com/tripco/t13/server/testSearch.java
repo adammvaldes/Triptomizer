@@ -5,6 +5,11 @@ import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.junit.runners.JUnit4;
 
+import java.sql.Connection;
+import java.sql.DriverManager;
+import java.sql.ResultSet;
+import java.sql.Statement;
+
 import static org.junit.Assert.*;
 
 /*
@@ -13,12 +18,22 @@ import static org.junit.Assert.*;
 @RunWith(JUnit4.class)
 public class testSearch {
     Search search;
+    String myDriver;
+    String myUrl;
+    String user;
+    String pass;
 
     @Before
     public void initialize(){
         search = new Search();
         search.version = 3;
         search.type = "search";
+        search.match = "";
+
+        myDriver = "com.mysql.jdbc.Driver";
+        myUrl = "jdbc:mysql://faure.cs.colostate.edu/cs314";
+        user="cs314-db";
+        pass="eiK5liet1uej";
     }
 
     @Test
@@ -55,6 +70,47 @@ public class testSearch {
         answer = search.applyLimit(search.limit, "boulder");
 
         assertEquals("boulder;", answer);
+    }
+
+    @Test
+    public void testUpdatePlaces(){
+
+        String searchQuery = "select id,name,municipality,type,latitude,longitude from airports where " +
+                "name like '%International%' or id like '%International%' or " +
+                "municipality like '%International%' or type like '%International%' or " +
+                "latitude like '%International%' or latitude like '%International%'";
+        try { //Send a search to the database, then process the results
+            Class.forName(myDriver);
+            try (Connection conn = DriverManager.getConnection(myUrl, user, pass);
+                 Statement stQuery = conn.createStatement();
+                 ResultSet rsQuery = stQuery.executeQuery(searchQuery)
+            ) {
+                search.updatePlaces(search.places, rsQuery);
+                Location L = search.places.get(0);
+                assertEquals(L.id, "01CO");
+                assertEquals(L.name, "St Vincent General Hospital Heliport");
+                assertEquals(L.latitude, 39.2453);
+                assertEquals(L.longitude, -106.246);
+                assertEquals(L.municipality, "Leadville");
+                assertEquals(L.type, "heliport");
+            }
+        } catch (Exception e) {
+            System.err.println("Exception: " + e.getMessage());
+        }
+
+    }
+
+    @Test
+    public void testValidateSearchRequestFormat(){
+
+        boolean check = search.validateSearchRequestFormat(search);
+
+        assertFalse(check);
+
+        search.match = "den";
+        check = search.validateSearchRequestFormat(search);
+
+        assertTrue(check);
     }
 
 }
