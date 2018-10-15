@@ -68,6 +68,7 @@ class Application extends Component {
     this.updateRenderButton = this.updateRenderButton.bind(this);
 
     this.search = this.search.bind(this);
+    this.addDestination = this.addDestination.bind(this);
     this.reverseTrip = this.reverseTrip.bind(this);
     this.removeLeg = this.removeLeg.bind(this);
     this.setStartLeg = this.setStartLeg.bind(this);
@@ -84,17 +85,19 @@ class Application extends Component {
     );
   }
 
-    planRequest(){
+  planRequest(){
         if(this.state.URL === "" || this.state.port==="314") {
             this.updateOptions('unitName', this.state.trip.options.units);
             request(this.state.trip, "plan").then(serverResponse => {
+                this.updateTrip(serverResponse["places"]);
                 this.updateMap(serverResponse["map"]);
                 this.updateDistances(serverResponse["distances"]);
             });
         }
         else{
             this.updateOptions('unitName', this.state.trip.options.units);
-            request(this.state.trip, "plan",this.state.port,this.props.URL).then(serverResponse => {
+            request(this.state.trip, "plan",this.state.port,this.state.URL).then(serverResponse => {
+                this.updateTrip(serverResponse["places"]);
                 this.updateMap(serverResponse["map"]);
                 this.updateDistances(serverResponse["distances"]);
             });
@@ -140,10 +143,17 @@ class Application extends Component {
           port:value
       });
   }
+
   changeServer(value){
       this.setState({
           URL:value
       });
+  }
+
+  addDestination(value){
+      let trip = this.state.trip;
+      trip.places.push(value);
+      this.setState(trip);
   }
 
   //TODO: Implement update* methods to change boolean state
@@ -227,8 +237,13 @@ class Application extends Component {
               <Info/>
               <Options options={this.state.trip.options}
                        config={this.state.config}
+                       port={this.state.port}
+                       URL={this.state.URL}
                        updateOptions={this.updateOptions}
-                       updateDistances={this.updateDistances}/>
+                       updateDistances={this.updateDistances}
+                       planRequest={this.planRequest}
+                       updateNumber={this.updateNumber}
+                       changeServer={this.changeServer}/>
               {this.state.fromScratch && <ScratchButton updateScratchButton={this.updateScratchButton}/>}
               <Trip trip={this.state.trip}
                     planRequest={this.planRequest}
@@ -249,11 +264,10 @@ class Application extends Component {
                          removeLeg={this.removeLeg}
                          reverseTrip={this.reverseTrip}
                          setStartLeg={this.setStartLeg}/>
-              <Interop port={this.state.port} URL={this.state.URL} updateNumber={this.updateNumber} changeServer={this.changeServer}/>
               {this.state.fromScratchButtons && <SearchBar showButtons={this.state.showModifyButtons}/>}
               {this.state.fromScratchButtons && <RenderButton showButtons={this.updateRenderButton}/>}
               {this.state.modify && <ModifyButton updateShowModify={this.updateShowModify}/>}
-              {this.state.showModifyButtons && <SearchBar showButtons={this.state.showModifyButtons}/>}
+              {this.state.showModifyButtons && <SearchBar showButtons={this.addDestination}/>}
               {this.state.showModifyButtons && <SaveButton showButtons={this.state.showModifyButtons}/>}
           </Container>
       )
