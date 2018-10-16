@@ -28,8 +28,7 @@ public class TripCalculate {
             isCorrectFormat = validateTripRequestFormat(trip);
 
             if (trip.options.optimization.equals("short")) {
-                ShortOptimization shortOptimization = new ShortOptimization(trip.options.units, trip.places);
-                trip.places = shortOptimization.travelingSalesman(trip.places, trip.places.get(0), trip.options.units);
+                shortOptimization();
             }
 
             //Calculate and fill trip distances
@@ -39,6 +38,54 @@ public class TripCalculate {
         } catch (Exception e) {
             isCorrectFormat = false;
         }
+    }
+
+    public TripCalculate(Trip trip) {
+        this.trip = trip;
+        if (trip.options.optimization.equals("short")) {
+            shortOptimization();
+        }
+
+        //Calculate and fill trip distances
+        this.trip.getTripDistances();
+        setMap();
+
+    }
+
+    void shortOptimization() {
+        int shortestCumulativeDistance = 0;
+        ArrayList<Integer> distancesOfTrip = trip.getTripDistances();
+        ShortOptimization shortOptimization = new ShortOptimization(trip.options.units, trip.places);
+
+        for (int distance : distancesOfTrip) {
+            shortestCumulativeDistance += distance;
+        }
+
+        System.out.println("Unoptimized cumulative distance is: " + shortestCumulativeDistance);
+        ArrayList<Location> retainOriginalPlaces = trip.places;
+        for (Location place : retainOriginalPlaces) {
+            System.out.println("Testing: " + place.name);
+            ArrayList<Location> tempPlaces = trip.places;
+            trip.places = shortOptimization.travelingSalesman(retainOriginalPlaces, place, trip.options.units);
+
+            int tempCumulativeDistance = 0;
+            distancesOfTrip = trip.getTripDistances();
+            for (int distance : distancesOfTrip) {
+                tempCumulativeDistance += distance;
+            }
+            System.out.println("Optimized cumulative distance for: " + place.name + " is: " + tempCumulativeDistance);
+            //Revert back to previous order of places if the current order has a bigger cumulative distance.
+            System.out.print("Is the current trip(" + tempCumulativeDistance + ") shorter than " + shortestCumulativeDistance + "? ");
+            if (tempCumulativeDistance > shortestCumulativeDistance) {
+                System.out.println("No");
+                trip.places = tempPlaces;
+            }else{
+                System.out.println("Yes");
+                shortestCumulativeDistance = tempCumulativeDistance;
+            }
+        }
+        //trip.places = shortOptimization.travelingSalesman(trip.places, trip.places.get(0), trip.options.units);
+
     }
 
     public void setMap(){

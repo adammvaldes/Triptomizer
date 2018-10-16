@@ -29,7 +29,8 @@ public class Trip{
      */
 
 
-    //fills distances arraylist with distance between each Location in places arraylist and fills final space in distances arraylist with round trip distance. Distances are calculated using getDistanceNum method from Distance class.
+    //fills distances arraylist with distance between each Location in places arraylist and fills final space in
+    //distances arraylist with round trip distance. Distances are calculated using getDistanceNum method from Distance class.
     public ArrayList<Integer> getTripDistances(){
         distances = new ArrayList<Integer>();
         options.setOptions();

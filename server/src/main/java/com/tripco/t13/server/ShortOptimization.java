@@ -23,7 +23,7 @@ public class ShortOptimization {
             Location currentPlace = calculateDistances(origin, places, units, visitedPlaces);
             visitedPlaces[places.indexOf(currentPlace)] = true;
             sortedPlaces.add(currentPlace);
-
+            origin = currentPlace;
             for (boolean visitedPlace : visitedPlaces) {
                 if (!visitedPlace) {
                     allPlacesVisited = false;
@@ -38,6 +38,9 @@ public class ShortOptimization {
         return sortedPlaces;
     }
 
+    /*This method calculates the shortest distance between the starting origin, and all the other places
+    this method has been given.
+    */
     public Location calculateDistances(Location origin, ArrayList<Location> places, String units, boolean[] visitedPlaces) {
         Distance distance = new Distance();
 
@@ -46,10 +49,10 @@ public class ShortOptimization {
 
         for (int place = 0; place < places.size(); place++) {
             if (!places.get(place).equals(origin) && !visitedPlaces[place]) {
-                if (Distance.getDistanceNum(origin.latitude, origin.longitude, places.get(place).latitude,
-                        places.get(place).longitude, distance.getRadius(units)) <= shortestDistance) {
-                    shortestDistance = Distance.getDistanceNum(origin.latitude, origin.longitude,
-                    places.get(place).latitude,places.get(place).longitude, distance.getRadius(units));
+                int tempDistance = Distance.getDistanceNum(origin.latitude, origin.longitude, places.get(place).latitude,
+                        places.get(place).longitude, distance.getRadius(units));
+                if (tempDistance <= shortestDistance) {
+                    shortestDistance = tempDistance;
                     closestPlace = places.get(place);
                 }
             }
