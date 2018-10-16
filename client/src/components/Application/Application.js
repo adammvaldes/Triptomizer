@@ -12,6 +12,7 @@ import SearchBar from "./SearchBar";
 import ScratchButton from "./ScratchButton";
 import RenderButton from "./RenderButton";
 import SaveButton from "./SaveButton";
+import OptimizationButtons from "./OptimizationButtons";
 
 /* Renders the application.
  * Holds the destinations and options state shared with the trip.
@@ -246,6 +247,8 @@ class Application extends Component {
                        planRequest={this.planRequest}
                        updateNumber={this.updateNumber}
                        changeServer={this.changeServer}/>
+                       />
+              <OptimizationButtons updateOptions={this.updateOptions}/>
               {this.state.fromScratch && <ScratchButton updateScratchButton={this.updateScratchButton}/>}
               <Trip trip={this.state.trip}
                     planRequest={this.planRequest}
