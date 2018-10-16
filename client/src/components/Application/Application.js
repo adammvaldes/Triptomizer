@@ -84,7 +84,7 @@ class Application extends Component {
     );
   }
 
-    planRequest(){
+  planRequest(){
         if(this.state.URL === "" || this.state.port==="314") {
             this.updateOptions('unitName', this.state.trip.options.units);
             request(this.state.trip, "plan").then(serverResponse => {
@@ -140,6 +140,7 @@ class Application extends Component {
           port:value
       });
   }
+
   changeServer(value){
       this.setState({
           URL:value
@@ -227,8 +228,13 @@ class Application extends Component {
               <Info/>
               <Options options={this.state.trip.options}
                        config={this.state.config}
+                       port={this.state.port}
+                       URL={this.state.URL}
                        updateOptions={this.updateOptions}
-                       updateDistances={this.updateDistances}/>
+                       updateDistances={this.updateDistances}
+                       planRequest={this.planRequest}
+                       updateNumber={this.updateNumber}
+                       changeServer={this.changeServer}/>
               {this.state.fromScratch && <ScratchButton updateScratchButton={this.updateScratchButton}/>}
               <Trip trip={this.state.trip}
                     planRequest={this.planRequest}
@@ -249,7 +255,6 @@ class Application extends Component {
                          removeLeg={this.removeLeg}
                          reverseTrip={this.reverseTrip}
                          setStartLeg={this.setStartLeg}/>
-              <Interop port={this.state.port} URL={this.state.URL} updateNumber={this.updateNumber} changeServer={this.changeServer}/>
               {this.state.fromScratchButtons && <SearchBar showButtons={this.state.showModifyButtons}/>}
               {this.state.fromScratchButtons && <RenderButton showButtons={this.updateRenderButton}/>}
               {this.state.modify && <ModifyButton updateShowModify={this.updateShowModify}/>}
