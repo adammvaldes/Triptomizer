@@ -81,4 +81,24 @@ public class TestDistance {
         assertEquals(44070439, testDistance);
     }
 
+    @Test
+    public void testGetRadius(){
+        String units = "miles";
+        float answer = distance.getRadius(units);
+        assertEquals(3959, answer, 0.0);
+
+        units = "kilometers";
+        answer = distance.getRadius(units);
+        assertEquals(6371, answer, 0.0);
+
+        units = "nautical miles";
+        answer = distance.getRadius(units);
+        assertEquals(3440, answer, 0.0);
+
+        units = "user defined";
+        distance.unitRadius = 1234;
+        answer = distance.getRadius(units);
+        assertEquals(1234, answer, 0.0);
+    }
+
 }

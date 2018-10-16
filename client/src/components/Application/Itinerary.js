@@ -1,37 +1,43 @@
 import React, { Component } from 'react';
-import {Button, Card, CardBody, Container, Form, FormGroup, Input, Media, Table} from 'reactstrap';
-import { request } from '../../api/api';
+import {Button, Card, CardBody, Container, Form, FormGroup, Input, Table} from 'reactstrap';
 
 
 class Itinerary extends Component {
     constructor(props) {
         super(props);
         this.state = {
-            textField : ""
+            textField1 : "",
+            textField2 : ""
         };
         this.removeLeg = this.removeLeg.bind(this);
         this.reverseTrip = this.reverseTrip.bind(this);
-        this.handleChange  = this.handleChange.bind(this);
+        this.setStartLeg = this.setStartLeg.bind(this);
+        this.handleChange1  = this.handleChange1.bind(this);
+        this.handleChange2  = this.handleChange2.bind(this);
+        this.renderButtons = this.renderButtons.bind(this);
     }
 
     removeLeg(){
-        this.props.removeLeg(this.state.textField);
-        request(this.props.trip, "plan").then(serverResponse => {
-            this.props.updateMap(serverResponse["map"]);
-            this.props.updateDistances(serverResponse["distances"]);
-        });
+        this.props.removeLeg(this.state.textField1);
+        this.props.planRequest();
     }
 
     reverseTrip(){
         this.props.reverseTrip();
-        request(this.props.trip, "plan").then(serverResponse => {
-            this.props.updateMap(serverResponse["map"]);
-            this.props.updateDistances(serverResponse["distances"]);
-        });
+        this.props.planRequest();
     }
 
-    handleChange(event) {
-        this.setState({textField: event.target.value})
+    setStartLeg(){
+        this.props.setStartLeg(this.state.textField2);
+        this.props.planRequest();
+    }
+
+    handleChange1(event) {
+        this.setState({textField1: event.target.value})
+    }
+
+    handleChange2(event) {
+        this.setState({textField2: event.target.value})
     }
 
 
@@ -41,7 +47,6 @@ class Itinerary extends Component {
             sum += distance;
             return <td key={'distance ' + sum}>{sum}</td>
         });
-
         return (
             <tr>
                 <th scope="row">Total Distance, {this.props.trip.options.unitName }</th>
@@ -49,8 +54,35 @@ class Itinerary extends Component {
                 {tripDistances}
             </tr>
         );
-
     }
+
+
+    renderButtons(){
+        return(
+        <div id="div2">
+            <Card>
+                <CardBody>
+                    <Button className="btn text-white" type="button" color="info"  onClick={this.removeLeg}>Remove Leg</Button>
+                    <Form>
+                        <FormGroup>
+                            <Input type="number" placeholder="Number of leg to remove (Starting position is 0)" onChange={this.handleChange1}/>
+                        </FormGroup>
+                    </Form>
+                    <div id="div3">
+                        <Button className="btn text-white" type="button" color="info"  onClick={this.reverseTrip}>Reverse Trip Order</Button>
+                    </div>
+                    <Button className="btn text-white" type="button" color="info"  onClick={this.setStartLeg}>Set Start Leg</Button>
+                    <Form>
+                        <FormGroup>
+                            <Input type="number" placeholder="Enter leg number to set to start (Starting position is 0)" onChange={this.handleChange2} />
+                        </FormGroup>
+                    </Form>
+                </CardBody>
+            </Card>
+        </div>
+     );
+    }
+
 
     renderTripPlaces() {
         let tripPlaces = this.props.trip.places.map((place) => {
@@ -107,19 +139,8 @@ class Itinerary extends Component {
                 {this.calculateTotalDistance()}
                 </tbody>
             </Table>
-            </div>
-            <div id="div2">
-            <Card>
-                <CardBody>
-                        <Button className="btn text-white" type="button" color="info"  onClick={this.removeLeg}>Remove Leg</Button>
-                    <Form>
-                        <FormGroup>
-                            <Input type="number" placeholder="Number of leg to remove" onChange={this.handleChange}/>
-                        </FormGroup>
-                    </Form>
-                        <Button className="btn text-white" type="button" color="info"  onClick={this.reverseTrip}>Reverse Trip Order</Button>
-                </CardBody>
-            </Card>
+
+                {this.renderButtons()}
             </div>
             </div>
         );
