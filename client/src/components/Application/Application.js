@@ -2,7 +2,6 @@ import React, {Component} from 'react';
 import { Container } from 'reactstrap';
 import Info from './Info';
 import Options from './Options';
-import Interop from './Interop';
 
 import {get_config, request} from '../../api/api';
 import Map from "./Map";
@@ -49,6 +48,7 @@ class Application extends Component {
       }
     };
     this.planRequest = this.planRequest.bind(this);
+    this.clearTrip = this.clearTrip.bind(this);
     this.updateTrip = this.updateTrip.bind(this);
     this.updateBasedOnResponse = this.updateBasedOnResponse.bind(this);
     this.updateOptions = this.updateOptions.bind(this);
@@ -99,6 +99,17 @@ class Application extends Component {
                 this.updateDistances(serverResponse["distances"]);
             });
         }
+  }
+
+  clearTrip(){
+      let trip = this.state.trip;
+      trip.places.length = 0;
+      trip.distances.length = 0;
+      trip.options.units = "";
+      trip.options.unitName = "";
+      trip.options.unitRadius = "";
+      trip.options.optimization = "none";
+      this.setState(trip);
   }
 
   updateTrip(field, value){
@@ -238,6 +249,7 @@ class Application extends Component {
               {this.state.fromScratch && <ScratchButton updateScratchButton={this.updateScratchButton}/>}
               <Trip trip={this.state.trip}
                     planRequest={this.planRequest}
+                    clearTrip={this.clearTrip}
                     updateTrip={this.updateTrip}
                     updateModify={this.updateModify}
                     closeScratchButton={this.closeScratchButton}

@@ -1,7 +1,6 @@
 import React, {Component} from 'react'
 import {Card, CardHeader, CardBody, FormGroup, InputGroup, InputGroupAddon} from 'reactstrap'
 import { ButtonGroup, Button, Form, Label, Input, FormText} from 'reactstrap'
-import {request} from "../../api/api";
 
 /* Options allows the user to change the parameters for planning
  * and rendering the trip map and itinerary.
@@ -26,7 +25,6 @@ class Options extends Component{
 
   updateName(name){
       this.props.updateOptions('unitName',name.target.value);
-      //console.log(name.target.value);
   }
   updateRadius(name){
       //const userRadius = (name.target.validity.valid) ? name.target.value : this.props.options.unitRadius;
@@ -37,7 +35,6 @@ class Options extends Component{
 
   changeServer(){
       this.props.changeServer("black-bottle.cs.colostate.edu");
-      //console.log("Change server in options", this.props.URL);
   }
 
   updatePort(team){
@@ -82,14 +79,13 @@ class Options extends Component{
                       </Input>
                   </InputGroup>
                   <FormText>
-                      Select which team's server you wish to use.
+                      Select which server you wish to use.
                   </FormText>
               </CardBody>
           </Card>
       );
   }
 
-  //TODO:Re-add {this.renderInterOpt()}
   render() {
     const buttons = this.props.config.units.map((unit) =>
       <Button
