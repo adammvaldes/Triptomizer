@@ -16,7 +16,6 @@ class Options extends Component{
     this.updateDefault = this.updateDefault.bind(this);
     this.changeServer = this.changeServer.bind(this);
     this.updatePort = this.updatePort.bind(this);
-    this.handleChange = this.handleChange.bind(this);
     this.renderInterOpt = this.renderInterOpt.bind(this);
   }
 
