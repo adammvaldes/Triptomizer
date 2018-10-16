@@ -98,6 +98,7 @@ For this sprint we ended up planning the same number of beginning story points a
 | 10/1/2018 | *none* | #135 | *none* | Dmitri was transferred away from our team. We will be working to readjust our team workload to compensate for the decrease in our number of team members.
 | 10/3/2018 | #217 | #135, #205 | *none* | 
 | 10/5/2018 | #217, #135, #200, #196, #213, #209, #225, #207, #228 | #205 | *none* |
+| 10/15/2018 | #217, #135, #200, #196, #213, #209, #225, #207, #228, #212, #237, #243, #204, #202, #198, #203, #205, #233, #232 | #235, #246, #250, #247, #244, #252 | *none* |
 
 *Add a new row for the scrum session after each lecture. *
 
