@@ -97,7 +97,6 @@ class Application extends Component {
         else{
             this.updateOptions('unitName', this.state.trip.options.units);
             request(this.state.trip, "plan",this.state.port,this.state.URL).then(serverResponse => {
-                this.updateTrip(serverResponse["places"]);
                 this.updateMap(serverResponse["map"]);
                 this.updateDistances(serverResponse["distances"]);
             });

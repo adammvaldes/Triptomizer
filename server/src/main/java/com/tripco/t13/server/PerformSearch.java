@@ -38,7 +38,7 @@ public class PerformSearch {
         Gson gson = new Gson();
         try { //Check to see if the JSON is valid, then create the search string for the database
             searchObject = gson.fromJson(requestBody, Search.class);
-            isCorrectFormat = validateSearchRequestFormat(searchObject);
+            isCorrectFormat = searchObject.validateSearchRequestFormat(searchObject);
             String temp = searchObject.createSearch(searchObject.match);
             temp = searchObject.applyLimit(searchObject.limit, temp);
             search = temp;
@@ -56,15 +56,6 @@ public class PerformSearch {
         } catch (Exception e) {
             System.err.println("Exception: " + e.getMessage());
         }
-    }
-
-    public boolean validateSearchRequestFormat(Search searchObject) {
-        //check if format of request if correct: type:"search" and version 3
-        if( searchObject.match.length() != 0) {
-            return true;
-        }
-
-        return false;
     }
 
     public String getSearchJson () {
