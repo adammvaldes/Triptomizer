@@ -2,8 +2,7 @@ import React, {Component} from 'react';
 import { Container } from 'reactstrap';
 import Info from './Info';
 import Options from './Options';
-import Interop from './Interop';
-
+import Interop from "./Interop";
 import {get_config, request} from '../../api/api';
 import Map from "./Map";
 import Itinerary from "./Itinerary";
@@ -13,6 +12,7 @@ import SearchBar from "./SearchBar";
 import ScratchButton from "./ScratchButton";
 import RenderButton from "./RenderButton";
 import SaveButton from "./SaveButton";
+import OptimizationButtons from "./OptimizationButtons";
 
 /* Renders the application.
  * Holds the destinations and options state shared with the trip.
@@ -49,6 +49,7 @@ class Application extends Component {
       }
     };
     this.planRequest = this.planRequest.bind(this);
+    this.clearTrip = this.clearTrip.bind(this);
     this.updateTrip = this.updateTrip.bind(this);
     this.updateBasedOnResponse = this.updateBasedOnResponse.bind(this);
     this.updateOptions = this.updateOptions.bind(this);
@@ -84,7 +85,7 @@ class Application extends Component {
     );
   }
 
-    planRequest(){
+  planRequest(){
         if(this.state.URL === "" || this.state.port==="314") {
             this.updateOptions('unitName', this.state.trip.options.units);
             request(this.state.trip, "plan").then(serverResponse => {
@@ -99,6 +100,17 @@ class Application extends Component {
                 this.updateDistances(serverResponse["distances"]);
             });
         }
+  }
+
+  clearTrip(){
+      let trip = this.state.trip;
+      trip.places.length = 0;
+      trip.distances.length = 0;
+      trip.options.units = "";
+      trip.options.unitName = "";
+      trip.options.unitRadius = "";
+      trip.options.optimization = "none";
+      this.setState(trip);
   }
 
   updateTrip(field, value){
@@ -140,6 +152,7 @@ class Application extends Component {
           port:value
       });
   }
+
   changeServer(value){
       this.setState({
           URL:value
@@ -205,7 +218,7 @@ class Application extends Component {
   }
 
   setStartLeg(value){
-      if(value < 0){
+      if(value <= 0){
           return;
       }
       let trip = this.state.trip;
@@ -229,9 +242,14 @@ class Application extends Component {
                        config={this.state.config}
                        updateOptions={this.updateOptions}
                        updateDistances={this.updateDistances}/>
+              <Interop changeServer={this.state.changeServer}
+                       updatePort={this.state.updatePort}
+                       updateDistances={this.updateDistances}/>
+              <OptimizationButtons updateOptions={this.updateOptions}/>
               {this.state.fromScratch && <ScratchButton updateScratchButton={this.updateScratchButton}/>}
               <Trip trip={this.state.trip}
                     planRequest={this.planRequest}
+                    clearTrip={this.clearTrip}
                     updateTrip={this.updateTrip}
                     updateModify={this.updateModify}
                     closeScratchButton={this.closeScratchButton}
@@ -249,7 +267,6 @@ class Application extends Component {
                          removeLeg={this.removeLeg}
                          reverseTrip={this.reverseTrip}
                          setStartLeg={this.setStartLeg}/>
-              <Interop port={this.state.port} URL={this.state.URL} updateNumber={this.updateNumber} changeServer={this.changeServer}/>
               {this.state.fromScratchButtons && <SearchBar showButtons={this.state.showModifyButtons}/>}
               {this.state.fromScratchButtons && <RenderButton showButtons={this.updateRenderButton}/>}
               {this.state.modify && <ModifyButton updateShowModify={this.updateShowModify}/>}
