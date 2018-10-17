@@ -25,14 +25,6 @@ class Application extends Component {
       config: null,
         port: "",
         URL: "",
-        //Starts true, turns false if ScratchButton is clicked or Load is selected. ScratchButton is visible while true.
-        fromScratch: true,
-        //Starts false. Turns true if ScratchButton is clicked. Turning true reveals options for building a trip from scratch. Turns false again when RenderButton is clicked.
-        fromScratchButtons: false,
-        //Starts false. Turns true if Load is selected. Turning true reveals ModifyButton.
-        modify: false,
-        //Starts false. Turns true if ModifyButton is clicked. Turning true reveals options for modifying an itinerary.
-        showModifyButtons: false,
       trip: {
         type: "trip",
         version: "3",
@@ -59,14 +51,6 @@ class Application extends Component {
 
     this.updateNumber = this.updateNumber.bind(this);
     this.changeServer = this.changeServer.bind(this);
-
-
-    this.updateScratchButton = this.updateScratchButton.bind(this);
-    this.updateFromScratch = this.updateFromScratch.bind(this);
-    this.closeScratchButton = this.closeScratchButton.bind(this);
-    this.updateModify = this.updateModify.bind(this);
-    this.updateShowModify = this.updateShowModify.bind(this);
-    this.updateRenderButton = this.updateRenderButton.bind(this);
 
     this.search = this.search.bind(this);
     this.reverseTrip = this.reverseTrip.bind(this);
@@ -159,46 +143,6 @@ class Application extends Component {
       });
   }
 
-  //TODO: Implement update* methods to change boolean state
-  updateFromScratch(){
-      this.setState({
-          fromScratch:false,
-          fromScratchButtons:true
-      });
-  }
-
-  updateScratchButton(){
-      this.setState({
-          fromScratch:false,
-          fromScratchButtons:true
-      });
-  }
-
-  closeScratchButton(){
-      this.setState({
-          fromScratch:false
-      });
-  }
-
-  updateModify(value){
-      this.setState({
-          modify:value
-      });
-  }
-
-  updateShowModify(){
-
-      this.setState({
-          showModifyButtons:true
-      });
-  }
-
-  updateRenderButton(){
-      this.setState({
-          fromScratchButtons:false
-      });
-  }
-
   //TODO: Implement search() function
   search(value){
 
@@ -242,8 +186,8 @@ class Application extends Component {
                        config={this.state.config}
                        updateOptions={this.updateOptions}
                        updateDistances={this.updateDistances}/>
-              <Interop changeServer={this.state.changeServer}
-                       updatePort={this.state.updatePort}
+              <Interop changeServer={this.changeServer}
+                       updateNumber={this.updateNumber}
                        updateDistances={this.updateDistances}/>
               <OptimizationButtons updateOptions={this.updateOptions}/>
               {this.state.fromScratch && <ScratchButton updateScratchButton={this.updateScratchButton}/>}
@@ -251,14 +195,13 @@ class Application extends Component {
                     planRequest={this.planRequest}
                     clearTrip={this.clearTrip}
                     updateTrip={this.updateTrip}
-                    updateModify={this.updateModify}
-                    closeScratchButton={this.closeScratchButton}
                     updateMap={this.updateMap}
                     updateTFFI={this.updateTFFI}
                     updateDistances={this.updateDistances}
                     updateOptions={this.updateOptions}
                     port={this.state.port}
                     URL={this.state.URL}/>
+              <SearchBar search={this.search}/>
               <Map trip={this.state.trip} URL={this.state.URL} port={this.state.port}/>
               <Itinerary trip={this.state.trip}
                          planRequest={this.planRequest}
@@ -267,7 +210,6 @@ class Application extends Component {
                          removeLeg={this.removeLeg}
                          reverseTrip={this.reverseTrip}
                          setStartLeg={this.setStartLeg}/>
-              {this.state.fromScratchButtons && <SearchBar showButtons={this.state.showModifyButtons}/>}
               {this.state.fromScratchButtons && <RenderButton showButtons={this.updateRenderButton}/>}
               {this.state.modify && <ModifyButton updateShowModify={this.updateShowModify}/>}
               {this.state.showModifyButtons && <SearchBar showButtons={this.state.showModifyButtons}/>}

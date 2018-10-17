@@ -17,7 +17,9 @@ class SearchBar extends Component{
 
     //reference updateOptions() in Application.js for implementation
     search(value){
+        console.log(this.state.searchText);
         this.props.search(value);
+
     }
 
     handleChange(event) {

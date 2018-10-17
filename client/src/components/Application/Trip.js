@@ -9,8 +9,6 @@ class Trip extends Component {
         this.readFile = this.readFile.bind(this);
     }
     plan(){
-        this.props.updateModify(true);
-        this.props.closeScratchButton();
         this.props.planRequest();
     }
     readFile(tffi){
