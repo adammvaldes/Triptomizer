@@ -247,7 +247,6 @@ class Application extends Component {
                        planRequest={this.planRequest}
                        updateNumber={this.updateNumber}
                        changeServer={this.changeServer}/>
-                       />
               <OptimizationButtons updateOptions={this.updateOptions}/>
               {this.state.fromScratch && <ScratchButton updateScratchButton={this.updateScratchButton}/>}
               <Trip trip={this.state.trip}
