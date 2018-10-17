@@ -3,6 +3,7 @@ package com.tripco.t13.server;
 import com.google.gson.Gson;
 import com.google.gson.JsonElement;
 import com.google.gson.JsonParser;
+import com.tripco.t13.planner.Place;
 import spark.Request;
 
 import java.io.BufferedReader;
@@ -11,7 +12,7 @@ import java.util.*;
 
 public class TripCalculate {
 
-    private Trip trip;
+    public Trip trip;
     private boolean isCorrectFormat; //verify correct format of POST request
 
     public TripCalculate(Request request) {
@@ -20,19 +21,28 @@ public class TripCalculate {
         // extract the information from the body of the request.
         JsonParser jsonParser = new JsonParser();
         JsonElement requestBody = jsonParser.parse(request.body());
-
         //Converting to a Java class
         Gson gson = new Gson();
         try {
             trip = gson.fromJson(requestBody, Trip.class);
             isCorrectFormat = validateTripRequestFormat(trip);
 
+            for (Location location : this.trip.places) {
+                System.out.print(location.name + " --> ");
+            }
             if (trip.options.optimization.equals("short")) {
                 shortOptimization();
+            } else {
+                System.out.println("Not doing optimization.");
+            }
+
+            System.out.println("After sort: \n\n\n\n");
+            for (Location location : this.trip.places) {
+                System.out.print(location.name + " --> ");
             }
 
             //Calculate and fill trip distances
-            trip.getTripDistances();
+            //trip.getTripDistances();
             setMap();
 
         } catch (Exception e) {
@@ -42,50 +52,75 @@ public class TripCalculate {
 
     public TripCalculate(Trip trip) {
         this.trip = trip;
-        if (trip.options.optimization.equals("short")) {
-            shortOptimization();
-        }
-
-        //Calculate and fill trip distances
-        this.trip.getTripDistances();
-        setMap();
-
+        //System.out.println("Before sort: \n\n\n\n");
+//        for (Location location : this.trip.places) {
+//            //System.out.print(location.name + " --> ");
+//        }
+//        if (trip.options.optimization.equals("short")) {
+//            shortOptimization();
+//        }
+//
+//        //System.out.println("After sort: \n\n\n\n");
+//        for (Location location : this.trip.places) {
+//            //System.out.print(location.name + " --> ");
+//        }
+//        //Calculate and fill trip distances
+//        this.trip.getTripDistances();
+//        setMap();
     }
 
     void shortOptimization() {
+        Trip tempTrip = new Trip();
         int shortestCumulativeDistance = 0;
-        ArrayList<Integer> distancesOfTrip = trip.getTripDistances();
-        ShortOptimization shortOptimization = new ShortOptimization(trip.options.units, trip.places);
-
-        for (int distance : distancesOfTrip) {
+//        ArrayList<Integer> distancesOfTrip = getLegDistances(trip.places, (int)trip.options.unitRadius);
+        trip.distances = trip.getTripDistances();
+        for (int distance : trip.distances) {
             shortestCumulativeDistance += distance;
         }
 
         System.out.println("Unoptimized cumulative distance is: " + shortestCumulativeDistance);
-        ArrayList<Location> retainOriginalPlaces = trip.places;
+        ArrayList<Location> retainOriginalPlaces = new ArrayList<>();
+        retainOriginalPlaces.addAll(trip.places);
+
         for (Location place : retainOriginalPlaces) {
             System.out.println("Testing: " + place.name);
-            ArrayList<Location> tempPlaces = trip.places;
-            trip.places = shortOptimization.travelingSalesman(retainOriginalPlaces, place, trip.options.units);
-
+            //Trip tempTrip = trip;
+            trip.places = ShortOptimization.travelingSalesman(place, trip.places, "miles");
+            trip.distances = trip.getTripDistances();
             int tempCumulativeDistance = 0;
-            distancesOfTrip = trip.getTripDistances();
-            for (int distance : distancesOfTrip) {
+            for (int distance : trip.distances) {
                 tempCumulativeDistance += distance;
             }
             System.out.println("Optimized cumulative distance for: " + place.name + " is: " + tempCumulativeDistance);
             //Revert back to previous order of places if the current order has a bigger cumulative distance.
             System.out.print("Is the current trip(" + tempCumulativeDistance + ") shorter than " + shortestCumulativeDistance + "? ");
-            if (tempCumulativeDistance > shortestCumulativeDistance) {
-                System.out.println("No");
-                trip.places = tempPlaces;
-            }else{
+            if (tempCumulativeDistance <= shortestCumulativeDistance) {
                 System.out.println("Yes");
                 shortestCumulativeDistance = tempCumulativeDistance;
+                tempTrip = new Trip(trip);
+            } else {
+                System.out.println("No");
             }
         }
+
+        //System.out.println("Newly optimized trip: ");
+//        for (Location location : trip.places) {
+//            System.out.print(location.name + " --> ");
+//        }
+        trip = tempTrip;
         //trip.places = shortOptimization.travelingSalesman(trip.places, trip.places.get(0), trip.options.units);
 
+    }
+
+    public static ArrayList<Integer> getLegDistances(ArrayList<Location> places, int unitRadius){
+        ArrayList<Integer> distances = new ArrayList<Integer>();
+
+        for(int i = 0; i < places.size() - 1; i++) {
+            distances.add(Distance.getDistanceNum(places.get(i).latitude, places.get(i).longitude, places.get(i+1).latitude, places.get(i+1).longitude, unitRadius));
+        }
+        distances.add(Distance.getDistanceNum(places.get(places.size()-1).latitude, places.get(places.size()-1).longitude, places.get(0).latitude, places.get(0).longitude, unitRadius));
+
+        return distances;
     }
 
     public void setMap(){

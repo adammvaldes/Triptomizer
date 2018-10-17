@@ -4,26 +4,23 @@ import java.util.ArrayList;
 
 public class ShortOptimization {
 
-    private String units;
-    private ArrayList<Location> places;
+//    private String units;
+//    private ArrayList<Location> places;
 
-    ShortOptimization(String units, ArrayList<Location> places) {
-        this.units = units;
-        this.places = places;
-    }
+//        this.units = units;
+//        this.places = places;
 
-    ArrayList<Location> travelingSalesman(ArrayList<Location> places, Location origin, String units) {
+    static ArrayList<Location> travelingSalesman(Location currentOrigin, ArrayList<Location> places, String units) {
         boolean[] visitedPlaces = new boolean[places.size()];
         boolean allPlacesVisited = false;
         ArrayList<Location> sortedPlaces = new ArrayList<>();
 
-        sortedPlaces.add(origin);
-        visitedPlaces[places.indexOf(origin)] = true;
+        sortedPlaces.add(currentOrigin);
+        visitedPlaces[places.indexOf(currentOrigin)] = true;
         while (!allPlacesVisited) {
-            Location currentPlace = calculateDistances(origin, places, units, visitedPlaces);
-            visitedPlaces[places.indexOf(currentPlace)] = true;
-            sortedPlaces.add(currentPlace);
-            origin = currentPlace;
+            currentOrigin = calculateDistances(currentOrigin, visitedPlaces, places, units);
+            visitedPlaces[places.indexOf(currentOrigin)] = true;
+            sortedPlaces.add(currentOrigin);
             for (boolean visitedPlace : visitedPlaces) {
                 if (!visitedPlace) {
                     allPlacesVisited = false;
@@ -41,7 +38,7 @@ public class ShortOptimization {
     /*This method calculates the shortest distance between the starting origin, and all the other places
     this method has been given.
     */
-    public Location calculateDistances(Location origin, ArrayList<Location> places, String units, boolean[] visitedPlaces) {
+    public static Location calculateDistances(Location origin, boolean[] visitedPlaces, ArrayList<Location> places, String units) {
         Distance distance = new Distance();
 
         int shortestDistance = Integer.MAX_VALUE;
@@ -57,7 +54,6 @@ public class ShortOptimization {
                 }
             }
         }
-
         return closestPlace;
     }
 }

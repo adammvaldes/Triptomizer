@@ -28,7 +28,19 @@ public class Trip{
         bananas: 35828571
      */
 
+    Trip(){
 
+    }
+
+    Trip(Trip trip){
+        this.version = trip.version;
+        this.type = trip.type;
+        this.title = trip.title;
+        this.places = trip.places;
+        this.options = trip.options;
+        this.distances = trip.distances;
+        this.map = trip.map;
+    }
     //fills distances arraylist with distance between each Location in places arraylist and fills final space in
     //distances arraylist with round trip distance. Distances are calculated using getDistanceNum method from Distance class.
     public ArrayList<Integer> getTripDistances(){
