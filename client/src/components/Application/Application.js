@@ -88,9 +88,11 @@ class Application extends Component {
   planRequest(){
         if(this.state.URL === "" || this.state.port==="314") {
             this.updateOptions('unitName', this.state.trip.options.units);
+
             request(this.state.trip, "plan").then(serverResponse => {
                 this.updateMap(serverResponse["map"]);
                 this.updateDistances(serverResponse["distances"]);
+                this.updateTrip("places", serverResponse["places"]);
             });
         }
         else{
@@ -98,6 +100,7 @@ class Application extends Component {
             request(this.state.trip, "plan",this.state.port,this.state.URL).then(serverResponse => {
                 this.updateMap(serverResponse["map"]);
                 this.updateDistances(serverResponse["distances"]);
+                this.updateTrip("places", serverResponse["places"]);
             });
         }
   }
@@ -143,7 +146,7 @@ class Application extends Component {
   }
 
   updateTFFI(value){
-      this.setState({'trip' : value});
+      this.setState({trip : value});
   }
 
   //Function to update the server for Interoperation of teams
@@ -245,7 +248,8 @@ class Application extends Component {
               <Interop changeServer={this.changeServer}
                        updateNumber={this.updateNumber}
                        updateDistances={this.updateDistances}/>
-              <OptimizationButtons updateOptions={this.updateOptions}/>
+              <OptimizationButtons config={this.state.config}
+                                   updateOptions={this.updateOptions}/>
               {this.state.fromScratch && <ScratchButton updateScratchButton={this.updateScratchButton}/>}
               <Trip trip={this.state.trip}
                     planRequest={this.planRequest}

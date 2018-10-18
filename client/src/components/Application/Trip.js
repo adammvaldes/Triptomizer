@@ -12,6 +12,7 @@ class Trip extends Component {
         };
     }
     plan(){
+        //console.log(this.props.trip);
         this.props.updateModify(true);
         this.props.closeScratchButton();
         this.props.planRequest();
@@ -32,6 +33,8 @@ class Trip extends Component {
             this.props.updateTFFI(obj);
         }.bind(this);
         fReader.readAsText(file);
+        //console.log(this.props.trip);
+
     }
     saveFile(){
         let userVersion = this.props.trip.version;
