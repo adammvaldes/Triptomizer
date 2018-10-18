@@ -32,6 +32,7 @@ public class Trip{
 
     }
 
+    //A constructor for short path algorithm in shortOptimization() method in TripCalculate.java to deep copy a Trip object.
     Trip(Trip trip){
         this.version = trip.version;
         this.type = trip.type;
@@ -41,6 +42,7 @@ public class Trip{
         this.distances = trip.distances;
         this.map = trip.map;
     }
+
     //fills distances arraylist with distance between each Location in places arraylist and fills final space in
     //distances arraylist with round trip distance. Distances are calculated using getDistanceNum method from Distance class.
     public ArrayList<Integer> getTripDistances(){

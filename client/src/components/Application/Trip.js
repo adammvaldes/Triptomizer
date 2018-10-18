@@ -9,6 +9,7 @@ class Trip extends Component {
         this.readFile = this.readFile.bind(this);
     }
     plan(){
+        //console.log(this.props.trip);
         this.props.updateModify(true);
         this.props.closeScratchButton();
         this.props.planRequest();
@@ -29,6 +30,8 @@ class Trip extends Component {
             this.props.updateTFFI(obj);
         }.bind(this);
         fReader.readAsText(file);
+        //console.log(this.props.trip);
+
     }
 
     render() {

@@ -27,22 +27,12 @@ public class TripCalculate {
             trip = gson.fromJson(requestBody, Trip.class);
             isCorrectFormat = validateTripRequestFormat(trip);
 
-            for (Location location : this.trip.places) {
-                System.out.print(location.name + " --> ");
-            }
             if (trip.options.optimization.equals("short")) {
                 shortOptimization();
             } else {
-                System.out.println("Not doing optimization.");
+                trip.getTripDistances();
             }
 
-            System.out.println("After sort: \n\n\n\n");
-            for (Location location : this.trip.places) {
-                System.out.print(location.name + " --> ");
-            }
-
-            //Calculate and fill trip distances
-            //trip.getTripDistances();
             setMap();
 
         } catch (Exception e) {
@@ -52,75 +42,37 @@ public class TripCalculate {
 
     public TripCalculate(Trip trip) {
         this.trip = trip;
-        //System.out.println("Before sort: \n\n\n\n");
-//        for (Location location : this.trip.places) {
-//            //System.out.print(location.name + " --> ");
-//        }
-//        if (trip.options.optimization.equals("short")) {
-//            shortOptimization();
-//        }
-//
-//        //System.out.println("After sort: \n\n\n\n");
-//        for (Location location : this.trip.places) {
-//            //System.out.print(location.name + " --> ");
-//        }
-//        //Calculate and fill trip distances
-//        this.trip.getTripDistances();
-//        setMap();
     }
 
     void shortOptimization() {
         Trip tempTrip = new Trip();
         int shortestCumulativeDistance = 0;
-//        ArrayList<Integer> distancesOfTrip = getLegDistances(trip.places, (int)trip.options.unitRadius);
         trip.distances = trip.getTripDistances();
+
         for (int distance : trip.distances) {
             shortestCumulativeDistance += distance;
         }
 
-        System.out.println("Unoptimized cumulative distance is: " + shortestCumulativeDistance);
         ArrayList<Location> retainOriginalPlaces = new ArrayList<>();
         retainOriginalPlaces.addAll(trip.places);
 
+        //Loop through all locations in original places array, performing shortest trip algorithm to see which place
+        //is shortest.
         for (Location place : retainOriginalPlaces) {
-            System.out.println("Testing: " + place.name);
-            //Trip tempTrip = trip;
             trip.places = ShortOptimization.travelingSalesman(place, trip.places, "miles");
             trip.distances = trip.getTripDistances();
             int tempCumulativeDistance = 0;
             for (int distance : trip.distances) {
                 tempCumulativeDistance += distance;
             }
-            System.out.println("Optimized cumulative distance for: " + place.name + " is: " + tempCumulativeDistance);
-            //Revert back to previous order of places if the current order has a bigger cumulative distance.
-            System.out.print("Is the current trip(" + tempCumulativeDistance + ") shorter than " + shortestCumulativeDistance + "? ");
+
             if (tempCumulativeDistance <= shortestCumulativeDistance) {
-                System.out.println("Yes");
                 shortestCumulativeDistance = tempCumulativeDistance;
                 tempTrip = new Trip(trip);
-            } else {
-                System.out.println("No");
             }
         }
 
-        //System.out.println("Newly optimized trip: ");
-//        for (Location location : trip.places) {
-//            System.out.print(location.name + " --> ");
-//        }
         trip = tempTrip;
-        //trip.places = shortOptimization.travelingSalesman(trip.places, trip.places.get(0), trip.options.units);
-
-    }
-
-    public static ArrayList<Integer> getLegDistances(ArrayList<Location> places, int unitRadius){
-        ArrayList<Integer> distances = new ArrayList<Integer>();
-
-        for(int i = 0; i < places.size() - 1; i++) {
-            distances.add(Distance.getDistanceNum(places.get(i).latitude, places.get(i).longitude, places.get(i+1).latitude, places.get(i+1).longitude, unitRadius));
-        }
-        distances.add(Distance.getDistanceNum(places.get(places.size()-1).latitude, places.get(places.size()-1).longitude, places.get(0).latitude, places.get(0).longitude, unitRadius));
-
-        return distances;
     }
 
     public void setMap(){
