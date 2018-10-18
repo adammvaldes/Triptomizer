@@ -19,7 +19,7 @@ class OptimizationButtons extends Component {
                 key={'Optimization button_' + option.label }
                 className="btn text-white optimization"
                 type="button"
-                active={this.props.config.optimization === option.lable}
+                active={this.props.config.optimization === option.label}
                 //color={"primary"}
                 style={{backgroundColor: "000000"}}
                 value={option.label}

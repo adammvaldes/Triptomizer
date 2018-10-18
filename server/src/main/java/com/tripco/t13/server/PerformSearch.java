@@ -14,10 +14,10 @@ import spark.Request;
 public class PerformSearch {
 
     // db configuration information
-    private final static String myDriver = "com.mysql.jdbc.Driver";
-    private final static String myUrl = "jdbc:mysql://faure.cs.colostate.edu/cs314";
-    private final static String user="cs314-db";
-    private final static String pass="eiK5liet1uej";
+    private static String myDriver = "com.mysql.jdbc.Driver";
+    private static String myUrl = "jdbc:mysql://faure.cs.colostate.edu/cs314";
+    private static String user="cs314-db";
+    private static String pass="eiK5liet1uej";
     // fill in SQL queries to count the number of records and to retrieve the data
     private final static String count = "select count(*) from airports;";
     private static String search = "";
@@ -45,6 +45,7 @@ public class PerformSearch {
         } catch (Exception e) {
             isCorrectFormat = false;
         }
+        setCredentials();
         try { //Send a search to the database, then process the results
             Class.forName(myDriver);
             try (Connection conn = DriverManager.getConnection(myUrl, user, pass);
@@ -67,5 +68,34 @@ public class PerformSearch {
             return "{}"; //return {} if incorrect request format
         }
 
+    }
+    public void setCredentials(){
+        // Here are some environment variables. The first one is set by default in
+        // Travis, and the other we set ourselves (see the other guide)
+        String isTravis = System.getenv("TRAVIS");
+        String isDevelopment = System.getenv("CS314_ENV");
+
+        // If we're running on Travis, use the proper url + credentials
+        if(isTravis != null && isTravis.equals("true")) {
+            myUrl = "jdbc:mysql://127.0.0.1/cs314";
+            user = "travis";
+            pass = null;
+        }
+
+        // else, use our credentials; also account for if we have our own dev
+        // environment variable (see the other guide) for connecting through an SSH
+        // tunnel
+        /*else if(isDevelopment != null && isDevelopment.equals("development")) {
+            myUrl = "jdbc:mysql://127.0.0.1:some-port/cs314";
+            user = "cs314-db";
+            pass = "eiK5liet1uej";
+        }*/
+
+        // Else, we must be running against the production database directly
+        else {
+            myUrl = "jdbc:mysql://faure.cs.colostate.edu/cs314";
+            user = "cs314-db";
+            pass = "eiK5liet1uej";
+        }
     }
 }
