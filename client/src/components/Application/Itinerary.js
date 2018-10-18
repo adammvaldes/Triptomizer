@@ -146,7 +146,6 @@ class Itinerary extends Component {
                 {this.calculateTotalDistance()}
                 </tbody>
             </Table>
-
                 {this.renderButtons()}
             </div>
             </div>
@@ -158,7 +157,6 @@ class Itinerary extends Component {
             return this.renderTripRows();
         }
         return <Container></Container>;
-
     }
 }
 

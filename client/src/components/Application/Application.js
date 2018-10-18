@@ -7,11 +7,7 @@ import {get_config, request} from '../../api/api';
 import Map from "./Map";
 import Itinerary from "./Itinerary";
 import Trip from "./Trip";
-import ModifyButton from "./ModifyButton";
 import SearchBar from "./SearchBar";
-import ScratchButton from "./ScratchButton";
-import RenderButton from "./RenderButton";
-import SaveButton from "./SaveButton";
 import OptimizationButtons from "./OptimizationButtons";
 
 /* Renders the application.
@@ -30,9 +26,9 @@ class Application extends Component {
         version: "3",
         title: "Stuffity",
         options : {
-          units: "",
-            unitName: "",
-            unitRadius: "",
+          units: "miles",
+            unitName: "miles",
+            unitRadius: "3959",
             optimization: "none"
         },
         places: [],
@@ -52,11 +48,10 @@ class Application extends Component {
     this.updateNumber = this.updateNumber.bind(this);
     this.changeServer = this.changeServer.bind(this);
 
-    this.search = this.search.bind(this);
+    this.addDestination = this.addDestination.bind(this);
     this.reverseTrip = this.reverseTrip.bind(this);
     this.removeLeg = this.removeLeg.bind(this);
     this.setStartLeg = this.setStartLeg.bind(this);
-    this.saveTrip = this.saveTrip.bind(this);
   }
 
   componentWillMount() {
@@ -143,38 +138,11 @@ class Application extends Component {
       });
   }
 
-  //TODO: Implement search() function
-  search(value){
-      /*let tripTFFI = {"match" : value, "places" : []};
-      console.log("Trip TFFI match", tripTFFI.match);
-      if(this.state.URL === "" || this.state.port==="314") {
-          this.updateOptions('unitName', this.state.trip.options.units);
-          request(tripTFFI, "search").then(serverResponse => {
-              tripTFFI.places = serverResponse["places"];
-              console.log("Local TFFI places", tripTFFI.places);
-              //console.log("Trip state places from search", this.state.trip.places);
-              //this.updateMap(serverResponse["map"]);
-              //this.updateDistances(serverResponse["distances"]);
-              //this.planRequest();
-              //console.log("In this one");
-              //console.log(tripTFFI.places.length);
-              //console.log(this.state.trip.places[0]);
-              //this.updateMap(serverResponse["map"]);
-              //this.updateDistances(serverResponse["distances"]);
-          });
-      }
-      else{
-          this.updateOptions('unitName', this.state.trip.options.units);
-          request(this.state.trip, "search",this.state.port,this.state.URL).then(serverResponse => {
-              this.updateTrip('places', serverResponse["places"]);
-              this.updateMap(serverResponse["map"]);
-              this.updateDistances(serverResponse["distances"]);
-              this.planRequest();
-              //console.log(this.state.trip.places[0]);
-              //this.updateMap(serverResponse["map"]);
-              //this.updateDistances(serverResponse["distances"]);
-          });
-      }*/
+  addDestination(value){
+      let trip = this.state.trip;
+      trip.places.push(value);
+      this.setState(trip);
+      this.planRequest();
   }
 
   reverseTrip(){
@@ -200,12 +168,6 @@ class Application extends Component {
       trip.places.splice(0, 0, temp);
   }
 
-  //TODO: Implement saveTrip() function
-  saveTrip(){
-
-  }
-
-
   render() {
     if(!this.state.config) { return <Container/> }
       return(
@@ -218,7 +180,8 @@ class Application extends Component {
               <Interop changeServer={this.changeServer}
                        updateNumber={this.updateNumber}
                        updateDistances={this.updateDistances}/>
-              <OptimizationButtons updateOptions={this.updateOptions}/>
+              <OptimizationButtons updateOptions={this.updateOptions}
+              config={this.state.config}/>
               <Trip trip={this.state.trip}
                     planRequest={this.planRequest}
                     clearTrip={this.clearTrip}
@@ -230,6 +193,7 @@ class Application extends Component {
                     port={this.state.port}
                     URL={this.state.URL}/>
               <Map trip={this.state.trip} URL={this.state.URL} port={this.state.port}/>
+              <SearchBar addDestination={this.addDestination}/>
               <Itinerary trip={this.state.trip}
                          planRequest={this.planRequest}
                          updateMap={this.updateMap}
@@ -237,7 +201,6 @@ class Application extends Component {
                          removeLeg={this.removeLeg}
                          reverseTrip={this.reverseTrip}
                          setStartLeg={this.setStartLeg}/>
-              <SearchBar search={this.search}/>
           </Container>
       )
     }

@@ -10,91 +10,70 @@ class SearchBar extends Component{
 
         this.state = {
             searchText : "",
+            addIndex : "",
             searchResults : []
         };
         this.search = this.search.bind(this);
+        this.setSearchResults = this.setSearchResults.bind(this);
         this.handleChange  = this.handleChange.bind(this);
+        this.handleChange2  = this.handleChange2.bind(this);
+        this.addDestination = this.addDestination.bind(this);
     }
 
-    //reference updateOptions() in Application.js for implementation
     search(){
         let tripTFFI = {"match" : this.state.searchText, "places" : []};
-        console.log("Trip TFFI match", tripTFFI.match);
         if(this.props.URL === "" || this.props.port==="314") {
             request(tripTFFI, "search").then(serverResponse => {
                 tripTFFI.places = serverResponse["places"];
-                //let searchResults = this.state.searchResults;
-                //searchResults = tripTFFI.places;
-                //this.setState(searchResults);
-                this.setState({searchResults : tripTFFI.places});
-                console.log("Search Results", this.state.searchResults);
-                //console.log("Search Results", this.state.searchResults);
-                //console.log("Trip state places from search", this.state.trip.places);
-                //this.updateMap(serverResponse["map"]);
-                //this.updateDistances(serverResponse["distances"]);
-                //this.planRequest();
-                //console.log("In this one");
-                //console.log(tripTFFI.places.length);
-                //console.log(this.state.trip.places[0]);
-                //this.updateMap(serverResponse["map"]);
-                //this.updateDistances(serverResponse["distances"]);
+                this.setSearchResults(tripTFFI.places);
             });
         }
         else{
             request(tripTFFI, "search",this.props.port,this.props.URL).then(serverResponse => {
                 tripTFFI.places = serverResponse["places"];
-                this.setState({searchResults : tripTFFI.places});
-                console.log("Search Results", this.state.searchResults);
-                //console.log("Search Results", this.state.searchResults);
-                //this.updateTrip('places', serverResponse["places"]);
-                //this.updateMap(serverResponse["map"]);
-                //this.updateDistances(serverResponse["distances"]);
-                //this.planRequest();
-                //console.log(this.state.trip.places[0]);
-                //this.updateMap(serverResponse["map"]);
-                //this.updateDistances(serverResponse["distances"]);
+                this.setSearchResults(tripTFFI.places);
             });
         }
-        //console.log("Search value at SearchBar call",this.state.searchText);
-        //console.log("Search target value at SearchBar call",value.target.value);
-        //this.props.search(value.target.value);
-        //this.props.search(this.state.searchText);
-        console.log("Search Results outside", this.state.searchResults);
     }
+
+    setSearchResults(value){
+        this.setState({
+            searchResults : value
+        });
+    }
+
 
     handleChange(event) {
         this.setState({searchText: event.target.value})
     }
 
+    handleChange2(event) {
+        this.setState({addIndex: event.target.value})
+    }
+
     renderResults(){
         let inc = 0;
-        let tripGeoLocations = this.state.searchResults.map((place) => {
+        let searchResultNames = this.state.searchResults.map((place) => {
             inc++;
-            return <td key={'place ' + inc}>{place.longitude}</td>;
+            return <td key={'place ' + inc}>{inc-1}:<p></p>{place.name}</td>;
         });
-        return (
-            <tr>
-                <th scope="row">Geographical Location</th>
-                {tripGeoLocations}
-            </tr>
-        );
+        if(this.state.searchResults.length > 0){
+            return (
+                <tr>
+                    <th scope="row">Location Name</th>
+                    {searchResultNames}
+                </tr>
+            );
+        }
     }
-        /*
-        return(
 
-            <tr>
-                <th scope="row">Geographical Location</th>
-                {this.state.searchResults}
-            </tr>
-        );*/
+    addDestination(){
+        if(this.state.addIndex < 0 || this.state.addIndex > 30){
+            return;
+        }
+        this.props.addDestination(this.state.searchResults[this.state.addIndex]);
+    }
 
-
-
-    /*const rows = {
-
-    }*/
-
-    //TODO: Create Search functions
     render() {
         return (
             <Card>
@@ -105,7 +84,6 @@ class SearchBar extends Component{
                         </FormGroup>
                     </Form>
                     <Button className="btn text-white" type="button" color="info"  onClick={this.search}>Search</Button>
-                    <Button className="btn text-white" type="button" color="info"  onClick={this.renderResults}>Add destination to Trip</Button>
                     <div id="parent">
                         <div id="div1">
                             <Table responsive>
@@ -115,6 +93,8 @@ class SearchBar extends Component{
                             </Table>
                         </div>
                     </div>
+                    <Input type="number" placeholder="Enter the index of the location you want to add to your trip" onChange={this.handleChange2} />
+                    <Button className="btn text-white" type="button" color="info"  onClick={this.addDestination}>Add destination to Trip</Button>
                 </CardBody>
             </Card>
         )
