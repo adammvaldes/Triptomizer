@@ -41,10 +41,12 @@ class Itinerary extends Component {
 
 
     calculateTotalDistance() { //calculates cumulative distance between towns
+        let counter = 0;
         let sum = 0;
         let tripDistances = this.props.trip.distances.map((distance)=> {
             sum += distance;
-            return <td key={'distance ' + sum}>{sum}</td>
+            counter = counter + 1;
+            return <td key={'distance ' + sum + counter}>{sum}</td>
         });
         return (
             <tr>
@@ -84,8 +86,10 @@ class Itinerary extends Component {
 
 
     renderTripPlaces() {
+        let counter = 0;
         let tripPlaces = this.props.trip.places.map((place) => {
-            return <td key={'place ' + place.name}>{place.name}</td>;
+            counter += 1;
+            return <td key={'place ' + counter}>{place.name}</td>;
         });
 
         return (
@@ -98,9 +102,10 @@ class Itinerary extends Component {
     }
 
     renderTripGeoLocations() {
+        let counter = 0;
         let tripGeoLocations = this.props.trip.places.map((place) => {
-
-             return <td key={'geo ' + place.latitude}>{place.latitude}, {place.longitude}</td>;
+            counter += 1;
+             return <td key={'geo ' + counter}>{place.latitude}, {place.longitude}</td>;
         });
 
         return (
@@ -115,18 +120,21 @@ class Itinerary extends Component {
     }
 
     renderLegDistances() {
+        let counter = 0;
         return (
             <tr>
                 <th scope="row">Leg Distances</th>
                 <td>0</td>
                 {this.props.trip.distances.map((el) => {
-                    return <td key={'leg ' + el}>{el}</td>;
+                    counter += 1;
+                    return <td key={'leg ' + counter}>{el}</td>;
                 })}
             </tr>
         );
     }
 
     renderTripRows(){
+        let idCounter = 0;
         return (
             <div id="parent">
                 <div id="div1">

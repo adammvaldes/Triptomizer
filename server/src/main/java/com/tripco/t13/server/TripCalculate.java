@@ -3,6 +3,7 @@ package com.tripco.t13.server;
 import com.google.gson.Gson;
 import com.google.gson.JsonElement;
 import com.google.gson.JsonParser;
+import com.tripco.t13.planner.Place;
 import spark.Request;
 
 import java.io.BufferedReader;
@@ -11,7 +12,7 @@ import java.util.*;
 
 public class TripCalculate {
 
-    private Trip trip;
+    public Trip trip;
     private boolean isCorrectFormat; //verify correct format of POST request
 
     public TripCalculate(Request request) {
@@ -20,7 +21,6 @@ public class TripCalculate {
         // extract the information from the body of the request.
         JsonParser jsonParser = new JsonParser();
         JsonElement requestBody = jsonParser.parse(request.body());
-
         //Converting to a Java class
         Gson gson = new Gson();
         try {
@@ -28,17 +28,51 @@ public class TripCalculate {
             isCorrectFormat = validateTripRequestFormat(trip);
 
             if (trip.options.optimization.equals("short")) {
-                ShortOptimization shortOptimization = new ShortOptimization(trip.options.units, trip.places);
-                trip.places = shortOptimization.travelingSalesman(trip.places, trip.places.get(0), trip.options.units);
+                shortOptimization();
+            } else {
+                trip.getTripDistances();
             }
 
-            //Calculate and fill trip distances
-            trip.getTripDistances();
             setMap();
 
         } catch (Exception e) {
             isCorrectFormat = false;
         }
+    }
+
+    public TripCalculate(Trip trip) {
+        this.trip = trip;
+    }
+
+    void shortOptimization() {
+        Trip tempTrip = new Trip();
+        int shortestCumulativeDistance = 0;
+        trip.distances = trip.getTripDistances();
+
+        for (int distance : trip.distances) {
+            shortestCumulativeDistance += distance;
+        }
+
+        ArrayList<Location> retainOriginalPlaces = new ArrayList<>();
+        retainOriginalPlaces.addAll(trip.places);
+
+        //Loop through all locations in original places array, performing shortest trip algorithm to see which place
+        //is shortest.
+        for (Location place : retainOriginalPlaces) {
+            trip.places = ShortOptimization.travelingSalesman(place, trip.places, "miles");
+            trip.distances = trip.getTripDistances();
+            int tempCumulativeDistance = 0;
+            for (int distance : trip.distances) {
+                tempCumulativeDistance += distance;
+            }
+
+            if (tempCumulativeDistance <= shortestCumulativeDistance) {
+                shortestCumulativeDistance = tempCumulativeDistance;
+                tempTrip = new Trip(trip);
+            }
+        }
+
+        trip = tempTrip;
     }
 
     public void setMap(){
