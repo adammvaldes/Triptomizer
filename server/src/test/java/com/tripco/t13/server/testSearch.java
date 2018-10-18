@@ -48,7 +48,6 @@ public class testSearch {
                 "latitude like '%den%' or latitude like '%den%'",answer);
     }
 
-    @Ignore
     @Test
     public void testApplyLimit(){
         search.limit = 75;
