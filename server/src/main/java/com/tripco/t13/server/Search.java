@@ -34,7 +34,7 @@ public class Search {
             match += " limit " + Integer.toString(limit) + ";";
         }
         else{
-            match += "limit 30;";
+            match += " limit 30;";
         }
         return match;
     }

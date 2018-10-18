@@ -57,7 +57,7 @@ public class testSearch {
         search.limit = 0;
         answer = search.applyLimit(search.limit, "Dave");
 
-        assertEquals("Dave;", answer);
+        assertEquals("Dave limit 30;", answer);
     }
 
     @Test
