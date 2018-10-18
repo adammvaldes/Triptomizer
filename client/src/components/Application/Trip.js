@@ -38,7 +38,7 @@ class Trip extends Component {
                 <FormText>
                     The file needs to be a JSON file, with the ".json" tag at the end of the name.
                 </FormText>
-                <Button className="btn text-white" onClick={this.plan} type="button" style={{backgroundColor: "000000"}}> PLAN </Button>
+                <Button className="btn text-white" onClick={this.plan} type="button" style={{backgroundColor: "000000"}}> RENDER </Button>
             </Form>
         );
     }

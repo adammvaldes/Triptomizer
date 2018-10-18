@@ -145,7 +145,36 @@ class Application extends Component {
 
   //TODO: Implement search() function
   search(value){
-
+      /*let tripTFFI = {"match" : value, "places" : []};
+      console.log("Trip TFFI match", tripTFFI.match);
+      if(this.state.URL === "" || this.state.port==="314") {
+          this.updateOptions('unitName', this.state.trip.options.units);
+          request(tripTFFI, "search").then(serverResponse => {
+              tripTFFI.places = serverResponse["places"];
+              console.log("Local TFFI places", tripTFFI.places);
+              //console.log("Trip state places from search", this.state.trip.places);
+              //this.updateMap(serverResponse["map"]);
+              //this.updateDistances(serverResponse["distances"]);
+              //this.planRequest();
+              //console.log("In this one");
+              //console.log(tripTFFI.places.length);
+              //console.log(this.state.trip.places[0]);
+              //this.updateMap(serverResponse["map"]);
+              //this.updateDistances(serverResponse["distances"]);
+          });
+      }
+      else{
+          this.updateOptions('unitName', this.state.trip.options.units);
+          request(this.state.trip, "search",this.state.port,this.state.URL).then(serverResponse => {
+              this.updateTrip('places', serverResponse["places"]);
+              this.updateMap(serverResponse["map"]);
+              this.updateDistances(serverResponse["distances"]);
+              this.planRequest();
+              //console.log(this.state.trip.places[0]);
+              //this.updateMap(serverResponse["map"]);
+              //this.updateDistances(serverResponse["distances"]);
+          });
+      }*/
   }
 
   reverseTrip(){
@@ -190,7 +219,6 @@ class Application extends Component {
                        updateNumber={this.updateNumber}
                        updateDistances={this.updateDistances}/>
               <OptimizationButtons updateOptions={this.updateOptions}/>
-              {this.state.fromScratch && <ScratchButton updateScratchButton={this.updateScratchButton}/>}
               <Trip trip={this.state.trip}
                     planRequest={this.planRequest}
                     clearTrip={this.clearTrip}
@@ -201,7 +229,6 @@ class Application extends Component {
                     updateOptions={this.updateOptions}
                     port={this.state.port}
                     URL={this.state.URL}/>
-              <SearchBar search={this.search}/>
               <Map trip={this.state.trip} URL={this.state.URL} port={this.state.port}/>
               <Itinerary trip={this.state.trip}
                          planRequest={this.planRequest}
@@ -210,10 +237,7 @@ class Application extends Component {
                          removeLeg={this.removeLeg}
                          reverseTrip={this.reverseTrip}
                          setStartLeg={this.setStartLeg}/>
-              {this.state.fromScratchButtons && <RenderButton showButtons={this.updateRenderButton}/>}
-              {this.state.modify && <ModifyButton updateShowModify={this.updateShowModify}/>}
-              {this.state.showModifyButtons && <SearchBar showButtons={this.state.showModifyButtons}/>}
-              {this.state.showModifyButtons && <SaveButton showButtons={this.state.showModifyButtons}/>}
+              <SearchBar search={this.search}/>
           </Container>
       )
     }
