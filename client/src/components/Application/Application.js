@@ -245,7 +245,8 @@ class Application extends Component {
               <Interop changeServer={this.state.changeServer}
                        updatePort={this.state.updatePort}
                        updateDistances={this.updateDistances}/>
-              <OptimizationButtons updateOptions={this.updateOptions}/>
+              <OptimizationButtons config={this.state.config}
+                                   updateOptions={this.updateOptions}/>
               {this.state.fromScratch && <ScratchButton updateScratchButton={this.updateScratchButton}/>}
               <Trip trip={this.state.trip}
                     planRequest={this.planRequest}
