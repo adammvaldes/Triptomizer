@@ -13,7 +13,6 @@ import static org.junit.Assert.assertEquals;
 @RunWith(JUnit4.class)
 
 public class TestShortAlgorithm {
-    ShortOptimization shortOptimization;
     ArrayList<Location> places = new ArrayList<>();
     String units;
     Location place1 = new Location();
@@ -49,8 +48,6 @@ public class TestShortAlgorithm {
         places.add(place2);
         places.add(place3);
         places.add(place4);
-
-        shortOptimization = new ShortOptimization(units, places);
     }
 
     @Test
@@ -62,14 +59,14 @@ public class TestShortAlgorithm {
     @Test
     public void testTravelingSalesman() {
         ArrayList<Location> sortedPlaces = new ArrayList<>();
-        sortedPlaces = shortOptimization.travelingSalesman(places, place1, units);
+        sortedPlaces = ShortOptimization.travelingSalesman(place1, places, units);
 
         assertEquals("Origin", sortedPlaces.get(0).name);
         assertEquals("closeToOrigin", sortedPlaces.get(1).name);
         assertEquals("midPointOnMap", sortedPlaces.get(2).name);
         assertEquals("longAwayFromOrigin", sortedPlaces.get(3).name);
 
-        sortedPlaces = shortOptimization.travelingSalesman(places, place3, units);
+        sortedPlaces = ShortOptimization.travelingSalesman(place3, places, units);
         assertEquals("midPointOnMap", sortedPlaces.get(0).name);
         assertEquals("longAwayFromOrigin", sortedPlaces.get(1).name);
         assertEquals("closeToOrigin", sortedPlaces.get(2).name);
@@ -98,7 +95,7 @@ public class TestShortAlgorithm {
         places.add(coSprings);
 
         boolean[] visitedPlaces = new boolean[places.size()];
-        Location shortestLocation = shortOptimization.calculateDistances(origin, places, units, visitedPlaces);
+        Location shortestLocation = ShortOptimization.calculateDistances(origin, visitedPlaces, places, units);
 
         assertEquals("Denver", shortestLocation.name); //Foco is closer to Denver than coSprings
 
@@ -115,11 +112,11 @@ public class TestShortAlgorithm {
         places.add(coSprings);
         visitedPlaces = new boolean[places.size()];
 
-        shortestLocation = shortOptimization.calculateDistances(castleRock, places, units, visitedPlaces);
+        shortestLocation = ShortOptimization.calculateDistances(castleRock, visitedPlaces, places, units);
 
         assertEquals("Denver", shortestLocation.name);
 
-        shortestLocation = shortOptimization.calculateDistances(coSprings, places, units, visitedPlaces);
+        shortestLocation = ShortOptimization.calculateDistances(coSprings, visitedPlaces, places, units);
 
         assertEquals("Castle Rock", shortestLocation.name);
     }
