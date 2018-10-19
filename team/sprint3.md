@@ -105,7 +105,7 @@ For this sprint we ended up planning the same number of beginning story points a
 
 ## Review
 
-*An introductory paragraph describing the overall results of the sprint.*
+Overall, our team performed adequately for this sprint. Our final website design was not completed as planned. However, the functionality of the webpage and the server was completed to our liking. Almost all of the tasks that we started ended up being completed. 
 
 #### Completed Epics in Sprint Backlog 
 
@@ -123,17 +123,15 @@ For this sprint we ended up planning the same number of beginning story points a
 
 #### What Went Well
 
-*Describe what went well during the sprint in general terms followed by a more detailed list.*
+The progress of the team throughout the sprint was much better than last sprint. The burndown chart of the team had less "big bangs" than last sprint. Our experience with ReactStrap is steadily increasing, so any problems with the client side that we encountered on the client side were resolved within a reasonable time. 
 
-* *something*
-*
+Also, we split tasks up much more efficiently this sprint, with a higher amount of story points. This lead to the team being well-organized when assigning tasks to members and completing them. The teamwork this sprint also improved, as each member performed better in asking for help, and providing assistance.
 
 #### Problems Encountered and Resolutions
 
-*Describe what problems occurred during the sprint in general terms followed by a more detailed list.*
+We had trouble with time management this sprint. Some group members could not dedicate as much time to this sprint as last sprint, due to other responsibilities. Because of this, our group fell behind a bit by the last week of the sprint. We also had slow coding progress at some points in the sprint due to user error.
 
-* *something*
-*
+The team resolved these issues by asking other people for help. With more eyes analyzing code, bugs were found fairly quickly. 
 
 ## Retrospective
 
