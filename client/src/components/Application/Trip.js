@@ -39,9 +39,10 @@ class Trip extends Component {
         let userTitle = this.props.trip.title;
         let userPlaces = this.props.trip.places;
         let userDistances = this.props.trip.distances;
+        let userOptions = this.props.trip.options;
         //let userMap = this.props.trip.map;
 
-        let userObject = {version: userVersion, type: userType, title: userTitle, places:userPlaces, distances:userDistances};
+        let userObject = {version: userVersion, type: userType, title: userTitle, options: userOptions, places:userPlaces, distances:userDistances};
         let json = JSON.stringify(userObject);
 
         userTitle += '.json';

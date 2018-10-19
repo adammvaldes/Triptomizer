@@ -16,7 +16,6 @@ public class TestDatabase {
     public void initialize(){
     }
 
-    @Ignore
     @Test
     public void testHeliport(){
         String match = "heliport";
