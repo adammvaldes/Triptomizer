@@ -21,7 +21,7 @@ class SearchBar extends Component{
     }
 
     search(){
-        let tripTFFI = {"match" : this.state.searchText, "places" : []};
+        let tripTFFI = {"version":3, "type":"search","match" : this.state.searchText, "places" : []};
         if(this.props.URL === "" || this.props.port==="314") {
             request(tripTFFI, "search").then(serverResponse => {
                 tripTFFI.places = serverResponse["places"];
