@@ -32,9 +32,8 @@ class AddByName extends Component {
         this.setState({longitude:form.target.value});
     }
     addToTrip(){
-        console.log("State in ABN: " + this.state);
         this.props.addLeg(this.state);
-        alert("The destination has been added to your ");
+        //alert("The destination has been added to your ");
     }
     render() {
         return(
