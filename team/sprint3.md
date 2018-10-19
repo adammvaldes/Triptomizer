@@ -152,4 +152,4 @@ One thing we could improve on in our development process is to improve at identi
 
 #### What we will change next sprint 
 
-*Articulate the one thing you will change for the next sprint and how you will accomplish that.*
+There are a few things that we would like to change for the next sprint. The first thing is to break epics down into issues better. We would also like to be better about asking for help/clarification earlier and more often. The last, and maybe most important change is to write tests before we write our code. We found ourselves at the end of the sprint with all the code written, but very few test classes written.
