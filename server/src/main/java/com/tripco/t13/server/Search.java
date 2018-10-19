@@ -7,9 +7,9 @@ import java.util.*;
 public class Search {
 
     String type;
-    int version;
+    Integer version;
     String match;
-    int limit;
+    Integer limit;
     ArrayList<Location> places ;
 
     public String createSearch(String match){
@@ -28,14 +28,20 @@ public class Search {
         return search;
     }
 
-    public String applyLimit(int limit, String match){
+    public String applyLimit(Integer limit, String match, Search searchObject){
         //Applying the limit of the search, if provided by the user
+
+        if(searchObject.limit == null){
+            limit = 0;
+        }
+
         if(limit > 0){
             match += " limit " + Integer.toString(limit) + ";";
         }
         else{
             match += " limit 30;";
         }
+
         return match;
     }
 
@@ -55,8 +61,10 @@ public class Search {
 
     public boolean validateSearchRequestFormat(Search searchObject) {
         //check if format of request if correct: type:"search" and version 3
-        if( searchObject.match.length() != 0) {
-            if( searchObject.places == null){
+        if(searchObject.match.length() != 0
+                && searchObject.version == 3
+                && searchObject.type.equals("search")) {
+            if(searchObject.places == null){
                 searchObject.places = new ArrayList<Location>();
             }
             return true;

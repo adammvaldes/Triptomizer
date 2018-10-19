@@ -9,7 +9,6 @@ class OptimizationButtons extends Component {
     }
 
     updateOptimization(name){
-        // console.log(name.target.value);
         this.props.updateOptions('optimization',name.target.value);
     }
 

@@ -19,7 +19,7 @@ public class PerformSearch {
     private static String user="cs314-db";
     private static String pass="eiK5liet1uej";
     // fill in SQL queries to count the number of records and to retrieve the data
-    private final static String count = "select count(*) from airports;";
+    private static String count = "select count(*) from airports;";
     private static String search = "";
     // Arguments contain the username and password for the database
 
@@ -40,11 +40,41 @@ public class PerformSearch {
             searchObject = gson.fromJson(requestBody, Search.class);
             isCorrectFormat = searchObject.validateSearchRequestFormat(searchObject);
             String temp = searchObject.createSearch(searchObject.match);
-            temp = searchObject.applyLimit(searchObject.limit, temp);
+            temp = searchObject.applyLimit(searchObject.limit, temp, searchObject);
             search = temp;
         } catch (Exception e) {
             isCorrectFormat = false;
         }
+    }
+    public PerformSearch(String request, int limit){
+
+        try {
+            searchObject = new Search();
+            searchObject.match = request;
+            searchObject.limit = limit;
+            searchObject.type = "search";
+            searchObject.version = 3;
+            isCorrectFormat = searchObject.validateSearchRequestFormat(searchObject);
+            String temp = searchObject.createSearch(searchObject.match);
+            temp = searchObject.applyLimit(searchObject.limit, temp, searchObject);
+            search = temp;
+        } catch (Exception e) {
+            isCorrectFormat = false;
+        }
+    }
+
+    public String getSearchJson() {
+        Gson gson = new Gson();
+        if(isCorrectFormat){
+            return gson.toJson(searchObject);
+        }
+        else{
+            return "{}"; //return {} if incorrect request format
+        }
+
+    }
+
+    public void sendSearch(){
         setCredentials();
         try { //Send a search to the database, then process the results
             Class.forName(myDriver);
@@ -59,16 +89,6 @@ public class PerformSearch {
         }
     }
 
-    public String getSearchJson () {
-        Gson gson = new Gson();
-        if(isCorrectFormat){
-            return gson.toJson(searchObject);
-        }
-        else{
-            return "{}"; //return {} if incorrect request format
-        }
-
-    }
     public void setCredentials(){
         // Here are some environment variables. The first one is set by default in
         // Travis, and the other we set ourselves (see the other guide)
