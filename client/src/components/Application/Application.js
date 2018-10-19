@@ -93,6 +93,7 @@ class Application extends Component {
       trip.options.unitRadius = "";
       trip.options.optimization = "none";
       this.setState(trip);
+      this.planRequest();
   }
 
   updateTrip(field, value){

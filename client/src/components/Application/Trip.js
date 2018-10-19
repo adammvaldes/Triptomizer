@@ -74,6 +74,7 @@ class Trip extends Component {
                 </FormText>
                 <Button className="btn text-white" onClick={this.plan} type="button" style={{backgroundColor: "000000"}}> RENDER </Button>
                 <Button id="save_Button" onClick={this.saveFile} style={{backgroundColor: "000000"}} > Save Trip </Button>
+                <Button className="btn text-white" onClick={this.props.clearTrip} type="button" style={{backgroundColor: "000000"}}> CLEAR </Button>
             </FormGroup>
         );
     }
