@@ -135,15 +135,15 @@ The team resolved these issues by asking other people for help. With more eyes a
 
 ## Retrospective
 
-*An introductory paragraph for your retrospective.*
+Looking back at the progress from this sprint, it is clear that our group fell behind in testing our code. We focused mainly on getting the tasks and epics done, but ignored testing our code until the last days of the sprint. Therefore, we had very incomplete test coverage for this sprint.
 
 #### What we changed this sprint
 
-*Articulate specifically what you will do differently based on the retrospective from the previous sprint before the sprint starts.*
+We will continue to try to break up epics into managable tasks, and work on tests along with functionality of the code. In addition, we will try to make the epics and requirements as clear as possible to avoid last minute changes to important code. 
 
 #### What we did well
 
-*Articulate what went well at the end of the sprint.*
+We had good teamwork this sprint, and better understood the requirements for some of the epics. We dealt with problems with the server and the client side as soon as we could, and prioritized certain tasks failry well.
 
 #### What we need to work on
 
