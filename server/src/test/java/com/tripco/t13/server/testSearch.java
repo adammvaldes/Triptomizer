@@ -51,12 +51,12 @@ public class testSearch {
     @Test
     public void testApplyLimit(){
         search.limit = 75;
-        String answer = search.applyLimit(search.limit, "stuff");
+        String answer = search.applyLimit(search.limit, "stuff", search);
 
         assertEquals("stuff limit 75;", answer);
 
         search.limit = 0;
-        answer = search.applyLimit(search.limit, "Dave");
+        answer = search.applyLimit(search.limit, "Dave", search);
 
         assertEquals("Dave limit 30;", answer);
     }
@@ -64,12 +64,12 @@ public class testSearch {
     @Ignore
     @Test
     public void testApplyLimitDefault(){
-        String answer = search.applyLimit(search.limit, "spaghetti");
+        String answer = search.applyLimit(search.limit, "spaghetti", search);
 
         assertEquals("spaghetti;",answer);
 
         search.limit = -55;
-        answer = search.applyLimit(search.limit, "boulder");
+        answer = search.applyLimit(search.limit, "boulder", search);
 
         assertEquals("boulder;", answer);
     }
