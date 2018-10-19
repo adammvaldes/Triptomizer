@@ -2,6 +2,7 @@ package com.tripco.t13.server;
 
 import org.junit.Before;
 import org.junit.Test;
+import org.junit.Ignore;
 import org.junit.runner.RunWith;
 import org.junit.runners.JUnit4;
 
@@ -15,6 +16,7 @@ public class TestDatabase {
     public void initialize(){
     }
 
+    @Ignore
     @Test
     public void testHeliport(){
         String match = "heliport";
