@@ -12,9 +12,6 @@ class Trip extends Component {
         };
     }
     plan(){
-        //console.log(this.props.trip);
-        this.props.updateModify(true);
-        this.props.closeScratchButton();
         this.props.planRequest();
     }
     readFile(tffi){
@@ -75,7 +72,7 @@ class Trip extends Component {
                 <FormText>
                     The file needs to be a JSON file, with the ".json" tag at the end of the name.
                 </FormText>
-                <Button className="btn text-white" onClick={this.plan} type="button" style={{backgroundColor: "000000"}}> PLAN </Button>
+                <Button className="btn text-white" onClick={this.plan} type="button" style={{backgroundColor: "000000"}}> RENDER </Button>
                 <Button id="save_Button" onClick={this.saveFile} style={{backgroundColor: "000000"}} > Save Trip </Button>
             </FormGroup>
         );
