@@ -15,7 +15,6 @@ class Itinerary extends Component {
         this.handleChange1  = this.handleChange1.bind(this);
         this.handleChange2  = this.handleChange2.bind(this);
         this.renderButtons = this.renderButtons.bind(this);
-        // this.addLeg = this.addLeg(this);
     }
 
     removeLeg(){
