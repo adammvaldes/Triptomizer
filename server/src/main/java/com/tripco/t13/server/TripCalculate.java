@@ -42,6 +42,8 @@ public class TripCalculate {
 
     public TripCalculate(Trip trip) {
         this.trip = trip;
+        isCorrectFormat = false;
+        isCorrectFormat = validateTripRequestFormat(trip);
     }
 
     void shortOptimization() {
@@ -62,6 +64,7 @@ public class TripCalculate {
             trip.places = ShortOptimization.travelingSalesman(place, trip.places, "miles");
             trip.distances = trip.getTripDistances();
             int tempCumulativeDistance = 0;
+
             for (int distance : trip.distances) {
                 tempCumulativeDistance += distance;
             }
