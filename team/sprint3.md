@@ -111,15 +111,16 @@ Overall, our team performed adequately for this sprint. Our final website design
 
 *Describe the solution based on the completed epics and list the epics below.*
 
-* *## epic title: comments*
-* 
+* User: I want to design a trip from scratch so I can stop using the other tool.: We successfully implemented the ability for a user to design a trip from scratch.*
+* User: I want to make and save changes to the trip.: We successfully implemented all of the functions specific in this epic that were specified for modifying and creating trips.
+* User: I want my trips to be shorter.: We successfully implemented a trip-shortening algorithm to properly optimize a trip.
 
 #### Incomplete Epics in Sprint Backlog 
 
 *Describe capabilities not included in the release and list the epics below with an explanation.*
 
-* *## epic title: explanation*
-*
+* TripCo: All code must be tested.: We were not able to implement the large majority of client tests on time, and as such our team did not meet the 50% minimum code coverage requirement.
+* TripCo: All code shall be clean!: Our overall code cleanliness and code climate overview did not meet all of the standard that were set forth for us.
 
 #### What Went Well
 
@@ -147,7 +148,7 @@ We had good teamwork this sprint, and better understood the requirements for som
 
 #### What we need to work on
 
-*Articulate things you could improve at the end of the sprint.*
+One thing we could improve on in our development process is to improve at identifying when progress towards a feature or goal has stopped and when to seek help from outside sources to complete it.
 
 #### What we will change next sprint 
 
