@@ -54,6 +54,7 @@ public class PerformSearch {
             searchObject.limit = limit;
             searchObject.type = "search";
             searchObject.version = 3;
+            searchObject.places = new ArrayList<Location>();
             isCorrectFormat = searchObject.validateSearchRequestFormat(searchObject);
             String temp = searchObject.createSearch(searchObject.match);
             temp = searchObject.applyLimit(searchObject.limit, temp, searchObject);
@@ -105,11 +106,11 @@ public class PerformSearch {
         // else, use our credentials; also account for if we have our own dev
         // environment variable (see the other guide) for connecting through an SSH
         // tunnel
-        else if(isDevelopment != null && isDevelopment.equals("development")) {
+        /*else if(isDevelopment != null && isDevelopment.equals("development")) {
             myUrl = "jdbc:mysql://127.0.0.1:3306/cs314";
             user = "cs314-db";
             pass = "eiK5liet1uej";
-        }
+        }*/
 
         // Else, we must be running against the production database directly
         else {
