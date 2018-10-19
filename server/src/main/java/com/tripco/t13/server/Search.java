@@ -10,7 +10,7 @@ public class Search {
     int version;
     String match;
     int limit;
-    ArrayList<Location> places;
+    ArrayList<Location> places ;
 
     public String createSearch(String match){
         //Creating the search string for the database
@@ -34,7 +34,7 @@ public class Search {
             match += " limit " + Integer.toString(limit) + ";";
         }
         else{
-            match += "limit 30;";
+            match += " limit 30;";
         }
         return match;
     }
@@ -56,6 +56,9 @@ public class Search {
     public boolean validateSearchRequestFormat(Search searchObject) {
         //check if format of request if correct: type:"search" and version 3
         if( searchObject.match.length() != 0) {
+            if( searchObject.places == null){
+                searchObject.places = new ArrayList<Location>();
+            }
             return true;
         }
 

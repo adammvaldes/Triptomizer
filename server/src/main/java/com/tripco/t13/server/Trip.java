@@ -28,8 +28,23 @@ public class Trip{
         bananas: 35828571
      */
 
+    Trip(){
 
-    //fills distances arraylist with distance between each Location in places arraylist and fills final space in distances arraylist with round trip distance. Distances are calculated using getDistanceNum method from Distance class.
+    }
+
+    //A constructor for short path algorithm in shortOptimization() method in TripCalculate.java to deep copy a Trip object.
+    Trip(Trip trip){
+        this.version = trip.version;
+        this.type = trip.type;
+        this.title = trip.title;
+        this.places = trip.places;
+        this.options = trip.options;
+        this.distances = trip.distances;
+        this.map = trip.map;
+    }
+
+    //fills distances arraylist with distance between each Location in places arraylist and fills final space in
+    //distances arraylist with round trip distance. Distances are calculated using getDistanceNum method from Distance class.
     public ArrayList<Integer> getTripDistances(){
         distances = new ArrayList<Integer>();
         options.setOptions();
