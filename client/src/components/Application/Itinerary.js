@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import {Button, Card, CardBody, Container, Form, FormGroup, Input, Table} from 'reactstrap';
+import AddByName from "./AddByName";
 
 
 class Itinerary extends Component {
@@ -14,6 +15,8 @@ class Itinerary extends Component {
         this.setStartLeg = this.setStartLeg.bind(this);
         this.handleChange1  = this.handleChange1.bind(this);
         this.handleChange2  = this.handleChange2.bind(this);
+        this.renderButtons = this.renderButtons.bind(this);
+        this.addLeg = this.addLeg(this);
     }
 
     removeLeg(){
@@ -21,6 +24,9 @@ class Itinerary extends Component {
         this.props.planRequest();
     }
 
+    addLeg(leg){
+        this.props.addLeg(leg);
+    }
     reverseTrip(){
         this.props.reverseTrip();
         this.props.planRequest();
@@ -148,6 +154,7 @@ class Itinerary extends Component {
             </Table>
                 {this.renderButtons()}
             </div>
+            <AddByName addLeg={this.props.addLeg}/>
             </div>
         );
     }
