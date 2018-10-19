@@ -14,7 +14,6 @@ class Itinerary extends Component {
         this.setStartLeg = this.setStartLeg.bind(this);
         this.handleChange1  = this.handleChange1.bind(this);
         this.handleChange2  = this.handleChange2.bind(this);
-        this.renderButtons = this.renderButtons.bind(this);
     }
 
     removeLeg(){
@@ -147,7 +146,6 @@ class Itinerary extends Component {
                 {this.calculateTotalDistance()}
                 </tbody>
             </Table>
-
                 {this.renderButtons()}
             </div>
             </div>
@@ -159,7 +157,6 @@ class Itinerary extends Component {
             return this.renderTripRows();
         }
         return <Container></Container>;
-
     }
 }
 
