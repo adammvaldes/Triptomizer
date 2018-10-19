@@ -9,6 +9,7 @@ import Itinerary from "./Itinerary";
 import Trip from "./Trip";
 import SearchBar from "./SearchBar";
 import OptimizationButtons from "./OptimizationButtons";
+import AddByName from "./AddByName";
 
 
 /* Renders the application.
@@ -209,7 +210,8 @@ class Application extends Component {
                          removeLeg={this.removeLeg}
                          reverseTrip={this.reverseTrip}
                          setStartLeg={this.setStartLeg}
-                         addLeg={this.addLeg}/>
+                         />
+              <AddByName addLeg={this.addLeg}/>
           </Container>
       )
     }
