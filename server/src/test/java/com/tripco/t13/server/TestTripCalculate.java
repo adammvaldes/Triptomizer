@@ -7,6 +7,8 @@ import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.junit.runners.JUnit4;
 
+import java.io.BufferedReader;
+import java.io.InputStreamReader;
 import java.util.ArrayList;
 import java.util.Collections;
 
@@ -14,6 +16,7 @@ import static org.junit.Assert.*;
 
 @RunWith(JUnit4.class)
 public class TestTripCalculate {
+    Gson gson = new Gson();
     Trip trip;
     TripCalculate tripCalculate;
     Location l1 = new Location();
@@ -98,28 +101,9 @@ public class TestTripCalculate {
                  "    { \"id\": 64, \"county\": \"Yuma County\", \"name\": \"Wray\", \"latitude\": 40, \"longitude\": -102.42 }\n" +
                  "  ]\n" +
                  "}\n";
-        Gson gson = new Gson();
 
         trip = gson.fromJson(jsonStr, Trip.class);
         tripCalculate = new TripCalculate(trip);
-//        TestTrip testTrip = new TestTrip();
-//        testTrip.initialize();
-//        this.trip = testTrip.trip;
-//        trip.options.optimization = "short";
-//        trip.version = 3;
-//        trip.type = "trip";
-//        l1.id = "dnvr";
-//        l1.name = "Denver";
-//        l1.latitude = (float)39.7392;
-//        l1.longitude = (float)-104.9903;
-//        l2.id = "bldr";
-//        l2.name = "Boulder";
-//        l2.latitude = (float)40.01499;
-//        l2.longitude = (float)-105.27055;
-//        l3.id = "foco";
-//        l3.name = "Fort Collins";
-//        l3.latitude = (float)40.585258;
-//        l3.longitude = (float)-105.084419;
     }
 
     @Test
@@ -129,5 +113,195 @@ public class TestTripCalculate {
         for (Location location : trip.places) {
             System.out.print(location.name + " --> ");
         }
+    }
+
+    @Test
+    public void testDrawVector() {
+        double mapW = 1066.6073, mapH = 783.0824, mapLat = 41.0007, mapLon = -109.0500, buffer = 36, lonRatio = 30.595
+                , latRatio = 23.0069, pixPerLat = 177.4202, pixPerLon = 142.02183;
+
+        String jsonStr ="{\n" +
+                "  \"type\": \"trip\",\n" +
+                "  \"title\": \"Colorado County Seats\",\n" +
+                "  \"version\": 3,\n" +
+                "  \"options\": {\n" +
+                "    \"units\":\"miles\",\n" +
+                "    \"optimization\": \"none\"\n" +
+                "  },\n" +
+                "  \"places\":\n" +
+                "  [\n" +
+                "    { \"id\": 1, \"county\": \"Adams County\", \"name\": \"Brighton\", \"latitude\": 39.87, \"longitude\": -104.33 }\n" +
+                "  ]\n" +
+                "}\n";
+
+        trip = gson.fromJson(jsonStr, Trip.class);
+        tripCalculate = new TripCalculate(trip);
+
+        String actualDrawVectorOutput = tripCalculate.drawVector(tripCalculate.trip);
+
+        double trip1Lon = tripCalculate.trip.places.get(0).longitude, trip1Lat = tripCalculate.trip.places.get(0).latitude;
+        String expectedDrawVectorOutput =         "<line x1=\"" + ((trip1Lon - mapLon) * pixPerLon + buffer) +
+                "\" y1=\"" + ((trip1Lat - mapLat) * -pixPerLat + buffer) +
+                "\" x2=\"" + ((trip1Lon - mapLon) * pixPerLon + buffer) +
+                "\" y2=\"" + ((trip1Lat - mapLat) * -pixPerLat + buffer) +
+                "\" style=\"stroke:rgb(255,0,0);stroke-width:2\" />";
+
+        assertEquals(expectedDrawVectorOutput, actualDrawVectorOutput);
+
+        jsonStr ="{\n" +
+                "  \"type\": \"trip\",\n" +
+                "  \"title\": \"Colorado County Seats\",\n" +
+                "  \"version\": 3,\n" +
+                "  \"options\": {\n" +
+                "    \"units\":\"miles\",\n" +
+                "    \"optimization\": \"none\"\n" +
+                "  },\n" +
+                "  \"places\":\n" +
+                "  [\n" +
+                "    { \"id\": 1, \"county\": \"Adams County\", \"name\": \"Brighton\", \"latitude\": 39.87, \"longitude\": -104.33 },\n" +
+                "    { \"id\": 34, \"county\": \"Lake County\", \"name\": \"Leadville\", \"latitude\": 39.2, \"longitude\": -106.35 }\n" +
+                "  ]\n" +
+                "}\n";
+
+        trip = gson.fromJson(jsonStr, Trip.class);
+        tripCalculate = new TripCalculate(trip);
+
+
+        double trip2Lon = tripCalculate.trip.places.get(1).longitude, trip2Lat = tripCalculate.trip.places.get(1).latitude;
+
+        expectedDrawVectorOutput = "<line x1=\"" + ((trip1Lon - mapLon) * pixPerLon + buffer) +
+                "\" y1=\"" + ((trip1Lat - mapLat) * -pixPerLat + buffer) +
+                "\" x2=\"" + ((trip2Lon - mapLon) * pixPerLon + buffer) +
+                "\" y2=\"" + ((trip2Lat - mapLat) * -pixPerLat + buffer) +
+                "\" style=\"stroke:rgb(255,0,0);stroke-width:2\" />";
+
+        expectedDrawVectorOutput += "<line x1=\"" + ((trip2Lon - mapLon) * pixPerLon + buffer) +
+                "\" y1=\"" + ((trip2Lat - mapLat) * -pixPerLat + buffer) +
+                "\" x2=\"" + ((trip1Lon - mapLon) * pixPerLon + buffer) +
+                "\" y2=\"" + ((trip1Lat - mapLat) * -pixPerLat + buffer) +
+                "\" style=\"stroke:rgb(255,0,0);stroke-width:2\" />";
+
+        actualDrawVectorOutput = tripCalculate.drawVector(tripCalculate.trip);
+        assertEquals(expectedDrawVectorOutput, actualDrawVectorOutput);
+    }
+
+
+    @Test
+    public void testSetMap() {
+        String jsonStr = "{\n" +
+                "  \"type\": \"trip\",\n" +
+                "  \"title\": \"Colorado County Seats\",\n" +
+                "  \"version\": 3,\n" +
+                "  \"options\": {\n" +
+                "    \"units\":\"miles\",\n" +
+                "    \"optimization\": \"none\"\n" +
+                "  },\n" +
+                "  \"places\":\n" +
+                "  [\n" +
+                "    { \"id\": 1, \"county\": \"Adams County\", \"name\": \"Brighton\", \"latitude\": 39.87, \"longitude\": -104.33 },\n" +
+                "    { \"id\": 34, \"county\": \"Lake County\", \"name\": \"Leadville\", \"latitude\": 39.2, \"longitude\": -106.35 }\n" +
+                "  ]\n" +
+                "}\n";
+
+        trip = gson.fromJson(jsonStr, Trip.class);
+        tripCalculate = new TripCalculate(trip);
+
+        String mapVectors = tripCalculate.drawVector(tripCalculate.trip);
+
+        BufferedReader read;
+        try {
+            read = new BufferedReader(new InputStreamReader(getClass().getResourceAsStream("/CObackground.svg")));
+        }
+        catch(Exception e){
+            return;
+        }
+
+        String temp = "";
+        String expectedSetMapResult = "";
+        try {
+            while((temp = read.readLine()) != null){
+                if (temp.equals("</svg>")) {
+                    expectedSetMapResult += mapVectors;
+                }
+                expectedSetMapResult += temp;
+            }
+        }
+        catch(Exception e){
+
+        }
+
+
+        tripCalculate.setMap();
+        assertEquals(expectedSetMapResult, tripCalculate.trip.map);
+
+    }
+
+    @Test
+    public void testValidateTripRequestFormat() {
+        String jsonStr = "{\n" +
+                "  \"type\": \"trip\",\n" +
+                "  \"title\": \"Colorado County Seats\",\n" +
+                "  \"version\": 3,\n" +
+                "  \"options\": {\n" +
+                "    \"units\":\"miles\",\n" +
+                "    \"optimization\": \"none\"\n" +
+                "  },\n" +
+                "  \"places\":\n" +
+                "  [\n" +
+                "    { \"id\": 1, \"county\": \"Adams County\", \"name\": \"Brighton\", \"latitude\": 39.87, \"longitude\": -104.33 },\n" +
+                "    { \"id\": 34, \"county\": \"Lake County\", \"name\": \"Leadville\", \"latitude\": 39.2, \"longitude\": -106.35 }\n" +
+                "  ]\n" +
+                "}\n";
+
+        trip = gson.fromJson(jsonStr, Trip.class);
+
+        tripCalculate = new TripCalculate(trip);
+
+        assert(tripCalculate.validateTripRequestFormat(trip));
+
+        jsonStr =  "{\n" +
+                "  \"type\": \"bananas\",\n" +
+                "  \"title\": \"Colorado County Seats\",\n" +
+                "  \"version\": 0,\n" +
+                "  \"options\": {\n" +
+                "    \"units\":\"miles\",\n" +
+                "    \"optimization\": \"none\"\n" +
+                "  },\n" +
+                "  \"places\":\n" +
+                "  [\n" +
+                "    { \"id\": 1, \"county\": \"Adams County\", \"name\": \"Brighton\", \"latitude\": 39.87, \"longitude\": -104.33 },\n" +
+                "    { \"id\": 34, \"county\": \"Lake County\", \"name\": \"Leadville\", \"latitude\": 39.2, \"longitude\": -106.35 }\n" +
+                "  ]\n" +
+                "}\n";
+
+        trip = gson.fromJson(jsonStr, Trip.class);
+
+        tripCalculate = new TripCalculate(trip);
+
+        assert(!tripCalculate.validateTripRequestFormat(trip));
+    }
+
+    @Test
+    public void testGetTripJson() {
+        String jsonStr = "{\n" +
+                "  \"type\": \"trip\",\n" +
+                "  \"title\": \"Colorado County Seats\",\n" +
+                "  \"version\": 3,\n" +
+                "  \"options\": {\n" +
+                "    \"units\":\"miles\",\n" +
+                "    \"optimization\": \"none\"\n" +
+                "  },\n" +
+                "  \"places\":\n" +
+                "  [\n" +
+                "    { \"id\": 1, \"county\": \"Adams County\", \"name\": \"Brighton\", \"latitude\": 39.87, \"longitude\": -104.33 },\n" +
+                "    { \"id\": 34, \"county\": \"Lake County\", \"name\": \"Leadville\", \"latitude\": 39.2, \"longitude\": -106.35 }\n" +
+                "  ]\n" +
+                "}\n";
+
+        trip = gson.fromJson(jsonStr, Trip.class);
+
+        tripCalculate = new TripCalculate(trip);
+
+        assert(!tripCalculate.getTripJson().equals("{}"));
     }
 }

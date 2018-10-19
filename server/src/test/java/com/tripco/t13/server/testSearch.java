@@ -61,17 +61,16 @@ public class testSearch {
         assertEquals("Dave limit 30;", answer);
     }
 
-    @Ignore
     @Test
     public void testApplyLimitDefault(){
         String answer = search.applyLimit(search.limit, "spaghetti");
 
-        assertEquals("spaghetti;",answer);
+        assertEquals("spaghetti limit 30;",answer);
 
         search.limit = -55;
         answer = search.applyLimit(search.limit, "boulder");
 
-        assertEquals("boulder;", answer);
+        assertEquals("boulder limit 30;", answer);
     }
 
     @Test
