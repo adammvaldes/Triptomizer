@@ -14,6 +14,7 @@ import RenderButton from "./RenderButton";
 import SaveButton from "./SaveButton";
 import OptimizationButtons from "./OptimizationButtons";
 
+
 /* Renders the application.
  * Holds the destinations and options state shared with the trip.
  */
@@ -71,6 +72,7 @@ class Application extends Component {
     this.search = this.search.bind(this);
     this.reverseTrip = this.reverseTrip.bind(this);
     this.removeLeg = this.removeLeg.bind(this);
+    this.addLeg = this.addLeg.bind(this);
     this.setStartLeg = this.setStartLeg.bind(this);
     this.saveTrip = this.saveTrip.bind(this);
   }
@@ -217,6 +219,12 @@ class Application extends Component {
       trip.places.splice(value,1);
   }
 
+  addLeg(leg){
+      let trip = this.state.trip;
+      trip.places.push(leg);
+      this.setState(trip);
+      this.planRequest();
+  }
   setStartLeg(value){
       if(value <= 0){
           return;
@@ -267,7 +275,8 @@ class Application extends Component {
                          updateDistances={this.updateDistances}
                          removeLeg={this.removeLeg}
                          reverseTrip={this.reverseTrip}
-                         setStartLeg={this.setStartLeg}/>
+                         setStartLeg={this.setStartLeg}
+                         addLeg={this.addLeg}/>
               {this.state.fromScratchButtons && <SearchBar showButtons={this.state.showModifyButtons}/>}
               {this.state.fromScratchButtons && <RenderButton showButtons={this.updateRenderButton}/>}
               {this.state.modify && <ModifyButton updateShowModify={this.updateShowModify}/>}
