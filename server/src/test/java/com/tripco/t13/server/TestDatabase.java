@@ -18,12 +18,12 @@ public class TestDatabase {
 
     @Test
     public void testHeliport(){
-        String match = "heliport";
+        String match = "denver";
         int limit = 3;
         pSearch = new PerformSearch(match, limit);
         pSearch.sendSearch();
         String gson = pSearch.getSearchJson();
-        assertEquals("{\"type\":\"search\",\"version\":3,\"match\":\"heliport\",\"limit\":3,\"places\":[{\"id\":\"01CO\",\"name\":\"St Vincent General Hospital Heliport\",\"latitude\":39.2453,\"longitude\":-106.246,\"municipality\":\"Leadville\",\"type\":\"heliport\"},{\"id\":\"0CD0\",\"name\":\"Delta County Memorial Hospital Heliport\",\"latitude\":38.7408,\"longitude\":-108.052,\"municipality\":\"Delta\",\"type\":\"heliport\"},{\"id\":\"0CD1\",\"name\":\"Colorado Plains Medical Center Heliport\",\"latitude\":40.261093,\"longitude\":-103.79634,\"municipality\":\"Fort Morgan\",\"type\":\"heliport\"}]}", gson);
+        assertEquals("{\"type\":\"search\",\"version\":3,\"match\":\"denver\",\"limit\":3,\"places\":[{\"id\":\"0CD4\",\"name\":\"Kauffman Heliport\",\"latitude\":40.1463,\"longitude\":-104.887,\"municipality\":\"Denver\",\"type\":\"heliport\"},{\"id\":\"11CO\",\"name\":\"Channel 7 Heliport\",\"latitude\":39.7253,\"longitude\":-104.984,\"municipality\":\"Denver\",\"type\":\"heliport\"},{\"id\":\"2CO4\",\"name\":\"Presbyterian/St Luke\\u0027s Medical Center Heliport\",\"latitude\":39.7494,\"longitude\":-104.969,\"municipality\":\"Denver\",\"type\":\"heliport\"}]}", gson);
     }
 
     @Test
