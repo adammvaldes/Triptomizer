@@ -22,7 +22,7 @@ public class Search {
         temp = "municipality like '%" + match + "%' or type like '%" + match + "%' or ";
         search += temp;
 
-        temp = "latitude like '%" + match + "%' or latitude like '%" + match + "%'";
+        temp = "latitude like '%" + match + "%' or longitude like '%" + match + "%'";
         search += temp;
 
         return search;

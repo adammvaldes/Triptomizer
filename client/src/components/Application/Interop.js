@@ -31,6 +31,7 @@ class Interop extends Component {
                         <InputGroupAddon addonType="prepend"><Button className="btn text-white" type="button" color="info" onClick={this.changeServer}> Change Server </Button></InputGroupAddon>
                         <Input type="select" onChange={this.updatePort}>
                             <option> team 13 </option>
+                            <option> team 00 </option>
                             <option> team 1 </option>
                             <option> team 2 </option>
                             <option> team 3 </option>
