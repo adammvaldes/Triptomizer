@@ -2,7 +2,7 @@
 
 <img src="https://github.com/csu18fa314/t13/blob/master/images/IMG_20180829_123435664.jpg" width="150"> <img src="https://github.com/csu18fa314/t13/blob/master/images/team%20photo.jpg" width="270">
 
-Member Names: John, Adam, EJ, Dmitry, Vlad <br>
+Member Names: John, Adam, EJ, ~~Dmitry,~~ Vlad <br>
 Spaghetti Coders is a group of guys with the basic goal of getting the project completed on time, with no Spaghetti-like organization.
 
 # Member information
@@ -12,7 +12,7 @@ Spaghetti Coders is a group of guys with the basic goal of getting the project c
 | Vlad Stepanuga   | vstepa            | vstepanuga              | vstepa@rams.colostate.edu | Vlad         |
 |John Miller       | jmiller0          | pqalzm6                 | jmiller0@rams.colocstate.edu | N/A       |
 |Adam Valdes       | adammv            | adammvaldes             | adammv@rams.colostate.edu    | N/A       |
-|Dmitry Melnikov   | dmelniko          | dmelniko                | dmelniko@rams.colostate.edu    | N/A     |
+|~~Dmitry Melnikov~~ | ~~dmelniko~~          | ~~dmelniko~~                | ~~dmelniko@rams.colostate.edu~~    |~~N/A~~    |
 
 
 ### Edward Lee
