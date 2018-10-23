@@ -45,7 +45,7 @@ public class testSearch {
         assertEquals("select id,name,municipality,type,latitude,longitude from airports where " +
                 "name like '%den%' or id like '%den%' or " +
                 "municipality like '%den%' or type like '%den%' or " +
-                "latitude like '%den%' or latitude like '%den%'",answer);
+                "latitude like '%den%' or longitude like '%den%'",answer);
     }
 
     @Test
