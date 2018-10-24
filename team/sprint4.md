@@ -3,7 +3,7 @@
 ## Goal
 
 ### Interactive Maps and Shorter Trips!
-### Sprint Leader: *firstname lastname*
+### Sprint Leader: *John Miller*
 
 ## Definition of Done
 
@@ -44,13 +44,16 @@ In addition, we want to clean our client's layout, both in code and what is rend
 
 Finally, we want to implement world-wide trips, shorter trips, and more options for the user to utilize, described from sprint 4's epics.
 
-###Diagrams
+#### Diagrams
 
 <img src="https://github.com/csu18fa314/t13/blob/master/team/leejr0/Sprint4Layout.jpg" width="450">
 *This is the new layout planned for the website by the end of Sprint 4. The layout will have the map now rendered at the bottom of the page, and the choose file and change server button closer to the top of the page. We also want to implement drop down buttons to hide different options to reduce the amount of space on the page.*
 
 <img src="https://user-images.githubusercontent.com/42558356/47400444-6b969980-d6fa-11e8-86cc-70fd6958b691.jpg" width=400px>
 *This diagram illustrates new sprint 4 component hierarchy our team will have. The focus of this sprint(at least for the client side) is to minimize amount of components instantiated per component, to decrease smelly code practices.*
+
+<img src="https://github.com/csu18fa314/t13/blob/master/images/ServerDiagram.png" width=400px>
+*This diagram illustrates the current state of our implementation of the server requests by outlining class usages and their places in the request flow.*
 
 Epics planned for this sprint.
 
