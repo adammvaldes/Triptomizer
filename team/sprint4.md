@@ -1,4 +1,4 @@
-# Sprint 4 - *your team number* - *your team name*
+# Sprint 4 - t13 - Spaghetti Coders
 
 ## Goal
 
@@ -38,7 +38,11 @@
 
 ## Plan
 
-*An introductory paragraph describing what you expect to accomplish this sprint that will achieve the goal.*
+Our main goal this sprint is to fix bugs found from the sprint 3 demo. Since some of our calculations for short trips are incorrect, and there are some bugs with what is returned in TFFI, we want to focus on fixing these issues before moving on. 
+
+In addition, we want to clean our client's layout, both in code and what is rendered on the page. We plan to dedicate time to cleaning the client side's code, and making the webpage layout more user-friendly. 
+
+Finally, we want to implement world-wide trips, shorter trips, and more options for the user to utilize, described from sprint 4's epics.
 
 ###Diagrams
 
