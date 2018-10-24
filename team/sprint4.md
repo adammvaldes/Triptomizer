@@ -42,6 +42,10 @@
 
 *Include any design diagrams prepared during sprint planning (user interface, component diagram, component/state/hierarchy, etc.) with a short paragraph for each.
 
+<img src="https://user-images.githubusercontent.com/42558356/47400444-6b969980-d6fa-11e8-86cc-70fd6958b691.jpg" width=400px>
+
+*This diagram illustrates new sprint 4 component hierarchy our team will have. The focus of this sprint(at least for the client side) is to minimize amount of components instantiated per component, to decrease smelly code practices.*
+
 Epics planned for this sprint.
 
 * *## epic title: description*
