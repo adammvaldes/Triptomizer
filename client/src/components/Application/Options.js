@@ -11,9 +11,14 @@ import {request} from "../../api/api";
 class Options extends Component{
   constructor(props) {
     super(props);
+
+    this.state = {showOptions : true};
     this.updateName = this.updateName.bind(this);
     this.updateRadius = this.updateRadius.bind(this);
     this.updateDefault = this.updateDefault.bind(this);
+    this.updateOptimization = this.updateOptimization.bind(this);
+    this.hideOptions = this.hideOptions.bind(this);
+    this.showOptions = this.showOptions.bind(this);
   }
 
   updateDefault(name){
@@ -23,7 +28,6 @@ class Options extends Component{
 
   updateName(name){
       this.props.updateOptions('unitName',name.target.value);
-      console.log(name.target.value);
   }
   updateRadius(name){
       //const userRadius = (name.target.validity.valid) ? name.target.value : this.props.options.unitRadius;
@@ -31,7 +35,19 @@ class Options extends Component{
       this.props.updateOptions('unitRadius', name.target.value);
   }
 
+  updateOptimization(name){
+      this.props.updateOptions('optimization',name.target.value);
+  }
 
+  showOptions(){
+      this.state.showOptions = true;
+      this.props.planRequest();
+  }
+
+  hideOptions(){
+     this.state.showOptions = false;
+     this.props.planRequest();
+  }
   render() {
     const buttons = this.props.config.units.map((unit) =>
       <Button
@@ -44,34 +60,73 @@ class Options extends Component{
         {unit.charAt(0).toUpperCase() + unit.slice(1)}
       </Button>
     );
-    if(this.props.options.units === "user defined"){
+
+    const optimizationButtons = this.props.config.optimization.map((option) =>
+        <Button
+            key={'Optimization button_' + option.label }
+            className="btn-outline-dark optimization"
+            type="button"
+            active={this.props.options.optimization === option.label}
+            value={option.label}
+            onClick={this.updateOptimization}
+        >
+            {option.label}
+        </Button>
+    );
+
+    if(this.state.showOptions == true) {
+        if(this.props.options.units === "user defined"){
+            return(
+                <Card>
+                    <CardBody>
+                        <Form>
+                            <p>Select the units you wish to use.</p>
+                            <ButtonGroup>
+                                {buttons}
+                            </ButtonGroup>
+                            <FormGroup>
+                                <Input type="text" name="UD" id="unitName" placeholder="Your Unit Name" onChange={ this.updateName } value={this.props.options.unitName} />
+                                <Input type="number" placeholder="Radius of Earth through object" onChange={ this.updateRadius } />
+                            </FormGroup>
+                            <p>Choose the level of optimization for your trip.</p>
+                            <ButtonGroup>
+                                {optimizationButtons}
+                            </ButtonGroup>
+                        </Form>
+                        <Button onClick={this.hideOptions} color={'info'}> Hide Options </Button>
+                    </CardBody>
+                </Card>
+            );
+        }
         return(
             <Card>
                 <CardBody>
-                    <p>Select the options you wish to use.</p>
-                    <ButtonGroup>
-                        {buttons}
-                    </ButtonGroup>
-                <Form>
-                    <FormGroup>
-                    <Input type="text" name="UD" id="unitName" placeholder="Your Unit Name" onChange={ this.updateName } value={this.props.options.unitName} />
-                    <Input type="number" placeholder="Radius of Earth through object" onChange={ this.updateRadius } />
-                    </FormGroup>
-                </Form>
-            </CardBody>
-        </Card>
+                    <Form>
+                        <p>Select the units you wish to use.</p>
+                        <ButtonGroup>
+                            {buttons}
+                        </ButtonGroup>
+                        <FormGroup/>
+                        <p>Choose the level of optimization for your trip.</p>
+                        <ButtonGroup>
+                            {optimizationButtons}
+                        </ButtonGroup>
+                    </Form>
+                    <Button onClick={this.hideOptions} color={'info'}> Hide Options </Button>
+                </CardBody>
+            </Card>
         );
     }
-    return(
-      <Card>
-        <CardBody>
-          <p>Select the options you wish to use.</p>
-          <ButtonGroup>
-            {buttons}
-          </ButtonGroup>
-        </CardBody>
-      </Card>
-    );
+    else {
+        return(
+            <Card>
+                <CardBody>
+                    <Button onClick={this.showOptions} color={'info'}>Show Options</Button>
+                </CardBody>
+            </Card>
+        );
+    }
+
   }
 }
 

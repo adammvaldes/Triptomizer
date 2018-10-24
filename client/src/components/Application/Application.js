@@ -8,7 +8,6 @@ import Map from "./Map";
 import Itinerary from "./Itinerary";
 import Trip from "./Trip";
 import SearchBar from "./SearchBar";
-import OptimizationButtons from "./OptimizationButtons";
 import AddByName from "./AddByName";
 
 
@@ -186,12 +185,11 @@ class Application extends Component {
               <Options options={this.state.trip.options}
                        config={this.state.config}
                        updateOptions={this.updateOptions}
-                       updateDistances={this.updateDistances}/>
+                       updateDistances={this.updateDistances}
+                       planRequest={this.planRequest}/>
               <Interop changeServer={this.changeServer}
                        updateNumber={this.updateNumber}
                        updateDistances={this.updateDistances}/>
-              <OptimizationButtons updateOptions={this.updateOptions}
-              config={this.state.config}/>
               <Trip trip={this.state.trip}
                     planRequest={this.planRequest}
                     clearTrip={this.clearTrip}
@@ -210,8 +208,7 @@ class Application extends Component {
                          updateDistances={this.updateDistances}
                          removeLeg={this.removeLeg}
                          reverseTrip={this.reverseTrip}
-                         setStartLeg={this.setStartLeg}
-                         />
+                         setStartLeg={this.setStartLeg}/>
               <AddByName addLeg={this.addLeg}/>
           </Container>
       )
