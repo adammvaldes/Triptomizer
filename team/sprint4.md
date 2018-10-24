@@ -40,12 +40,40 @@
 
 *An introductory paragraph describing what you expect to accomplish this sprint that will achieve the goal.*
 
-*Include any design diagrams prepared during sprint planning (user interface, component diagram, component/state/hierarchy, etc.) with a short paragraph for each.
+###Diagrams
+
+<img src="https://github.com/csu18fa314/t13/blob/master/team/leejr0/Sprint4Layout.jpg" width="450">
+*This is the new layout planned for the website by the end of Sprint 4. The layout will have the map now rendered at the bottom of the page, and the choose file and change server button closer to the top of the page. We also want to implement drop down buttons to hide different options to reduce the amount of space on the page.*
+
+<img src="https://user-images.githubusercontent.com/42558356/47400444-6b969980-d6fa-11e8-86cc-70fd6958b691.jpg" width=400px>
+*This diagram illustrates new sprint 4 component hierarchy our team will have. The focus of this sprint(at least for the client side) is to minimize amount of components instantiated per component, to decrease smelly code practices.*
 
 Epics planned for this sprint.
 
-* *## epic title: description*
-*
+* TripCo: All code shall be clean! : <br>
+-Adhere to the Google style guide for Java and JavaScript.
+-Write maintainable code.
+-Time to read the book if you haven't started.
+-More to come!
+-You may amend your sprint#.md and README.md with policies as needed to reflect specifics you would like to focus on for the sprint and the future.
+* TripCo: All code must be tested. : <br>
+-minimum 50% coverage, preferred 70% coverage
+* User: I want to choose what information is displayed in the itinerary and map. : <br>
+-allow additional attribute/value pairs to be captured for destinations whether they are entered manually or obtained from a database.
+-allow the user to select attributes to display in the itinerary, including the latitude and longitude.
+* User: I'd like even shorter trips. : <br>
+-Use 2-opt to improve the nearest neighbor tours.
+* User: I want to plan trips worldwide. : <br>
+-Use a new database that contains a list of destinations worldwide.
+-Allow the user to filter search requests.
+* User: I want to view my trip in other tools. : <br>
+-Use a mapping tool to draw the map and allow the user to zoom and pan.
+
+Extra epics planned for the future:
+* User: I want the shortest trips possible: <br>
+-Use 3-opt to improve the nearest neighbor trips.
+* User: I want trip planning to be fast.: <br>
+-Use concurrency to improve trip planning performance so there is less of a delay for the user.
 
 
 ## Metrics
