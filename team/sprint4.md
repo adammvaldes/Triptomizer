@@ -87,9 +87,9 @@ Extra epics planned for the future:
 
 | Statistic | Planned | Completed |
 | --- | ---: | ---: |
-| Epics | *total* | *total* |
-| Tasks |  *total*   | *total* | 
-| Story Points |  *total*  | *total* | 
+| Epics | 4 for sprint 4, 2 left from sprint 3 | *total* |
+| Tasks |  25   | *total* | 
+| Story Points |  42  | *total* | 
 
 *Enter the `# Planned` at the beginning of the sprint.  Include a discussion of planning decisions based on the planned number of story points versus how many were completed in previous sprints.*
 
@@ -100,7 +100,7 @@ Extra epics planned for the future:
 
 | Date | Tasks closed  | Tasks in progress | Impediments |
 | :--- | :--- | :--- | :--- |
-| *date* | *#task, ...* | *#task, ...* | *none* | 
+| 10/24/2018 | #259, #301, #302, #303 | #294, #296, #300, #306, #308, #309, #316, #325 | *none* | 
 
 *Add a new row for the scrum session after each lecture. *
 
