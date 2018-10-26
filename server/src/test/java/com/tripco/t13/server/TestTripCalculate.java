@@ -110,9 +110,18 @@ public class TestTripCalculate {
     public void testShortOptimization() {
         tripCalculate.shortOptimization();
         System.out.println("Newly optimized trip: ");
-        for (Location location : trip.places) {
+        int totalDist = 0;
+        for (Location location : tripCalculate.trip.places) {
             System.out.print(location.name + " --> ");
         }
+
+        System.out.println("\n\nTotal distance for trip: ");
+        ArrayList<Integer> distances = tripCalculate.trip.getTripDistances();
+
+        for (Integer distance: distances) {
+            totalDist += distance;
+        }
+        System.out.println(totalDist);
     }
 
     @Test

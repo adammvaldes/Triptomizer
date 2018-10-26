@@ -61,7 +61,7 @@ public class TripCalculate {
         //Loop through all locations in original places array, performing shortest trip algorithm to see which place
         //is shortest.
         for (Location place : retainOriginalPlaces) {
-            trip.places = ShortOptimization.travelingSalesman(place, trip.places, "miles");
+            trip.places = ShortOptimization.travelingSalesman(place, retainOriginalPlaces, trip.options.units);
             trip.distances = trip.getTripDistances();
             int tempCumulativeDistance = 0;
 
