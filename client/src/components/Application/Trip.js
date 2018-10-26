@@ -1,11 +1,10 @@
 import React, {Component} from 'react'
-import { Button, Form, Label, Input, FormText, FormGroup } from 'reactstrap'
+import { Button, ButtonGroup, Form, Label, Input, FormText, FormGroup, Card, CardBody} from 'reactstrap'
 
 class Trip extends Component {
     constructor(props) {
         super(props);
         this.plan = this.plan.bind(this);
-        this.readFile = this.readFile.bind(this);
         this.saveFile = this.saveFile.bind(this);
         this.state={
             user: "Dave Matthews, ruler of the universe"
@@ -13,25 +12,6 @@ class Trip extends Component {
     }
     plan(){
         this.props.planRequest();
-    }
-    readFile(tffi){
-        let file = tffi.target.files[0];
-
-        let fReader = new FileReader();
-
-        fReader.onload = function() {
-            let obj;
-            try{
-                obj = JSON.parse(fReader.result);
-            }
-            catch(e){
-                alert("Not a JSON file");
-            }
-            this.props.updateTFFI(obj);
-        }.bind(this);
-        fReader.readAsText(file);
-        //console.log(this.props.trip);
-
     }
     saveFile(){
         let userVersion = this.props.trip.version;
@@ -67,16 +47,13 @@ class Trip extends Component {
 
     render() {
         return (
-            <FormGroup>
-                <Label> Choose the file with trip you want to plan: </Label>
-                <Input type="file" name="file" id="userFile" onChange={ this.readFile } />
-                <FormText>
-                    The file needs to be a JSON file, with the ".json" tag at the end of the name.
-                </FormText>
-                <Button className="btn text-white" onClick={this.plan} type="button" style={{backgroundColor: "000000"}}> RENDER </Button>
-                <Button id="save_Button" onClick={this.saveFile} style={{backgroundColor: "000000"}} > Save Trip </Button>
-                <Button className="btn text-white" onClick={this.props.clearTrip} type="button" style={{backgroundColor: "000000"}}> CLEAR </Button>
-            </FormGroup>
+            <Card>
+                <CardBody>
+                    <Button href='#' style={{backgroundColor: "407157"}} onClick={this.plan} type="button" block> RENDER </Button>
+                    <Button href='#' style={{backgroundColor: "cea12b"}} onClick={this.saveFile} type="button" block> Save Trip </Button>
+                    <Button href='#' style={{backgroundColor: "cea12b"}} onClick={this.props.clearTrip} type="button" block> CLEAR </Button>
+                </CardBody>
+            </Card>
         );
     }
 }
@@ -84,3 +61,4 @@ class Trip extends Component {
 export default Trip;
 
 //https://chuvash.eu/2016/05/15/create-and-download-a-file-in-javascript/
+//style={{backgroundColor: "000000"}}
