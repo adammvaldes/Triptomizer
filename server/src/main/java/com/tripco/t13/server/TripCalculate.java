@@ -27,7 +27,7 @@ public class TripCalculate {
             trip = gson.fromJson(requestBody, Trip.class);
             isCorrectFormat = validateTripRequestFormat(trip);
 
-            if (trip.options.optimization.equals("short")) {
+            if (trip.options.optimization != null && trip.options.optimization.equals("short")) {
                 shortOptimization();
             } else {
                 trip.getTripDistances();
