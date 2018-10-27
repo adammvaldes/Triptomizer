@@ -29,7 +29,7 @@ const testProps = {
 function updateTFFI(tffi) {
     testProps.trip = tffi;
 }
-function testPlan() {
+function testRender() {
     const tripWrapper = mount((
         <Trip
             trip={testProps.trip}
@@ -55,4 +55,4 @@ function testPlan() {
     // expect(buttonNames).toEqual(["test", "test2"]);
 }
 
-test('Testing plan function in Trip.js', testPlan);
+test('Testing plan function in Trip.js', testRender);
