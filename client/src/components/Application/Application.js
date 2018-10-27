@@ -41,7 +41,7 @@ class Application extends Component {
     this.planRequest = this.planRequest.bind(this);
     this.clearTrip = this.clearTrip.bind(this);
     this.updateTrip = this.updateTrip.bind(this);
-    this.updateBasedOnResponse = this.updateBasedOnResponse.bind(this);
+    //this.updateBasedOnResponse = this.updateBasedOnResponse.bind(this);
     this.updateOptions = this.updateOptions.bind(this);
     this.updateMap = this.updateMap.bind(this);
     this.updateTFFI = this.updateTFFI.bind(this);
@@ -102,9 +102,9 @@ class Application extends Component {
     this.setState(trip);
   }
 
-  updateBasedOnResponse(value) {
-    this.setState({'trip': value});
-  }
+  // updateBasedOnResponse(value) {
+  //   this.setState({'trip': value});
+  // }
 
   updateOptions(option, value){
     let trip = this.state.trip;
@@ -169,7 +169,7 @@ class Application extends Component {
       this.planRequest();
   }
   setStartLeg(value){
-      if(value <= 0){
+      if(value <= 0 || value >= this.state.trip.places.length){
           return;
       }
       let trip = this.state.trip;
