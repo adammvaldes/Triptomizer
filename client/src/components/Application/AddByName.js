@@ -11,8 +11,9 @@ class AddByName extends Component {
             name : "",
             latitude : "",
             longitude : "",
-            toggle : false
+            collapse: false
         };
+
         this.onIDChange = this.onIDChange.bind(this);
         this.onNameChange = this.onNameChange.bind(this);
         this.onLatitudeChange = this.onLatitudeChange.bind(this);
