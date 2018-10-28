@@ -57,8 +57,7 @@ class Itinerary extends Component {
         return (
             <tr>
                 <th scope="row">Total Distance, {this.props.trip.options.unitName }</th>
-                <td>0</td>
-                {tripDistances}
+                <td>0</td>{tripDistances}
             </tr>
         );
     }
@@ -68,14 +67,14 @@ class Itinerary extends Component {
         return(
         <div id="div2">
             <div id="div3">
-                <Button className="btn text-white" type="button" style={{backgroundColor: "#407157"}} onClick={this.reverseTrip}>Reverse Trip Order</Button>
+                <Button className="btn text-white" type="button" style={{backgroundColor: "407157"}} onClick={this.reverseTrip}>Reverse Trip Order</Button>
             </div>
             <InputGroup>
-                <InputGroupAddon addonType="prepend"><Button className="btn text-white" type="button" style={{backgroundColor: "#407157"}}  onClick={this.removeLeg}>Remove Leg</Button></InputGroupAddon>
+                <InputGroupAddon addonType="prepend"><Button className="btn text-white" type="button" style={{backgroundColor: "407157"}} onClick={this.removeLeg}>Remove Leg</Button></InputGroupAddon>
                 <Input type="number" placeholder="Number of leg to remove (Starting position is 0)" onChange={this.handleChange1}/>
             </InputGroup>
             <InputGroup>
-                <InputGroupAddon addonType="prepend"><Button className="btn text-white" type="button" style={{backgroundColor: "#407157"}}  onClick={this.setStartLeg}>Set Start Leg</Button></InputGroupAddon>
+                <InputGroupAddon addonType="prepend"><Button className="btn text-white" type="button" style={{backgroundColor: "407157"}} onClick={this.setStartLeg}>Set Start Leg</Button></InputGroupAddon>
                 <Input type="number" placeholder="Enter leg number to set to start (Starting position is 0)" onChange={this.handleChange2} />
             </InputGroup>
         </div>
@@ -136,14 +135,12 @@ class Itinerary extends Component {
         return (
             <div id="parent">
                 <div id="div1">
-                    <Table responsive>
-                    <tbody>
+                    <Table responsive><tbody>
                     {this.renderTripPlaces()}
                     {this.renderTripGeoLocations()}
                     {this.renderLegDistances()}
                     {this.calculateTotalDistance()}
-                    </tbody>
-                </Table>
+                    </tbody></Table>
                 </div>
                 <Button onClick={this.toggle} type="button" style={{backgroundColor: "000000"}}> Edit Trip </Button>
                 <Collapse isOpen={this.state.collapse}>
@@ -160,7 +157,7 @@ class Itinerary extends Component {
     }
 
     toggle(){
-        this.setState({ collapse: !this.state.collapse});
+        this.setState({collapse: !this.state.collapse});
     }
 
     render() {

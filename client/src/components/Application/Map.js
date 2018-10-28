@@ -4,7 +4,6 @@ import {Button, Media, Container, Card, CardBody} from 'reactstrap'
 class Map extends Component {
     constructor(props) {
         super(props);
-
         this.saveFile = this.saveFile.bind(this);
     }
 
@@ -38,7 +37,7 @@ class Map extends Component {
                     <CardBody>
                     <Media>
                         <Media body>
-                            <Media object src={dataUri} alt="Map of Colorado"/>
+                            <Media id="map" object src={dataUri} alt="Map of Colorado"/>
                         </Media>
                     </Media>
                     <Button href='#' style={{backgroundColor: "cea12b"}} onClick={this.saveFile} type="button" block> Save Map </Button>
@@ -48,12 +47,7 @@ class Map extends Component {
         }
         else{
             return (
-                <Media>
-                    <Media body>
-                        <Media heading>
-                        </Media>
-                    </Media>
-                </Media>
+                <Media></Media>
             )
         }
     }

@@ -12,7 +12,7 @@ class SearchBar extends Component{
             searchText : "",
             addIndex : "",
             searchResults : [],
-            toggle : false
+            collapse : false
         };
         this.search = this.search.bind(this);
         this.setSearchResults = this.setSearchResults.bind(this);
@@ -80,34 +80,26 @@ class SearchBar extends Component{
         this.setState({ collapse: !this.state.collapse});
     }
 
-    render() {
-        if(this.state.display == false){
-            return <Button onClick={this.displayInfo} type="button" style={{backgroundColor: "#000000"}} > Search for locations </Button>
-        }
+    render(){
         return (
             <div>
-                <Button onClick={this.toggle} type="button" style={{backgroundColor: "#000000"}} > Search for locations </Button>
+                <Button onClick={this.toggle} type="button" style={{backgroundColor: "000000"}} >Search for locations</Button>
                 <Collapse isOpen={this.state.collapse}>
-                <Form>
-                    <FormGroup>
-                        <Input type="text" placeholder="Search for a destination to add to your trip" onChange={this.handleChange} />
-                    </FormGroup>
-                </Form>
-                <Button className="btn text-white" type="button" style={{backgroundColor: "#407157"}} onClick={this.search}>Search</Button>
-                <div id="parent">
-                    <div id="div1">
-                        <Table responsive>
-                            <tbody>
-                            {this.renderResults()}
-                            </tbody>
-                        </Table>
+                    <Form>
+                        <FormGroup>
+                            <Input type="text" placeholder="Search for a destination to add to your trip" onChange={this.handleChange} />
+                        </FormGroup>
+                    </Form>
+                    <Button className="btn text-white" type="button" style={{backgroundColor: "407157"}} onClick={this.search}>Search</Button>
+                    <div id="parent">
+                        <div id="div1">
+                            <Table responsive><tbody>{this.renderResults()}</tbody></Table>
+                        </div>
                     </div>
-                </div>
-                <Input type="number" placeholder="Enter the index of the location you want to add to your trip" onChange={this.handleChange2} />
-                <Button className="btn text-white" type="button" style={{backgroundColor: "#407157"}}  onClick={this.addDestination}>Add destination to Trip</Button>
+                    <Input type="number" placeholder="Enter the index of the location you want to add to your trip" onChange={this.handleChange2} />
+                    <Button className="btn text-white" type="button" style={{backgroundColor: "407157"}} onClick={this.addDestination}>Add destination to Trip</Button>
                 </Collapse>
-            </div>
-        );
+            </div>);
     }
 }
 

@@ -33,45 +33,36 @@ class Options extends Component{
 
 
   render() {
-    const buttons = this.props.config.units.map((unit) =>
-      <Button
-        key={'distance_button_' + unit}
-        className='btn-outline-dark unit-button'
-        active={this.props.options.units === unit}
-        value={unit}
-        onClick={this.updateDefault}
-      >
+      const buttons = this.props.config.units.map((unit) =>
+        <Button
+            key={'distance_button_' + unit}
+            className='btn-outline-dark unit-button'
+            active={this.props.options.units === unit}
+            value={unit}
+            onClick={this.updateDefault}>
         {unit.charAt(0).toUpperCase() + unit.slice(1)}
-      </Button>
-    );
-    if(this.props.options.units === "user defined"){
-        return(
-            <Card>
-                <CardBody>
-                    <p>Select the options you wish to use.</p>
-                    <ButtonGroup>
-                        {buttons}
-                    </ButtonGroup>
-                <Form>
-                    <FormGroup>
-                    <Input type="text" name="UD" id="unitName" placeholder="Your Unit Name" onChange={ this.updateName } value={this.props.options.unitName} />
-                    <Input type="number" placeholder="Radius of Earth through object" onChange={ this.updateRadius } />
-                    </FormGroup>
-                </Form>
+        </Button>);
+      if(this.props.options.units === "user defined"){
+          return(
+              <Card>
+                  <CardBody>
+                      <p>Select the options you wish to use.</p>
+                      <ButtonGroup>{buttons}</ButtonGroup>
+                      <Form>
+                          <FormGroup>
+                              <Input type="text" name="UD" id="unitName" placeholder="Your Unit Name" onChange={ this.updateName } value={this.props.options.unitName} />
+                              <Input type="number" placeholder="Radius of Earth through object" onChange={ this.updateRadius } />
+                          </FormGroup>
+                      </Form>
+                  </CardBody>
+              </Card>);}
+      return(
+        <Card>
+            <CardBody>
+            <p>Select the options you wish to use.</p>
+            <ButtonGroup>{buttons}</ButtonGroup>
             </CardBody>
-        </Card>
-        );
-    }
-    return(
-      <Card>
-        <CardBody>
-          <p>Select the options you wish to use.</p>
-          <ButtonGroup>
-            {buttons}
-          </ButtonGroup>
-        </CardBody>
-      </Card>
-    );
+        </Card>);
   }
 }
 
