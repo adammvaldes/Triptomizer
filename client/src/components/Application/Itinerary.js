@@ -1,5 +1,7 @@
 import React, { Component } from 'react';
-import {Button, Card, CardBody, Container, Form, FormGroup, Input, Table} from 'reactstrap';
+import {Button, Card, CardBody, Container, Form, FormGroup, Input, Table, Collapse, InputGroupAddon, InputGroup} from 'reactstrap';
+import SearchBar from "./SearchBar";
+import AddByName from "./AddByName";
 
 
 class Itinerary extends Component {
@@ -7,7 +9,8 @@ class Itinerary extends Component {
         super(props);
         this.state = {
             textField1 : "",
-            textField2 : ""
+            textField2 : "",
+            collapse : false
         };
         this.removeLeg = this.removeLeg.bind(this);
         this.reverseTrip = this.reverseTrip.bind(this);
@@ -15,6 +18,7 @@ class Itinerary extends Component {
         this.handleChange1  = this.handleChange1.bind(this);
         this.handleChange2  = this.handleChange2.bind(this);
         this.renderButtons = this.renderButtons.bind(this);
+        this.toggle = this.toggle.bind(this);
     }
 
     removeLeg(){
@@ -53,8 +57,7 @@ class Itinerary extends Component {
         return (
             <tr>
                 <th scope="row">Total Distance, {this.props.trip.options.unitName }</th>
-                <td>0</td>
-                {tripDistances}
+                <td>0</td>{tripDistances}
             </tr>
         );
     }
@@ -63,25 +66,17 @@ class Itinerary extends Component {
     renderButtons(){
         return(
         <div id="div2">
-            <Card>
-                <CardBody>
-                    <Button className="btn text-white" type="button" color="info"  onClick={this.removeLeg}>Remove Leg</Button>
-                    <Form>
-                        <FormGroup>
-                            <Input type="number" placeholder="Number of leg to remove (Starting position is 0)" onChange={this.handleChange1}/>
-                        </FormGroup>
-                    </Form>
-                    <div id="div3">
-                        <Button className="btn text-white" type="button" color="info"  onClick={this.reverseTrip}>Reverse Trip Order</Button>
-                    </div>
-                    <Button className="btn text-white" type="button" color="info"  onClick={this.setStartLeg}>Set Start Leg</Button>
-                    <Form>
-                        <FormGroup>
-                            <Input type="number" placeholder="Enter leg number to set to start (Starting position is 0)" onChange={this.handleChange2} />
-                        </FormGroup>
-                    </Form>
-                </CardBody>
-            </Card>
+            <div id="div3">
+                <Button className="btn text-white" type="button" style={{backgroundColor: "407157"}} onClick={this.reverseTrip}>Reverse Trip Order</Button>
+            </div>
+            <InputGroup>
+                <InputGroupAddon addonType="prepend"><Button className="btn text-white" type="button" style={{backgroundColor: "407157"}} onClick={this.removeLeg}>Remove Leg</Button></InputGroupAddon>
+                <Input type="number" placeholder="Number of leg to remove (Starting position is 0)" onChange={this.handleChange1}/>
+            </InputGroup>
+            <InputGroup>
+                <InputGroupAddon addonType="prepend"><Button className="btn text-white" type="button" style={{backgroundColor: "407157"}} onClick={this.setStartLeg}>Set Start Leg</Button></InputGroupAddon>
+                <Input type="number" placeholder="Enter leg number to set to start (Starting position is 0)" onChange={this.handleChange2} />
+            </InputGroup>
         </div>
      );
     }
@@ -140,18 +135,29 @@ class Itinerary extends Component {
         return (
             <div id="parent">
                 <div id="div1">
-            <Table responsive>
-                <tbody>
-                {this.renderTripPlaces()}
-                {this.renderTripGeoLocations()}
-                {this.renderLegDistances()}
-                {this.calculateTotalDistance()}
-                </tbody>
-            </Table>
-                {this.renderButtons()}
-            </div>
+                    <Table responsive><tbody>
+                    {this.renderTripPlaces()}
+                    {this.renderTripGeoLocations()}
+                    {this.renderLegDistances()}
+                    {this.calculateTotalDistance()}
+                    </tbody></Table>
+                </div>
+                <Button onClick={this.toggle} type="button" style={{backgroundColor: "000000"}}> Edit Trip </Button>
+                <Collapse isOpen={this.state.collapse}>
+                    <Card>
+                        <CardBody>
+                            {this.renderButtons()}
+                            <SearchBar addDestination={this.props.addDestination}/>
+                            <AddByName addLeg={this.props.addLeg}/>
+                        </CardBody>
+                    </Card>
+                </Collapse>
             </div>
         );
+    }
+
+    toggle(){
+        this.setState({collapse: !this.state.collapse});
     }
 
     render() {
@@ -163,3 +169,7 @@ class Itinerary extends Component {
 }
 
 export default Itinerary;
+
+//https://reactstrap.github.io/components/collapse/
+//http://extension.colostate.edu/docs/staffres/csu-colorpalette.pdf
+//https://react-bootstrap.github.io/components/buttons/

@@ -1,5 +1,5 @@
 import React, {Component} from 'react';
-import {Card, CardBody, FormGroup, Table} from 'reactstrap';
+import {Card, CardBody, FormGroup, Table, Collapse} from 'reactstrap';
 import {Button, Form, Input} from 'reactstrap';
 import {request} from "../../api/api";
 
@@ -11,13 +11,15 @@ class SearchBar extends Component{
         this.state = {
             searchText : "",
             addIndex : "",
-            searchResults : []
+            searchResults : [],
+            collapse : false
         };
         this.search = this.search.bind(this);
         this.setSearchResults = this.setSearchResults.bind(this);
         this.handleChange  = this.handleChange.bind(this);
         this.handleChange2  = this.handleChange2.bind(this);
         this.addDestination = this.addDestination.bind(this);
+        this.toggle = this.toggle.bind(this);
     }
 
     search(){
@@ -74,30 +76,30 @@ class SearchBar extends Component{
         this.props.addDestination(this.state.searchResults[this.state.addIndex]);
     }
 
-    render() {
+    toggle(){
+        this.setState({ collapse: !this.state.collapse});
+    }
+
+    render(){
         return (
-            <Card>
-                <CardBody>
+            <div>
+                <Button onClick={this.toggle} type="button" style={{backgroundColor: "000000"}} >Search for locations</Button>
+                <Collapse isOpen={this.state.collapse}>
                     <Form>
                         <FormGroup>
                             <Input type="text" placeholder="Search for a destination to add to your trip" onChange={this.handleChange} />
                         </FormGroup>
                     </Form>
-                    <Button className="btn text-white" type="button" color="info"  onClick={this.search}>Search</Button>
+                    <Button className="btn text-white" type="button" style={{backgroundColor: "407157"}} onClick={this.search}>Search</Button>
                     <div id="parent">
                         <div id="div1">
-                            <Table responsive>
-                                <tbody>
-                                {this.renderResults()}
-                                </tbody>
-                            </Table>
+                            <Table responsive><tbody>{this.renderResults()}</tbody></Table>
                         </div>
                     </div>
                     <Input type="number" placeholder="Enter the index of the location you want to add to your trip" onChange={this.handleChange2} />
-                    <Button className="btn text-white" type="button" color="info"  onClick={this.addDestination}>Add destination to Trip</Button>
-                </CardBody>
-            </Card>
-        )
+                    <Button className="btn text-white" type="button" style={{backgroundColor: "407157"}} onClick={this.addDestination}>Add destination to Trip</Button>
+                </Collapse>
+            </div>);
     }
 }
 

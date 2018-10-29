@@ -1,9 +1,9 @@
-# Sprint 4 - *your team number* - *your team name*
+# Sprint 4 - t13 - Spaghetti Coders
 
 ## Goal
 
 ### Interactive Maps and Shorter Trips!
-### Sprint Leader: *firstname lastname*
+### Sprint Leader: *John Miller*
 
 ## Definition of Done
 
@@ -38,15 +38,22 @@
 
 ## Plan
 
-*An introductory paragraph describing what you expect to accomplish this sprint that will achieve the goal.*
+Our main goal this sprint is to fix bugs found from the sprint 3 demo. Since some of our calculations for short trips are incorrect, and there are some bugs with what is returned in TFFI, we want to focus on fixing these issues before moving on. 
 
-###Diagrams
+In addition, we want to clean our client's layout, both in code and what is rendered on the page. We plan to dedicate time to cleaning the client side's code, and making the webpage layout more user-friendly. 
+
+Finally, we want to implement world-wide trips, shorter trips, and more options for the user to utilize, described from sprint 4's epics.
+
+#### Diagrams
 
 <img src="https://github.com/csu18fa314/t13/blob/master/team/leejr0/Sprint4Layout.jpg" width="450">
 *This is the new layout planned for the website by the end of Sprint 4. The layout will have the map now rendered at the bottom of the page, and the choose file and change server button closer to the top of the page. We also want to implement drop down buttons to hide different options to reduce the amount of space on the page.*
 
 <img src="https://user-images.githubusercontent.com/42558356/47400444-6b969980-d6fa-11e8-86cc-70fd6958b691.jpg" width=400px>
 *This diagram illustrates new sprint 4 component hierarchy our team will have. The focus of this sprint(at least for the client side) is to minimize amount of components instantiated per component, to decrease smelly code practices.*
+
+<img src="https://github.com/csu18fa314/t13/blob/master/images/ServerDiagram.png" width=400px>
+*This diagram illustrates the current state of our implementation of the server requests by outlining class usages and their places in the request flow.*
 
 Epics planned for this sprint.
 
@@ -80,9 +87,9 @@ Extra epics planned for the future:
 
 | Statistic | Planned | Completed |
 | --- | ---: | ---: |
-| Epics | *total* | *total* |
-| Tasks |  *total*   | *total* | 
-| Story Points |  *total*  | *total* | 
+| Epics | 4 for sprint 4, 2 left from sprint 3 | *total* |
+| Tasks |  25   | *total* | 
+| Story Points |  42  | *total* | 
 
 *Enter the `# Planned` at the beginning of the sprint.  Include a discussion of planning decisions based on the planned number of story points versus how many were completed in previous sprints.*
 
@@ -93,7 +100,8 @@ Extra epics planned for the future:
 
 | Date | Tasks closed  | Tasks in progress | Impediments |
 | :--- | :--- | :--- | :--- |
-| *date* | *#task, ...* | *#task, ...* | *none* | 
+| 10/24/2018 | #259, #301, #302, #303 | #294, #296, #300, #306, #308, #309, #316, #325 | *none* | 
+| 10/26/2018 | #277, #328, #330, #294, #296, #325, #259, #301, #302, #303 | #300, #306, #308, #309 | *none* |
 
 *Add a new row for the scrum session after each lecture. *
 

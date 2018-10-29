@@ -28,6 +28,7 @@ class Options extends Component{
 
   updateName(name){
       this.props.updateOptions('unitName',name.target.value);
+      console.log(name.target.value);
   }
   updateRadius(name){
       //const userRadius = (name.target.validity.valid) ? name.target.value : this.props.options.unitRadius;
@@ -49,31 +50,16 @@ class Options extends Component{
      this.props.planRequest();
   }
   render() {
-    const buttons = this.props.config.units.map((unit) =>
-      <Button
-        key={'distance_button_' + unit}
-        className='btn-outline-dark unit-button'
-        active={this.props.options.units === unit}
-        value={unit}
-        onClick={this.updateDefault}
-      >
+      const buttons = this.props.config.units.map((unit) =>
+        <Button
+            key={'distance_button_' + unit}
+            className='btn-outline-dark unit-button'
+            active={this.props.options.units === unit}
+            value={unit}
+            onClick={this.updateDefault}>
         {unit.charAt(0).toUpperCase() + unit.slice(1)}
       </Button>
     );
-
-    const optimizationButtons = this.props.config.optimization.map((option) =>
-        <Button
-            key={'Optimization button_' + option.label }
-            className="btn-outline-dark optimization"
-            type="button"
-            active={this.props.options.optimization === option.label}
-            value={option.label}
-            onClick={this.updateOptimization}
-        >
-            {option.label}
-        </Button>
-    );
-
     if(this.state.showOptions == true) {
         if(this.props.options.units === "user defined"){
             return(

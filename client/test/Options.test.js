@@ -33,7 +33,7 @@ const startProps = {
 function testExample() {
   const options = mount((
       <Options config={startProps.config} options={startProps.options}/>
-    ));
+  ));
 
   let actual = [];
   options.find('Button').map((element) => actual.push(element.prop('value')));

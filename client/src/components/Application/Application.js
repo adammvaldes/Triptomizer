@@ -8,8 +8,9 @@ import Map from "./Map";
 import Itinerary from "./Itinerary";
 import Trip from "./Trip";
 import SearchBar from "./SearchBar";
+import OptimizationButtons from "./OptimizationButtons";
 import AddByName from "./AddByName";
-
+import ChooseFile from "./ChooseFile";
 
 /* Renders the application.
  * Holds the destinations and options state shared with the trip.
@@ -25,7 +26,7 @@ class Application extends Component {
       trip: {
         type: "trip",
         version: "3",
-        title: "Stuffity",
+        title: "Blank",
         options : {
           units: "miles",
             unitName: "miles",
@@ -40,7 +41,7 @@ class Application extends Component {
     this.planRequest = this.planRequest.bind(this);
     this.clearTrip = this.clearTrip.bind(this);
     this.updateTrip = this.updateTrip.bind(this);
-    this.updateBasedOnResponse = this.updateBasedOnResponse.bind(this);
+    //this.updateBasedOnResponse = this.updateBasedOnResponse.bind(this);
     this.updateOptions = this.updateOptions.bind(this);
     this.updateMap = this.updateMap.bind(this);
     this.updateTFFI = this.updateTFFI.bind(this);
@@ -101,9 +102,9 @@ class Application extends Component {
     this.setState(trip);
   }
 
-  updateBasedOnResponse(value) {
-    this.setState({'trip': value});
-  }
+  // updateBasedOnResponse(value) {
+  //   this.setState({'trip': value});
+  // }
 
   updateOptions(option, value){
     let trip = this.state.trip;
@@ -168,7 +169,7 @@ class Application extends Component {
       this.planRequest();
   }
   setStartLeg(value){
-      if(value <= 0){
+      if(value <= 0 || value >= this.state.trip.places.length){
           return;
       }
       let trip = this.state.trip;
@@ -182,34 +183,25 @@ class Application extends Component {
       return(
           <Container id="Application">
               <Info/>
+              <Interop changeServer={this.changeServer} updateNumber={this.updateNumber}/>
+              <ChooseFile trip={this.state.trip} updateTFFI={this.updateTFFI}/>
               <Options options={this.state.trip.options}
                        config={this.state.config}
                        updateOptions={this.updateOptions}
-                       updateDistances={this.updateDistances}
-                       planRequest={this.planRequest}/>
-              <Interop changeServer={this.changeServer}
-                       updateNumber={this.updateNumber}
                        updateDistances={this.updateDistances}/>
+              <OptimizationButtons updateOptions={this.updateOptions} config={this.state.config}/>
               <Trip trip={this.state.trip}
                     planRequest={this.planRequest}
                     clearTrip={this.clearTrip}
-                    updateTrip={this.updateTrip}
-                    updateMap={this.updateMap}
-                    updateTFFI={this.updateTFFI}
-                    updateDistances={this.updateDistances}
-                    updateOptions={this.updateOptions}
-                    port={this.state.port}
-                    URL={this.state.URL}/>
-              <Map trip={this.state.trip} URL={this.state.URL} port={this.state.port}/>
-              <SearchBar addDestination={this.addDestination}/>
+                    updateTFFI={this.updateTFFI}/>
               <Itinerary trip={this.state.trip}
                          planRequest={this.planRequest}
-                         updateMap={this.updateMap}
-                         updateDistances={this.updateDistances}
                          removeLeg={this.removeLeg}
                          reverseTrip={this.reverseTrip}
-                         setStartLeg={this.setStartLeg}/>
-              <AddByName addLeg={this.addLeg}/>
+                         setStartLeg={this.setStartLeg}
+                         addDestination={this.addDestination}
+                         addLeg={this.addLeg}/>
+              <Map trip={this.state.trip} />
           </Container>
       )
     }

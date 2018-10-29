@@ -1,5 +1,5 @@
 import React, {Component} from 'react'
-import {Card, CardHeader, CardBody, FormGroup} from 'reactstrap'
+import {Card, CardHeader, CardBody, FormGroup, Collapse} from 'reactstrap'
 import { ButtonGroup, Button, Form, Label, Input, FormText} from 'reactstrap'
 
 class AddByName extends Component {
@@ -10,13 +10,16 @@ class AddByName extends Component {
             id : "",
             name : "",
             latitude : "",
-            longitude : ""
-    };
-    this.onIDChange = this.onIDChange.bind(this);
-    this.onNameChange = this.onNameChange.bind(this);
-    this.onLatitudeChange = this.onLatitudeChange.bind(this);
-    this.onLongitudeChange = this.onLongitudeChange.bind(this);
-    this.addToTrip = this.addToTrip.bind(this);
+            longitude : "",
+            collapse: false
+        };
+
+        this.onIDChange = this.onIDChange.bind(this);
+        this.onNameChange = this.onNameChange.bind(this);
+        this.onLatitudeChange = this.onLatitudeChange.bind(this);
+        this.onLongitudeChange = this.onLongitudeChange.bind(this);
+        this.addToTrip = this.addToTrip.bind(this);
+        this.toggle = this.toggle.bind(this);
     }
 
     onIDChange(form){
@@ -35,10 +38,16 @@ class AddByName extends Component {
         this.props.addLeg(this.state);
         //alert("The destination has been added to your ");
     }
+
+    toggle(){
+        this.setState({ collapse: !this.state.collapse});
+    }
+
     render() {
         return(
             <Form>
-
+                <Button onClick={this.toggle} type="button" style={{backgroundColor: "000000"}} > Add your own location </Button>
+                <Collapse isOpen={this.state.collapse}>
                 <FormGroup>
                     <p>Add a destination to your trip by name and location.</p>
                     <Input type="number" placeholder="" id="id" placeholder="Enter destination ID" onChange={this.onIDChange}/>
@@ -46,7 +55,8 @@ class AddByName extends Component {
                     <Input type="number" placeholder="" id="latitude" placeholder="Enter destination latitude" onChange={this.onLatitudeChange}/>
                     <Input type="number" placeholder="" id="longitude" placeholder="Enter destination longitude" onChange={this.onLongitudeChange}/>
                 </FormGroup>
-                <Button id="add button" color="info" onClick={this.addToTrip}>Add to trip</Button>
+                <Button id="add button" style={{backgroundColor: "#407157"}} onClick={this.addToTrip}>Add to trip</Button>
+                </Collapse>
             </Form>
         );
     }
