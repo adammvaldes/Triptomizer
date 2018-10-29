@@ -30,16 +30,16 @@ public class TestTrip {
         Location l3 = new Location();
         l1.id = "dnvr";
         l1.name = "Denver";
-        l1.latitude = (float)39.7392;
-        l1.longitude = (float)-104.9903;
+        l1.latitude = 39.7392;
+        l1.longitude = -104.9903;
         l2.id = "bldr";
         l2.name = "Boulder";
-        l2.latitude = (float)40.01499;
-        l2.longitude = (float)-105.27055;
+        l2.latitude = 40.01499;
+        l2.longitude = -105.27055;
         l3.id = "foco";
         l3.name = "Fort Collins";
-        l3.latitude = (float)40.585258;
-        l3.longitude = (float)-105.084419;
+        l3.latitude = 40.585258;
+        l3.longitude = -105.084419;
         Collections.addAll(initialLocations, l1, l2, l3);
         trip.places = initialLocations;
     }
@@ -84,7 +84,7 @@ public class TestTrip {
     public void testOptionsUserDefined1() {
         trip.options.units = "user defined";
         trip.options.unitName = "accurate miles";
-        trip.options.unitRadius = (float)3958.7613;
+        trip.options.unitRadius = 3958.7613;
         trip.getTripDistances();
         assertEquals(3958.7613, trip.options.unitRadius, 0.001);
         ArrayList<Integer> expectedDistances = new ArrayList<Integer>();
@@ -96,11 +96,11 @@ public class TestTrip {
     public void testOptionsUserDefined2() {
         trip.options.units = "user defined";
         trip.options.unitName = "bananas";
-        trip.options.unitRadius = (float)35828571;
+        trip.options.unitRadius = 35828571.0;
         trip.getTripDistances();
-        assertEquals(35828571, trip.options.unitRadius, 1);
+        assertEquals(35828571.0, trip.options.unitRadius, 1);
         ArrayList<Integer> expectedDistances = new ArrayList<Integer>();
-        Collections.addAll(expectedDistances, 218700, 367485, 530969);
+        Collections.addAll(expectedDistances, 218699, 367486, 530971);
         assertEquals(expectedDistances, trip.distances);
     }
 

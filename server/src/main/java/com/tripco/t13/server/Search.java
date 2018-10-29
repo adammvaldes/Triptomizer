@@ -53,8 +53,8 @@ public class Search {
             placeSearch.id = query.getString("id");
             placeSearch.municipality = query.getString("municipality");
             placeSearch.type = query.getString("type");
-            placeSearch.latitude = Float.parseFloat(query.getString("latitude"));
-            placeSearch.longitude = Float.parseFloat(query.getString("longitude"));
+            placeSearch.latitude = Double.parseDouble(query.getString("latitude"));
+            placeSearch.longitude = Double.parseDouble(query.getString("longitude"));
             places.add(placeSearch);
         }
     }
