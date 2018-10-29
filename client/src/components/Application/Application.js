@@ -189,7 +189,6 @@ class Application extends Component {
                        config={this.state.config}
                        updateOptions={this.updateOptions}
                        updateDistances={this.updateDistances}/>
-              <OptimizationButtons updateOptions={this.updateOptions} config={this.state.config}/>
               <Trip trip={this.state.trip}
                     planRequest={this.planRequest}
                     clearTrip={this.clearTrip}

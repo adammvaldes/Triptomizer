@@ -274,7 +274,6 @@ function testRender() {
                          config={wrapper.state().config}
                          updateOptions={wrapper.instance().updateOptions}
                          updateDistances={wrapper.instance().updateDistances}/>,
-                <OptimizationButtons updateOptions={wrapper.instance().updateOptions} config={wrapper.state().config}/>,
                 <Trip trip={wrapper.state().trip}
                       planRequest={wrapper.instance().planRequest}
                       clearTrip={wrapper.instance().clearTrip}
