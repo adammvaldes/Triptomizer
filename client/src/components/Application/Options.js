@@ -75,7 +75,8 @@ class Options extends Component{
                                 <Input type="number" placeholder="Radius of Earth through object" onChange={ this.updateRadius } />
                             </FormGroup>
                             <OptimizationButtons options={this.props.options}
-                                                 config={this.props.config}/>
+                                                 config={this.props.config}
+                                                 updateOptions={this.props.updateOptions}/>
                         </Form>
                         <Button onClick={this.hideOptions} color={'info'}> Hide Options </Button>
                     </CardBody>
@@ -92,7 +93,8 @@ class Options extends Component{
                         </ButtonGroup>
                         <FormGroup/>
                         <OptimizationButtons options={this.props.options}
-                                             config={this.props.config}/>
+                                             config={this.props.config}
+                                             updateOptions={this.props.updateOptions}/>
                     </Form>
                     <Button onClick={this.hideOptions} color={'info'}> Hide Options </Button>
                 </CardBody>
