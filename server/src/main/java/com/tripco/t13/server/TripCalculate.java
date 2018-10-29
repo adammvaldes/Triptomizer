@@ -69,7 +69,7 @@ public class TripCalculate {
                 tempCumulativeDistance += distance;
             }
 
-            if (tempCumulativeDistance <= shortestCumulativeDistance) {
+            if (tempCumulativeDistance < shortestCumulativeDistance) {
                 shortestCumulativeDistance = tempCumulativeDistance;
                 tempTrip = new Trip(trip);
             }

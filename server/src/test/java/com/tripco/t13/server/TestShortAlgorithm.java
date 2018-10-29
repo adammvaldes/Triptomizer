@@ -26,23 +26,23 @@ public class TestShortAlgorithm {
 
         place1.id = "test1";
         place1.name = "Origin";
-        place1.latitude = (float)40.5853;
-        place1.longitude = (float)-105.0844;
+        place1.latitude = 40.5853;
+        place1.longitude = -105.0844;
 
         place2.id = "tst2";
         place2.name = "longAwayFromOrigin";
-        place2.latitude = (float)36.9932;
-        place2.longitude = (float)-102.0420;
+        place2.latitude = 36.9932;
+        place2.longitude = -102.0420;
 
         place3.id = "tst3";
         place3.name = "midPointOnMap";
-        place3.latitude = (float)37.5;
-        place3.longitude = (float)-103.5;
+        place3.latitude = 37.5;
+        place3.longitude = -103.5;
 
         place4.id = "tst4";
         place4.name = "closeToOrigin";
-        place4.latitude = (float)40;
-        place4.longitude = (float)-104.8;
+        place4.latitude = 40;
+        place4.longitude = -104.8;
 
         places.add(place1);
         places.add(place2);
@@ -81,14 +81,14 @@ public class TestShortAlgorithm {
         Location denver = new Location();
         denver.id = "dnv";
         denver.name = "Denver";
-        denver.latitude = (float)39.7392;
-        denver.longitude = (float)-104.9903;
+        denver.latitude = 39.7392;
+        denver.longitude = -104.9903;
 
         Location coSprings = new Location();
         coSprings.id = "cspr";
         coSprings.name = "Colorado Springs";
-        coSprings.latitude = (float)38.8339;
-        coSprings.longitude = (float) -104.8214;
+        coSprings.latitude = 38.8339;
+        coSprings.longitude = -104.8214;
 
         places.add(origin);
         places.add(denver);
@@ -102,8 +102,8 @@ public class TestShortAlgorithm {
         Location castleRock = new Location();
         castleRock.id = "cstlrk";
         castleRock.name = "Castle Rock";
-        castleRock.latitude = (float)39.3722;
-        castleRock.longitude = (float)-104.8561;
+        castleRock.latitude = 39.3722;
+        castleRock.longitude = -104.8561;
 
         places = new ArrayList<>();
         places.add(origin);
