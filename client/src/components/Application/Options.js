@@ -2,6 +2,7 @@ import React, {Component} from 'react'
 import {Card, CardHeader, CardBody, FormGroup} from 'reactstrap'
 import { ButtonGroup, Button, Form, Label, Input, FormText} from 'reactstrap'
 import {request} from "../../api/api";
+import OptimizationButtons from "./OptimizationButtons";
 
 /* Options allows the user to change the parameters for planning
  * and rendering the trip map and itinerary.
@@ -28,7 +29,6 @@ class Options extends Component{
 
   updateName(name){
       this.props.updateOptions('unitName',name.target.value);
-      console.log(name.target.value);
   }
   updateRadius(name){
       //const userRadius = (name.target.validity.valid) ? name.target.value : this.props.options.unitRadius;
@@ -50,13 +50,13 @@ class Options extends Component{
      this.props.planRequest();
   }
   render() {
-      const buttons = this.props.config.units.map((unit) =>
-        <Button
-            key={'distance_button_' + unit}
-            className='btn-outline-dark unit-button'
-            active={this.props.options.units === unit}
-            value={unit}
-            onClick={this.updateDefault}>
+    const buttons = this.props.config.units.map((unit) =>
+      <Button
+        key={'distance_button_' + unit}
+        className='btn-outline-dark unit-button'
+        active={this.props.options.units === unit}
+        value={unit}
+        onClick={this.updateDefault}>
         {unit.charAt(0).toUpperCase() + unit.slice(1)}
       </Button>
     );
@@ -74,10 +74,8 @@ class Options extends Component{
                                 <Input type="text" name="UD" id="unitName" placeholder="Your Unit Name" onChange={ this.updateName } value={this.props.options.unitName} />
                                 <Input type="number" placeholder="Radius of Earth through object" onChange={ this.updateRadius } />
                             </FormGroup>
-                            <p>Choose the level of optimization for your trip.</p>
-                            <ButtonGroup>
-                                {optimizationButtons}
-                            </ButtonGroup>
+                            <OptimizationButtons options={this.props.options}
+                                                 config={this.props.config}/>
                         </Form>
                         <Button onClick={this.hideOptions} color={'info'}> Hide Options </Button>
                     </CardBody>
@@ -93,10 +91,8 @@ class Options extends Component{
                             {buttons}
                         </ButtonGroup>
                         <FormGroup/>
-                        <p>Choose the level of optimization for your trip.</p>
-                        <ButtonGroup>
-                            {optimizationButtons}
-                        </ButtonGroup>
+                        <OptimizationButtons options={this.props.options}
+                                             config={this.props.config}/>
                     </Form>
                     <Button onClick={this.hideOptions} color={'info'}> Hide Options </Button>
                 </CardBody>
