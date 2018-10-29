@@ -101,6 +101,7 @@ Extra epics planned for the future:
 | Date | Tasks closed  | Tasks in progress | Impediments |
 | :--- | :--- | :--- | :--- |
 | 10/24/2018 | #259, #301, #302, #303 | #294, #296, #300, #306, #308, #309, #316, #325 | *none* | 
+| 10/26/2018 | #277, #328, #330, #294, #296, #325, #259, #301, #302, #303 | #300, #306, #308, #309 | *none* |
 
 *Add a new row for the scrum session after each lecture. *
 
