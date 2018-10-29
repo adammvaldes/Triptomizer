@@ -184,7 +184,7 @@ class Application extends Component {
           <Container id="Application">
               <Info/>
               <Interop changeServer={this.changeServer} updateNumber={this.updateNumber}/>
-              <ChooseFile trip={this.state.trip} updateTFFI={this.updateTFFI}/>
+              <ChooseFile trip={this.state.trip} updateTFFI={this.updateTFFI} addDestination={this.addDestination} addLeg={this.addLeg}/>
               <Options options={this.state.trip.options}
                        config={this.state.config}
                        updateOptions={this.updateOptions}
