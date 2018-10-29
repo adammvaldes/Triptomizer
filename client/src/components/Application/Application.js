@@ -183,8 +183,7 @@ class Application extends Component {
       return(
           <Container id="Application">
               <Info/>
-              <Interop changeServer={this.changeServer}
-                       updateNumber={this.updateNumber}/>
+              <Interop changeServer={this.changeServer} updateNumber={this.updateNumber}/>
               <ChooseFile trip={this.state.trip} updateTFFI={this.updateTFFI}/>
               <Options options={this.state.trip.options}
                        config={this.state.config}
@@ -200,8 +199,8 @@ class Application extends Component {
                          removeLeg={this.removeLeg}
                          reverseTrip={this.reverseTrip}
                          setStartLeg={this.setStartLeg}
-                        addDestination={this.addDestination}
-                        addLeg={this.addLeg}/>
+                         addDestination={this.addDestination}
+                         addLeg={this.addLeg}/>
               <Map trip={this.state.trip} />
           </Container>
       )
