@@ -27,7 +27,7 @@ import OptimizationButtons from "../src/components/Application/OptimizationButto
  */
 const startProps = {
   'config': { 'units': ['miles', 'kilometers'],
-  'optimization' : [{'label' : 'none', 'description' : 'The trip is not optimized.'}, {'label' : 'short', 'description' : 'Nearest neighbor.'}]},
+  'optimization' : [{'label' : 'none', 'description' : 'The trip is not optimized.'}, {'label' : 'short', 'description' : 'Nearest neighbor.'}, {'label' : 'shorter', 'description' : '2-opt'}]},
   'options': { 'unit': 'miles' }
 };
 
@@ -41,7 +41,7 @@ function testExample() {
 
   let actualOpt = options.find('Button.optimization').map((element) => {return element.props().value });
   expect(actualUnits).toEqual(startProps.config.units);
-  expect(actualOpt).toEqual(['none','short']);
+  expect(actualOpt).toEqual(['none','short', 'shorter']);
 }
 
 test('Check to see if table gets made correctly (Function)', testExample);
