@@ -13,18 +13,18 @@ public class Distance {
     public Location destination;
     String units;
 
-    String unitName;
-    float unitRadius;
+    String unitName = null;
+    Double unitRadius = null;
 
-    int distance;
+    Integer distance = null;
 
-    public static int getDistanceNum(float theta1, float lambda1, float theta2, float lambda2, float radius) {
+    public static int getDistanceNum(double theta1, double lambda1, double theta2, double lambda2, double radius) {
 
         //convert all degree definitions to radians.
-        theta1 = (float)Math.toRadians(theta1);
-        theta2 = (float)Math.toRadians(theta2);
-        lambda1 = (float)Math.toRadians(lambda1);
-        lambda2 = (float)Math.toRadians(lambda2);
+        theta1 = Math.toRadians(theta1);
+        theta2 = Math.toRadians(theta2);
+        lambda1 = Math.toRadians(lambda1);
+        lambda2 = Math.toRadians(lambda2);
 
         //implement Vincenty formulae of d = r * arctan definition.
         return (int)Math.round(radius * Math.atan2((Math.sqrt(Math.pow(Math.cos(theta2) * Math.sin(lambda2 - lambda1), 2) +
@@ -33,9 +33,9 @@ public class Distance {
                 Math.cos(theta1) * Math.cos(theta2) * Math.cos(lambda2 - lambda1))));
     }
 
-    public float getRadius(String units) {
+    public double getRadius(String units) {
 
-        float radius = 0;
+        double radius = 0;
         if(units.equals("miles")) {
             radius = 3959;
             unitRadius = radius;

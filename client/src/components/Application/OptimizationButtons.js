@@ -1,5 +1,5 @@
 import React, {Component} from 'react';
-import {Card, CardBody, Button, col} from 'reactstrap';
+import {Container, Card, CardBody, Button, col} from 'reactstrap';
 import { ButtonGroup, Form, Label, Input, FormText} from 'reactstrap'
 
 class OptimizationButtons extends Component {
@@ -16,11 +16,9 @@ class OptimizationButtons extends Component {
         const optimizationButtons = this.props.config.optimization.map((option) =>
             <Button
                 key={'Optimization button_' + option.label }
-                className="btn text-white optimization"
+                className="btn-outline-dark optimization"
                 type="button"
-                active={this.props.config.optimization === option.label}
-                //color={"primary"}
-                style={{backgroundColor: "000000"}}
+                active={this.props.options.optimization === option.label}
                 value={option.label}
                 onClick={this.updateOptimization}
             >
@@ -28,18 +26,14 @@ class OptimizationButtons extends Component {
             </Button>
         );
         return(
-            <Card>
-                <CardBody>
-                    <p>Choose the level of optimization for your trip.</p>
-                    <ButtonGroup>
-                        {optimizationButtons}
-                    </ButtonGroup>
-
-                </CardBody>
-            </Card>
+            <div>
+               <p>Choose the level of optimization for your trip.</p>
+               <ButtonGroup>
+                  {optimizationButtons}
+               </ButtonGroup>
+            </div>
         );
     }
 }
-
 
 export default OptimizationButtons;

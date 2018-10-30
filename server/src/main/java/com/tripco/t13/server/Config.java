@@ -17,6 +17,7 @@ public class Config {
     Config conf = new Config();
     OptimizationConfig option1 = new OptimizationConfig();
     OptimizationConfig option2 = new OptimizationConfig();
+    OptimizationConfig option3 = new OptimizationConfig();
 
     option1.label = "none";
     option1.description = "The trip is not optimized.";
@@ -24,10 +25,12 @@ public class Config {
     option2.label = "short";
     option2.description = "Nearest neighbor.";
 
-    conf.optimization = Arrays.asList(option1, option2);
+    option3.label = "shorter";
+    option3.description = "2-opt.";
+
+    conf.optimization = Arrays.asList(option1, option2, option3);
 
     Gson gson = new Gson();
-
 
     return gson.toJson(conf);
   }

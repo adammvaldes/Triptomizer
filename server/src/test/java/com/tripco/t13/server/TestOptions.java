@@ -16,14 +16,14 @@ public class TestOptions {
         options = new Options();
         options.unitName = "";
         options.units = "";
-        options.unitRadius = 0;
+        options.unitRadius = 0.0;
     }
 
     @Test
     public void testMilesOptions(){
         options.units = "miles";
         options.setOptions();
-        float radius = options.unitRadius;
+        double radius = options.unitRadius;
         assertEquals(3959, radius, 0.0);
         assertEquals("miles", options.unitName);
     }

@@ -23,10 +23,10 @@ public class TestDistance {
         distance = new Distance();
         distance.origin = new Location();
         distance.destination = new Location();
-        distance.origin.latitude = (float)40.5853;
-        distance.origin.longitude = (float)-105.0844;
-        distance.destination.latitude = (float)-33.8688;
-        distance.destination.longitude = (float)151.2093;
+        distance.origin.latitude = 40.5853;
+        distance.origin.longitude = -105.0844;
+        distance.destination.latitude = -33.8688;
+        distance.destination.longitude = 151.2093;
         distance.origin.name = "Fort Collins, Colorado, USA";
         distance.destination.name = "Sydney, New South Wales, Australia";
     }
@@ -65,7 +65,7 @@ public class TestDistance {
     public void testUserDefined1(){
         distance.units = "user defined";
         distance.unitName = "meters";
-        distance.unitRadius = 6371000;
+        distance.unitRadius = 6371000.0;
         //distance.getRadius(distance.units);
         int testDistance = Distance.getDistanceNum(distance.origin.latitude, distance.origin.longitude, distance.destination.latitude, distance.destination.longitude, distance.getRadius(distance.units));
         assertEquals(13431841, testDistance);
@@ -75,16 +75,16 @@ public class TestDistance {
     public void testUserDefined2(){
         distance.units = "user defined";
         distance.unitName = "feet";
-        distance.unitRadius = 20903520;
+        distance.unitRadius = 20903520.0;
         //distance.getRadius(distance.units);
         int testDistance = Distance.getDistanceNum(distance.origin.latitude, distance.origin.longitude, distance.destination.latitude, distance.destination.longitude, distance.getRadius(distance.units));
-        assertEquals(44070439, testDistance);
+        assertEquals(44070438, testDistance);
     }
 
     @Test
     public void testGetRadius(){
         String units = "miles";
-        float answer = distance.getRadius(units);
+        double answer = distance.getRadius(units);
         assertEquals(3959, answer, 0.0);
 
         units = "kilometers";
@@ -96,7 +96,7 @@ public class TestDistance {
         assertEquals(3440, answer, 0.0);
 
         units = "user defined";
-        distance.unitRadius = 1234;
+        distance.unitRadius = 1234.0;
         answer = distance.getRadius(units);
         assertEquals(1234, answer, 0.0);
     }

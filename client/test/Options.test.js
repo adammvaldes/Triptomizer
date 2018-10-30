@@ -13,6 +13,7 @@ import './enzyme.config.js'                   // (1)
 import React from 'react'
 import { mount } from 'enzyme'              // (2)
 import Options from '../src/components/Application/Options'
+import OptimizationButtons from "../src/components/Application/OptimizationButtons";
 
 /* Both of these tests are functionally identical although the standard way
  *  of writing tests uses lambda or anonymous functions. These are useful
@@ -25,7 +26,8 @@ import Options from '../src/components/Application/Options'
  * component on construction.
  */
 const startProps = {
-  'config': { 'units': ['miles', 'kilometers'] },
+  'config': { 'units': ['miles', 'kilometers'],
+  'optimization' : [{'label' : 'none', 'description' : 'The trip is not optimized.'}, {'label' : 'short', 'description' : 'Nearest neighbor.'}, {'label' : 'shorter', 'description' : '2-opt'}]},
   'options': { 'unit': 'miles' }
 };
 
@@ -35,10 +37,11 @@ function testExample() {
       <Options config={startProps.config} options={startProps.options}/>
   ));
 
-  let actual = [];
-  options.find('Button').map((element) => actual.push(element.prop('value')));
+  let actualUnits = options.find('Button.unit-button').map((element) => {return element.props().value});
 
-  expect(actual).toEqual(startProps.config.units);
+  let actualOpt = options.find('Button.optimization').map((element) => {return element.props().value });
+  expect(actualUnits).toEqual(startProps.config.units);
+  expect(actualOpt).toEqual(['none','short', 'shorter']);
 }
 
 test('Check to see if table gets made correctly (Function)', testExample);
@@ -46,20 +49,20 @@ test('Check to see if table gets made correctly (Function)', testExample);
 /*--------------------------------------------------------------------------*/
 
 /* Test example using an anonymous function */
-test('Check to see if table gets made correctly (Lambda)', () => {
-  /*  First, we create a version of our Options component, using the
-   *  startProps object defined above for its props (1). With our new unrendered
-   *  component, we can call ReactWrapper.find() to extract a certain part
-   *  of the component and its children (2). Lastly, we check to see if the
-   *  value of the buttons created by the component is what we expect,
-   *  given the example input (3).
-  */
-  const options = mount((   // (1)
-      <Options config={startProps.config} options={startProps.options}/>
-    ));
-
-  let actual = [];
-  options.find('Button').map((element) => actual.push(element.prop('value')));  // (2)
-
-  expect(actual).toEqual(startProps.config.units);  // (3)
-});
+// test('Check to see if table gets made correctly (Lambda)', () => {
+//   /*  First, we create a version of our Options component, using the
+//    *  startProps object defined above for its props (1). With our new unrendered
+//    *  component, we can call ReactWrapper.find() to extract a certain part
+//    *  of the component and its children (2). Lastly, we check to see if the
+//    *  value of the buttons created by the component is what we expect,
+//    *  given the example input (3).
+//   */
+//   const options = mount((   // (1)
+//       <Options config={startProps.config} options={startProps.options}/>
+//     ));
+//
+//   let actual = [];
+//   options.find('Button').map((element) => actual.push(element.prop('value')));  // (2)
+//
+//   expect(actual).toEqual(startProps.config.units);  // (3)
+// });

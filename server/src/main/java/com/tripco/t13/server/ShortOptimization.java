@@ -48,7 +48,7 @@ public class ShortOptimization {
                 int tempDistance = Distance.getDistanceNum(origin.latitude, origin.longitude, places.get(place).latitude,
                         places.get(place).longitude, distance.getRadius(units));
 
-                if (tempDistance <= shortestDistance) {
+                if (tempDistance < shortestDistance) {
                     shortestDistance = tempDistance;
                     closestPlace = places.get(place);
                 }
