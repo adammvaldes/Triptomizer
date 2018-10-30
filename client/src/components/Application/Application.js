@@ -41,7 +41,6 @@ class Application extends Component {
     this.planRequest = this.planRequest.bind(this);
     this.clearTrip = this.clearTrip.bind(this);
     this.updateTrip = this.updateTrip.bind(this);
-    //this.updateBasedOnResponse = this.updateBasedOnResponse.bind(this);
     this.updateOptions = this.updateOptions.bind(this);
     this.updateMap = this.updateMap.bind(this);
     this.updateTFFI = this.updateTFFI.bind(this);
@@ -187,7 +186,6 @@ class Application extends Component {
               <ChooseFile trip={this.state.trip} updateTFFI={this.updateTFFI} addDestination={this.addDestination} addLeg={this.addLeg}/>
               <Options options={this.state.trip.options}
                        config={this.state.config}
-                       updateOptions={this.updateOptions}
                        updateDistances={this.updateDistances}
                        planRequest={this.planRequest}
                        updateOptions={this.updateOptions}/>

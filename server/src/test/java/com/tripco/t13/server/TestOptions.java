@@ -22,51 +22,44 @@ public class TestOptions {
     @Test
     public void testMilesOptions(){
         options.units = "miles";
-        options.setOptions();
-        double radius = options.unitRadius;
+        double radius = options.getRadius();
         assertEquals(3959, radius, 0.0);
-        assertEquals("miles", options.unitName);
+        //assertEquals("miles", options.unitName);
     }
 
     @Test
     public void testKilometersOptions(){
         options.units = "kilometers";
-        options.setOptions();
-        assertEquals(6371, options.unitRadius, 0.0);
-        assertEquals("kilometers", options.unitName);
+        assertEquals(6371, options.getRadius(), 0.0);
+        //assertEquals("kilometers", options.unitName);
     }
 
     @Test
     public void testNauticalMilesOptions(){
         options.units = "nautical miles";
-        options.setOptions();
-        assertEquals(3440, options.unitRadius, 0.0);
-        assertEquals("nautical miles", options.unitName);
+        assertEquals(3440, options.getRadius(), 0.0);
+        //assertEquals("nautical miles", options.unitName);
     }
 
     @Test
     public void testNullOptions(){
         options.units = "";
-        options.setOptions();
-        assertEquals(3959, options.unitRadius, 0.0);
-        assertEquals("miles", options.unitName);
+        assertEquals(3959, options.getRadius(), 0.0);
         assertEquals("miles", options.units);
     }
 
     @Test
     public void testUserDefinedOptions(){
         options.units = "user defined";
-        options.setOptions();
-        assertEquals(0.0, options.unitRadius, 0.0);
+        assertEquals(0.0, options.getRadius(), 0.0);
         assertEquals("", options.unitName);
     }
 
     @Test
     public void testInvalidOptions(){
         options.units = "stuffity";
-        options.setOptions();
-        assertEquals(3959, options.unitRadius, 0.0);
-        assertEquals("miles", options.unitName);
+        assertEquals(3959, options.getRadius(), 0.0);
+        //assertEquals("miles", options.unitName);
         assertEquals("miles", options.units);
     }
 }
