@@ -202,7 +202,7 @@ public class TestTripCalculate {
         String jsonStr = "{\n" +
                 "  \"type\": \"trip\",\n" +
                 "  \"title\": \"Colorado County Seats\",\n" +
-                "  \"version\": 3,\n" +
+                "  \"version\": 4,\n" +
                 "  \"options\": {\n" +
                 "    \"units\":\"miles\",\n" +
                 "    \"optimization\": \"none\"\n" +
@@ -252,7 +252,7 @@ public class TestTripCalculate {
         String jsonStr = "{\n" +
                 "  \"type\": \"trip\",\n" +
                 "  \"title\": \"Colorado County Seats\",\n" +
-                "  \"version\": 3,\n" +
+                "  \"version\": 4,\n" +
                 "  \"options\": {\n" +
                 "    \"units\":\"miles\",\n" +
                 "    \"optimization\": \"none\"\n" +
@@ -297,7 +297,7 @@ public class TestTripCalculate {
         String jsonStr = "{\n" +
                 "  \"type\": \"trip\",\n" +
                 "  \"title\": \"Colorado County Seats\",\n" +
-                "  \"version\": 3,\n" +
+                "  \"version\": 4,\n" +
                 "  \"options\": {\n" +
                 "    \"units\":\"miles\",\n" +
                 "    \"optimization\": \"none\"\n" +

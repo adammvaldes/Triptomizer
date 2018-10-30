@@ -28,9 +28,7 @@ public class Trip{
         bananas: 35828571
      */
 
-    Trip(){
-
-    }
+    Trip(){} //allow option of none for initialization.
 
     //A constructor for short path algorithm in shortOptimization() method in TripCalculate.java to deep copy a Trip object.
     Trip(Trip trip){
@@ -47,11 +45,10 @@ public class Trip{
     //distances arraylist with round trip distance. Distances are calculated using getDistanceNum method from Distance class.
     public ArrayList<Integer> getTripDistances(){
         distances = new ArrayList<Integer>();
-        options.setOptions();
         for(int i = 0; i < places.size() - 1; i++) {
-            distances.add(Distance.getDistanceNum(places.get(i).latitude, places.get(i).longitude, places.get(i+1).latitude, places.get(i+1).longitude, options.unitRadius));
+            distances.add(Distance.getDistanceNum(places.get(i).latitude, places.get(i).longitude, places.get(i+1).latitude, places.get(i+1).longitude, options.getRadius()));
         }
-        distances.add(Distance.getDistanceNum(places.get(places.size()-1).latitude, places.get(places.size()-1).longitude, places.get(0).latitude, places.get(0).longitude, options.unitRadius));
+        distances.add(Distance.getDistanceNum(places.get(places.size()-1).latitude, places.get(places.size()-1).longitude, places.get(0).latitude, places.get(0).longitude, options.getRadius()));
 
         return distances;
     }
