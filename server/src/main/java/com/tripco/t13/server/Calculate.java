@@ -28,7 +28,7 @@ public class Calculate {
             isCorrectFormat = validateDistanceRequestFormat(distance);
             double radius = distance.getRadius(distance.units);
             //Perform the Calculation
-            distance.distance = distance.getDistanceNum(distance.origin.latitude,distance.origin.longitude,distance.destination.latitude,distance.destination.longitude, radius); //Added 2 in place of paramaters
+            distance.distance = Distance.getDistanceNum(distance.origin.latitude,distance.origin.longitude,distance.destination.latitude,distance.destination.longitude, radius); //Added 2 in place of paramaters
 
         }
         catch(Exception e){

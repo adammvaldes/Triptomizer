@@ -34,24 +34,10 @@ public class Distance {
     }
 
     public double getRadius(String units) {
-
-        double radius = 0;
-        if(units.equals("miles")) {
-            radius = 3959;
-            unitRadius = radius;
-        }
-        if(units.equals("kilometers")) {
-            radius = 6371;
-            unitRadius = radius;
-        }
-        if(units.equals("nautical miles")) {
-            radius = 3440;
-            unitRadius = radius;
-        }
-
-        if(units.equals("user defined"))
-            radius = unitRadius;
-
-        return radius;
+        Options options = new Options();
+        options.units = units;
+        options.unitName = this.unitName;
+        options.unitRadius = this.unitRadius;
+        return options.getRadius();
     }
 }

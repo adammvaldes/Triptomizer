@@ -5,7 +5,7 @@ import java.util.ArrayList;
 public class ShortOptimization {
 
     //Performs shortest trip calculation based on what place of origin has been received.
-    static ArrayList<Location> travelingSalesman(Location currentOrigin, ArrayList<Location> places, String units) {
+    static ArrayList<Location> travelingSalesman(Location currentOrigin, ArrayList<Location> places, Options options) {
         boolean[] visitedPlaces = new boolean[places.size()];
         boolean allPlacesVisited = false;
         ArrayList<Location> sortedPlaces = new ArrayList<>();
@@ -14,7 +14,7 @@ public class ShortOptimization {
         visitedPlaces[places.indexOf(currentOrigin)] = true;
 
         while (!allPlacesVisited) {
-            currentOrigin = calculateDistances(currentOrigin, visitedPlaces, places, units);
+            currentOrigin = calculateDistances(currentOrigin, visitedPlaces, places, options);
             visitedPlaces[places.indexOf(currentOrigin)] = true;
             sortedPlaces.add(currentOrigin);
 
@@ -35,9 +35,8 @@ public class ShortOptimization {
     /*This method calculates the shortest distance between the starting origin, and all the other places
     this method has been given.
     */
-    static Location calculateDistances(Location origin, boolean[] visitedPlaces, ArrayList<Location> places, String units) {
+    static Location calculateDistances(Location origin, boolean[] visitedPlaces, ArrayList<Location> places, Options options) {
         Distance distance = new Distance();
-
         int shortestDistance = Integer.MAX_VALUE;
         Location closestPlace = null;
 
@@ -46,7 +45,7 @@ public class ShortOptimization {
             if (!places.get(place).equals(origin) && !visitedPlaces[place]) {
 
                 int tempDistance = Distance.getDistanceNum(origin.latitude, origin.longitude, places.get(place).latitude,
-                        places.get(place).longitude, distance.getRadius(units));
+                        places.get(place).longitude, options.getRadius());
 
                 if (tempDistance < shortestDistance) {
                     shortestDistance = tempDistance;
