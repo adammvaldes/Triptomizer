@@ -1,5 +1,7 @@
 import React, { Component } from 'react';
 import {Button, Card, CardBody,  FormGroup, FormText, Input, Label} from 'reactstrap';
+import SearchBar from "./SearchBar";
+import AddByName from "./AddByName";
 
 
 class ChooseFile extends Component {
@@ -36,6 +38,8 @@ class ChooseFile extends Component {
                         The file needs to be a JSON file, with the ".json" tag at the end of the name.
                     </FormText>
                     <Label> Or plan your trip from scratch below! </Label>
+                    <SearchBar addDestination={this.props.addDestination}/>
+                    <AddByName addLeg={this.props.addLeg}/>
                 </CardBody>
             </Card>
         );
