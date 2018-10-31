@@ -6,6 +6,8 @@ import com.google.gson.JsonParser;
 import jdk.nashorn.internal.parser.JSONParser;
 import spark.Request;
 
+import java.util.ArrayList;
+
 public class Distance {
     String type;
     int version;
@@ -31,6 +33,12 @@ public class Distance {
                         Math.pow((Math.cos(theta1) * Math.sin(theta2) - Math.sin(theta1) * Math.cos(theta2) *
                 Math.cos(lambda2 - lambda1)), 2))), (Math.sin(theta1) * Math.sin(theta2) +
                 Math.cos(theta1) * Math.cos(theta2) * Math.cos(lambda2 - lambda1))));
+    }
+
+    public static int getDistanceNum(ArrayList<Location> route, int i, int j, double radius){
+        Location location1 = route.get(i);
+        Location location2 = route.get(j);
+        return getDistanceNum(location1.latitude, location1.longitude, location2.latitude, location2.longitude, radius);
     }
 
     public double getRadius(String units) {
