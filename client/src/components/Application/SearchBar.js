@@ -1,5 +1,5 @@
 import React, {Component} from 'react';
-import {Card, CardBody, FormGroup, Table, Collapse} from 'reactstrap';
+import {Card, CardBody, FormGroup, Table, Collapse, InputGroup} from 'reactstrap';
 import {Button, Form, Input} from 'reactstrap';
 import {request} from "../../api/api";
 
@@ -91,10 +91,10 @@ class SearchBar extends Component{
                 <Button onClick={this.toggle} type="button" style={{backgroundColor: "000000"}} >Search for locations</Button>
                 <Collapse isOpen={this.state.collapse}>
                     <Form>
-                        <FormGroup>
+                        <InputGroup>
                             <Input type="text" placeholder="Search for a destination to add to your trip" onChange={this.handleChange} />
-                            <Input type="number" placeholder="Number of search results you want" onChane={this.updateSearchNumber} />
-                        </FormGroup>
+                            <Input type="number" placeholder="Number of search results you want" onChange={this.updateSearchNumber} />
+                        </InputGroup>
                     </Form>
                     <Button className="btn text-white" type="button" style={{backgroundColor: "407157"}} onClick={this.search}>Search</Button>
                     <div id="parent">

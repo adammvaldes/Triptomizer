@@ -8,6 +8,7 @@ class ChooseFile extends Component {
     constructor(props) {
         super(props);
         this.readFile = this.readFile.bind(this);
+        this.updateTitle = this.updateTitle.bind(this);
     }
     readFile(tffi){
         let file = tffi.target.files[0];
@@ -27,6 +28,10 @@ class ChooseFile extends Component {
         fReader.readAsText(file);
     }
 
+    updateTitle(title){
+        this.props.updateTrip("title", title.target.value);
+    }
+
     render() {
         return (
             <Card>
@@ -37,7 +42,9 @@ class ChooseFile extends Component {
                     <FormText>
                         The file needs to be a JSON file, with the ".json" tag at the end of the name.
                     </FormText>
-                    <Label> Or plan your trip from scratch below! </Label>
+                    <h2> Or plan your trip from scratch below! </h2>
+                    <p> Enter your trip title below! </p>
+                    <Input type="text" placeholder={this.props.trip.title} onChange={this.updateTitle}/>
                     <SearchBar addDestination={this.props.addDestination}/>
                     <AddByName addLeg={this.props.addLeg}/>
                 </CardBody>
