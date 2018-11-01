@@ -6,58 +6,54 @@ import { col } from 'reactstrap';
 class Interop extends Component {
     constructor(props) {
         super(props);
-
+        this.state = {
+            server : "black-bottle.cs.colostate.edu",
+            port : "31413"
+        };
         this.changeServer = this.changeServer.bind(this);
         this.updatePort = this.updatePort.bind(this);
-        this.teamNumbers = this.teamNumbers.bind(this);
+        this.handleServerChange = this.handleServerChange.bind(this);
+        this.handlePortChange = this.handlePortChange.bind(this);
     }
 
     changeServer(){
-        this.props.changeServer("black-bottle.cs.colostate.edu");
+        this.props.changeServer(this.state.server);
     }
 
-    updatePort(team){
-        let value = "314";
-        let t = team.target.value;
-        let number = t.substr(5,t.length);
-        if(number < 0){
-
-        }
-        value += number;
-        this.props.updateNumber(value);
-    }
-
-    teamNumbers(){
-        let teams = [];
-        for(let i = 0; i < 25; i++) {
-            if(i != 13) {
-                if(i < 10){
-                    teams.push(<option key={i}> team 0{i} </option>);
-                }
-                else{
-                    teams.push(<option key={i}> team {i} </option>);
-                }
+    updatePort(){
+            let tempPort = "314";
+            if(this.state.port.length == 4){
+                tempPort += "0" + this.state.port.at(3);
+                this.state.port = tempPort;
             }
-        }
-        return teams;
+            this.changeServer();
+            this.props.updateNumber(this.state.port);
+    }
+
+    handleServerChange(event){
+        this.setState({server: event.target.value})
+    }
+
+    handlePortChange(event){
+        this.setState({port: event.target.value})
     }
 
     render() {
-        let var0 = this.teamNumbers();
-        return (
+        return(
             <Card>
                 <CardBody>
-                    <InputGroup size="sm">
-                        <InputGroupAddon addonType="prepend"><Button className="btn text-white" type="button" color="info" onClick={this.changeServer}> Change Server </Button></InputGroupAddon>
-                        <Input type="select" onChange={this.updatePort}>
-                            <option> team 13 </option>
-                            {var0}
-                        </Input>
+                    Enter your server information then click the corresponding change button to change the server
+                    <InputGroup>
+                        <InputGroupAddon addonType="prepend"><Button className="btn text-white" type="button" style={{backgroundColor: "407157"}} onClick={this.changeServer}>Change Server</Button></InputGroupAddon>
+                        <Input type="text" placeholder="Enter the URL of the server you want to use" onChange={this.handleServerChange} value={this.state.server}/>
                     </InputGroup>
-                    <FormText> Select which team's server you wish to use.</FormText>
+                    <InputGroup>
+                        <InputGroupAddon addonType="prepend"><Button className="btn text-white" type="button" style={{backgroundColor: "407157"}} onClick={this.updatePort}>Change Port</Button></InputGroupAddon>
+                        <Input type="number" placeholder="Enter the port number you want to use" onChange={this.handlePortChange} value={this.state.port}/>
+                    </InputGroup>
                 </CardBody>
             </Card>
-        );
+        )
     }
 }
 
