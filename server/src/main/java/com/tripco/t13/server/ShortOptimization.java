@@ -29,6 +29,7 @@ public class ShortOptimization {
             }
         }
 
+        sortedPlaces.add(sortedPlaces.get(0)); //Make it a round trip.
         return sortedPlaces;
     }
 
