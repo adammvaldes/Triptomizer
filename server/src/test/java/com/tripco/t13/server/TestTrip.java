@@ -56,7 +56,7 @@ public class TestTrip {
         trip.getTripDistances();
         assertEquals(3959, trip.options.getRadius(), 0.001);
         ArrayList<Integer> expectedDistances = new ArrayList<Integer>();
-        Collections.addAll(expectedDistances, 24, 41, 59);
+        Collections.addAll(expectedDistances, 24, 41);
         assertEquals(expectedDistances, trip.distances);
     }
 
@@ -66,7 +66,7 @@ public class TestTrip {
         trip.getTripDistances();
         assertEquals(6371, trip.options.getRadius(), 0.001);
         ArrayList<Integer> expectedDistances = new ArrayList<Integer>();
-        Collections.addAll(expectedDistances, 39, 65, 94);
+        Collections.addAll(expectedDistances, 39, 65);
         assertEquals(expectedDistances, trip.distances);
     }
 
@@ -76,7 +76,7 @@ public class TestTrip {
         trip.getTripDistances();
         assertEquals(3440, trip.options.getRadius(), 0.001);
         ArrayList<Integer> expectedDistances = new ArrayList<Integer>();
-        Collections.addAll(expectedDistances, 21, 35, 51);
+        Collections.addAll(expectedDistances, 21, 35);
         assertEquals(expectedDistances, trip.distances);
     }
 
@@ -88,7 +88,7 @@ public class TestTrip {
         trip.getTripDistances();
         assertEquals(3958.7613, trip.options.getRadius(), 0.001);
         ArrayList<Integer> expectedDistances = new ArrayList<Integer>();
-        Collections.addAll(expectedDistances, 24, 41, 59);
+        Collections.addAll(expectedDistances, 24, 41);
         assertEquals(expectedDistances, trip.distances);
     }
 
@@ -100,7 +100,7 @@ public class TestTrip {
         trip.getTripDistances();
         assertEquals(35828571.0, trip.options.getRadius(), 1);
         ArrayList<Integer> expectedDistances = new ArrayList<Integer>();
-        Collections.addAll(expectedDistances, 218699, 367486, 530971);
+        Collections.addAll(expectedDistances, 218699, 367486);
         assertEquals(expectedDistances, trip.distances);
     }
 

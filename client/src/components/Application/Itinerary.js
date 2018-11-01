@@ -56,8 +56,9 @@ class Itinerary extends Component {
         });
         return (
             <tr>
-                <th scope="row">Total Distance, {this.props.trip.options.unitName }</th>
-                <td>0</td>{tripDistances}
+                <th scope="row">Total Distance, {this.props.trip.options.units}</th>
+                <td>0</td>
+                {tripDistances}
             </tr>
         );
     }

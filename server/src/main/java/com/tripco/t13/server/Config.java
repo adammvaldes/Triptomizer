@@ -7,7 +7,7 @@ import java.util.List;
 
 public class Config {
 
-  private short version = 3;
+  private short version = 4;
   private String type = "config";
 
   private List<String> units = Arrays.asList("miles","kilometers","nautical miles","user defined");
