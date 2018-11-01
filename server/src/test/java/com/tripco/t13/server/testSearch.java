@@ -42,10 +42,21 @@ public class testSearch {
         search.match = "den";
         String answer = search.createSearch(search.match);
 
-        assertEquals("select id,name,municipality,type,latitude,longitude from airports where " +
-                "name like '%den%' or id like '%den%' or " +
-                "municipality like '%den%' or type like '%den%' or " +
-                "latitude like '%den%' or longitude like '%den%'",answer);
+        assertEquals("select world_airports.id, world_airports.type, " +
+                "world_airports.latitude, world_airports.longitude, " +
+                "world_airports.name, world_airports.municipality, region.name, country.name, continents.name from continents " +
+                "inner join country on continents.id = country.continent " +
+                "inner join region on country.id = region.iso_country " +
+                "inner join world_airports on region.id = world_airports.iso_region " +
+                "where country.name like '%den%' " +
+                "or region.name like '%den%' " +
+                "or world_airports.name like '%den%' " +
+                "or world_airports.municipality like '%den%' " +
+                "or continents.name like '%den%' " +
+                "or world_airports.latitude like '%den%' " +
+                "or world_airports.longitude like '%den%' " +
+                "or world_airports.id like '%den%' " +
+                "or world_airports.type like '%den%'",answer);
     }
 
     @Test

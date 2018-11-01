@@ -8,5 +8,8 @@ public class Location {
     public double longitude;
     public String municipality;
     public String type;
+    public String region;
+    public String country;
+    public String continent;
 
 }

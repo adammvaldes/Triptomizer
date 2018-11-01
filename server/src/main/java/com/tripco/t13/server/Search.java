@@ -10,22 +10,31 @@ public class Search {
     Integer version;
     String match;
     Integer limit;
-    ArrayList<Location> places ;
+    ArrayList<Location> places;
+
+    ArrayList<String> filters;
+    Integer found;
 
     public String createSearch(String match){
         //Creating the search string for the database
-        String search = "select id,name,municipality,type,latitude,longitude from airports where ";
+        String Qmatch = "'%" + match + "%'";
+        String newSearch = "select world_airports.id, world_airports.type, " +
+                "world_airports.latitude, world_airports.longitude, " +
+                "world_airports.name, world_airports.municipality, region.name, country.name, continents.name from continents ";
+        newSearch += "inner join country on continents.id = country.continent ";
+        newSearch += "inner join region on country.id = region.iso_country ";
+        newSearch += "inner join world_airports on region.id = world_airports.iso_region ";
+        newSearch += "where country.name like " + Qmatch + " ";
+        newSearch += "or region.name like " + Qmatch + " ";
+        newSearch += "or world_airports.name like " + Qmatch + " ";
+        newSearch += "or world_airports.municipality like " + Qmatch + " ";
+        newSearch += "or continents.name like " + Qmatch + " ";
+        newSearch += "or world_airports.latitude like " + Qmatch + " ";
+        newSearch += "or world_airports.longitude like " + Qmatch + " ";
+        newSearch += "or world_airports.id like " + Qmatch + " ";
+        newSearch += "or world_airports.type like " + Qmatch;
 
-        String temp = "name like '%" + match + "%' or id like '%" + match + "%' or ";
-        search += temp;
-
-        temp = "municipality like '%" + match + "%' or type like '%" + match + "%' or ";
-        search += temp;
-
-        temp = "latitude like '%" + match + "%' or longitude like '%" + match + "%'";
-        search += temp;
-
-        return search;
+        return newSearch;
     }
 
     public String applyLimit(Integer limit, String match, Search searchObject){
@@ -55,6 +64,9 @@ public class Search {
             placeSearch.type = query.getString("type");
             placeSearch.latitude = Double.parseDouble(query.getString("latitude"));
             placeSearch.longitude = Double.parseDouble(query.getString("longitude"));
+            placeSearch.region = query.getString(7);
+            placeSearch.country = query.getString(8);
+            placeSearch.continent = query.getString(9);
             places.add(placeSearch);
         }
     }
@@ -62,7 +74,7 @@ public class Search {
     public boolean validateSearchRequestFormat(Search searchObject) {
         //check if format of request if correct: type:"search" and version 3
         if(searchObject.match.length() != 0
-                && searchObject.version == 3
+                && (searchObject.version == 3 || searchObject.version == 4)
                 && searchObject.type.equals("search")) {
             if(searchObject.places == null){
                 searchObject.places = new ArrayList<Location>();
@@ -74,3 +86,14 @@ public class Search {
     }
 
 }
+
+ /*String search = "select id,name,municipality,type,latitude,longitude from airports where ";
+
+        String temp = "name like '%" + match + "%' or id like '%" + match + "%' or ";
+        search += temp;
+
+        temp = "municipality like '%" + match + "%' or type like '%" + match + "%' or ";
+        search += temp;
+
+        temp = "latitude like '%" + match + "%' or longitude like '%" + match + "%'";
+        search += temp;*/
