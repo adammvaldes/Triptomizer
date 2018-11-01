@@ -28,10 +28,10 @@ public class TestTripCalculate {
          String jsonStr ="{\n" +
                  "  \"type\": \"trip\",\n" +
                  "  \"title\": \"Colorado County Seats\",\n" +
-                 "  \"version\": 3,\n" +
+                 "  \"version\": 4,\n" +
                  "  \"options\": {\n" +
-                 "    \"units\":\"miles\"\n" +
-//                 "    \"optimization\": \"short\"\n" +
+                 "    \"units\":\"miles\",\n" +
+                 "    \"optimization\": \"none\"\n" +
                  "  },\n" +
                  "  \"places\":\n" +
                  "  [\n" +
@@ -108,7 +108,7 @@ public class TestTripCalculate {
 
     @Test
     public void testShortOptimization() {
-        if (tripCalculate.trip.options.optimization != null && tripCalculate.trip.options.optimization.equals("short")) {
+        if (tripCalculate.trip.options.optimization != null && (tripCalculate.trip.options.optimization.equals("short") || tripCalculate.trip.options.optimization.equals("shorter"))) {
             tripCalculate.shortOptimization();
         }
         System.out.println("Newly optimized trip: ");
@@ -116,7 +116,6 @@ public class TestTripCalculate {
         for (Location location : tripCalculate.trip.places) {
             System.out.print(location.name + " --> ");
         }
-
         System.out.println("\n\nTotal distance for trip: ");
         ArrayList<Integer> distances = tripCalculate.trip.getTripDistances();
 

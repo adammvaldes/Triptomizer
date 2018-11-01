@@ -27,9 +27,11 @@ public class TripCalculate {
             trip = gson.fromJson(requestBody, Trip.class);
             isCorrectFormat = validateTripRequestFormat(trip);
 
-            if (trip.options.optimization != null && trip.options.optimization.equals("short")) {
+            String optimization = trip.options.optimization;
+            if (trip.options.optimization != null && (optimization.equals("short") || optimization.equals("shorter"))) {
                 shortOptimization();
             } else {
+                trip.places.add(trip.places.get(0));
                 trip.getTripDistances();
             }
 
@@ -62,9 +64,32 @@ public class TripCalculate {
         //is shortest.
         for (Location place : retainOriginalPlaces) {
             trip.places = ShortOptimization.travelingSalesman(place, retainOriginalPlaces, trip.options);
-            trip.distances = trip.getTripDistances();
             int tempCumulativeDistance = 0;
 
+            if (trip.options.optimization.equals("shorter")) {
+                boolean improvement = true;
+                while (improvement) {
+                    improvement = false;
+                    if (retainOriginalPlaces.size() > 4) {
+                        for (int i = 0; i <= retainOriginalPlaces.size() - 3; i++) {
+                            for (int k = i + 2; k <= retainOriginalPlaces.size() - 1; k++) {
+                                double radius = trip.options.getRadius();
+                                double delta = -(Distance.getDistanceNum(trip.places, i, i+1, radius))
+                                        -(Distance.getDistanceNum(trip.places, k, k+1, radius))
+                                        +(Distance.getDistanceNum(trip.places, i, k, radius))
+                                        +(Distance.getDistanceNum(trip.places, i+1, k+1, radius));
+
+                                if (delta < 0) {
+                                    trip.places = twoOptReverse(trip.places, i+1, k);
+                                    improvement = true;
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+
+            trip.distances = trip.getTripDistances();
             for (int distance : trip.distances) {
                 tempCumulativeDistance += distance;
             }
@@ -76,6 +101,17 @@ public class TripCalculate {
         }
 
         trip = tempTrip;
+    }
+
+    public ArrayList<Location> twoOptReverse(ArrayList<Location> route, int i1, int k) {
+        while (i1 < k) {
+            Location temp = route.get(i1);
+            route.set(i1, route.get(k));
+            route.set(k, temp);
+            i1++; k--;
+        }
+
+        return route;
     }
 
     public void setMap(){
