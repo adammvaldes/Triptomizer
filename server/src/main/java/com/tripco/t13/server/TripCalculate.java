@@ -57,7 +57,7 @@ public class TripCalculate {
             shortestCumulativeDistance += distance;
         }
 
-        ArrayList<Location> retainOriginalPlaces = new ArrayList<>();
+        ArrayList<Location> retainOriginalPlaces = new ArrayList<>(trip.places.size());
         retainOriginalPlaces.addAll(trip.places);
 
         //Loop through all locations in original places array, performing shortest trip algorithm to see which place
@@ -67,26 +67,7 @@ public class TripCalculate {
             int tempCumulativeDistance = 0;
 
             if (trip.options.optimization.equals("shorter")) {
-                boolean improvement = true;
-                while (improvement) {
-                    improvement = false;
-                    if (retainOriginalPlaces.size() > 4) {
-                        for (int i = 0; i <= retainOriginalPlaces.size() - 3; i++) {
-                            for (int k = i + 2; k <= retainOriginalPlaces.size() - 1; k++) {
-                                double radius = trip.options.getRadius();
-                                double delta = -(Distance.getDistanceNum(trip.places, i, i+1, radius))
-                                        -(Distance.getDistanceNum(trip.places, k, k+1, radius))
-                                        +(Distance.getDistanceNum(trip.places, i, k, radius))
-                                        +(Distance.getDistanceNum(trip.places, i+1, k+1, radius));
-
-                                if (delta < 0) {
-                                    trip.places = twoOptReverse(trip.places, i+1, k);
-                                    improvement = true;
-                                }
-                            }
-                        }
-                    }
-                }
+                twoOpt(retainOriginalPlaces);
             }
 
             trip.distances = trip.getTripDistances();
@@ -99,8 +80,30 @@ public class TripCalculate {
                 tempTrip = new Trip(trip);
             }
         }
-
         trip = tempTrip;
+    }
+
+    public void twoOpt(ArrayList<Location> retainOriginalPlaces) {
+        boolean improvement = true;
+        while (improvement) {
+            improvement = false;
+            if (retainOriginalPlaces.size() > 4) {
+                for (int i = 0; i <= retainOriginalPlaces.size() - 3; i++) {
+                    for (int k = i + 2; k <= retainOriginalPlaces.size() - 1; k++) {
+                        double radius = trip.options.getRadius();
+                        double delta = -(Distance.getDistanceNum(trip.places, i, i+1, radius))
+                                -(Distance.getDistanceNum(trip.places, k, k+1, radius))
+                                +(Distance.getDistanceNum(trip.places, i, k, radius))
+                                +(Distance.getDistanceNum(trip.places, i+1, k+1, radius));
+
+                        if (delta < 0) {
+                            trip.places = twoOptReverse(trip.places, i+1, k);
+                            improvement = true;
+                        }
+                    }
+                }
+            }
+        }
     }
 
     public ArrayList<Location> twoOptReverse(ArrayList<Location> route, int i1, int k) {
