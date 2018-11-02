@@ -53,7 +53,7 @@ public class PerformSearch {
             searchObject.match = request;
             searchObject.limit = limit;
             searchObject.type = "search";
-            searchObject.version = 3;
+            searchObject.version = 4;
             searchObject.places = new ArrayList<Location>();
             isCorrectFormat = searchObject.validateSearchRequestFormat(searchObject);
             String temp = searchObject.createSearch(searchObject.match);

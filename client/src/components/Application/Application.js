@@ -25,8 +25,8 @@ class Application extends Component {
         URL: "",
       trip: {
         type: "trip",
-        version: "3",
-        title: "Blank",
+        version: "4",
+        title: "Your trip title",
         options : {
           units: "miles",
             unitName: "miles",
@@ -183,7 +183,7 @@ class Application extends Component {
           <Container id="Application">
               <Info/>
               <Interop changeServer={this.changeServer} updateNumber={this.updateNumber}/>
-              <ChooseFile trip={this.state.trip} updateTFFI={this.updateTFFI} addDestination={this.addDestination} addLeg={this.addLeg}/>
+              <ChooseFile trip={this.state.trip} updateTFFI={this.updateTFFI} addDestination={this.addDestination} addLeg={this.addLeg} updateTrip={this.updateTrip}/>
               <Options options={this.state.trip.options}
                        config={this.state.config}
                        updateDistances={this.updateDistances}

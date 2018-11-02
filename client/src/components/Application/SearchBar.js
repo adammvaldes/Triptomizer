@@ -1,5 +1,5 @@
 import React, {Component} from 'react';
-import {Card, CardBody, FormGroup, Table, Collapse} from 'reactstrap';
+import {Card, CardBody, FormGroup, Table, Collapse, InputGroup} from 'reactstrap';
 import {Button, Form, Input} from 'reactstrap';
 import {request} from "../../api/api";
 
@@ -12,18 +12,20 @@ class SearchBar extends Component{
             searchText : "",
             addIndex : "",
             searchResults : [],
+            searchNumber : 0,
             collapse : false
         };
         this.search = this.search.bind(this);
         this.setSearchResults = this.setSearchResults.bind(this);
         this.handleChange  = this.handleChange.bind(this);
         this.handleChange2  = this.handleChange2.bind(this);
+        this.updateSearchNumber = this.updateSearchNumber.bind(this);
         this.addDestination = this.addDestination.bind(this);
         this.toggle = this.toggle.bind(this);
     }
 
     search(){
-        let tripTFFI = {"version":3, "type":"search","match" : this.state.searchText, "places" : []};
+        let tripTFFI = {"version":4, "type":"search","match" : this.state.searchText, "places" : [], "limit": this.state.searchNumber};
         if(this.props.URL === "" || this.props.port==="314") {
             request(tripTFFI, "search").then(serverResponse => {
                 tripTFFI.places = serverResponse["places"];
@@ -51,6 +53,9 @@ class SearchBar extends Component{
 
     handleChange2(event) {
         this.setState({addIndex: event.target.value})
+    }
+    updateSearchNumber(number) {
+        this.setState({searchNumber : number.target.value})
     }
 
     renderResults(){
@@ -86,9 +91,10 @@ class SearchBar extends Component{
                 <Button onClick={this.toggle} type="button" style={{backgroundColor: "000000"}} >Search for locations</Button>
                 <Collapse isOpen={this.state.collapse}>
                     <Form>
-                        <FormGroup>
+                        <InputGroup>
                             <Input type="text" placeholder="Search for a destination to add to your trip" onChange={this.handleChange} />
-                        </FormGroup>
+                            <Input type="number" placeholder="Number of search results you want" onChange={this.updateSearchNumber} />
+                        </InputGroup>
                     </Form>
                     <Button className="btn text-white" type="button" style={{backgroundColor: "407157"}} onClick={this.search}>Search</Button>
                     <div id="parent">
