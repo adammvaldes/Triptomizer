@@ -39,7 +39,7 @@ function testRender() {
         return button.text();
     });
 
-    let expectedButtonTexts = ['Search for locations', 'Search', 'Add destination to Trip',' Add your own location ', 'Add to trip'];
+    let expectedButtonTexts = ['Search for locations', 'Search', 'Add destination to Trip', 'Add all destinations to Trip', ' Add your own location ', 'Add to trip'];
     expect(actualButtonTexts).toEqual(expectedButtonTexts)
 }
 
