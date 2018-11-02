@@ -10,7 +10,7 @@ class SearchBar extends Component{
 
         this.state = {
             searchText : "",
-            addIndex : "",
+            addIndex : "0",
             searchResults : [],
             searchNumber : 0,
             collapse : false
@@ -21,6 +21,7 @@ class SearchBar extends Component{
         this.handleChange2  = this.handleChange2.bind(this);
         this.updateSearchNumber = this.updateSearchNumber.bind(this);
         this.addDestination = this.addDestination.bind(this);
+        this.addAllDestinations = this.addAllDestinations.bind(this);
         this.toggle = this.toggle.bind(this);
     }
 
@@ -81,6 +82,15 @@ class SearchBar extends Component{
         this.props.addDestination(this.state.searchResults[this.state.addIndex]);
     }
 
+    addAllDestinations(){
+        let tempAddIndex = this.state.addIndex;
+        while(this.state.addIndex < this.state.searchResults.length){
+            this.addDestination();
+            this.state.addIndex++;
+        }
+        this.setState({addIndex: tempAddIndex})
+    }
+
     toggle(){
         this.setState({ collapse: !this.state.collapse});
     }
@@ -104,6 +114,7 @@ class SearchBar extends Component{
                     </div>
                     <Input type="number" placeholder="Enter the index of the location you want to add to your trip" onChange={this.handleChange2} />
                     <Button className="btn text-white" type="button" style={{backgroundColor: "407157"}} onClick={this.addDestination}>Add destination to Trip</Button>
+                    <Button className="btn text-white" type="button" style={{backgroundColor: "407157"}} onClick={this.addAllDestinations}>Add all destinations to Trip</Button>
                 </Collapse>
             </div>);
     }
