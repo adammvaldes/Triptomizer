@@ -31,7 +31,7 @@ public class TestTripCalculate {
                  "  \"version\": 4,\n" +
                  "  \"options\": {\n" +
                  "    \"units\":\"miles\",\n" +
-                 "    \"optimization\": \"none\"\n" +
+                 "    \"optimization\": \"shorter\"\n" +
                  "  },\n" +
                  "  \"places\":\n" +
                  "  [\n" +

@@ -8,8 +8,7 @@ public class ShortOptimization {
     static ArrayList<Location> travelingSalesman(Location currentOrigin, ArrayList<Location> places, Options options) {
         boolean[] visitedPlaces = new boolean[places.size()];
         boolean allPlacesVisited = false;
-        ArrayList<Location> sortedPlaces = new ArrayList<>();
-
+        ArrayList<Location> sortedPlaces = new ArrayList<>(places.size() + 1);
         sortedPlaces.add(currentOrigin);
         visitedPlaces[places.indexOf(currentOrigin)] = true;
 
