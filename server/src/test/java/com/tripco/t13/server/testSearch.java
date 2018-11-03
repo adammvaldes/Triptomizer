@@ -10,6 +10,7 @@ import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.ResultSet;
 import java.sql.Statement;
+import java.util.ArrayList;
 
 import static org.junit.Assert.*;
 
@@ -48,7 +49,7 @@ public class testSearch {
                 "inner join country on continents.id = country.continent " +
                 "inner join region on country.id = region.iso_country " +
                 "inner join world_airports on region.id = world_airports.iso_region " +
-                "where country.name like '%den%' " +
+                "where (country.name like '%den%' " +
                 "or region.name like '%den%' " +
                 "or world_airports.name like '%den%' " +
                 "or world_airports.municipality like '%den%' " +
@@ -56,7 +57,70 @@ public class testSearch {
                 "or world_airports.latitude like '%den%' " +
                 "or world_airports.longitude like '%den%' " +
                 "or world_airports.id like '%den%' " +
-                "or world_airports.type like '%den%'",answer);
+                "or world_airports.type like '%den%')",answer);
+    }
+
+    @Test
+    public void testAllTypeFilterSearch(){
+        search.match = "den";
+        Filter filter = new Filter();
+        filter.name = "type";
+        filter.values = new ArrayList<>();
+        filter.values.add("balloon_port");
+        filter.values.add("heliport");
+        filter.values.add("airport");
+        filter.values.add("seaplane base");
+        search.filters = new ArrayList<>();
+        search.filters.add(filter);
+
+        String answer = search.createSearch(search.match);
+
+        assertEquals("select world_airports.id, world_airports.type, " +
+                "world_airports.latitude, world_airports.longitude, " +
+                "world_airports.name, world_airports.municipality, region.name, country.name, continents.name from continents " +
+                "inner join country on continents.id = country.continent " +
+                "inner join region on country.id = region.iso_country " +
+                "inner join world_airports on region.id = world_airports.iso_region " +
+                "where (country.name like '%den%' " +
+                "or region.name like '%den%' " +
+                "or world_airports.name like '%den%' " +
+                "or world_airports.municipality like '%den%' " +
+                "or continents.name like '%den%' " +
+                "or world_airports.latitude like '%den%' " +
+                "or world_airports.longitude like '%den%' " +
+                "or world_airports.id like '%den%' " +
+                "or world_airports.type like '%den%') " +
+                "and world_airports.type in ('balloon_port', 'heliport', 'airport', 'seaplane base')",answer);
+    }
+
+    @Test
+    public void testOneTypeFilterSearch(){
+        search.match = "den";
+        Filter filter = new Filter();
+        filter.name = "type";
+        filter.values = new ArrayList<>();
+        filter.values.add("balloon_port");
+        search.filters = new ArrayList<>();
+        search.filters.add(filter);
+
+        String answer = search.createSearch(search.match);
+
+        assertEquals("select world_airports.id, world_airports.type, " +
+                "world_airports.latitude, world_airports.longitude, " +
+                "world_airports.name, world_airports.municipality, region.name, country.name, continents.name from continents " +
+                "inner join country on continents.id = country.continent " +
+                "inner join region on country.id = region.iso_country " +
+                "inner join world_airports on region.id = world_airports.iso_region " +
+                "where (country.name like '%den%' " +
+                "or region.name like '%den%' " +
+                "or world_airports.name like '%den%' " +
+                "or world_airports.municipality like '%den%' " +
+                "or continents.name like '%den%' " +
+                "or world_airports.latitude like '%den%' " +
+                "or world_airports.longitude like '%den%' " +
+                "or world_airports.id like '%den%' " +
+                "or world_airports.type like '%den%') " +
+                "and world_airports.type in ('balloon_port')",answer);
     }
 
     @Test

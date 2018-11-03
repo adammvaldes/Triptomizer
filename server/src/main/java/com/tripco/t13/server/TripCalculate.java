@@ -25,8 +25,8 @@ public class TripCalculate {
         Gson gson = new Gson();
         try {
             trip = gson.fromJson(requestBody, Trip.class);
-            isCorrectFormat = validateTripRequestFormat(trip);
 
+            isCorrectFormat = validateTripRequestFormat(trip);
             String optimization = trip.options.optimization;
             if (trip.options.optimization != null && (optimization.equals("short") || optimization.equals("shorter"))) {
                 shortOptimization();
@@ -34,7 +34,6 @@ public class TripCalculate {
                 trip.places.add(trip.places.get(0));
                 trip.getTripDistances();
             }
-
             setMap();
 
         } catch (Exception e) {
@@ -49,6 +48,8 @@ public class TripCalculate {
     }
 
     void shortOptimization() {
+
+        //Trip tempTrip = new Trip(trip);
         Trip tempTrip = new Trip();
         int shortestCumulativeDistance = 0;
         trip.distances = trip.getTripDistances();
@@ -56,7 +57,6 @@ public class TripCalculate {
         for (int distance : trip.distances) {
             shortestCumulativeDistance += distance;
         }
-
         ArrayList<Location> retainOriginalPlaces = new ArrayList<>(trip.places.size());
         retainOriginalPlaces.addAll(trip.places);
 

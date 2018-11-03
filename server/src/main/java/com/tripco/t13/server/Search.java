@@ -12,7 +12,7 @@ public class Search {
     Integer limit;
     ArrayList<Location> places;
 
-    ArrayList<String> filters;
+    ArrayList<Filter> filters;
     Integer found;
 
     public String createSearch(String match){
@@ -24,7 +24,7 @@ public class Search {
         newSearch += "inner join country on continents.id = country.continent ";
         newSearch += "inner join region on country.id = region.iso_country ";
         newSearch += "inner join world_airports on region.id = world_airports.iso_region ";
-        newSearch += "where country.name like " + Qmatch + " ";
+        newSearch += "where (country.name like " + Qmatch + " ";
         newSearch += "or region.name like " + Qmatch + " ";
         newSearch += "or world_airports.name like " + Qmatch + " ";
         newSearch += "or world_airports.municipality like " + Qmatch + " ";
@@ -32,9 +32,39 @@ public class Search {
         newSearch += "or world_airports.latitude like " + Qmatch + " ";
         newSearch += "or world_airports.longitude like " + Qmatch + " ";
         newSearch += "or world_airports.id like " + Qmatch + " ";
-        newSearch += "or world_airports.type like " + Qmatch;
+        newSearch += "or world_airports.type like " + Qmatch + ")";
+
+        newSearch = applyFilter(newSearch);
 
         return newSearch;
+    }
+
+    public String applyFilter(String search){
+        if(filters == null) {
+            return search;
+        }
+        else{
+            String name;
+            ArrayList<String> values;
+            for(Filter filter : filters){
+                name = filter.name;
+                values = filter.values;
+                if(name.equals("type")){
+                    search += " and world_airports.type in (";
+                }
+                int i = 0;
+                while(i < values.size()) {
+                        if(i < values.size()-1){
+                            search += "'" + values.get(i) + "', ";
+                        }
+                        else{
+                            search += "'" + values.get(i) + "')";
+                        }
+                        i++;
+                }
+            }
+            return search;
+        }
     }
 
     public String applyLimit(Integer limit, String match, Search searchObject){
