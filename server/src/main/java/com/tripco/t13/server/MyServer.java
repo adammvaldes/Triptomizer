@@ -29,8 +29,8 @@ public class MyServer {
     if (args.length > 0)
       return Integer.parseInt(args[0]);
     else
-      //return 8088; // some default
-      return 8888;
+      return 8088; // some default
+      //return 8888;
 
   }
 
