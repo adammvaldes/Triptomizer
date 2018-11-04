@@ -39,7 +39,6 @@ class SearchBar extends Component{
             this.state.filters.push(filter);
         }
         let searchTFFI;
-        console.log(this.state.filters.length);
         if(this.state.filters.length === 0){
             searchTFFI = {"version":4, "type":"search","match" : this.state.searchText, "places" : [], "limit": this.state.searchNumber};
         }
