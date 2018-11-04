@@ -12,6 +12,7 @@ public class Config {
 
   private List<String> units = Arrays.asList("miles","kilometers","nautical miles","user defined");
   private List<OptimizationConfig> optimization;
+  private List<String> maps = Arrays.asList("svg");
 
   static String getConfig() {
     Config conf = new Config();

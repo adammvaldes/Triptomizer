@@ -25,8 +25,8 @@ public class TripCalculate {
         Gson gson = new Gson();
         try {
             trip = gson.fromJson(requestBody, Trip.class);
-
             isCorrectFormat = validateTripRequestFormat(trip);
+
             String optimization = trip.options.optimization;
             if (trip.options.optimization != null && (optimization.equals("short") || optimization.equals("shorter"))) {
                 shortOptimization();
@@ -34,7 +34,24 @@ public class TripCalculate {
                 trip.places.add(trip.places.get(0));
                 trip.getTripDistances();
             }
-            setMap();
+
+            switch (trip.version) {
+                case 1:
+                    setMap("/CObackground.svg");
+                    break;
+                case 2:
+                    setMap("/CObackground.svg");
+                    break;
+                case 3:
+                    setMap("/CObackground.svg");
+                    break;
+                case 4:
+                    setMap("/world_map.svg");
+                    break;
+                default:  //no element is provided, return default svg
+                    setMap("/world_map.svg");
+                    break;
+            }
 
         } catch (Exception e) {
             isCorrectFormat = false;
@@ -48,8 +65,6 @@ public class TripCalculate {
     }
 
     void shortOptimization() {
-
-        //Trip tempTrip = new Trip(trip);
         Trip tempTrip = new Trip();
         int shortestCumulativeDistance = 0;
         trip.distances = trip.getTripDistances();
@@ -57,6 +72,7 @@ public class TripCalculate {
         for (int distance : trip.distances) {
             shortestCumulativeDistance += distance;
         }
+
         ArrayList<Location> retainOriginalPlaces = new ArrayList<>(trip.places.size());
         retainOriginalPlaces.addAll(trip.places);
 
@@ -117,10 +133,10 @@ public class TripCalculate {
         return route;
     }
 
-    public void setMap(){
+    public void setMap(String filepath){
         BufferedReader read;
         try {
-            read = new BufferedReader(new InputStreamReader(getClass().getResourceAsStream("/CObackground.svg")));
+            read = new BufferedReader(new InputStreamReader(getClass().getResourceAsStream(filepath)));
         }
         catch(Exception e){
             return;
@@ -131,7 +147,11 @@ public class TripCalculate {
         try {
             while((temp = read.readLine()) != null){
                 if (temp.equals("</svg>")) {
-                    answer += drawVector(trip);
+                    if (trip.version < 4) {
+                        answer += drawVectorCO(trip);
+                    } else {
+                        answer += drawVectorWorld(trip);
+                    }
                 }
                 answer += temp;
             }
@@ -140,9 +160,44 @@ public class TripCalculate {
         catch(Exception e){
             return;
         }
+
     }
 
-    public String drawVector(Trip trip) {
+    public String drawVectorWorld(Trip trip) {
+        String vectors = "";
+        double mapW = 1024.0, mapH = 512.0, mapLat = 180.0, mapLon = 360.0,
+                pixPerLat = mapH / mapLat, pixPerLon = mapW / mapLon;
+
+        for (int i = 0; i < trip.places.size(); i++) {
+
+            double place1Lon = trip.places.get(i).longitude, place1Lat = trip.places.get(i).latitude;
+
+            //if we ran out of places to go, we round the trip up from last place to origin...
+            if ((i + 1) == trip.places.size()) {
+                double originLon = trip.places.get(0).longitude, originLat = trip.places.get(0).latitude;
+                vectors += "<line x1=\"" + (-(-(mapLon/2) - place1Lon) * pixPerLon) +
+                        "\" y1=\"" + (((mapLat/2) - place1Lat) * pixPerLat) +
+                        "\" x2=\"" + (-(-(mapLon/2) - originLon) * pixPerLon) +
+                        "\" y2=\"" + (((mapLat/2) - originLat) * pixPerLat) +
+                        "\" style=\"stroke:rgb(255,0,0);stroke-width:2\" />";
+                break; //break to not get index out of bounds exception
+            } else { //else get data for the second place just like the first.
+                double place2Lon = trip.places.get(i + 1).longitude, place2Lat = trip.places.get(i + 1).latitude;
+                //draw vector from place 1 to place 2...
+                vectors += "<line x1=\"" + (-(-(mapLon/2) - place1Lon) * pixPerLon) +
+                        "\" y1=\"" + (((mapLat/2) - place1Lat) * pixPerLat) +
+                        "\" x2=\"" + (-(-(mapLon/2) - place2Lon) * pixPerLon) +
+                        "\" y2=\"" + (((mapLat/2) - place2Lat) * pixPerLat) +
+                        "\" style=\"stroke:rgb(255,0,0);stroke-width:2\" />";
+            }
+        }
+
+        //Hardcode test
+        return vectors;
+
+    }
+
+    public String drawVectorCO(Trip trip) {
         //TODO
         String vectors = "";
         double mapW = 1066.6073, mapH = 783.0824, mapLat = 41.0007, mapLon = -109.0500, buffer = 36, lonRatio = 30.595

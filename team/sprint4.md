@@ -91,7 +91,9 @@ Extra epics planned for the future:
 | Tasks |  25   | *total* | 
 | Story Points |  42  | *total* | 
 
-*Enter the `# Planned` at the beginning of the sprint.  Include a discussion of planning decisions based on the planned number of story points versus how many were completed in previous sprints.*
+*Enter the `# Planned` at the beginning of the sprint.  Include a discussion of planning decisions based on the planned number of story points versus how many were completed in previous sprints.* <br>
+We worked to increase the number of story points that we had for this sprint's plan. In the previous sprints, our team had trouble achieving a 50% complete tasks by the middle of the sprint, due to planning errors, and the amount of work we need to get done. <br> 
+*Edit 11/2/2018* Due to more tasks and issues being created throughout the sprints, this sprint we have changed a few things part of the way through. For example, we are no longer creating tasks for updating the sprint's .md file. Because of this, our team may have less issues completing the required amount of story point by the end of the sprint. 
 
 *Enter the `# Completed` at the end of the sprint.  Include a discussion about any difference in the number planned versus completed tasks and story points.*
 
@@ -103,6 +105,8 @@ Extra epics planned for the future:
 | 10/24/2018 | #259, #301, #302, #303 | #294, #296, #300, #306, #308, #309, #316, #325 | *none* | 
 | 10/26/2018 | #277, #328, #330, #294, #296, #325, #259, #301, #302, #303 | #300, #306, #308, #309 | *none* |
 | 10/29/2018 | #277, #328, #330, #294, #296, #325, #259, #301, #302, #303, #296, #325, #294, #330, #328, #277, #300, #308, #269, #309, #313, #319 | #298, #306, #334 | *none* |
+| 10/31/2018 | #277, #328, #330, #294, #296, #325, #259, #301, #302, #303, #296, #325, #294, #330, #328, #277, #300, #308, #269, #309, #313, #319, #334, #348 | #320, #298, #346, #352, #317, #321 | *none* |
+| 11/2/2018 | #277, #328, #330, #294, #296, #325, #259, #301, #302, #303, #296, #325, #294, #330, #328, #277, #300, #308, #269, #309, #313, #319, #334, #348, #320, #298, #346, #352, #317, #321 | #299, #355 | *none* |
 
 *Add a new row for the scrum session after each lecture. *
 
