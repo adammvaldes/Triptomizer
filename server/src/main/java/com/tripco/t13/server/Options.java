@@ -7,7 +7,7 @@ public class Options {
     public String unitName = null;
     public Double unitRadius = null;
     public String optimization = null;
-
+    public String map = null;
 
     public double getRadius(){
         switch (units) {
