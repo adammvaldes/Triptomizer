@@ -67,7 +67,6 @@ class Application extends Component {
   }
 
   planRequest(){
-      console.log(this.state.trip.options.optimization);
         if(this.state.URL === "" || this.state.port==="314") {
             this.updateOptions('unitName', this.state.trip.options.units);
             request(this.state.trip, "plan").then(serverResponse => {
@@ -82,7 +81,6 @@ class Application extends Component {
                 this.updateDistances(serverResponse["distances"]);
             });
         }
-        console.log(this.state.trip.map);
   }
 
   clearTrip(){

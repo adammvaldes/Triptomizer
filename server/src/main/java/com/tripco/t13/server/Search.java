@@ -40,7 +40,7 @@ public class Search {
     }
 
     public String applyFilter(String search){
-        if(filters == null) {
+        if(filters == null || filters.size() == 0) {
             return search;
         }
         else{

@@ -34,11 +34,18 @@ class SearchBar extends Component{
     }
 
     search(){
-        if(this.state.type !== null) {
+        if(this.state.type.length !== 0) {
             let filter = {"name": "type", "values": this.state.type};
             this.state.filters.push(filter);
         }
-        let searchTFFI = {"version":4, "type":"search","match" : this.state.searchText, "places" : [], "limit": this.state.searchNumber, "filters": this.state.filters};
+        let searchTFFI;
+        console.log(this.state.filters.length);
+        if(this.state.filters.length === 0){
+            searchTFFI = {"version":4, "type":"search","match" : this.state.searchText, "places" : [], "limit": this.state.searchNumber};
+        }
+        else{
+            searchTFFI = {"version":4, "type":"search","match" : this.state.searchText, "places" : [], "limit": this.state.searchNumber, "filters": this.state.filters};
+        }
         if(this.props.URL === "" || this.props.port==="314") {
             request(searchTFFI, "search").then(serverResponse => {
                 searchTFFI.places = serverResponse["places"];
@@ -50,6 +57,9 @@ class SearchBar extends Component{
                 searchTFFI.places = serverResponse["places"];
                 this.setSearchResults(searchTFFI.places);
             });
+        }
+        for(let i = 0; i < this.state.filters.length; i++){
+            this.state.filters.pop();
         }
     }
 
