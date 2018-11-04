@@ -3,6 +3,7 @@ package com.tripco.t13.server;
 import com.google.gson.Gson;
 import com.google.gson.JsonObject;
 import org.junit.Before;
+import org.junit.Ignore;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.junit.runners.JUnit4;
@@ -126,6 +127,47 @@ public class TestTripCalculate {
     }
 
     @Test
+    public void testWorldVectors() {
+        double mapW = 1024.0, mapH = 512.0, mapLat = 180.0, mapLon = 360.0,
+                pixPerLat = mapH / mapLat, pixPerLon = mapW / mapLon;
+
+        String jsonStr ="{\n" +
+                "  \"type\": \"trip\",\n" +
+                "  \"title\": \"Colorado County Seats\",\n" +
+                "  \"version\": 4,\n" +
+                "  \"options\": {\n" +
+                "    \"units\":\"miles\",\n" +
+                "    \"optimization\": \"none\"\n" +
+                "  },\n" +
+                "  \"places\":\n" +
+                "  [\n" +
+                "    { \"id\": 1, \"county\": \"Adams County\", \"name\": \"Brighton\", \"latitude\": 80, \"longitude\": -170 },\n" +
+                "    { \"id\": 2, \"county\": \"Denver County\", \"name\": \"Denver\", \"latitude\": 60, \"longitude\": -150 }\n" +
+                "  ]\n" +
+                "}\n";
+
+        trip = gson.fromJson(jsonStr, Trip.class);
+        tripCalculate = new TripCalculate(trip);
+
+        String actualDrawVectorOutput = tripCalculate.drawVectorWorld(tripCalculate.trip);
+
+
+        String expectedDrawVectorOutput = "<line x1=\"" + 10 * pixPerLon +
+                "\" y1=\"" + 10 * pixPerLat+
+                "\" x2=\"" + 30 * pixPerLon+
+                "\" y2=\"" + 30 * pixPerLat +
+                "\" style=\"stroke:rgb(255,0,0);stroke-width:2\" />";
+
+        expectedDrawVectorOutput += "<line x1=\"" + 30 *pixPerLon+
+                "\" y1=\"" + 30 * pixPerLat +
+                "\" x2=\"" + 10 * pixPerLon +
+                "\" y2=\"" + 10 * pixPerLat+
+                "\" style=\"stroke:rgb(255,0,0);stroke-width:2\" />";
+
+        assertEquals(expectedDrawVectorOutput, actualDrawVectorOutput);
+    }
+
+    @Test
     public void testDrawVector() {
         double mapW = 1066.6073, mapH = 783.0824, mapLat = 41.0007, mapLon = -109.0500, buffer = 36, lonRatio = 30.595
                 , latRatio = 23.0069, pixPerLat = 177.4202, pixPerLon = 142.02183;
@@ -147,7 +189,7 @@ public class TestTripCalculate {
         trip = gson.fromJson(jsonStr, Trip.class);
         tripCalculate = new TripCalculate(trip);
 
-        String actualDrawVectorOutput = tripCalculate.drawVector(tripCalculate.trip);
+        String actualDrawVectorOutput = tripCalculate.drawVectorCO(tripCalculate.trip);
 
         double trip1Lon = tripCalculate.trip.places.get(0).longitude, trip1Lat = tripCalculate.trip.places.get(0).latitude;
         String expectedDrawVectorOutput =         "<line x1=\"" + ((trip1Lon - mapLon) * pixPerLon + buffer) +
@@ -191,10 +233,9 @@ public class TestTripCalculate {
                 "\" y2=\"" + ((trip1Lat - mapLat) * -pixPerLat + buffer) +
                 "\" style=\"stroke:rgb(255,0,0);stroke-width:2\" />";
 
-        actualDrawVectorOutput = tripCalculate.drawVector(tripCalculate.trip);
+        actualDrawVectorOutput = tripCalculate.drawVectorCO(tripCalculate.trip);
         assertEquals(expectedDrawVectorOutput, actualDrawVectorOutput);
     }
-
 
     @Test
     public void testSetMap() {
@@ -216,11 +257,11 @@ public class TestTripCalculate {
         trip = gson.fromJson(jsonStr, Trip.class);
         tripCalculate = new TripCalculate(trip);
 
-        String mapVectors = tripCalculate.drawVector(tripCalculate.trip);
+        String mapVectors = tripCalculate.drawVectorWorld(tripCalculate.trip);
 
         BufferedReader read;
         try {
-            read = new BufferedReader(new InputStreamReader(getClass().getResourceAsStream("/CObackground.svg")));
+            read = new BufferedReader(new InputStreamReader(getClass().getResourceAsStream("/world_map.svg")));
         }
         catch(Exception e){
             return;
@@ -240,10 +281,9 @@ public class TestTripCalculate {
 
         }
 
-
-        tripCalculate.setMap();
+        System.out.println(expectedSetMapResult);
+        tripCalculate.setMap("/world_map.svg");
         assertEquals(expectedSetMapResult, tripCalculate.trip.map);
-
     }
 
     @Test
