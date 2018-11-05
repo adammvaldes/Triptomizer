@@ -65,7 +65,7 @@ public class TripCalculate {
     }
 
     void shortOptimization() {
-        Trip tempTrip = new Trip();
+        Trip tempTrip = null;
         int shortestCumulativeDistance = 0;
         trip.distances = trip.getTripDistances();
 
@@ -96,7 +96,9 @@ public class TripCalculate {
                 tempTrip = new Trip(trip);
             }
         }
-        trip = tempTrip;
+        if (tempTrip != null) {
+            trip = tempTrip;
+        }
     }
 
     public void twoOpt(ArrayList<Location> retainOriginalPlaces) {

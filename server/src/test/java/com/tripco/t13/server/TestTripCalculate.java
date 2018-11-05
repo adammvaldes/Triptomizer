@@ -103,6 +103,25 @@ public class TestTripCalculate {
                  "  ]\n" +
                  "}\n";
 
+         String test2 = "{  \n" +
+                 "\t\"type\" : \"trip\",  \n" +
+                 "\t\"version\" : 4,  \n" +
+                 "\t\"title\" : \"Shopping loop\",  \n" +
+                 "\t\"options\" : {\n" +
+                 "\t\t\t\t\t\"units\": \"miles\", \n" +
+                 "\t\t\t\t\t\"optimization\": \"shorter\",\n" +
+                 "\t\t\t\t\t\"map\": \"svg\"\n" +
+                 "\t\t\t\t\t},  \n" +
+                 "   \"places\" : [   \n" +
+                 "\t   {\"country\": \"United States\", \"id\":\"CRock\", \"name\": \"Castle Rock\", \"latitude\":39.374912, \"longitude\":-104.853859},\n" +
+                 "\t\t{\"country\": \"United States\", \"id\":\"foco\", \"name\":\"Fort Collins\", \"latitude\":40.585258, \"longitude\":-105.084419},\n" +
+                 "\t\t{\"country\": \"United States\",\"id\":\"CS\", \"name\":\"Colorado Springs\", \"latitude\":38.846127, \"longitude\":-104.800644},\n" +
+                 "\t\t{\"country\": \"United States\",\"id\":\"DR\", \"name\":\"Durango\", \"latitude\":37.270500, \"longitude\":-107.878700}\n" +
+                 "      ,{\"country\": \"Costa Rica\", \"id\": \"jksctwkr\", \"name\": \"Fuego Brew Company\", \"latitude\": 9.25416667, \"longitude\":  83.86500000}\n" +
+                 "    ,{\"country\": \"Canada\", \"id\": \"psghotge\", \"name\": \"Big Rock Brewery\", \"latitude\": 50.984444, \"longitude\": -113.954722}\n" +
+                 "    ,{\"country\": \"Chile\", \"id\": \"mjshen\", \"name\": \"Chester Beer\", \"latitude\": -41.29166667, \"longitude\": -72.98416667}\t\t\n" +
+                 "   ] \n" +
+                 "}";
         trip = gson.fromJson(jsonStr, Trip.class);
         tripCalculate = new TripCalculate(trip);
     }
@@ -111,6 +130,8 @@ public class TestTripCalculate {
     public void testShortOptimization() {
         if (tripCalculate.trip.options.optimization != null && (tripCalculate.trip.options.optimization.equals("short") || tripCalculate.trip.options.optimization.equals("shorter"))) {
             tripCalculate.shortOptimization();
+        } else {
+            tripCalculate.trip.places.add(tripCalculate.trip.places.get(0));
         }
         System.out.println("Newly optimized trip: ");
         int totalDist = 0;
