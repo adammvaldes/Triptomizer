@@ -100,20 +100,26 @@ public class TripCalculate {
     }
 
     public void twoOpt(ArrayList<Location> retainOriginalPlaces) {
+        retainOriginalPlaces.add(retainOriginalPlaces.get(0));
+        int[][] distanceLibrary = new int[retainOriginalPlaces.size()][retainOriginalPlaces.size()];
         boolean improvement = true;
         while (improvement) {
             improvement = false;
             if (retainOriginalPlaces.size() > 4) {
+                for (int i = 0; i < retainOriginalPlaces.size(); i++) {
+                    for (int k = 0; k < retainOriginalPlaces.size(); k++) {
+                        distanceLibrary[i][k] = Distance.getDistanceNum(retainOriginalPlaces, i, k, trip.options.getRadius());
+                    }
+                }
                 for (int i = 0; i <= retainOriginalPlaces.size() - 3; i++) {
                     for (int k = i + 2; k <= retainOriginalPlaces.size() - 1; k++) {
-                        double radius = trip.options.getRadius();
-                        double delta = -(Distance.getDistanceNum(trip.places, i, i+1, radius))
-                                -(Distance.getDistanceNum(trip.places, k, k+1, radius))
-                                +(Distance.getDistanceNum(trip.places, i, k, radius))
-                                +(Distance.getDistanceNum(trip.places, i+1, k+1, radius));
-
+                        //double radius = trip.options.getRadius();
+                        double delta = -(distanceLibrary[i][i+1])
+                                -(distanceLibrary[k][k+1])
+                                +(distanceLibrary[i][k])
+                                +(distanceLibrary[i+1][k+1]);
                         if (delta < 0) {
-                            trip.places = twoOptReverse(trip.places, i+1, k);
+                            trip.places = twoOptReverse(trip.places, i+1, k, distanceLibrary);
                             improvement = true;
                         }
                     }
@@ -122,11 +128,18 @@ public class TripCalculate {
         }
     }
 
-    public ArrayList<Location> twoOptReverse(ArrayList<Location> route, int i1, int k) {
+    public ArrayList<Location> twoOptReverse(ArrayList<Location> route, int i1, int k, int[][] distanceLibrary) {
         while (i1 < k) {
+            //Reverse locations in location array
             Location temp = route.get(i1);
             route.set(i1, route.get(k));
             route.set(k, temp);
+
+            //Reverse distances in distance library
+            int tempDistance = distanceLibrary[i1][k];
+            distanceLibrary[i1][k] = distanceLibrary[k][i1];
+            distanceLibrary[k][i1] = tempDistance;
+
             i1++; k--;
         }
 
