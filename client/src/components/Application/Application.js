@@ -26,11 +26,11 @@ class Application extends Component {
       trip: {
         type: "trip",
         version: "4",
-        title: "Your trip title",
+        title: "Your Trip's Title",
         options : {
-          units: "miles",
-            unitName: "miles",
-            unitRadius: "3959",
+            units: "miles",
+            //unitName: null,
+            //unitRadius: null,
             optimization: "none"
         },
         places: [],
@@ -67,20 +67,20 @@ class Application extends Component {
   }
 
   planRequest(){
-        if(this.state.URL === "" || this.state.port==="314") {
-            this.updateOptions('unitName', this.state.trip.options.units);
-            request(this.state.trip, "plan").then(serverResponse => {
-                this.updateMap(serverResponse["map"]);
-                this.updateDistances(serverResponse["distances"]);
-            });
-        }
-        else{
-            this.updateOptions('unitName', this.state.trip.options.units);
-            request(this.state.trip, "plan",this.state.port,this.state.URL).then(serverResponse => {
-                this.updateMap(serverResponse["map"]);
-                this.updateDistances(serverResponse["distances"]);
-            });
-        }
+      if(this.state.URL === "" || this.state.port==="314") {
+          this.updateOptions('unitName', this.state.trip.options.units);
+          request(this.state.trip, "plan").then(serverResponse => {
+              this.updateMap(serverResponse["map"]);
+              this.updateDistances(serverResponse["distances"]);
+          });
+      }
+      else{
+          this.updateOptions('unitName', this.state.trip.options.units);
+          request(this.state.trip, "plan",this.state.port,this.state.URL).then(serverResponse => {
+              this.updateMap(serverResponse["map"]);
+              this.updateDistances(serverResponse["distances"]);
+          });
+      }
   }
 
   clearTrip(){

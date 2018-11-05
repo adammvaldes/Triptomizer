@@ -23,7 +23,7 @@ class Options extends Component{
   }
 
   updateDefault(name){
-      this.props.updateOptions('unitName',name.target.value);
+      //this.props.updateOptions('unitName',name.target.value);
       this.props.updateOptions('units', name.target.value);
   }
 
@@ -60,7 +60,7 @@ class Options extends Component{
         {unit.charAt(0).toUpperCase() + unit.slice(1)}
       </Button>
     );
-    if(this.state.showOptions == true) {
+    if(this.state.showOptions === true) {
         if(this.props.options.units === "user defined"){
             return(
                 <Card>

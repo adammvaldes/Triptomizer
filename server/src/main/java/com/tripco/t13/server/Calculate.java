@@ -54,7 +54,7 @@ public class Calculate {
     public boolean validateDistanceRequestFormat(Distance distance){
             //check if format of request if correct: type:"distance", version 1 or 2, accepted units
             if(     Objects.equals(distance.type, "distance")&&
-                    (distance.version==2||distance.version==1)&&
+                    (distance.version<=4)&&
                     (Objects.equals(distance.units, "miles")||Objects.equals(distance.units, "kilometers")||
                     Objects.equals(distance.units, "nautical miles")||
                     Objects.equals(distance.units, "user defined"))&&
