@@ -84,6 +84,7 @@ class Itinerary extends Component {
 
 
     renderTripPlaces() {
+        console.log((this.props.trip.places));
         let counter = 0;
         let tripPlaces = this.props.trip.places.map((place) => {
             counter += 1;
@@ -94,7 +95,6 @@ class Itinerary extends Component {
             <tr>
                 <th scope="row">Place</th>
                 {tripPlaces}
-                {tripPlaces[0]}
             </tr>
         );
     }
@@ -110,7 +110,6 @@ class Itinerary extends Component {
             <tr>
                 <th scope="row">Geographical Location</th>
                 {tripGeoLocations}
-                {tripGeoLocations[0]}
             </tr>
 
         );

@@ -32,19 +32,14 @@ public class TestTripCalculate {
                  "\t\"type\": \"trip\",\n" +
                  "\t\"version\": 4,\n" +
                  "\t\"title\": \"World Beer Tour\",\n" +
-                 "\t\"options\": {\n" +
-                 "\t    \"units\": \"miles\",\n" +
-                 "\t    \"optimization\": \"shorter\",\n" +
-                 "\t    \"map\": \"svg\"\n" +
-                 "\t},\n" +
-                 "\t\"places\": [\n" +
+                 " \"options\":{\"units\":\"miles\",\"optimization\":\"shorter\"},\t\"places\": [\n" +
                  "    {\"country\": \"Albania\", \"id\": \"pt\", \"name\": \"Bräuhaus\", \"latitude\": 41.32396, \"longitude\": 19.81658}\n" +
                  "    ,{\"country\": \"Algeria\", \"id\":\"shoulton\", \"name\": \"Brasserie Star d'Algerie\", \"latitude\": 36.668984, \"longitude\": 4.849482}\n" +
                  "    ,{\"country\": \"Andorra\", \"id\": \"anthos\", \"name\": \"Cervesa Alpha\", \"latitude\": 42.569283, \"longitude\": 1.489231}\n" +
                  "    ,{\"country\": \"Angola\", \"id\":\"ehharris\", \"name\": \"Pela Cuca (BGI)\", \"latitude\": -8.83682, \"longitude\": 13.23432}\n" +
                  "    ,{\"country\": \"Antigua and Barbuda\", \"id\":\"aceriver\", \"name\": \"2SIX8 Craft Brewery\", \"latitude\": 17.02301944, \"longitude\": 61.76833333}\n" +
                  "    ,{\"country\": \"Argentina\", \"id\": \"alexenth\", \"name\": \"The Sexton Beer Company\", \"latitude\": -34.6151, \"longitude\": -58.3731}\n" +
-                 "    ,{\"country\": \"Armenia\", \"id\": \"jmpumuro\", \"name\": \"Dargett Craft Beer\", \"latitude\": 40.183666, \"longitude\": 44.508327}\n" +
+                 "     ,{\"country\": \"Armenia\", \"id\": \"jmpumuro\", \"name\": \"Dargett Craft Beer\", \"latitude\": 40.183666, \"longitude\": 44.508327}\n" +
                  "    ,{\"country\": \"Australia\", \"id\":\"leejr\", \"name\": \"Nail Brewing Australia\", \"latitude\": -31.904894, \"longitude\": 115.930847}\t\n" +
                  "    ,{\"country\": \"Austria\", \"id\":\"jeskea\", \"name\": \"Muttermilch Vienna Brewery\", \"latitude\": 48.1155, \"longitude\": 16.2130}\n" +
                  "    ,{\"country\": \"Azerbaijan\", \"id\":\"alxbly\", \"name\": \"Baltika-Baku (Xirdalan)\", \"latitude\": 40.2628, \"longitude\": 49.4513}\n" +
@@ -129,7 +124,7 @@ public class TestTripCalculate {
                  "    ,{\"country\": \"Zambia\", \"id\": \"tsdansby\", \"name\": \"National Breweries Plc Ndola\", \"latitude\": -13.0170, \"longitude\": 28.6475}\t\t\n" +
                  "    ,{\"country\": \"Zimbabwe\", \"id\": \"susannak\", \"name\": \"Delta Beverages\", \"latitude\": -20.189394, \"longitude\":  8.555527}\n" +
                  "    ]\n" +
-                 "}\n";
+                 "}";
 
         trip = gson.fromJson(jsonStr, Trip.class);
         tripCalculate = new TripCalculate(trip);

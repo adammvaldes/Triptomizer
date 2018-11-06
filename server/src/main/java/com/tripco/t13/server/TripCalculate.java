@@ -76,14 +76,20 @@ public class TripCalculate {
         ArrayList<Location> retainOriginalPlaces = new ArrayList<>(trip.places.size());
         retainOriginalPlaces.addAll(trip.places);
 
+        int[][] distanceLibrary = new int[retainOriginalPlaces.size()][retainOriginalPlaces.size()];
+        for (int i = 0; i < retainOriginalPlaces.size(); i++) {
+            for (int k = 0; k < retainOriginalPlaces.size(); k++) {
+                distanceLibrary[i][k] = Distance.getDistanceNum(retainOriginalPlaces, i, k, trip.options.getRadius());
+            }
+        }
         //Loop through all locations in original places array, performing shortest trip algorithm to see which place
         //is shortest.
-        for (Location place : retainOriginalPlaces) {
-            trip.places = ShortOptimization.travelingSalesman(place, retainOriginalPlaces, trip.options);
+        for (int place = 0; place < retainOriginalPlaces.size(); place++) {
+            trip.places = ShortOptimization.travelingSalesman(place, retainOriginalPlaces, distanceLibrary);
             int tempCumulativeDistance = 0;
 
             if (trip.options.optimization.equals("shorter")) {
-                twoOpt(retainOriginalPlaces);
+                twoOpt(trip.places);
             }
 
             trip.distances = trip.getTripDistances();
@@ -100,17 +106,16 @@ public class TripCalculate {
     }
 
     public void twoOpt(ArrayList<Location> retainOriginalPlaces) {
-        retainOriginalPlaces.add(retainOriginalPlaces.get(0));
         int[][] distanceLibrary = new int[retainOriginalPlaces.size()][retainOriginalPlaces.size()];
+        for (int i = 0; i < retainOriginalPlaces.size(); i++) {
+            for (int k = 0; k < retainOriginalPlaces.size(); k++) {
+                distanceLibrary[i][k] = Distance.getDistanceNum(retainOriginalPlaces, i, k, trip.options.getRadius());
+            }
+        }
         boolean improvement = true;
         while (improvement) {
             improvement = false;
             if (retainOriginalPlaces.size() > 4) {
-                for (int i = 0; i < retainOriginalPlaces.size(); i++) {
-                    for (int k = 0; k < retainOriginalPlaces.size(); k++) {
-                        distanceLibrary[i][k] = Distance.getDistanceNum(retainOriginalPlaces, i, k, trip.options.getRadius());
-                    }
-                }
                 for (int i = 0; i <= retainOriginalPlaces.size() - 3; i++) {
                     for (int k = i + 2; k <= retainOriginalPlaces.size() - 1; k++) {
                         //double radius = trip.options.getRadius();

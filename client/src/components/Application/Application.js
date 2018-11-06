@@ -72,6 +72,7 @@ class Application extends Component {
           request(this.state.trip, "plan").then(serverResponse => {
               this.updateMap(serverResponse["map"]);
               this.updateDistances(serverResponse["distances"]);
+              this.updateTrip("places", serverResponse["places"]);
           });
       }
       else{
@@ -79,6 +80,7 @@ class Application extends Component {
           request(this.state.trip, "plan",this.state.port,this.state.URL).then(serverResponse => {
               this.updateMap(serverResponse["map"]);
               this.updateDistances(serverResponse["distances"]);
+              this.updateTrip("places", serverResponse["places"]);
           });
       }
   }
