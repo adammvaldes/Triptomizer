@@ -38,11 +38,11 @@ CREATE TABLE `country` (
 --
 -- Dumping data for table `country`
 --
--- WHERE:  name='united states'
+-- WHERE:  name='United States' or name='Canada'
 
 LOCK TABLES `country` WRITE;
 /*!40000 ALTER TABLE `country` DISABLE KEYS */;
-INSERT INTO `country` VALUES (302755,'US','United States','NA','http://en.wikipedia.org/wiki/United_States','America');
+INSERT INTO `country` VALUES (302730,'CA','Canada','NA','http://en.wikipedia.org/wiki/Canada',NULL),(302755,'US','United States','NA','http://en.wikipedia.org/wiki/United_States','America');
 /*!40000 ALTER TABLE `country` ENABLE KEYS */;
 UNLOCK TABLES;
 /*!40103 SET TIME_ZONE=@OLD_TIME_ZONE */;
@@ -55,4 +55,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2018-11-01 19:27:49
+-- Dump completed on 2018-11-05 18:09:17
