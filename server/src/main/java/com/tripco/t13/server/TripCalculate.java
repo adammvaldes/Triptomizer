@@ -248,7 +248,7 @@ public class TripCalculate {
     public boolean validateTripRequestFormat(Trip trip) {
         //check if format of request if correct: type:"trip", version 1 or 2 or 3 or 4
         if(     Objects.equals(trip.type, "trip")&&
-                (trip.version==4)&&
+                (trip.version<=4)&&
                 trip.places!=null&&trip.options!=null){
 
             return true;
