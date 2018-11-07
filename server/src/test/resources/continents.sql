@@ -35,11 +35,10 @@ CREATE TABLE `continents` (
 --
 -- Dumping data for table `continents`
 --
--- WHERE:  name='north america'
 
 LOCK TABLES `continents` WRITE;
 /*!40000 ALTER TABLE `continents` DISABLE KEYS */;
-INSERT INTO `continents` VALUES (400005,'NA','North America','https://en.wikipedia.org/wiki/North_America');
+INSERT INTO `continents` VALUES (400001,'AF','Africa','https://en.wikipedia.org/wiki/Africa'),(400002,'AN','Antarctica','https://en.wikipedia.org/wiki/Antarctica'),(400003,'AS','Asia','https://en.wikipedia.org/wiki/Asia'),(400004,'EU','Europe','https://en.wikipedia.org/wiki/Europe'),(400005,'NA','North America','https://en.wikipedia.org/wiki/North_America'),(400006,'OC','Oceania','https://en.wikipedia.org/wiki/Oceania'),(400007,'SA','South America','https://en.wikipedia.org/wiki/South_America');
 /*!40000 ALTER TABLE `continents` ENABLE KEYS */;
 UNLOCK TABLES;
 /*!40103 SET TIME_ZONE=@OLD_TIME_ZONE */;
@@ -52,4 +51,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2018-11-01 19:26:50
+-- Dump completed on 2018-11-07  9:48:24
