@@ -13,6 +13,7 @@ class SearchBar extends Component{
             searchText : "",
             addIndex : "0",
             searchResults : [],
+            foundNumber : 0,
             searchNumber : 0,
             filters : [],
             type : [],
@@ -48,12 +49,14 @@ class SearchBar extends Component{
         if(this.props.URL === "" || this.props.port==="314") {
             request(searchTFFI, "search").then(serverResponse => {
                 searchTFFI.places = serverResponse["places"];
+                this.state.foundNumber = serverResponse["found"];
                 this.setSearchResults(searchTFFI.places);
             });
         }
         else{
             request(searchTFFI, "search",this.props.port,this.props.URL).then(serverResponse => {
                 searchTFFI.places = serverResponse["places"];
+                this.state.foundNumber = serverResponse["found"];
                 this.setSearchResults(searchTFFI.places);
             });
         }
@@ -80,19 +83,31 @@ class SearchBar extends Component{
         this.setState({searchNumber : number.target.value})
     }
 
-    renderResults(){
-        let inc = 0;
-        let searchResultNames = this.state.searchResults.map((place) => {
-            inc++;
-            return <td key={'place ' + inc}>{inc-1}:<p></p>{place.name}</td>;
-        });
-        if(this.state.searchResults.length > 0){
-            return (
-                <tr>
-                    <th scope="row">Location Name</th>
-                    {searchResultNames}
-                </tr>
+    renderFoundNumbers(){
+        if(typeof this.state.searchResults != 'undefined' && this.state.searchResults.length != 0){
+            return(
+                <div>
+                    Displaying {this.state.searchResults.length} of {this.state.foundNumber} results:
+                </div>
             );
+        }
+    }
+
+    renderResults(){
+        if(typeof this.state.searchResults != 'undefined'){
+            let inc = 0;
+            let searchResultNames = this.state.searchResults.map((place) => {
+                inc++;
+                return <td key={'place ' + inc}>{inc-1}:<p></p>{place.name}</td>;
+            });
+            if(this.state.searchResults.length > 0){
+                return (
+                    <tr>
+                        <th scope="row">Location Name</th>
+                        {searchResultNames}
+                    </tr>
+                );
+            }
         }
     }
 
@@ -182,6 +197,9 @@ class SearchBar extends Component{
                         </Container>
                     </Form>
                     <Button className="btn text-white" type="button" style={{backgroundColor: "407157"}} onClick={this.search}>Search</Button>
+                    <div id="grandparent">
+                        {this.renderFoundNumbers()}
+                    </div>
                     <div id="parent">
                         <div id="div1"><Table responsive><tbody>{this.renderResults()}</tbody></Table></div>
                     </div>
