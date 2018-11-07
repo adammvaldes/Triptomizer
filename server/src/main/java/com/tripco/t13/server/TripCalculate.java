@@ -89,7 +89,15 @@ public class TripCalculate {
             int tempCumulativeDistance = 0;
 
             if (trip.options.optimization.equals("shorter")) {
-                twoOpt(trip.places);
+                distanceLibrary = new int[trip.places.size()][trip.places.size()];
+                for (int i = 0; i < trip.places.size(); i++) {
+                    for (int k = 0; k < trip.places.size(); k++) {
+                        if (i != k) {
+                            distanceLibrary[i][k] = Distance.getDistanceNum(trip.places, i, k, trip.options.getRadius());
+                        }
+                    }
+                }
+                twoOpt(trip.places, distanceLibrary);
             }
 
             trip.distances = trip.getTripDistances();
@@ -105,13 +113,7 @@ public class TripCalculate {
         trip = tempTrip;
     }
 
-    public void twoOpt(ArrayList<Location> retainOriginalPlaces) {
-        int[][] distanceLibrary = new int[retainOriginalPlaces.size()][retainOriginalPlaces.size()];
-        for (int i = 0; i < retainOriginalPlaces.size(); i++) {
-            for (int k = 0; k < retainOriginalPlaces.size(); k++) {
-                distanceLibrary[i][k] = Distance.getDistanceNum(retainOriginalPlaces, i, k, trip.options.getRadius());
-            }
-        }
+    public void twoOpt(ArrayList<Location> retainOriginalPlaces, int[][] distanceLibrary) {
         boolean improvement = true;
         while (improvement) {
             improvement = false;
@@ -124,7 +126,7 @@ public class TripCalculate {
                                 +(distanceLibrary[i][k])
                                 +(distanceLibrary[i+1][k+1]);
                         if (delta < 0) {
-                            trip.places = twoOptReverse(trip.places, i+1, k, distanceLibrary);
+                            retainOriginalPlaces = twoOptReverse(retainOriginalPlaces, i+1, k, distanceLibrary);
                             improvement = true;
                         }
                     }
