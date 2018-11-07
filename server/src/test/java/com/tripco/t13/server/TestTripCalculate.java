@@ -32,7 +32,7 @@ public class TestTripCalculate {
                  "\t\"type\": \"trip\",\n" +
                  "\t\"version\": 4,\n" +
                  "\t\"title\": \"World Beer Tour\",\n" +
-                 " \"options\":{\"units\":\"miles\",\"optimization\":\"shorter\"},\t\"places\": [\n" +
+                 " \"options\":{\"units\":\"miles\",\"optimization\":\"short\"},\t\"places\": [\n" +
                  "    {\"country\": \"Albania\", \"id\": \"pt\", \"name\": \"Bräuhaus\", \"latitude\": 41.32396, \"longitude\": 19.81658}\n" +
                  "    ,{\"country\": \"Algeria\", \"id\":\"shoulton\", \"name\": \"Brasserie Star d'Algerie\", \"latitude\": 36.668984, \"longitude\": 4.849482}\n" +
                  "    ,{\"country\": \"Andorra\", \"id\": \"anthos\", \"name\": \"Cervesa Alpha\", \"latitude\": 42.569283, \"longitude\": 1.489231}\n" +

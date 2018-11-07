@@ -96,7 +96,7 @@ public class TripCalculate {
                         distanceLibrary[i][k] = Distance.getDistanceNum(trip.places, i, k, trip.options.getRadius());
                     }
                 }
-                twoOpt(trip.places, distanceLibrary);
+                twoOpt(retainOriginalPlaces, distanceLibrary);
             }
 
             trip.distances = trip.getTripDistances();
@@ -117,8 +117,8 @@ public class TripCalculate {
         while (improvement) {
             improvement = false;
             if (places.size() > 4) {
-                for (int i = 0; i < places.size() - 3; i++) {
-                    for (int k = i + 2; k < places.size() - 1; k++) {
+                for (int i = 0; i <= places.size() - 3; i++) {
+                    for (int k = i + 2; k <= places.size() - 1; k++) {
                         double radius = trip.options.getRadius();
                         double delta = -(Distance.getDistanceNum(trip.places, i, i + 1, radius))
                                        -(Distance.getDistanceNum(trip.places, k, k + 1, radius))
@@ -129,7 +129,7 @@ public class TripCalculate {
 //                                +(distanceLibrary[i][k])
 //                                +(distanceLibrary[i+1][k+1]);
                         if (delta < 0) {
-                            places = twoOptReverse(places, i+1, k, distanceLibrary);
+                            trip.places = twoOptReverse(trip.places, i+1, k, distanceLibrary);
                             improvement = true;
                         }
                     }
