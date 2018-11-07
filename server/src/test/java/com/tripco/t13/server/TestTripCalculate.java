@@ -202,7 +202,7 @@ public class TestTripCalculate {
                  "  ]\n" +
                  "}\n";
 
-        trip = gson.fromJson(jsonCountySeats, Trip.class);
+        trip = gson.fromJson(jsonStr, Trip.class);
         tripCalculate = new TripCalculate(trip);
     }
 

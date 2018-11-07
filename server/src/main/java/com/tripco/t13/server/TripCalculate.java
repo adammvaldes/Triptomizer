@@ -89,12 +89,11 @@ public class TripCalculate {
             int tempCumulativeDistance = 0;
 
             if (trip.options.optimization.equals("shorter")) {
+
                 distanceLibrary = new int[trip.places.size()][trip.places.size()];
                 for (int i = 0; i < trip.places.size(); i++) {
                     for (int k = 0; k < trip.places.size(); k++) {
-                        if (i != k) {
-                            distanceLibrary[i][k] = Distance.getDistanceNum(trip.places, i, k, trip.options.getRadius());
-                        }
+                        distanceLibrary[i][k] = Distance.getDistanceNum(trip.places, i, k, trip.options.getRadius());
                     }
                 }
                 twoOpt(trip.places, distanceLibrary);
@@ -113,20 +112,24 @@ public class TripCalculate {
         trip = tempTrip;
     }
 
-    public void twoOpt(ArrayList<Location> retainOriginalPlaces, int[][] distanceLibrary) {
+    public void twoOpt(ArrayList<Location> places, int[][] distanceLibrary) {
         boolean improvement = true;
         while (improvement) {
             improvement = false;
-            if (retainOriginalPlaces.size() > 4) {
-                for (int i = 0; i <= retainOriginalPlaces.size() - 3; i++) {
-                    for (int k = i + 2; k <= retainOriginalPlaces.size() - 1; k++) {
-                        //double radius = trip.options.getRadius();
-                        double delta = -(distanceLibrary[i][i+1])
-                                -(distanceLibrary[k][k+1])
-                                +(distanceLibrary[i][k])
-                                +(distanceLibrary[i+1][k+1]);
+            if (places.size() > 4) {
+                for (int i = 0; i < places.size() - 3; i++) {
+                    for (int k = i + 2; k < places.size() - 1; k++) {
+                        double radius = trip.options.getRadius();
+                        double delta = -(Distance.getDistanceNum(trip.places, i, i + 1, radius))
+                                       -(Distance.getDistanceNum(trip.places, k, k + 1, radius))
+                                       +(Distance.getDistanceNum(trip.places, i, k, radius))
+                                       +(Distance.getDistanceNum(trip.places, i + 1, k + 1, radius));
+//                        double delta = -(distanceLibrary[i][i+1])
+//                                -(distanceLibrary[k][k+1])
+//                                +(distanceLibrary[i][k])
+//                                +(distanceLibrary[i+1][k+1]);
                         if (delta < 0) {
-                            retainOriginalPlaces = twoOptReverse(retainOriginalPlaces, i+1, k, distanceLibrary);
+                            places = twoOptReverse(places, i+1, k, distanceLibrary);
                             improvement = true;
                         }
                     }
