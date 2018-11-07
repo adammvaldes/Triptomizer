@@ -19,7 +19,7 @@ public class TestDatabase {
     @Test
     public void testHeliport(){
         String match = "denver";
-        int limit = 3;
+        int limit = 30;
         pSearch = new PerformSearch(match, limit);
         pSearch.sendSearch();
         String gson = pSearch.getSearchJson();
