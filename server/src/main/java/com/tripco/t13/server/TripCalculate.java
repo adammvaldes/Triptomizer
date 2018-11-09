@@ -34,24 +34,7 @@ public class TripCalculate {
                 trip.places.add(trip.places.get(0));
                 trip.getTripDistances();
             }
-
-            switch (trip.version) {
-                case 1:
-                    setMap("/CObackground.svg");
-                    break;
-                case 2:
-                    setMap("/CObackground.svg");
-                    break;
-                case 3:
-                    setMap("/CObackground.svg");
-                    break;
-                case 4:
-                    setMap("/world_map.svg");
-                    break;
-                default:  //no element is provided, return default svg
-                    setMap("/world_map.svg");
-                    break;
-            }
+            setMap("/world_map.svg");
 
         } catch (Exception e) {
             isCorrectFormat = false;
@@ -149,11 +132,7 @@ public class TripCalculate {
         try {
             while((temp = read.readLine()) != null){
                 if (temp.equals("</svg>")) {
-                    if (trip.version < 4) {
-                        answer += drawVectorCO(trip);
-                    } else {
-                        answer += drawVectorWorld(trip);
-                    }
+                    answer += drawVectorWorld(trip);
                 }
                 answer += temp;
             }
