@@ -127,8 +127,9 @@ This sprint went fairly well, as our team completed quite a few epics and worked
 
 *Describe capabilities not included in the release and list the epics below with an explanation.*
 
-* *## epic title: explanation*
-*
+## I want to view my trip in other tools: 
+Since this epic had the lowest priority out of all the other epics our team was assigned this sprint, we simply did not have enough time resource to implement the issues associated with this epic.
+
 
 #### What Went Well
 
@@ -147,9 +148,7 @@ To fix the code on master, we had to be quick and supportive when bugs were foun
 We had to rely on each other to resolve time constraints of different team members. Some tasks had to be "handed-off" to other team members in order to have them finished by the check and the final deploy. 
 
 ## Retrospective
-
-*An introductory paragraph for your retrospective.*
-
+During this sprint, our team has improved task closing significantly since last sprint. The burndown chart illustrated a much more consistent and fluid work flow(in other words, not as many "big bangs") this sprint. Teamwork between groupmates within the group as well as other groups has improved significantly(ever since the interop assignent). 
 #### What we changed this sprint
 
 *Articulate specifically what you will do differently based on the retrospective from the previous sprint before the sprint starts.*
