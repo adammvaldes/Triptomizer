@@ -87,9 +87,11 @@ Extra epics planned for the future:
 
 | Statistic | Planned | Completed |
 | --- | ---: | ---: |
-| Epics | 4 for sprint 4, 2 left from sprint 3 | *total* |
-| Tasks |  25   | *total* | 
-| Story Points |  42  | *total* | 
+| Epics | 4 for sprint 4, 2 left from sprint 3 | 3 |
+| Tasks |  45   | 36 | 
+| Story Points |  67  | 51 | 
+
+Although we were able to complete most of the tasks that we created this sprint, since we continued to add tasks and story points as our understanding of the epics increased we ultimately ended up with a number of uncompleted tasks.
 
 *Enter the `# Planned` at the beginning of the sprint.  Include a discussion of planning decisions based on the planned number of story points versus how many were completed in previous sprints.* <br>
 We worked to increase the number of story points that we had for this sprint's plan. In the previous sprints, our team had trouble achieving a 50% complete tasks by the middle of the sprint, due to planning errors, and the amount of work we need to get done. <br> 
