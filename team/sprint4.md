@@ -123,12 +123,15 @@ This sprint went fairly well, as our team completed quite a few epics and worked
 
 *Describe the solution based on the completed epics and list the epics below.*
 
-* *## epic title: comments*
-* 
+* User: I want to plan trips worldwide: We were able to complete this epic by implementing the required filters and expanding our database to be worldwide.
+* User: I'd like even shorter trips: We were able to implement 2-opt to impove our nearest neighbor tours. We are currently working on shortening our algorithm's runtime going forward.
+* User: I want to choose what information is displayed in the itinerary and map: We were able to allow the user to hide and show the different attributes in the itinerary and also to allow for the capture of additional attribute/value pairs from the database.
 
 #### Incomplete Epics in Sprint Backlog 
 
-*Describe capabilities not included in the release and list the epics below with an explanation.*
+* User: I want to view my trip in other tools: We were not able to implement any of the kml-related features this sprint and as such we currently only support svg.
+* TripCo: All code shall be clean!: Since we have marked this as an ongoing epic we are endeavoring to maintain our standard of clean code.
+* TripCo: All code must be tested: Although we made great improvements to our code coverage this sprint, our current test coverage sits at 46%, which is slightly lower than the cutoff of 50% coverage.
 
 ## I want to view my trip in other tools: 
 Since this epic had the lowest priority out of all the other epics our team was assigned this sprint, we simply did not have enough time resource to implement the issues associated with this epic.
