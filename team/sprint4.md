@@ -157,16 +157,16 @@ We had to rely on each other to resolve time constraints of different team membe
 During this sprint, our team has improved task closing significantly since last sprint. The burndown chart illustrated a much more consistent and fluid work flow(in other words, not as many "big bangs") this sprint. Teamwork between groupmates within the group as well as other groups has improved significantly(ever since the interop assignent). 
 #### What we changed this sprint
 
-*Articulate specifically what you will do differently based on the retrospective from the previous sprint before the sprint starts.*
+One of the big chages we made this sprint was testing. During sprint 4 we better applied the ideas of test driven development, and ran ran more tests localy instead of just relying on travis to test our changes. Another change, was an improvent in incremental development. During this sprint we saw less big bangs in the burn-down chart.  
 
 #### What we did well
 
-*Articulate what went well at the end of the sprint.*
+Some things that we did well were; increasing test coverage, improving our interoperability, and working in increments. During this sprint we were able to up out test coverage to almost 50%. We were also better about checking our site against the other teams sites though out the sprint, to gauge our progress. Lastly we were able to close isues more consistently throught the sprint, instead of just having a few big bangs.
 
 #### What we need to work on
 
-*Articulate things you could improve at the end of the sprint.*
+One thing we can work on is deploying our server more often. Over the course of the sprint we only deployed a few times. On top of that, we can also continue to improve our test coverage, and incremental development. 
 
 #### What we will change next sprint 
 
-*Articulate the one thing you will change for the next sprint and how you will accomplish that.*
+The main change that we would like to make next sprint is to deploy more often. The goal will be to deploy a new version of our server every time we make a noticeable change to the UI or the server. Our other goal will be to increase our test coverage and be more consistent with closing issues. 
