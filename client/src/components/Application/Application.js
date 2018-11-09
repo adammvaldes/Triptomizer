@@ -57,13 +57,24 @@ class Application extends Component {
   }
 
   componentWillMount() {
-    get_config().then(
-      config => {
-        this.setState({
-          config:config
-        })
+      if(this.state.port==="" || this.state.URL===""){
+          get_config().then(
+              config => {
+                  this.setState({
+                      config:config
+                  })
+              }
+          );
       }
-    );
+      else{
+          get_config("type", this.state.port, this.state.URL).then(
+              config => {
+                  this.setState({
+                      config:config
+                  })
+              }
+          );
+      }
   }
 
   planRequest(){
@@ -133,12 +144,14 @@ class Application extends Component {
       this.setState({
           port:value
       });
+      this.componentWillMount();
   }
 
   changeServer(value){
       this.setState({
           URL:value
       });
+      this.componentWillMount();
   }
 
   addDestination(value){
@@ -183,7 +196,8 @@ class Application extends Component {
           <Container id="Application">
               <Info/>
               <Interop changeServer={this.changeServer} updateNumber={this.updateNumber}/>
-              <ChooseFile trip={this.state.trip} updateTFFI={this.updateTFFI} addDestination={this.addDestination} addLeg={this.addLeg} updateTrip={this.updateTrip}/>
+              <ChooseFile trip={this.state.trip} updateTFFI={this.updateTFFI} addDestination={this.addDestination}
+                          addLeg={this.addLeg} updateTrip={this.updateTrip} config={this.state.config}/>
               <Options options={this.state.trip.options}
                        config={this.state.config}
                        updateDistances={this.updateDistances}
@@ -199,7 +213,7 @@ class Application extends Component {
                          reverseTrip={this.reverseTrip}
                          setStartLeg={this.setStartLeg}
                          addDestination={this.addDestination}
-                         addLeg={this.addLeg}/>
+                         addLeg={this.addLeg} config={this.state.config}/>
               <Map trip={this.state.trip} />
           </Container>
       )

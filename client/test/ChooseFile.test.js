@@ -19,6 +19,9 @@ const testProps = {
         places: [],
         distances: [],
         map: ''
+    },
+    config: {
+        filters: []
     }
 };
 
@@ -32,6 +35,7 @@ function testRender() {
         <ChooseFile
             trip={testProps.trip}
             updateTFFI={updateTFFI}
+            config={testProps.config}
         />
     ));
 

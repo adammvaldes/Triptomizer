@@ -84,7 +84,7 @@ class SearchBar extends Component{
     }
 
     renderFoundNumbers(){
-        if(typeof this.state.searchResults != 'undefined' && this.state.searchResults.length != 0){
+        if(typeof this.state.searchResults !== 'undefined' && this.state.searchResults.length !== 0){
             return(
                 <div>
                     Displaying {this.state.searchResults.length} of {this.state.foundNumber} results:
@@ -94,7 +94,7 @@ class SearchBar extends Component{
     }
 
     renderResults(){
-        if(typeof this.state.searchResults != 'undefined'){
+        if(typeof this.state.searchResults !== 'undefined'){
             let inc = 0;
             let searchResultNames = this.state.searchResults.map((place) => {
                 inc++;
@@ -136,39 +136,37 @@ class SearchBar extends Component{
 
     updateFilter(name, value){
         let search = this.state;
-        let index = search[name].indexOf(value);
+        let index = search[name].indexOf(value.filter);
         if(index > -1){
             search[name].splice(index, 1);
         }
         else{
-            search[name].push(value);
+            search[name].push(value.filter);
         }
         this.setState({search});
     }
 
     setTypeFilters(){
-        return(
-            <FormGroup>
-                <FormGroup check inline>
-                        <Input type="checkbox" onChange={(e) => this.updateFilter("type","small_airport")}/> small-sized airport
-                </FormGroup>
-                <FormGroup check inline>
-                        <Input type="checkbox" onChange={(e) => this.updateFilter("type","medium_airport")}/> medium-sized airport
-                </FormGroup>
-                <FormGroup check inline>
-                    <Input type="checkbox" onChange={(e) => this.updateFilter("type","large_airport")}/> large-sized airport
-                </FormGroup>
-                <FormGroup check inline>
-                    <Input type="checkbox" onChange={(e) => this.updateFilter("type","heliport")}/> heliport
-                </FormGroup>
-                <FormGroup check inline>
-                    <Input type="checkbox" onChange={(e) => this.updateFilter("type","balloon_port")}/> balloon port
-                </FormGroup>
-                <FormGroup check inline>
-                    <Input type="checkbox" onChange={(e) => this.updateFilter("type","seaplane_base")}/> seaplane base
-                </FormGroup>
-            </FormGroup>
-        );
+        if(this.props.config.filters!==undefined) {
+            let filters = [];
+            for (let i = 0; i < this.props.config.filters.length; i++) {
+                let f = [];
+                f.push(this.props.config.filters[i]);
+                let name = f[0].name;
+                filters.push(<div key={name}> {name.charAt(0).toUpperCase() + name.slice(1) + ":"} </div>);
+                const values = f[0].values.map((filter) =>
+                    (<FormGroup key={"Group_" + filter} check inline>
+                        <Input key={"filter_" + filter} type="checkbox"
+                               onChange={(e) => this.updateFilter(f[0].name, {filter})}/> {filter.replace("_", " ")}
+                    </FormGroup>)
+                );
+                filters.push(values);
+            }
+            return (
+                <FormGroup> {filters} </FormGroup>
+            )
+        }
+        return <FormGroup> </FormGroup>
     }
 
     setFilters(){
@@ -213,6 +211,6 @@ class SearchBar extends Component{
 
 export default SearchBar;
 
-//<input type="checkbox" checked={this.state.val1 === true} autocomplete="off" /
+//<input type="checkbox" checked={this.state.val1 === true} autocomplete="off"
 
 //https://reactstrap.github.io/components/form/
