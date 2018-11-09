@@ -114,7 +114,7 @@ We worked to increase the number of story points that we had for this sprint's p
 
 ## Review
 
-*An introductory paragraph describing the overall results of the sprint.*
+This sprint went fairly well, as our team completed quite a few epics and worked to catch up in code maintainability and test coverage from the previous sprint. While not everything went as planned or perfectly, we brought our skills together to develop a presentable product by the end of the sprint.
 
 #### Completed Epics in Sprint Backlog 
 
@@ -132,17 +132,19 @@ We worked to increase the number of story points that we had for this sprint's p
 
 #### What Went Well
 
-*Describe what went well during the sprint in general terms followed by a more detailed list.*
+We better used our time this sprint, with tasks being done more incrementally than last sprint. There still were some "big bangs" in the diagram, but we worked on different tasks for longer than just the night that tasks were closed.
 
-* *something*
-*
+In addition, our team had better teamwork this sprint. Some of the larger epics and tasks, we split into pairs to complete, such as the efficiency algorithms tasks. Overall, we communicated better with each other and spoke up more in Piazza and class when we didn't understand a concept or a goal.
+
+We completed tasks to the best of our abilities, and prioritized some tasks over others, improving our team's time-management skills. 
 
 #### Problems Encountered and Resolutions
 
-*Describe what problems occurred during the sprint in general terms followed by a more detailed list.*
+There were a few times when the code on our master in Github was broken, and there were several hidden bugs that were only exposed with time that we had to fix. This hindered our ability to get as much done as our team could have this sprint. In addition, we had some group members give less time due to other responsibilities such as exams in other classes and traveling. This led to some issues in teamwork when not all group members could be present for meetings. 
 
-* *something*
-*
+To fix the code on master, we had to be quick and supportive when bugs were found on master, and patient enough to find and fix the bugs that were found.
+
+We had to rely on each other to resolve time constraints of different team members. Some tasks had to be "handed-off" to other team members in order to have them finished by the check and the final deploy. 
 
 ## Retrospective
 
