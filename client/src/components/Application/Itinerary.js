@@ -194,7 +194,7 @@ class Itinerary extends Component {
                     <Card>
                         <CardBody>
                             {this.renderButtons()}
-                            <SearchBar addDestination={this.props.addDestination}/>
+                            <SearchBar addDestination={this.props.addDestination} config={this.props.config}/>
                             <AddByName addLeg={this.props.addLeg}/>
                         </CardBody>
                     </Card>
