@@ -85,11 +85,12 @@ public class Search {
 
     public String applyLimit(Integer limit, String match, Search searchObject){
         //Applying the limit of the search, if provided by the user
-
+        //order by world_airports.index
         if(searchObject.limit == null){
             limit = 0;
         }
 
+        match += " order by world_airports.id";
         if(limit > 0){
             match += " limit " + Integer.toString(limit) + ";";
         }
