@@ -192,24 +192,24 @@ public class testSearch {
         search.limit = 75;
         String answer = search.applyLimit(search.limit, "stuff", search);
 
-        assertEquals("stuff limit 75;", answer);
+        assertEquals("stuff order by world_airports.id limit 75;", answer);
 
         search.limit = 0;
         answer = search.applyLimit(search.limit, "Dave", search);
 
-        assertEquals("Dave limit 30;", answer);
+        assertEquals("Dave order by world_airports.id limit 30;", answer);
     }
 
     @Test
     public void testApplyLimitDefault(){
         String answer = search.applyLimit(search.limit, "spaghetti", search);
 
-        assertEquals("spaghetti limit 30;",answer);
+        assertEquals("spaghetti order by world_airports.id limit 30;",answer);
 
         search.limit = -55;
         answer = search.applyLimit(search.limit, "boulder", search);
 
-        assertEquals("boulder limit 30;", answer);
+        assertEquals("boulder order by world_airports.id limit 30;", answer);
     }
 
     @Test
@@ -244,11 +244,11 @@ public class testSearch {
                 assertEquals(L.name, "Kauffman Heliport");
                 assertEquals(L.latitude, 40.1463012695,0.0);
                 assertEquals(L.longitude, -104.887001038,0.0);
-                assertEquals(L.municipality, "Denver");
+                //assertEquals(L.municipality, "Denver");
                 assertEquals(L.type, "heliport");
-                assertEquals(L.region, "Colorado");
-                assertEquals(L.country, "United States");
-                assertEquals(L.continent, "North America");
+                //assertEquals(L.region, "Colorado");
+                //assertEquals(L.country, "United States");
+                //assertEquals(L.continent, "North America");
             }
         } catch (Exception e) {
             System.err.println("Exception: " + e.getMessage());

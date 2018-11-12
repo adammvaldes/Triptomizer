@@ -130,5 +130,7 @@ public class PerformSearch {
             user = "cs314-db";
             pass = "eiK5liet1uej";
         }
+
+        myUrl += "?characterencoding=utf-8";
     }
 }
