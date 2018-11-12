@@ -133,18 +133,12 @@ public class TestTripCalculate {
         } else {
             tripCalculate.trip.places.add(tripCalculate.trip.places.get(0));
         }
-        //System.out.println("Newly optimized trip: ");
         int totalDist = 0;
-        for (Location location : tripCalculate.trip.places) {
-            //System.out.print(location.name + " --> ");
-        }
-        //System.out.println("\n\nTotal distance for trip: ");
         ArrayList<Integer> distances = tripCalculate.trip.getTripDistances();
 
         for (Integer distance: distances) {
             totalDist += distance;
         }
-        //System.out.println(totalDist);
     }
 
     @Test
@@ -302,7 +296,6 @@ public class TestTripCalculate {
 
         }
 
-        //System.out.println(expectedSetMapResult);
         tripCalculate.setMap("/world_map.svg");
         assertEquals(expectedSetMapResult, tripCalculate.trip.map);
     }
