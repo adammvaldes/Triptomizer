@@ -72,7 +72,7 @@ class Options extends Component{
                                                  config={this.props.config}
                                                  updateOptions={this.props.updateOptions}/>
                         </Form>
-                        <Button onClick={this.showOptions} color={'info'}> Hide Options </Button>
+                        <Button onClick={this.toggleShowOptions} color={'info'}> Hide Options </Button>
                     </CardBody>
                 </Card>
             );
