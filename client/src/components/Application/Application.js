@@ -1,5 +1,5 @@
 import React, {Component} from 'react';
-import { Container } from 'reactstrap';
+import {Container, Nav, NavItem, NavLink, TabContent, TabPane} from 'reactstrap';
 import Info from './Info';
 import Options from './Options';
 import Interop from "./Interop";
@@ -11,7 +11,8 @@ import SearchBar from "./SearchBar";
 import OptimizationButtons from "./OptimizationButtons";
 import AddByName from "./AddByName";
 import ChooseFile from "./ChooseFile";
-
+import TeamTab from "./TeamTab";
+import classnames from 'classnames'
 /* Renders the application.
  * Holds the destinations and options state shared with the trip.
  */
@@ -36,7 +37,8 @@ class Application extends Component {
         places: [],
         distances: [],
         map: ''
-      }
+      },
+        activeTab: "1"
     };
     this.planRequest = this.planRequest.bind(this);
     this.clearTrip = this.clearTrip.bind(this);
@@ -190,11 +192,50 @@ class Application extends Component {
       trip.places.splice(0, 0, temp);
   }
 
+  toggleDescriptionTab(value) {
+      this.setState({
+          activeTab: value
+      });
+  }
+
+  renderDescriptionTabs() {
+      return (
+          <div id={"description-tabs"}>
+              <Nav tabs>
+                  <NavItem>
+                      <NavLink
+                          className={classnames({active: this.state.activeTab === "1"})}
+                          onClick={()=>{this.toggleDescriptionTab("1");}}
+                      >
+                      TripCO Info
+                      </NavLink>
+                  </NavItem>
+                  <NavItem>
+                      <NavLink
+                          className={classnames({active: this.state.activeTab === "2"})}
+                          onClick={()=>{this.toggleDescriptionTab("2");}}
+                      >
+                      Team Info
+                      </NavLink>
+                  </NavItem>
+              </Nav>
+              <TabContent activeTab={this.state.activeTab}>
+                  <TabPane tabId={"1"}>
+                      <Info/>
+                  </TabPane>
+                  <TabPane tabId={"2"}>
+                      <TeamTab/>
+                  </TabPane>
+              </TabContent>
+          </div>
+      );
+  }
+
   render() {
     if(!this.state.config) { return <Container/> }
       return(
           <Container id="Application">
-              <Info/>
+              {this.renderDescriptionTabs()}
               <Interop changeServer={this.changeServer} updateNumber={this.updateNumber}/>
               <ChooseFile trip={this.state.trip} updateTFFI={this.updateTFFI} addDestination={this.addDestination}
                           addLeg={this.addLeg} updateTrip={this.updateTrip} config={this.state.config}/>

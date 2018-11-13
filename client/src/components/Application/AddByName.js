@@ -2,7 +2,7 @@ import React, {Component} from 'react'
 import {Card, CardHeader, CardBody, FormGroup, Collapse} from 'reactstrap'
 import { ButtonGroup, Button, Form, Label, Input, FormText} from 'reactstrap'
 
-class AddByName extends Component {
+class AddByName extends React.Component {
     constructor(props) {
         super(props);
 
