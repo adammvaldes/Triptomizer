@@ -74,23 +74,19 @@ class Itinerary extends Component {
     }
 
     showPlace(){
-        this.state.showPlace = !this.state.showPlace;
-        this.props.planRequest();
+        this.setState({showPlace : !this.state.showPlace});
     }
 
     showGeoLocation(){
-        this.state.showGeoLocation = !this.state.showGeoLocation;
-        this.props.planRequest();
+        this.setState({showGeoLocation : !this.state.showGeoLocation});
     }
 
     showDistances(){
-        this.state.showDistances = !this.state.showDistances;
-        this.props.planRequest();
+        this.setState({showDistances : !this.state.showDistances});
     }
 
     showTotalDistance(){
-        this.state.showTotalDistance = !this.state.showTotalDistance;
-        this.props.planRequest();
+        this.setState({showTotalDistance : !this.state.showTotalDistance});
     }
 
 
@@ -119,7 +115,7 @@ class Itinerary extends Component {
             counter += 1;
             return <td key={'place ' + counter}>{place.name}</td>;
         });
-        if(this.state.showPlace){
+        if(this.state.showPlace) {
             return (
                 <tr>
                     <th scope="row">Place</th>
@@ -194,7 +190,7 @@ class Itinerary extends Component {
                     <Card>
                         <CardBody>
                             {this.renderButtons()}
-                            <SearchBar addDestination={this.props.addDestination} config={this.props.config}/>
+                            <SearchBar addDestination={this.props.addDestination} config={this.props.config} planRequest={this.props.planRequest}/>
                             <AddByName addLeg={this.props.addLeg}/>
                         </CardBody>
                     </Card>

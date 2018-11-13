@@ -102,8 +102,8 @@ class Application extends Component {
       trip.options.unitName = "";
       trip.options.unitRadius = "";
       trip.options.optimization = "none";
+      trip.map = "";
       this.setState(trip);
-      this.planRequest();
   }
 
   updateTrip(field, value){
@@ -158,7 +158,7 @@ class Application extends Component {
       let trip = this.state.trip;
       trip.places.push(value);
       this.setState(trip);
-      this.planRequest();
+      //this.planRequest();
   }
 
   reverseTrip(){
@@ -178,7 +178,7 @@ class Application extends Component {
       let trip = this.state.trip;
       trip.places.push(leg);
       this.setState(trip);
-      this.planRequest();
+      //this.planRequest();
   }
   setStartLeg(value){
       if(value <= 0 || value >= this.state.trip.places.length){
@@ -197,7 +197,7 @@ class Application extends Component {
               <Info/>
               <Interop changeServer={this.changeServer} updateNumber={this.updateNumber}/>
               <ChooseFile trip={this.state.trip} updateTFFI={this.updateTFFI} addDestination={this.addDestination}
-                          addLeg={this.addLeg} updateTrip={this.updateTrip} config={this.state.config}/>
+                          addLeg={this.addLeg} updateTrip={this.updateTrip} config={this.state.config} planRequest={this.planRequest}/>
               <Options options={this.state.trip.options}
                        config={this.state.config}
                        updateDistances={this.updateDistances}
