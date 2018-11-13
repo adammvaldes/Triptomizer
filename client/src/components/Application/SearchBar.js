@@ -116,15 +116,17 @@ class SearchBar extends Component{
             return;
         }
         this.props.addDestination(this.state.searchResults[this.state.addIndex]);
+        this.props.planRequest();
     }
 
     addAllDestinations(){
         let tempAddIndex = this.state.addIndex;
         while(this.state.addIndex < this.state.searchResults.length){
-            this.addDestination();
+            this.props.addDestination(this.state.searchResults[this.state.addIndex]);
             this.state.addIndex++;
         }
-        this.setState({addIndex: tempAddIndex})
+        this.setState({addIndex: tempAddIndex});
+        this.props.planRequest();
     }
 
     toggle(){
@@ -156,8 +158,8 @@ class SearchBar extends Component{
                 filters.push(<div key={name}> {name.charAt(0).toUpperCase() + name.slice(1) + ":"} </div>);
                 const values = f[0].values.map((filter) =>
                     (<FormGroup key={"Group_" + filter} check inline>
-                        <Input key={"filter_" + filter} type="checkbox"
-                               onChange={(e) => this.updateFilter(f[0].name, {filter})}/> {filter.replace("_", " ")}
+                        <Label><Input key={"filter_" + filter} type="checkbox"
+                                      onChange={(e) => this.updateFilter(f[0].name, {filter})}/> {filter.replace("_", " ")}</Label>
                     </FormGroup>)
                 );
                 filters.push(values);
