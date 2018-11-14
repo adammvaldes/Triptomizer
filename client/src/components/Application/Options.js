@@ -73,7 +73,7 @@ class Options extends Component{
                         <Collapse isOpen={this.state.showOptions}>
                         <Form>
                             <p>Select the units you wish to use.</p>
-                            <ButtonGroup responsive>
+                            <ButtonGroup>
                                 {buttons}
                             </ButtonGroup>
                             <FormGroup>
@@ -96,7 +96,7 @@ class Options extends Component{
                     <Collapse isOpen={this.state.showOptions}>
                     <Form>
                         <p>Select the units you wish to use.</p>
-                        <ButtonGroup responsive>
+                        <ButtonGroup>
                             {buttons}
                         </ButtonGroup>
                         <FormGroup/>

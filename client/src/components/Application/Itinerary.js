@@ -14,7 +14,8 @@ class Itinerary extends Component {
             showPlace : true,
             showGeoLocation : true,
             showDistances : true,
-            showTotalDistance : true
+            showTotalDistance : true,
+            displayedAttributes : []
         };
         this.removeLeg = this.removeLeg.bind(this);
         this.reverseTrip = this.reverseTrip.bind(this);
@@ -27,6 +28,7 @@ class Itinerary extends Component {
         this.showDistances = this.showDistances.bind(this);
         this.showTotalDistance = this.showTotalDistance.bind(this);
         this.toggle = this.toggle.bind(this);
+        this.getConfigAttributes = this.getConfigAttributes.bind(this);
     }
 
     removeLeg(){
@@ -88,6 +90,10 @@ class Itinerary extends Component {
     showTotalDistance(){
         this.setState({showTotalDistance : !this.state.showTotalDistance});
     }
+
+    /*showAttribute(value){
+        this.setState({value} : {!this.state.showTotalDistance});
+    }*/
 
 
     renderButtons(){
@@ -199,6 +205,28 @@ class Itinerary extends Component {
         );
     }
 
+    getConfigAttributes(){
+        if(this.props.config.attributes !== null){
+            let attributes = [];
+            for(let i = 0; i < this.props.config.attributes.length; i++){
+                let name = this.props.config.attributes[i];
+                let value = "Hide/Show " + name.charAt(0).toUpperCase() + name.slice(1);
+                let checkBox = (
+                    <FormGroup>
+                        <Label><Input key={name} type="checkbox" />{value}</Label>
+                    </FormGroup>
+                )
+                attributes.push(checkBox);
+            }
+            this.setState({displayedAttributes : {attributes}});
+            return (
+                <FormGroup>
+                    {attributes}
+                </FormGroup>
+            )
+        }
+    }
+
     renderCheckboxes(){
         return(
             <Card>
@@ -230,7 +258,7 @@ class Itinerary extends Component {
         if (this.props.trip.distances !== undefined && this.props.trip.distances.length !== 0 && this.props.trip.places !== undefined) {
             return this.renderTripRows();
         }
-        return <Container></Container>;
+        return <Container> </Container>;
     }
 }
 
