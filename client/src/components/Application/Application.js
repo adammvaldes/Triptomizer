@@ -104,6 +104,7 @@ class Application extends Component {
       trip.options.optimization = "none";
       trip.map = "";
       this.setState(trip);
+
   }
 
   updateTrip(field, value){
