@@ -244,11 +244,11 @@ public class testSearch {
                 assertEquals(L.name, "Kauffman Heliport");
                 assertEquals(L.latitude, 40.1463012695,0.0);
                 assertEquals(L.longitude, -104.887001038,0.0);
-                //assertEquals(L.municipality, "Denver");
+                assertEquals(L.municipality, "Denver");
                 assertEquals(L.type, "heliport");
-                //assertEquals(L.region, "Colorado");
-                //assertEquals(L.country, "United States");
-                //assertEquals(L.continent, "North America");
+                assertEquals(L.region, "Colorado");
+                assertEquals(L.country, "United States");
+                assertEquals(L.continent, "North America");
             }
         } catch (Exception e) {
             System.err.println("Exception: " + e.getMessage());

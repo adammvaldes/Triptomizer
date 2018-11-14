@@ -18,7 +18,6 @@ class Options extends Component{
     this.updateRadius = this.updateRadius.bind(this);
     this.updateDefault = this.updateDefault.bind(this);
     this.updateOptimization = this.updateOptimization.bind(this);
-    this.hideOptions = this.hideOptions.bind(this);
     this.showOptions = this.showOptions.bind(this);
   }
 
@@ -46,13 +45,6 @@ class Options extends Component{
       this.setState({showOptions : !this.state.showOptions});
   }
 
-  hideOptions(){
-     this.state.showOptions = false;
-     this.props.planRequest();
-  }
-  toggle(){
-
-  }
   render() {
     const buttons = this.props.config.units.map((unit) =>
       <Button
@@ -73,7 +65,7 @@ class Options extends Component{
                         <Collapse isOpen={this.state.showOptions}>
                         <Form>
                             <p>Select the units you wish to use.</p>
-                            <ButtonGroup responsive>
+                            <ButtonGroup>
                                 {buttons}
                             </ButtonGroup>
                             <FormGroup>
@@ -96,7 +88,7 @@ class Options extends Component{
                     <Collapse isOpen={this.state.showOptions}>
                     <Form>
                         <p>Select the units you wish to use.</p>
-                        <ButtonGroup responsive>
+                        <ButtonGroup>
                             {buttons}
                         </ButtonGroup>
                         <FormGroup/>
