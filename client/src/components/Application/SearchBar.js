@@ -32,6 +32,8 @@ class SearchBar extends Component{
         this.setFilters = this.setFilters.bind(this);
         this.setTypeFilters = this.setTypeFilters.bind(this);
         this.updateFilter = this.updateFilter.bind(this);
+        this.searchRow = this.searchRow.bind(this);
+        this.setResults = this.setResults.bind(this);
     }
 
     search(){
@@ -41,10 +43,10 @@ class SearchBar extends Component{
         }
         let searchTFFI;
         if(this.state.filters.length === 0){
-            searchTFFI = {"version":4, "type":"search","match" : this.state.searchText, "places" : [], "limit": this.state.searchNumber};
+            searchTFFI = {"version":4, "type":"search","match" : this.state.searchText, "places" : [], "limit": 30};
         }
         else{
-            searchTFFI = {"version":4, "type":"search","match" : this.state.searchText, "places" : [], "limit": this.state.searchNumber, "filters": this.state.filters};
+            searchTFFI = {"version":4, "type":"search","match" : this.state.searchText, "places" : [], "limit": 30, "filters": this.state.filters};
         }
         if(this.props.URL === "" || this.props.port==="314") {
             request(searchTFFI, "search").then(serverResponse => {
@@ -93,23 +95,52 @@ class SearchBar extends Component{
         }
     }
 
-    renderResults(){
-        if(typeof this.state.searchResults !== 'undefined'){
-            let inc = 0;
-            let searchResultNames = this.state.searchResults.map((place) => {
+    searchRow(rowName, results){
+        return(
+            <tr>
+                <th scope="row"> {rowName} </th>
+                {results}
+            </tr>
+        )
+    }
+    setResults(name){
+        let inc = 0
+        return(
+            this.state.searchResults.map((place) => {
                 inc++;
-                return <td key={'place ' + inc}>{inc-1}:<p></p>{place.name}</td>;
-            });
+                return <td key={'type ' + inc}> <p> </p>{place[name]}</td>;
+            })
+        );
+    }
+
+    renderResults(){
+        if(typeof this.state.searchResults !== 'undefined' && this.state.searchResults.length!==0){
+            let searchResultNames = this.setResults("name");
+            let searchResultRegion = this.setResults("region")
+            let searchResultCountry = this.setResults("country");
+            let searchResultType = this.setResults("type");
+            let searchResultContinent = this.setResults("continent");
+            let searchResultMun = this.setResults("municipality");
+            let searchResultLat = this.setResults("latitude");
+            let searchResultLong = this.setResults("longitude");
             if(this.state.searchResults.length > 0){
                 return (
-                    <tr>
-                        <th scope="row">Location Name</th>
-                        {searchResultNames}
-                    </tr>
+                    <tbody>
+                    {this.searchRow("Location Name", searchResultNames)}{this.searchRow("Location Municipality", searchResultMun)}
+                    {this.searchRow("Location Latitude", searchResultLat)}{this.searchRow("Location Longitude", searchResultLong)}
+                    {this.searchRow("Location Region", searchResultRegion)}{this.searchRow("Location Country", searchResultCountry)}
+                    {this.searchRow("Location Continent", searchResultContinent)}{this.searchRow("Location Type", searchResultType)}
+                    </tbody>
                 );
-            }
-        }
+            }}
     }
+    /*
+    let inc = 0;
+            let searchResultNames = this.state.searchResults.map((place) => {
+                inc++;
+                return <td key={'place ' + inc}>{inc-1}:<p> </p>{place.name}</td>;
+            });
+     */
 
     addDestination(){
         if(this.state.addIndex < 0 || this.state.addIndex > 30){
@@ -187,7 +218,6 @@ class SearchBar extends Component{
                     <Form>
                         <InputGroup>
                             <Input type="text" placeholder="Search for a destination to add to your trip" onChange={this.handleChange} />
-                            <Input type="number" placeholder="Number of search results" onChange={this.updateSearchNumber} />
                         </InputGroup>
                         <Container>
                             <Button onClick={this.toggleFilter} type="button" style={{backgroundColor: "cea12b"}} >Filter Your Search</Button>
@@ -201,7 +231,7 @@ class SearchBar extends Component{
                         {this.renderFoundNumbers()}
                     </div>
                     <div id="parent">
-                        <div id="div1"><Table responsive><tbody>{this.renderResults()}</tbody></Table></div>
+                        <div id="div1"><Table responsive>{this.renderResults()}</Table></div>
                     </div>
                     <Input type="number" placeholder="Enter the index of the location you want to add to your trip" onChange={this.handleChange2} />
                     <Button className="btn text-white" type="button" style={{backgroundColor: "407157"}} onClick={this.addDestination}>Add destination to Trip</Button>
@@ -216,3 +246,4 @@ export default SearchBar;
 //<input type="checkbox" checked={this.state.val1 === true} autocomplete="off"
 
 //https://reactstrap.github.io/components/form/
+//<Input type="number" placeholder="Number of search results" onChange={this.updateSearchNumber} />
