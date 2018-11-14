@@ -1,5 +1,5 @@
 import React, {Component} from 'react'
-import {Card, CardHeader, CardBody, FormGroup} from 'reactstrap'
+import {Card, CardHeader, CardBody, FormGroup, Collapse} from 'reactstrap'
 import { ButtonGroup, Button, Form, Label, Input, FormText} from 'reactstrap'
 import {request} from "../../api/api";
 import OptimizationButtons from "./OptimizationButtons";
@@ -18,7 +18,8 @@ class Options extends Component{
     this.updateRadius = this.updateRadius.bind(this);
     this.updateDefault = this.updateDefault.bind(this);
     this.updateOptimization = this.updateOptimization.bind(this);
-    this.toggleShowOptions = this.toggleShowOptions.bind(this);
+    this.hideOptions = this.hideOptions.bind(this);
+    this.showOptions = this.showOptions.bind(this);
   }
 
   updateDefault(name){
@@ -39,10 +40,19 @@ class Options extends Component{
       this.props.updateOptions('optimization',name.target.value);
   }
 
-  toggleShowOptions(){
+  showOptions(){
+      //this.state.showOptions = true;
+      //this.props.planRequest();
       this.setState({showOptions : !this.state.showOptions});
   }
 
+  hideOptions(){
+     this.state.showOptions = false;
+     this.props.planRequest();
+  }
+  toggle(){
+
+  }
   render() {
     const buttons = this.props.config.units.map((unit) =>
       <Button
@@ -54,14 +64,16 @@ class Options extends Component{
         {unit.charAt(0).toUpperCase() + unit.slice(1)}
       </Button>
     );
-    if(this.state.showOptions === true) {
+    //if(this.state.showOptions === true) {
         if(this.props.options.units === "user defined"){
             return(
                 <Card>
                     <CardBody>
+                        <Button onClick={this.showOptions} style={{backgroundColor: "000000"}}> Toggle Options </Button>
+                        <Collapse isOpen={this.state.showOptions}>
                         <Form>
                             <p>Select the units you wish to use.</p>
-                            <ButtonGroup>
+                            <ButtonGroup responsive>
                                 {buttons}
                             </ButtonGroup>
                             <FormGroup>
@@ -72,7 +84,7 @@ class Options extends Component{
                                                  config={this.props.config}
                                                  updateOptions={this.props.updateOptions}/>
                         </Form>
-                        <Button onClick={this.toggleShowOptions} color={'info'}> Hide Options </Button>
+                        </Collapse>
                     </CardBody>
                 </Card>
             );
@@ -80,30 +92,33 @@ class Options extends Component{
         return(
             <Card>
                 <CardBody>
+                    <Button onClick={this.showOptions} style={{backgroundColor: "000000"}}> Toggle Options </Button>
+                    <Collapse isOpen={this.state.showOptions}>
                     <Form>
                         <p>Select the units you wish to use.</p>
-                        <ButtonGroup>
+                        <ButtonGroup responsive>
                             {buttons}
                         </ButtonGroup>
                         <FormGroup/>
                         <OptimizationButtons options={this.props.options}
                                              config={this.props.config}
                                              updateOptions={this.props.updateOptions}/>
+
                     </Form>
-                    <Button onClick={this.toggleShowOptions} color={'info'}> Hide Options </Button>
+                    </Collapse>
                 </CardBody>
             </Card>
         );
-    }
-    else {
+    //}
+    /*else {
         return(
             <Card>
                 <CardBody>
-                    <Button onClick={this.toggleShowOptions} color={'info'}>Show Options</Button>
+                    <Button onClick={this.showOptions} color={'info'}>Show Options</Button>
                 </CardBody>
             </Card>
         );
-    }
+    }*/
 
   }
 }
