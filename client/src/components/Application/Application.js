@@ -110,6 +110,7 @@ class Application extends Component {
     let trip = this.state.trip;
     trip[field] = value;
     this.setState(trip);
+
   }
 
   // updateBasedOnResponse(value) {
