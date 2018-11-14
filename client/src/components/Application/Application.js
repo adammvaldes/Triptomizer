@@ -195,7 +195,6 @@ class Application extends Component {
       return(
           <Container id="Application">
               <Info/>
-              <Interop changeServer={this.changeServer} updateNumber={this.updateNumber}/>
               <ChooseFile trip={this.state.trip} updateTFFI={this.updateTFFI} addDestination={this.addDestination}
                           addLeg={this.addLeg} updateTrip={this.updateTrip} config={this.state.config} planRequest={this.planRequest}/>
               <Options options={this.state.trip.options}
@@ -215,6 +214,7 @@ class Application extends Component {
                          addDestination={this.addDestination}
                          addLeg={this.addLeg} config={this.state.config}/>
               <Map trip={this.state.trip} />
+              <Interop changeServer={this.changeServer} updateNumber={this.updateNumber}/>
           </Container>
       )
     }
