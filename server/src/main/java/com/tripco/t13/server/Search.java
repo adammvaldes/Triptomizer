@@ -107,13 +107,13 @@ public class Search {
             Location placeSearch = new Location();
             placeSearch.name = query.getString("name");
             placeSearch.id = query.getString("id");
-            //placeSearch.municipality = query.getString("municipality");
+            placeSearch.municipality = query.getString("municipality");
             placeSearch.type = query.getString("type");
             placeSearch.latitude = Double.parseDouble(query.getString("latitude"));
             placeSearch.longitude = Double.parseDouble(query.getString("longitude"));
-            //placeSearch.region = query.getString(7);
-            //placeSearch.country = query.getString(8);
-            //placeSearch.continent = query.getString(9);
+            placeSearch.region = query.getString(7);
+            placeSearch.country = query.getString(8);
+            placeSearch.continent = query.getString(9);
             places.add(placeSearch);
         }
     }

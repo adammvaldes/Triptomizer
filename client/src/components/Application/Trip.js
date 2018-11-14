@@ -103,7 +103,7 @@ class Trip extends Component {
         return (
             <Card>
                 <CardBody>
-                    <Button style={{backgroundColor: "407157"}} onClick={this.plan} type="button" block> RENDER </Button>
+                    <Button style={{backgroundColor: "407157"}} onClick={this.plan} type="button" block> PLAN </Button>
                     <Button style={{backgroundColor: "cea12b"}} onClick={this.saveFile} type="button" block> Save Trip </Button>
                     <Button style={{backgroundColor: "cea12b"}} onClick={this.props.clearTrip} type="button" block> CLEAR </Button>
                     <Button style={{backgroundColor: "cea12b"}} onClick={this.toggle} type="button" block> Calculate Distance </Button>
