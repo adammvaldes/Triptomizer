@@ -15,7 +15,7 @@ public class Config {
   private List<String> units = Arrays.asList("miles","kilometers","nautical miles","user defined");
   private List<OptimizationConfig> optimization;
   private List<String> maps = Arrays.asList("svg");
-  private List<String> attributes = Arrays.asList("name", "id", "type", "latitude", "longitude","municipality", "region", "country", "continent");
+  private List<String> attributes = Arrays.asList("name", "id", "type", "latitude", "longitude", "municipality", "region", "country", "continent");
   private List<Filter> filters;
 
   static String getConfig() {
