@@ -21,22 +21,38 @@ public class Search {
         String newSearch = "select world_airports.id, world_airports.type, " +
                 "world_airports.latitude, world_airports.longitude, " +
                 "world_airports.name, world_airports.municipality, region.name, country.name, continents.name from continents ";
-        newSearch += "inner join country on continents.id = country.continent ";
-        newSearch += "inner join region on country.id = region.iso_country ";
-        newSearch += "inner join world_airports on region.id = world_airports.iso_region ";
-        newSearch += "where (country.name like " + Qmatch + " ";
-        newSearch += "or region.name like " + Qmatch + " ";
-        newSearch += "or world_airports.name like " + Qmatch + " ";
-        newSearch += "or world_airports.municipality like " + Qmatch + " ";
-        newSearch += "or continents.name like " + Qmatch + " ";
-        newSearch += "or world_airports.latitude like " + Qmatch + " ";
-        newSearch += "or world_airports.longitude like " + Qmatch + " ";
-        newSearch += "or world_airports.id like " + Qmatch + " ";
-        newSearch += "or world_airports.type like " + Qmatch + ")";
 
-        newSearch = applyFilter(newSearch);
+        newSearch = addSQL(newSearch, Qmatch);
 
         return newSearch;
+    }
+
+    public String createFound(){
+        String Qmatch = "'%" + match + "%'";
+        String found = "select count(*) from continents ";
+        found = addSQL(found, Qmatch);
+
+        return found;
+    }
+
+    public String addSQL(String search, String Qmatch){
+
+        search += "inner join country on continents.id = country.continent ";
+        search += "inner join region on country.id = region.iso_country ";
+        search += "inner join world_airports on region.id = world_airports.iso_region ";
+        search += "where (country.name like " + Qmatch + " ";
+        search += "or region.name like " + Qmatch + " ";
+        search += "or world_airports.name like " + Qmatch + " ";
+        search += "or world_airports.municipality like " + Qmatch + " ";
+        search += "or continents.name like " + Qmatch + " ";
+        search += "or world_airports.latitude like " + Qmatch + " ";
+        search += "or world_airports.longitude like " + Qmatch + " ";
+        search += "or world_airports.id like " + Qmatch + " ";
+        search += "or world_airports.type like " + Qmatch + ")";
+
+        search = applyFilter(search);
+
+        return search;
     }
 
     public String applyFilter(String search){
@@ -69,11 +85,12 @@ public class Search {
 
     public String applyLimit(Integer limit, String match, Search searchObject){
         //Applying the limit of the search, if provided by the user
-
+        //order by world_airports.index
         if(searchObject.limit == null){
             limit = 0;
         }
 
+        match += " order by world_airports.id";
         if(limit > 0){
             match += " limit " + Integer.toString(limit) + ";";
         }
@@ -90,15 +107,20 @@ public class Search {
             Location placeSearch = new Location();
             placeSearch.name = query.getString("name");
             placeSearch.id = query.getString("id");
-            placeSearch.municipality = query.getString("municipality");
+            //placeSearch.municipality = query.getString("municipality");
             placeSearch.type = query.getString("type");
             placeSearch.latitude = Double.parseDouble(query.getString("latitude"));
             placeSearch.longitude = Double.parseDouble(query.getString("longitude"));
-            placeSearch.region = query.getString(7);
-            placeSearch.country = query.getString(8);
-            placeSearch.continent = query.getString(9);
+            //placeSearch.region = query.getString(7);
+            //placeSearch.country = query.getString(8);
+            //placeSearch.continent = query.getString(9);
             places.add(placeSearch);
         }
+    }
+
+    public void updateFound(ResultSet query) throws SQLException {
+        query.next();
+        found = Integer.parseInt(query.getString("count(*)"));
     }
 
     public boolean validateSearchRequestFormat(Search searchObject) {
@@ -116,14 +138,3 @@ public class Search {
     }
 
 }
-
- /*String search = "select id,name,municipality,type,latitude,longitude from airports where ";
-
-        String temp = "name like '%" + match + "%' or id like '%" + match + "%' or ";
-        search += temp;
-
-        temp = "municipality like '%" + match + "%' or type like '%" + match + "%' or ";
-        search += temp;
-
-        temp = "latitude like '%" + match + "%' or longitude like '%" + match + "%'";
-        search += temp;*/

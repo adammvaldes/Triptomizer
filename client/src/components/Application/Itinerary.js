@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import {Button, Card, CardBody, Container, Form, FormGroup, Input, Table, Collapse, InputGroupAddon, InputGroup} from 'reactstrap';
+import {Button, Card, CardBody, Container, Form, FormGroup, Input, Table, Collapse, InputGroupAddon, InputGroup, Row, Col, Label} from 'reactstrap';
 import SearchBar from "./SearchBar";
 import AddByName from "./AddByName";
 
@@ -10,7 +10,11 @@ class Itinerary extends Component {
         this.state = {
             textField1 : "",
             textField2 : "",
-            collapse : false
+            collapse : false,
+            showPlace : true,
+            showGeoLocation : true,
+            showDistances : true,
+            showTotalDistance : true
         };
         this.removeLeg = this.removeLeg.bind(this);
         this.reverseTrip = this.reverseTrip.bind(this);
@@ -18,6 +22,10 @@ class Itinerary extends Component {
         this.handleChange1  = this.handleChange1.bind(this);
         this.handleChange2  = this.handleChange2.bind(this);
         this.renderButtons = this.renderButtons.bind(this);
+        this.showPlace = this.showPlace.bind(this);
+        this.showGeoLocation = this.showGeoLocation.bind(this);
+        this.showDistances = this.showDistances.bind(this);
+        this.showTotalDistance = this.showTotalDistance.bind(this);
         this.toggle = this.toggle.bind(this);
     }
 
@@ -54,13 +62,31 @@ class Itinerary extends Component {
             counter = counter + 1;
             return <td key={'distance ' + sum + counter}>{sum}</td>
         });
-        return (
-            <tr>
-                <th scope="row">Total Distance, {this.props.trip.options.units}</th>
-                <td>0</td>
-                {tripDistances}
-            </tr>
-        );
+        if(this.state.showTotalDistance){
+            return (
+                <tr>
+                    <th scope="row">Total Distance, {this.props.trip.options.units}</th>
+                    <td>0</td>
+                    {tripDistances}
+                </tr>
+            );
+        }
+    }
+
+    showPlace(){
+        this.setState({showPlace : !this.state.showPlace});
+    }
+
+    showGeoLocation(){
+        this.setState({showGeoLocation : !this.state.showGeoLocation});
+    }
+
+    showDistances(){
+        this.setState({showDistances : !this.state.showDistances});
+    }
+
+    showTotalDistance(){
+        this.setState({showTotalDistance : !this.state.showTotalDistance});
     }
 
 
@@ -84,19 +110,20 @@ class Itinerary extends Component {
 
 
     renderTripPlaces() {
-        console.log((this.props.trip.places));
         let counter = 0;
         let tripPlaces = this.props.trip.places.map((place) => {
             counter += 1;
             return <td key={'place ' + counter}>{place.name}</td>;
         });
-
-        return (
-            <tr>
-                <th scope="row">Place</th>
-                {tripPlaces}
-            </tr>
-        );
+        if(this.state.showPlace) {
+            return (
+                <tr>
+                    <th scope="row">Place</th>
+                    {tripPlaces}
+                    {tripPlaces[0]}
+                </tr>
+            );
+        }
     }
 
     renderTripGeoLocations() {
@@ -105,29 +132,32 @@ class Itinerary extends Component {
             counter += 1;
              return <td key={'geo ' + counter}>{place.latitude}, {place.longitude}</td>;
         });
+        if(this.state.showGeoLocation){
+            return (
+                <tr>
+                    <th scope="row">Geographical Location</th>
+                    {tripGeoLocations}
+                    {tripGeoLocations[0]}
+                </tr>
 
-        return (
-            <tr>
-                <th scope="row">Geographical Location</th>
-                {tripGeoLocations}
-            </tr>
-
-        );
-
+            );
+        }
     }
 
     renderLegDistances() {
         let counter = 0;
-        return (
-            <tr>
-                <th scope="row">Leg Distances</th>
-                <td>0</td>
-                {this.props.trip.distances.map((el) => {
-                    counter += 1;
-                    return <td key={'leg ' + counter}>{el}</td>;
-                })}
-            </tr>
-        );
+        if(this.state.showDistances){
+            return (
+                <tr>
+                    <th scope="row">Leg Distances</th>
+                    <td>0</td>
+                    {this.props.trip.distances.map((el) => {
+                        counter += 1;
+                        return <td key={'leg ' + counter}>{el}</td>;
+                    })}
+                </tr>
+            );
+        }
     }
 
     renderTripRows(){
@@ -135,24 +165,60 @@ class Itinerary extends Component {
         return (
             <div id="parent">
                 <div id="div1">
-                    <Table responsive><tbody>
-                    {this.renderTripPlaces()}
-                    {this.renderTripGeoLocations()}
-                    {this.renderLegDistances()}
-                    {this.calculateTotalDistance()}
-                    </tbody></Table>
+                    <Card>
+                        <CardBody>
+                            <Row>
+                                <Col lg="3">
+                                    {this.renderCheckboxes()}
+                                </Col>
+                                <Col lg="9">
+                            <Table responsive><tbody>
+                            {this.renderTripPlaces()}
+                            {this.renderTripGeoLocations()}
+                            {this.renderLegDistances()}
+                            {this.calculateTotalDistance()}
+                            </tbody>
+                            </Table>
+                                </Col>
+                            </Row>
+                        </CardBody>
+                    </Card>
+
                 </div>
                 <Button onClick={this.toggle} type="button" style={{backgroundColor: "000000"}}> Edit Trip </Button>
                 <Collapse isOpen={this.state.collapse}>
                     <Card>
                         <CardBody>
                             {this.renderButtons()}
-                            <SearchBar addDestination={this.props.addDestination}/>
+                            <SearchBar addDestination={this.props.addDestination} config={this.props.config} planRequest={this.props.planRequest}/>
                             <AddByName addLeg={this.props.addLeg}/>
                         </CardBody>
                     </Card>
                 </Collapse>
             </div>
+        );
+    }
+
+    renderCheckboxes(){
+        return(
+            <Card>
+                <CardBody>
+                    <FormGroup>
+                     <FormGroup>
+                        <Label><Input name="Hide Places" type="checkbox" onChange={this.showPlace}/>Hide Places</Label>
+                    </FormGroup>
+                    <FormGroup>
+                        <Label><Input name="Hide Geographical Location" type="checkbox" onChange={this.showGeoLocation}/>Hide Geographical Location</Label>
+                    </FormGroup>
+                    <FormGroup>
+                        <Label><Input name="Hide Leg Distances" type="checkbox" onChange={this.showDistances}/>Hide Leg Distances</Label>
+                    </FormGroup>
+                    <FormGroup>
+                        <Label><Input name="Hide Total Distance" type="checkbox" onChange={this.showTotalDistance}/>Hide Total Distance</Label>
+                    </FormGroup>
+                    </FormGroup>
+                </CardBody>
+            </Card>
         );
     }
 

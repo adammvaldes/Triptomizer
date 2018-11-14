@@ -57,13 +57,24 @@ class Application extends Component {
   }
 
   componentWillMount() {
-    get_config().then(
-      config => {
-        this.setState({
-          config:config
-        })
+      if(this.state.port==="" || this.state.URL===""){
+          get_config().then(
+              config => {
+                  this.setState({
+                      config:config
+                  })
+              }
+          );
       }
-    );
+      else{
+          get_config("type", this.state.port, this.state.URL).then(
+              config => {
+                  this.setState({
+                      config:config
+                  })
+              }
+          );
+      }
   }
 
   planRequest(){
@@ -93,8 +104,8 @@ class Application extends Component {
       trip.options.unitName = "";
       trip.options.unitRadius = "";
       trip.options.optimization = "none";
+      trip.map = "";
       this.setState(trip);
-      this.planRequest();
   }
 
   updateTrip(field, value){
@@ -135,19 +146,21 @@ class Application extends Component {
       this.setState({
           port:value
       });
+      this.componentWillMount();
   }
 
   changeServer(value){
       this.setState({
           URL:value
       });
+      this.componentWillMount();
   }
 
   addDestination(value){
       let trip = this.state.trip;
       trip.places.push(value);
       this.setState(trip);
-      this.planRequest();
+      //this.planRequest();
   }
 
   reverseTrip(){
@@ -167,7 +180,7 @@ class Application extends Component {
       let trip = this.state.trip;
       trip.places.push(leg);
       this.setState(trip);
-      this.planRequest();
+      //this.planRequest();
   }
   setStartLeg(value){
       if(value <= 0 || value >= this.state.trip.places.length){
@@ -185,7 +198,8 @@ class Application extends Component {
           <Container id="Application">
               <Info/>
               <Interop changeServer={this.changeServer} updateNumber={this.updateNumber}/>
-              <ChooseFile trip={this.state.trip} updateTFFI={this.updateTFFI} addDestination={this.addDestination} addLeg={this.addLeg} updateTrip={this.updateTrip}/>
+              <ChooseFile trip={this.state.trip} updateTFFI={this.updateTFFI} addDestination={this.addDestination}
+                          addLeg={this.addLeg} updateTrip={this.updateTrip} config={this.state.config} planRequest={this.planRequest}/>
               <Options options={this.state.trip.options}
                        config={this.state.config}
                        updateDistances={this.updateDistances}
@@ -201,7 +215,7 @@ class Application extends Component {
                          reverseTrip={this.reverseTrip}
                          setStartLeg={this.setStartLeg}
                          addDestination={this.addDestination}
-                         addLeg={this.addLeg}/>
+                         addLeg={this.addLeg} config={this.state.config}/>
               <Map trip={this.state.trip} />
           </Container>
       )

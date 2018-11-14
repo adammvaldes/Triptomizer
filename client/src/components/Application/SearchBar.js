@@ -13,6 +13,7 @@ class SearchBar extends Component{
             searchText : "",
             addIndex : "0",
             searchResults : [],
+            foundNumber : 0,
             searchNumber : 0,
             filters : [],
             type : [],
@@ -48,12 +49,14 @@ class SearchBar extends Component{
         if(this.props.URL === "" || this.props.port==="314") {
             request(searchTFFI, "search").then(serverResponse => {
                 searchTFFI.places = serverResponse["places"];
+                this.state.foundNumber = serverResponse["found"];
                 this.setSearchResults(searchTFFI.places);
             });
         }
         else{
             request(searchTFFI, "search",this.props.port,this.props.URL).then(serverResponse => {
                 searchTFFI.places = serverResponse["places"];
+                this.state.foundNumber = serverResponse["found"];
                 this.setSearchResults(searchTFFI.places);
             });
         }
@@ -80,19 +83,31 @@ class SearchBar extends Component{
         this.setState({searchNumber : number.target.value})
     }
 
-    renderResults(){
-        let inc = 0;
-        let searchResultNames = this.state.searchResults.map((place) => {
-            inc++;
-            return <td key={'place ' + inc}>{inc-1}:<p></p>{place.name}</td>;
-        });
-        if(this.state.searchResults.length > 0){
-            return (
-                <tr>
-                    <th scope="row">Location Name</th>
-                    {searchResultNames}
-                </tr>
+    renderFoundNumbers(){
+        if(typeof this.state.searchResults !== 'undefined' && this.state.searchResults.length !== 0){
+            return(
+                <div>
+                    Displaying {this.state.searchResults.length} of {this.state.foundNumber} results:
+                </div>
             );
+        }
+    }
+
+    renderResults(){
+        if(typeof this.state.searchResults !== 'undefined'){
+            let inc = 0;
+            let searchResultNames = this.state.searchResults.map((place) => {
+                inc++;
+                return <td key={'place ' + inc}>{inc-1}:<p></p>{place.name}</td>;
+            });
+            if(this.state.searchResults.length > 0){
+                return (
+                    <tr>
+                        <th scope="row">Location Name</th>
+                        {searchResultNames}
+                    </tr>
+                );
+            }
         }
     }
 
@@ -101,15 +116,17 @@ class SearchBar extends Component{
             return;
         }
         this.props.addDestination(this.state.searchResults[this.state.addIndex]);
+        this.props.planRequest();
     }
 
     addAllDestinations(){
         let tempAddIndex = this.state.addIndex;
         while(this.state.addIndex < this.state.searchResults.length){
-            this.addDestination();
+            this.props.addDestination(this.state.searchResults[this.state.addIndex]);
             this.state.addIndex++;
         }
-        this.setState({addIndex: tempAddIndex})
+        this.setState({addIndex: tempAddIndex});
+        this.props.planRequest();
     }
 
     toggle(){
@@ -121,39 +138,37 @@ class SearchBar extends Component{
 
     updateFilter(name, value){
         let search = this.state;
-        let index = search[name].indexOf(value);
+        let index = search[name].indexOf(value.filter);
         if(index > -1){
             search[name].splice(index, 1);
         }
         else{
-            search[name].push(value);
+            search[name].push(value.filter);
         }
         this.setState({search});
     }
 
     setTypeFilters(){
-        return(
-            <FormGroup>
-                <FormGroup check inline>
-                        <Input type="checkbox" onChange={(e) => this.updateFilter("type","small_airport")}/> small-sized airport
-                </FormGroup>
-                <FormGroup check inline>
-                        <Input type="checkbox" onChange={(e) => this.updateFilter("type","medium_airport")}/> medium-sized airport
-                </FormGroup>
-                <FormGroup check inline>
-                    <Input type="checkbox" onChange={(e) => this.updateFilter("type","large_airport")}/> large-sized airport
-                </FormGroup>
-                <FormGroup check inline>
-                    <Input type="checkbox" onChange={(e) => this.updateFilter("type","heliport")}/> heliport
-                </FormGroup>
-                <FormGroup check inline>
-                    <Input type="checkbox" onChange={(e) => this.updateFilter("type","balloon_port")}/> balloon port
-                </FormGroup>
-                <FormGroup check inline>
-                    <Input type="checkbox" onChange={(e) => this.updateFilter("type","seaplane_base")}/> seaplane base
-                </FormGroup>
-            </FormGroup>
-        );
+        if(this.props.config.filters!==undefined) {
+            let filters = [];
+            for (let i = 0; i < this.props.config.filters.length; i++) {
+                let f = [];
+                f.push(this.props.config.filters[i]);
+                let name = f[0].name;
+                filters.push(<div key={name}> {name.charAt(0).toUpperCase() + name.slice(1) + ":"} </div>);
+                const values = f[0].values.map((filter) =>
+                    (<FormGroup key={"Group_" + filter} check inline>
+                        <Label><Input key={"filter_" + filter} type="checkbox"
+                                      onChange={(e) => this.updateFilter(f[0].name, {filter})}/> {filter.replace("_", " ")}</Label>
+                    </FormGroup>)
+                );
+                filters.push(values);
+            }
+            return (
+                <FormGroup> {filters} </FormGroup>
+            )
+        }
+        return <FormGroup> </FormGroup>
     }
 
     setFilters(){
@@ -182,6 +197,9 @@ class SearchBar extends Component{
                         </Container>
                     </Form>
                     <Button className="btn text-white" type="button" style={{backgroundColor: "407157"}} onClick={this.search}>Search</Button>
+                    <div id="grandparent">
+                        {this.renderFoundNumbers()}
+                    </div>
                     <div id="parent">
                         <div id="div1"><Table responsive><tbody>{this.renderResults()}</tbody></Table></div>
                     </div>
@@ -195,6 +213,6 @@ class SearchBar extends Component{
 
 export default SearchBar;
 
-//<input type="checkbox" checked={this.state.val1 === true} autocomplete="off" /
+//<input type="checkbox" checked={this.state.val1 === true} autocomplete="off"
 
 //https://reactstrap.github.io/components/form/

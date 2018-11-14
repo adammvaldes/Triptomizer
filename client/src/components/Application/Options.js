@@ -18,8 +18,7 @@ class Options extends Component{
     this.updateRadius = this.updateRadius.bind(this);
     this.updateDefault = this.updateDefault.bind(this);
     this.updateOptimization = this.updateOptimization.bind(this);
-    this.hideOptions = this.hideOptions.bind(this);
-    this.showOptions = this.showOptions.bind(this);
+    this.toggleShowOptions = this.toggleShowOptions.bind(this);
   }
 
   updateDefault(name){
@@ -40,15 +39,10 @@ class Options extends Component{
       this.props.updateOptions('optimization',name.target.value);
   }
 
-  showOptions(){
-      this.state.showOptions = true;
-      this.props.planRequest();
+  toggleShowOptions(){
+      this.setState({showOptions : !this.state.showOptions});
   }
 
-  hideOptions(){
-     this.state.showOptions = false;
-     this.props.planRequest();
-  }
   render() {
     const buttons = this.props.config.units.map((unit) =>
       <Button
@@ -78,7 +72,7 @@ class Options extends Component{
                                                  config={this.props.config}
                                                  updateOptions={this.props.updateOptions}/>
                         </Form>
-                        <Button onClick={this.hideOptions} color={'info'}> Hide Options </Button>
+                        <Button onClick={this.toggleShowOptions} color={'info'}> Hide Options </Button>
                     </CardBody>
                 </Card>
             );
@@ -96,7 +90,7 @@ class Options extends Component{
                                              config={this.props.config}
                                              updateOptions={this.props.updateOptions}/>
                     </Form>
-                    <Button onClick={this.hideOptions} color={'info'}> Hide Options </Button>
+                    <Button onClick={this.toggleShowOptions} color={'info'}> Hide Options </Button>
                 </CardBody>
             </Card>
         );
@@ -105,7 +99,7 @@ class Options extends Component{
         return(
             <Card>
                 <CardBody>
-                    <Button onClick={this.showOptions} color={'info'}>Show Options</Button>
+                    <Button onClick={this.toggleShowOptions} color={'info'}>Show Options</Button>
                 </CardBody>
             </Card>
         );

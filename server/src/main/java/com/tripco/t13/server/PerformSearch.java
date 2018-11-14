@@ -19,7 +19,7 @@ public class PerformSearch {
     private static String user="cs314-db";
     private static String pass="eiK5liet1uej";
     // fill in SQL queries to count the number of records and to retrieve the data
-    private static String count = "select count(*) from airports;";
+    private static String count = "";
     private static String search = "";
     // Arguments contain the username and password for the database
 
@@ -42,6 +42,10 @@ public class PerformSearch {
             String temp = searchObject.createSearch(searchObject.match);
             temp = searchObject.applyLimit(searchObject.limit, temp, searchObject);
             search = temp;
+
+            String found = searchObject.createFound();
+            found = searchObject.applyLimit(searchObject.limit, found, searchObject);
+            count = found;
         } catch (Exception e) {
             isCorrectFormat = false;
         }
@@ -59,6 +63,10 @@ public class PerformSearch {
             String temp = searchObject.createSearch(searchObject.match);
             temp = searchObject.applyLimit(searchObject.limit, temp, searchObject);
             search = temp;
+
+            String found = searchObject.createFound();
+            found = searchObject.applyLimit(searchObject.limit, found, searchObject);
+            count = found;
         } catch (Exception e) {
             isCorrectFormat = false;
         }
@@ -81,8 +89,12 @@ public class PerformSearch {
             Class.forName(myDriver);
             try (Connection conn = DriverManager.getConnection(myUrl, user, pass);
                  Statement stQuery = conn.createStatement();
-                 ResultSet rsQuery = stQuery.executeQuery(search)
+                 ResultSet rsQuery = stQuery.executeQuery(search);
+                 Statement ctQuery = conn.createStatement();
+                 ResultSet csQuery = ctQuery.executeQuery(count);
+
             ) {
+                searchObject.updateFound(csQuery);
                 searchObject.updatePlaces(searchObject.places, rsQuery);
             }
         } catch (Exception e) {
@@ -118,5 +130,7 @@ public class PerformSearch {
             user = "cs314-db";
             pass = "eiK5liet1uej";
         }
+
+        myUrl += "?characterencoding=utf-8";
     }
 }
