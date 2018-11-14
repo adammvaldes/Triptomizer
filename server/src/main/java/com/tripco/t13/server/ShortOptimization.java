@@ -6,21 +6,24 @@ import java.util.Collections;
 public class ShortOptimization {
 
     //Performs shortest trip calculation based on what place of origin has been received.
-    static ArrayList<Location> travelingSalesman(int currentOrigin, ArrayList<Location> places, int[][] distancesLibrary) {
+    static int[] travelingSalesman(int currentOrigin, ArrayList<Location> places, int[][] distancesLibrary, int[] pointerPlaces) {
         boolean[] visitedPlaces = new boolean[places.size()];
         boolean allPlacesVisited = false;
 
-        ArrayList<Location> sortedPlaces = new ArrayList<>(places.size() + 1);
         Location[] placesArr = new Location[places.size() + 1];
         placesArr = places.toArray(placesArr);
 
-        sortedPlaces.add(placesArr[currentOrigin]);
+        int counter = 0;
+        pointerPlaces[counter] = currentOrigin;
+        counter++;
+
         visitedPlaces[currentOrigin] = true;
 
         while (!allPlacesVisited) {
             currentOrigin = calculateDistances(currentOrigin, visitedPlaces, distancesLibrary);
             visitedPlaces[currentOrigin] = true;
-            sortedPlaces.add(placesArr[currentOrigin]);
+            pointerPlaces[counter] = currentOrigin;
+            counter++;
 
             for (boolean visitedPlace : visitedPlaces) {
 
@@ -33,8 +36,8 @@ public class ShortOptimization {
             }
         }
 
-        sortedPlaces.add(sortedPlaces.get(0)); //Make it a round trip.
-        return sortedPlaces;
+
+        return pointerPlaces;
     }
 
     /*This method calculates the shortest distance between the starting origin, and all the other places

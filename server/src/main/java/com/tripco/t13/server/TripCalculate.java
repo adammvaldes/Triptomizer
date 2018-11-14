@@ -48,7 +48,7 @@ public class TripCalculate {
     }
 
     void shortOptimization() {
-        Trip tempTrip = null;
+        int[] tempPointerPlaces = null;
         int shortestCumulativeDistance = 0;
         trip.distances = trip.getTripDistances();
 
@@ -58,63 +58,72 @@ public class TripCalculate {
 
         ArrayList<Location> retainOriginalPlaces = new ArrayList<>(trip.places.size());
         retainOriginalPlaces.addAll(trip.places);
+        // the  + 1 is responsible for containing the round trip element.
+        int[] pointerPlaces = new int[retainOriginalPlaces.size() + 1];
 
-        int[][] distanceLibrary = new int[retainOriginalPlaces.size()][retainOriginalPlaces.size()];
+        //Initially we have pointers all in the same order as the places array.
+        for (int i = 0; i < retainOriginalPlaces.size(); i++) {
+            pointerPlaces[i] = i;
+        }
+
+        double radius = trip.options.getRadius();
+        int[][] distanceLibrary = new int[retainOriginalPlaces.size() + 1][retainOriginalPlaces.size() + 1];
         for (int i = 0; i < retainOriginalPlaces.size(); i++) {
             for (int k = 0; k < retainOriginalPlaces.size(); k++) {
-                distanceLibrary[i][k] = Distance.getDistanceNum(retainOriginalPlaces, i, k, trip.options.getRadius());
+                distanceLibrary[i][k] = Distance.getDistanceNum(retainOriginalPlaces, i, k, radius);
             }
+            distanceLibrary[i][retainOriginalPlaces.size()] = Distance.getDistanceNum(retainOriginalPlaces, i, 0,
+                    radius); //Round trip calculation.
         }
+        distanceLibrary[retainOriginalPlaces.size()] = distanceLibrary[0]; //Round trip calculation
+
         //Loop through all locations in original places array, performing shortest trip algorithm to see which place
         //is shortest.
         for (int place = 0; place < retainOriginalPlaces.size(); place++) {
-            trip.places = ShortOptimization.travelingSalesman(place, retainOriginalPlaces, distanceLibrary);
+            ShortOptimization.travelingSalesman(place, retainOriginalPlaces, distanceLibrary, pointerPlaces);
             int tempCumulativeDistance = 0;
 
+
             if (trip.options.optimization.equals("shorter")) {
-
-                distanceLibrary = new int[trip.places.size()][trip.places.size()];
-                for (int i = 0; i < trip.places.size(); i++) {
-                    for (int k = 0; k < trip.places.size(); k++) {
-                        distanceLibrary[i][k] = Distance.getDistanceNum(trip.places, i, k, trip.options.getRadius());
-                    }
-                }
-                twoOpt(retainOriginalPlaces, distanceLibrary);
+                twoOpt(retainOriginalPlaces, distanceLibrary, pointerPlaces);
             }
 
-            trip.distances = trip.getTripDistances();
-            for (int distance : trip.distances) {
-                tempCumulativeDistance += distance;
+            for(int i = 0; i < retainOriginalPlaces.size() - 1; i++) {
+                tempCumulativeDistance += Distance.getDistanceNum(retainOriginalPlaces, pointerPlaces[i],
+                        pointerPlaces[i+1], radius);
             }
+            tempCumulativeDistance += Distance.getDistanceNum(retainOriginalPlaces,
+                    pointerPlaces[retainOriginalPlaces.size() - 1], pointerPlaces[0], radius); //Round Trip
 
             if (tempCumulativeDistance < shortestCumulativeDistance) {
                 shortestCumulativeDistance = tempCumulativeDistance;
-                tempTrip = new Trip(trip);
+                tempPointerPlaces = new int[retainOriginalPlaces.size() + 1];
+                for (int i = 0; i < retainOriginalPlaces.size() + 1; i++) {
+                    tempPointerPlaces[i] = pointerPlaces[i];
+                }
             }
         }
-        if (tempTrip != null) {
-            trip = tempTrip;
+        if (tempPointerPlaces != null) {
+            for (int i = 0; i < retainOriginalPlaces.size(); i++) {
+                trip.places.set(i, trip.places.get(tempPointerPlaces[i]));
+            }
+            trip.places.add(trip.places.get(0)); //Make it a round trip.
         }
     }
 
-    public void twoOpt(ArrayList<Location> places, int[][] distanceLibrary) {
+    public void twoOpt(ArrayList<Location> places, int[][] distanceLibrary, int[] pPlaces) {
         boolean improvement = true;
         while (improvement) {
             improvement = false;
             if (places.size() > 4) {
                 for (int i = 0; i <= places.size() - 3; i++) {
                     for (int k = i + 2; k <= places.size() - 1; k++) {
-                        double radius = trip.options.getRadius();
-                        double delta = -(Distance.getDistanceNum(trip.places, i, i + 1, radius))
-                                       -(Distance.getDistanceNum(trip.places, k, k + 1, radius))
-                                       +(Distance.getDistanceNum(trip.places, i, k, radius))
-                                       +(Distance.getDistanceNum(trip.places, i + 1, k + 1, radius));
-//                        double delta = -(distanceLibrary[i][i+1])
-//                                -(distanceLibrary[k][k+1])
-//                                +(distanceLibrary[i][k])
-//                                +(distanceLibrary[i+1][k+1]);
+                        double delta = -(distanceLibrary[pPlaces[i]][pPlaces[i+1]])
+                                       -(distanceLibrary[pPlaces[k]][pPlaces[k+1]])
+                                       +(distanceLibrary[pPlaces[i]][pPlaces[k]])
+                                       +(distanceLibrary[pPlaces[i+1]][pPlaces[k+1]]);
                         if (delta < 0) {
-                            trip.places = twoOptReverse(trip.places, i+1, k, distanceLibrary);
+                            twoOptReverse(pPlaces, i+1, k);
                             improvement = true;
                         }
                     }
@@ -123,22 +132,17 @@ public class TripCalculate {
         }
     }
 
-    public ArrayList<Location> twoOptReverse(ArrayList<Location> route, int i1, int k, int[][] distanceLibrary) {
+    public int[] twoOptReverse(int[] pPlaces, int i1, int k) {
         while (i1 < k) {
             //Reverse locations in location array
-            Location temp = route.get(i1);
-            route.set(i1, route.get(k));
-            route.set(k, temp);
-
-            //Reverse distances in distance library
-            int tempDistance = distanceLibrary[i1][k];
-            distanceLibrary[i1][k] = distanceLibrary[k][i1];
-            distanceLibrary[k][i1] = tempDistance;
+            int temp = pPlaces[i1];
+            pPlaces[i1] = pPlaces[k];
+            pPlaces[k] = temp;
 
             i1++; k--;
         }
 
-        return route;
+        return pPlaces;
     }
 
     public void setMap(String filepath){

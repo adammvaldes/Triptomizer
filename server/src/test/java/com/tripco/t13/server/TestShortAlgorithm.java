@@ -68,20 +68,19 @@ public class TestShortAlgorithm {
 
     @Test
     public void testTravelingSalesman() {
-        ArrayList<Location> sortedPlaces = new ArrayList<>();
+        int[] pointerPlaces = new int[places.size() + 1];
+        ShortOptimization.travelingSalesman(places.indexOf(place1), places, distanceLibrary, pointerPlaces);
 
-        sortedPlaces = ShortOptimization.travelingSalesman(places.indexOf(place1), places, distanceLibrary);
+        assertEquals("Origin", places.get(pointerPlaces[0]).name);
+        assertEquals("closeToOrigin", places.get(pointerPlaces[1]).name);
+        assertEquals("midPointOnMap", places.get(pointerPlaces[2]).name);
+        assertEquals("longAwayFromOrigin", places.get(pointerPlaces[3]).name);
 
-        assertEquals("Origin", sortedPlaces.get(0).name);
-        assertEquals("closeToOrigin", sortedPlaces.get(1).name);
-        assertEquals("midPointOnMap", sortedPlaces.get(2).name);
-        assertEquals("longAwayFromOrigin", sortedPlaces.get(3).name);
-
-        sortedPlaces = ShortOptimization.travelingSalesman(places.indexOf(place3), places, distanceLibrary);
-        assertEquals("midPointOnMap", sortedPlaces.get(0).name);
-        assertEquals("longAwayFromOrigin", sortedPlaces.get(1).name);
-        assertEquals("closeToOrigin", sortedPlaces.get(2).name);
-        assertEquals("Origin", sortedPlaces.get(3).name);
+        ShortOptimization.travelingSalesman(places.indexOf(place3), places, distanceLibrary, pointerPlaces);
+        assertEquals("midPointOnMap", places.get(pointerPlaces[0]).name);
+        assertEquals("longAwayFromOrigin", places.get(pointerPlaces[1]).name);
+        assertEquals("closeToOrigin", places.get(pointerPlaces[2]).name);
+        assertEquals("Origin", places.get(pointerPlaces[3]).name);
     }
 
     @Test
