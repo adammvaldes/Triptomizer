@@ -21,6 +21,7 @@ public class TestShortAlgorithm {
     Location place3 = new Location();
     Location place4 = new Location();
     int[][] distanceLibrary = null;
+    int[] pointerPlaces = null;
     @Before
     public void initialize() {
         options = new Options();
@@ -57,7 +58,11 @@ public class TestShortAlgorithm {
                 distanceLibrary[i][k] = Distance.getDistanceNum(places, i, k, options.getRadius());
             }
         }
-
+        pointerPlaces = new int[places.size() + 1];
+        for (int i = 0; i < pointerPlaces.length - 1; i++) {
+            pointerPlaces[i] = i;
+        }
+        pointerPlaces[pointerPlaces.length - 1] = pointerPlaces[0];
     }
 
     @Test
@@ -68,15 +73,18 @@ public class TestShortAlgorithm {
 
     @Test
     public void testTravelingSalesman() {
-        int[] pointerPlaces = new int[places.size() + 1];
-        ShortOptimization.travelingSalesman(places.indexOf(place1), places, distanceLibrary, pointerPlaces);
+        pointerPlaces = ShortOptimization.travelingSalesman(places.indexOf(place1), places, distanceLibrary, pointerPlaces);
 
         assertEquals("Origin", places.get(pointerPlaces[0]).name);
         assertEquals("closeToOrigin", places.get(pointerPlaces[1]).name);
         assertEquals("midPointOnMap", places.get(pointerPlaces[2]).name);
         assertEquals("longAwayFromOrigin", places.get(pointerPlaces[3]).name);
 
-        ShortOptimization.travelingSalesman(places.indexOf(place3), places, distanceLibrary, pointerPlaces);
+        for (int i = 0; i < pointerPlaces.length - 1; i++) {
+            pointerPlaces[i] = i;
+        }
+        pointerPlaces[pointerPlaces.length - 1] = pointerPlaces[0];
+        pointerPlaces = ShortOptimization.travelingSalesman(places.indexOf(place3), places, distanceLibrary, pointerPlaces);
         assertEquals("midPointOnMap", places.get(pointerPlaces[0]).name);
         assertEquals("longAwayFromOrigin", places.get(pointerPlaces[1]).name);
         assertEquals("closeToOrigin", places.get(pointerPlaces[2]).name);
@@ -112,7 +120,12 @@ public class TestShortAlgorithm {
         }
 
         boolean[] visitedPlaces = new boolean[places.size()];
-        int shortestLocation = ShortOptimization.calculateDistances(places.indexOf(origin), visitedPlaces, distanceLibrary);
+        for (int i = 0; i < pointerPlaces.length - 1; i++) {
+            pointerPlaces[i] = i;
+        }
+        pointerPlaces[pointerPlaces.length - 1] = pointerPlaces[0];
+
+        int shortestLocation = ShortOptimization.calculateDistances(places.indexOf(origin), visitedPlaces, distanceLibrary, pointerPlaces);
 
         assertEquals("Denver", places.get(shortestLocation).name); //Foco is closer to Denver than coSprings
 
@@ -135,11 +148,20 @@ public class TestShortAlgorithm {
             }
         }
 
-        shortestLocation = ShortOptimization.calculateDistances(places.indexOf(castleRock), visitedPlaces, distanceLibrary);
+        for (int i = 0; i < pointerPlaces.length - 1; i++) {
+            pointerPlaces[i] = i;
+        }
+        pointerPlaces[pointerPlaces.length - 1] = pointerPlaces[0];
+        shortestLocation = ShortOptimization.calculateDistances(places.indexOf(castleRock), visitedPlaces, distanceLibrary, pointerPlaces);
 
         assertEquals("Denver", places.get(shortestLocation).name);
 
-        shortestLocation = ShortOptimization.calculateDistances(places.indexOf(coSprings), visitedPlaces, distanceLibrary);
+        for (int i = 0; i < pointerPlaces.length - 1; i++) {
+            pointerPlaces[i] = i;
+        }
+        pointerPlaces[pointerPlaces.length - 1] = pointerPlaces[0];
+
+        shortestLocation = ShortOptimization.calculateDistances(places.indexOf(coSprings), visitedPlaces, distanceLibrary, pointerPlaces);
 
         assertEquals("Castle Rock", places.get(shortestLocation).name);
     }

@@ -14,15 +14,16 @@ public class ShortOptimization {
         placesArr = places.toArray(placesArr);
 
         int counter = 0;
-        pointerPlaces[counter] = currentOrigin;
+        int[] tempPointerPlaces = new int[places.size() + 1];
+        tempPointerPlaces[counter] = pointerPlaces[currentOrigin];
         counter++;
 
-        visitedPlaces[currentOrigin] = true;
+        visitedPlaces[pointerPlaces[currentOrigin]] = true;
 
         while (!allPlacesVisited) {
-            currentOrigin = calculateDistances(currentOrigin, visitedPlaces, distancesLibrary);
+            currentOrigin = calculateDistances(currentOrigin, visitedPlaces, distancesLibrary, pointerPlaces);
             visitedPlaces[currentOrigin] = true;
-            pointerPlaces[counter] = currentOrigin;
+            tempPointerPlaces[counter] = currentOrigin;
             counter++;
 
             for (boolean visitedPlace : visitedPlaces) {
@@ -36,30 +37,35 @@ public class ShortOptimization {
             }
         }
 
-
-        return pointerPlaces;
+        tempPointerPlaces[places.size()] = tempPointerPlaces[0];
+        return tempPointerPlaces;
     }
 
     /*This method calculates the shortest distance between the starting origin, and all the other places
     this method has been given.
     */
-    static Integer calculateDistances(int origin, boolean[] visitedPlaces, int[][] distancesLibrary) {
+    static Integer calculateDistances(int origin, boolean[] visitedPlaces, int[][] distancesLibrary, int[] pPlaces) {
         int shortestDistance = Integer.MAX_VALUE;
         Integer closestPlace = null;
 
+        if (origin == 68) {
+            System.out.println();
+        }
         for (int place = 0; place < visitedPlaces.length; place++) {
 
-            if (place != origin && !visitedPlaces[place]) {
+            if (pPlaces[place] != pPlaces[origin] && !visitedPlaces[pPlaces[place]]) {
 
-                int tempDistance = distancesLibrary[origin][place];
+                int tempDistance = distancesLibrary[pPlaces[origin]][pPlaces[place]];
 
                 if (tempDistance < shortestDistance) {
                     shortestDistance = tempDistance;
-                    closestPlace = place;
+                    closestPlace = pPlaces[place];
                 }
             }
         }
-
+        if (closestPlace == null) {
+            System.out.println();
+        }
         return closestPlace;
     }
 }

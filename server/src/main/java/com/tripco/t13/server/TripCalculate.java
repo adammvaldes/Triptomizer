@@ -65,6 +65,7 @@ public class TripCalculate {
         for (int i = 0; i < retainOriginalPlaces.size(); i++) {
             pointerPlaces[i] = i;
         }
+        pointerPlaces[pointerPlaces.length - 1] = pointerPlaces[0];
 
         double radius = trip.options.getRadius();
         int[][] distanceLibrary = new int[retainOriginalPlaces.size() + 1][retainOriginalPlaces.size() + 1];
@@ -80,7 +81,10 @@ public class TripCalculate {
         //Loop through all locations in original places array, performing shortest trip algorithm to see which place
         //is shortest.
         for (int place = 0; place < retainOriginalPlaces.size(); place++) {
-            ShortOptimization.travelingSalesman(place, retainOriginalPlaces, distanceLibrary, pointerPlaces);
+            if (place == 37) {
+                System.out.println();
+            }
+            pointerPlaces = ShortOptimization.travelingSalesman(place, retainOriginalPlaces, distanceLibrary, pointerPlaces);
             int tempCumulativeDistance = 0;
 
 
@@ -88,12 +92,12 @@ public class TripCalculate {
                 twoOpt(retainOriginalPlaces, distanceLibrary, pointerPlaces);
             }
 
-            for(int i = 0; i < retainOriginalPlaces.size() - 1; i++) {
-                tempCumulativeDistance += Distance.getDistanceNum(retainOriginalPlaces, pointerPlaces[i],
-                        pointerPlaces[i+1], radius);
+            for(int i = 0; i < retainOriginalPlaces.size(); i++) {
+                tempCumulativeDistance += distanceLibrary[pointerPlaces[i]][pointerPlaces[i+1]];
+//                        Distance.getDistanceNum(retainOriginalPlaces, pointerPlaces[i],
+//                        pointerPlaces[i+1], radius);
             }
-            tempCumulativeDistance += Distance.getDistanceNum(retainOriginalPlaces,
-                    pointerPlaces[retainOriginalPlaces.size() - 1], pointerPlaces[0], radius); //Round Trip
+            tempCumulativeDistance += distanceLibrary[pointerPlaces[retainOriginalPlaces.size()]][pointerPlaces[0]]; //Round Trip
 
             if (tempCumulativeDistance < shortestCumulativeDistance) {
                 shortestCumulativeDistance = tempCumulativeDistance;
