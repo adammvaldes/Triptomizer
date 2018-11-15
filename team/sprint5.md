@@ -46,7 +46,15 @@ We also want to "clean up" the code for our page in general. This includes simpl
 
 We want to implement the new epics and tasks assigned specifically for sprint 5, but those tasks are at the bottom of priority as we work to complete the tasks from the last sprint, such as implementation on of the KML map.
 
-*Include any design diagrams prepared during sprint planning (user interface, component diagram, component/state/hierarchy, etc.) with a short paragraph for each.
+### Diagrams
+<img src="https://raw.githubusercontent.com/csu18fa314/t13/master/images/SP5Sketch.jpg?token=AoljlLfU73gPpS4Du_qMjjdLxvrZ35KSks5b9fTJwA%3D%3D" width=400px>
+*Sprint 5 release website sketch. The main focus for this sprint is to improve and finalize all current features, and optionally add more features once the base has been finalized.*
+
+<img src="https://user-images.githubusercontent.com/42558356/47400444-6b969980-d6fa-11e8-86cc-70fd6958b691.jpg" width=400px>
+*Sprint 5 component hierarchy. The focus of this sprint is to keep the hierarchy of our objects the same, while at the same time making big UI changes using react and reactstrap.*
+
+<img src="https://github.com/csu18fa314/t13/blob/master/images/ServerDiagram.png" width=400px>
+*Class usages and server side hierarchy for sprint 5. The focus of this sprint will be mainly on the UI, not so much on the server, thus planned hierarchy will be the same.*
 
 Epics planned for this sprint.
 
