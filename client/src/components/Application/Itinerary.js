@@ -168,18 +168,18 @@ class Itinerary extends Component {
 
     renderItineraryButtons(){
         let counter = 0;
-        let list = this.props.trip.places.map((place) => {
+        let buttons = this.props.trip.places.map((place) => {
             counter += 1;
             return <td align="center" key={counter}>
-                <Button onClick={() => this.removeLeg(this.props.trip.places.indexOf(place))}>X</Button>
-                {'  '}
+                    <Button onClick={() => this.removeLeg(this.props.trip.places.indexOf(place))}>X</Button>
+                <p> </p>
                 <Button onClick={() => this.setStartLeg(this.props.trip.places.indexOf(place))}>S</Button>
             </td>;
         });
         return(
             <tr>
                 <th scope="row"> </th>
-                {list}
+                {buttons}
             </tr>
         );
     }
