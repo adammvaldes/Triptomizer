@@ -31,8 +31,8 @@ class Itinerary extends Component {
         this.getConfigAttributes = this.getConfigAttributes.bind(this);
     }
 
-    removeLeg(){
-        this.props.removeLeg(this.state.textField1);
+    removeLeg(value){
+        this.props.removeLeg(value);
         this.props.planRequest();
     }
 
@@ -42,8 +42,8 @@ class Itinerary extends Component {
         this.props.planRequest();
     }
 
-    setStartLeg(){
-        this.props.setStartLeg(this.state.textField2);
+    setStartLeg(value){
+        this.props.setStartLeg(value);
         this.props.planRequest();
     }
 
@@ -166,6 +166,24 @@ class Itinerary extends Component {
         }
     }
 
+    renderItineraryButtons(){
+        let counter = 0;
+        let list = this.props.trip.places.map((place) => {
+            counter += 1;
+            return <td align="center" key={counter}>
+                <Button onClick={() => this.removeLeg(this.props.trip.places.indexOf(place))}>X</Button>
+                {'  '}
+                <Button onClick={() => this.setStartLeg(this.props.trip.places.indexOf(place))}>S</Button>
+            </td>;
+        });
+        return(
+            <tr>
+                <th scope="row"> </th>
+                {list}
+            </tr>
+        );
+    }
+
     renderTripRows(){
         let idCounter = 0;
         return (
@@ -178,13 +196,14 @@ class Itinerary extends Component {
                                     {this.renderCheckboxes()}
                                 </Col>
                                 <Col lg="9">
-                                    <Table responsive><tbody>
-                                    {this.renderTripPlaces()}
-                                    {this.renderTripGeoLocations()}
-                                    {this.renderLegDistances()}
-                                    {this.calculateTotalDistance()}
-                                    </tbody>
-                                    </Table>
+                            <Table responsive><tbody>
+                            {this.renderTripPlaces()}
+                            {this.renderTripGeoLocations()}
+                            {this.renderLegDistances()}
+                            {this.calculateTotalDistance()}
+                            {this.renderItineraryButtons()}
+                            </tbody>
+                            </Table>
                                 </Col>
                             </Row>
                         </CardBody>
