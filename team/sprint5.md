@@ -97,7 +97,7 @@ Epics from the previous sprint.
 
 | Date | Tasks closed  | Tasks in progress | Impediments |
 | :--- | :--- | :--- | :--- |
-| *date* | *#task, ...* | *#task, ...* | *none* | 
+| 11/14/018 | #414, #400 | #402, #397 | *none* | 
 
 *Add a new row for the scrum session after each lecture. *
 
