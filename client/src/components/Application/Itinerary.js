@@ -33,18 +33,15 @@ class Itinerary extends Component {
 
     removeLeg(value){
         this.props.removeLeg(value);
-        this.props.planRequest();
     }
 
 
     reverseTrip(){
         this.props.reverseTrip();
-        this.props.planRequest();
     }
 
     setStartLeg(value){
         this.props.setStartLeg(value);
-        this.props.planRequest();
     }
 
     handleChange1(event) {
@@ -215,7 +212,7 @@ class Itinerary extends Component {
                     <Card>
                         <CardBody>
                             {this.renderButtons()}
-                            <SearchBar addDestination={this.props.addDestination} config={this.props.config} planRequest={this.props.planRequest}/>
+                            <SearchBar addDestination={this.props.addDestination} config={this.props.config}/>
                             <AddByName addLeg={this.props.addLeg}/>
                         </CardBody>
                     </Card>

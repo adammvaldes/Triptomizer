@@ -158,12 +158,12 @@ class Application extends Component {
       let trip = this.state.trip;
       trip.places.push(value);
       this.setState(trip);
-      //this.planRequest();
   }
 
   reverseTrip(){
       let trip = this.state.trip;
       trip.places.reverse();
+      this.setState(trip);
   }
 
   removeLeg(value){
@@ -172,13 +172,13 @@ class Application extends Component {
       }
       let trip = this.state.trip;
       trip.places.splice(value,1);
+      this.setState(trip);
   }
 
   addLeg(leg){
       let trip = this.state.trip;
       trip.places.push(leg);
       this.setState(trip);
-      //this.planRequest();
   }
   setStartLeg(value){
       if(value <= 0 || value >= this.state.trip.places.length){
@@ -188,6 +188,7 @@ class Application extends Component {
       let temp = trip.places[value];
       trip.places.splice(value, 1);
       trip.places.splice(0, 0, temp);
+      this.setState(trip);
   }
 
   render() {
@@ -196,18 +197,16 @@ class Application extends Component {
           <Container id="Application">
               <Info/>
               <ChooseFile trip={this.state.trip} updateTFFI={this.updateTFFI} addDestination={this.addDestination}
-                          addLeg={this.addLeg} updateTrip={this.updateTrip} config={this.state.config} planRequest={this.planRequest}/>
+                          addLeg={this.addLeg} updateTrip={this.updateTrip} config={this.state.config}/>
               <Options options={this.state.trip.options}
                        config={this.state.config}
                        updateDistances={this.updateDistances}
-                       planRequest={this.planRequest}
                        updateOptions={this.updateOptions}/>
               <Trip trip={this.state.trip}
                     planRequest={this.planRequest}
                     clearTrip={this.clearTrip}
                     updateTFFI={this.updateTFFI}/>
               <Itinerary trip={this.state.trip}
-                         planRequest={this.planRequest}
                          removeLeg={this.removeLeg}
                          reverseTrip={this.reverseTrip}
                          setStartLeg={this.setStartLeg}

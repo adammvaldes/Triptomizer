@@ -41,14 +41,11 @@ class Options extends Component{
     }
 
     showOptions(){
-        //this.state.showOptions = true;
-        //this.props.planRequest();
         this.setState({showOptions : !this.state.showOptions});
     }
 
     hideOptions(){
         this.state.showOptions = false;
-        this.props.planRequest();
     }
     toggle(){
 
