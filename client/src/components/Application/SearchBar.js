@@ -147,7 +147,6 @@ class SearchBar extends Component{
             return;
         }
         this.props.addDestination(this.state.searchResults[this.state.addIndex]);
-        this.props.planRequest();
     }
 
     addAllDestinations(){
@@ -157,7 +156,6 @@ class SearchBar extends Component{
             this.state.addIndex++;
         }
         this.setState({addIndex: tempAddIndex});
-        this.props.planRequest();
     }
 
     toggle(){
