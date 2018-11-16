@@ -160,42 +160,42 @@ class Application extends Component {
         this.componentWillMount();
     }
 
-    addDestination(value) {
-        let trip = this.state.trip;
-        trip.places.push(value);
-        this.setState(trip);
-        //this.planRequest();
-    }
+  addDestination(value){
+      let trip = this.state.trip;
+      trip.places.push(value);
+      this.setState(trip);
+  }
 
-    reverseTrip() {
-        let trip = this.state.trip;
-        trip.places.reverse();
-    }
+  reverseTrip(){
+      let trip = this.state.trip;
+      trip.places.reverse();
+      this.setState(trip);
+  }
 
-    removeLeg(value) {
-        if (value < 0) {
-            return;
-        }
-        let trip = this.state.trip;
-        trip.places.splice(value, 1);
-    }
+  removeLeg(value){
+      if(value < 0){
+          return;
+      }
+      let trip = this.state.trip;
+      trip.places.splice(value,1);
+      this.setState(trip);
+  }
 
-    addLeg(leg) {
-        let trip = this.state.trip;
-        trip.places.push(leg);
-        this.setState(trip);
-        //this.planRequest();
-    }
-
-    setStartLeg(value) {
-        if (value <= 0 || value >= this.state.trip.places.length) {
-            return;
-        }
-        let trip = this.state.trip;
-        let temp = trip.places[value];
-        trip.places.splice(value, 1);
-        trip.places.splice(0, 0, temp);
-    }
+  addLeg(leg){
+      let trip = this.state.trip;
+      trip.places.push(leg);
+      this.setState(trip);
+  }
+  setStartLeg(value){
+      if(value <= 0 || value >= this.state.trip.places.length){
+          return;
+      }
+      let trip = this.state.trip;
+      let temp = trip.places[value];
+      trip.places.splice(value, 1);
+      trip.places.splice(0, 0, temp);
+      this.setState(trip);
+  }
 
     toggleTab(tabID) {
         if (this.state.activeTab !== tabID) {
@@ -240,7 +240,6 @@ class Application extends Component {
         let tripPlanTab = [
             <ChooseFile trip={this.state.trip} updateTFFI={this.updateTFFI} addDestination={this.addDestination}
                         addLeg={this.addLeg} updateTrip={this.updateTrip} config={this.state.config}
-                        planRequest={this.planRequest}
             />,
             <Trip trip={this.state.trip}
                   planRequest={this.planRequest}
@@ -249,7 +248,6 @@ class Application extends Component {
             />,
             <Map trip={this.state.trip}/>,
             <Itinerary trip={this.state.trip}
-                       planRequest={this.planRequest}
                        removeLeg={this.removeLeg}
                        reverseTrip={this.reverseTrip}
                        setStartLeg={this.setStartLeg}
@@ -266,7 +264,6 @@ class Application extends Component {
             <Options options={this.state.trip.options}
                      config={this.state.config}
                      updateDistances={this.updateDistances}
-                     planRequest={this.planRequest}
                      updateOptions={this.updateOptions}
             />
         ];
