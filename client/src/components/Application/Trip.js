@@ -32,7 +32,7 @@ class Trip extends Component {
                 },
                 units : this.props.trip.options.units,
                 distance : 0
-            },
+            }
         };
     }
     plan(){
