@@ -14,7 +14,8 @@ class Itinerary extends Component {
             showPlace : true,
             showGeoLocation : true,
             showDistances : true,
-            showTotalDistance : true
+            showTotalDistance : true,
+            displayedAttributes : []
         };
         this.removeLeg = this.removeLeg.bind(this);
         this.reverseTrip = this.reverseTrip.bind(this);
@@ -27,22 +28,20 @@ class Itinerary extends Component {
         this.showDistances = this.showDistances.bind(this);
         this.showTotalDistance = this.showTotalDistance.bind(this);
         this.toggle = this.toggle.bind(this);
+        this.getConfigAttributes = this.getConfigAttributes.bind(this);
     }
 
-    removeLeg(){
-        this.props.removeLeg(this.state.textField1);
-        this.props.planRequest();
+    removeLeg(value){
+        this.props.removeLeg(value);
     }
 
 
     reverseTrip(){
         this.props.reverseTrip();
-        this.props.planRequest();
     }
 
-    setStartLeg(){
-        this.props.setStartLeg(this.state.textField2);
-        this.props.planRequest();
+    setStartLeg(value){
+        this.props.setStartLeg(value);
     }
 
     handleChange1(event) {
@@ -89,23 +88,27 @@ class Itinerary extends Component {
         this.setState({showTotalDistance : !this.state.showTotalDistance});
     }
 
+    /*showAttribute(value){
+        this.setState({value} : {!this.state.showTotalDistance});
+    }*/
+
 
     renderButtons(){
         return(
-        <div id="div2">
-            <div id="div3">
-                <Button className="btn text-white" type="button" style={{backgroundColor: "407157"}} onClick={this.reverseTrip}>Reverse Trip Order</Button>
+            <div id="div2">
+                <div id="div3">
+                    <Button className="btn text-white" type="button" style={{backgroundColor: "407157"}} onClick={this.reverseTrip}>Reverse Trip Order</Button>
+                </div>
+                <InputGroup>
+                    <InputGroupAddon addonType="prepend"><Button className="btn text-white" type="button" style={{backgroundColor: "407157"}} onClick={this.removeLeg}>Remove Leg</Button></InputGroupAddon>
+                    <Input type="number" placeholder="Number of leg to remove (Starting position is 0)" onChange={this.handleChange1}/>
+                </InputGroup>
+                <InputGroup>
+                    <InputGroupAddon addonType="prepend"><Button className="btn text-white" type="button" style={{backgroundColor: "407157"}} onClick={this.setStartLeg}>Set Start Leg</Button></InputGroupAddon>
+                    <Input type="number" placeholder="Enter leg number to set to start (Starting position is 0)" onChange={this.handleChange2} />
+                </InputGroup>
             </div>
-            <InputGroup>
-                <InputGroupAddon addonType="prepend"><Button className="btn text-white" type="button" style={{backgroundColor: "407157"}} onClick={this.removeLeg}>Remove Leg</Button></InputGroupAddon>
-                <Input type="number" placeholder="Number of leg to remove (Starting position is 0)" onChange={this.handleChange1}/>
-            </InputGroup>
-            <InputGroup>
-                <InputGroupAddon addonType="prepend"><Button className="btn text-white" type="button" style={{backgroundColor: "407157"}} onClick={this.setStartLeg}>Set Start Leg</Button></InputGroupAddon>
-                <Input type="number" placeholder="Enter leg number to set to start (Starting position is 0)" onChange={this.handleChange2} />
-            </InputGroup>
-        </div>
-     );
+        );
     }
 
 
@@ -130,7 +133,7 @@ class Itinerary extends Component {
         let counter = 0;
         let tripGeoLocations = this.props.trip.places.map((place) => {
             counter += 1;
-             return <td key={'geo ' + counter}>{place.latitude}, {place.longitude}</td>;
+            return <td key={'geo ' + counter}>{place.latitude}, {place.longitude}</td>;
         });
         if(this.state.showGeoLocation){
             return (
@@ -160,6 +163,24 @@ class Itinerary extends Component {
         }
     }
 
+    renderItineraryButtons(){
+        let counter = 0;
+        let buttons = this.props.trip.places.map((place) => {
+            counter += 1;
+            return <td align="center" key={counter}>
+                    <Button onClick={() => this.removeLeg(this.props.trip.places.indexOf(place))}>X</Button>
+                <p> </p>
+                <Button onClick={() => this.setStartLeg(this.props.trip.places.indexOf(place))}>S</Button>
+            </td>;
+        });
+        return(
+            <tr>
+                <th scope="row"> </th>
+                {buttons}
+            </tr>
+        );
+    }
+
     renderTripRows(){
         let idCounter = 0;
         return (
@@ -177,6 +198,7 @@ class Itinerary extends Component {
                             {this.renderTripGeoLocations()}
                             {this.renderLegDistances()}
                             {this.calculateTotalDistance()}
+                            {this.renderItineraryButtons()}
                             </tbody>
                             </Table>
                                 </Col>
@@ -190,7 +212,7 @@ class Itinerary extends Component {
                     <Card>
                         <CardBody>
                             {this.renderButtons()}
-                            <SearchBar addDestination={this.props.addDestination} config={this.props.config} planRequest={this.props.planRequest}/>
+                            <SearchBar addDestination={this.props.addDestination} config={this.props.config}/>
                             <AddByName addLeg={this.props.addLeg}/>
                         </CardBody>
                     </Card>
@@ -199,23 +221,45 @@ class Itinerary extends Component {
         );
     }
 
+    getConfigAttributes(){
+        if(this.props.config.attributes !== null){
+            let attributes = [];
+            for(let i = 0; i < this.props.config.attributes.length; i++){
+                let name = this.props.config.attributes[i];
+                let value = "Hide/Show " + name.charAt(0).toUpperCase() + name.slice(1);
+                let checkBox = (
+                    <FormGroup>
+                        <Label><Input key={name} type="checkbox" />{value}</Label>
+                    </FormGroup>
+                )
+                attributes.push(checkBox);
+            }
+            this.setState({displayedAttributes : {attributes}});
+            return (
+                <FormGroup>
+                    {attributes}
+                </FormGroup>
+            )
+        }
+    }
+
     renderCheckboxes(){
         return(
             <Card>
                 <CardBody>
                     <FormGroup>
-                     <FormGroup>
-                        <Label><Input name="Hide Places" type="checkbox" onChange={this.showPlace}/>Hide Places</Label>
-                    </FormGroup>
-                    <FormGroup>
-                        <Label><Input name="Hide Geographical Location" type="checkbox" onChange={this.showGeoLocation}/>Hide Geographical Location</Label>
-                    </FormGroup>
-                    <FormGroup>
-                        <Label><Input name="Hide Leg Distances" type="checkbox" onChange={this.showDistances}/>Hide Leg Distances</Label>
-                    </FormGroup>
-                    <FormGroup>
-                        <Label><Input name="Hide Total Distance" type="checkbox" onChange={this.showTotalDistance}/>Hide Total Distance</Label>
-                    </FormGroup>
+                        <FormGroup>
+                            <Label><Input name="Hide Places" type="checkbox" onChange={this.showPlace}/>Hide Places</Label>
+                        </FormGroup>
+                        <FormGroup>
+                            <Label><Input name="Hide Geographical Location" type="checkbox" onChange={this.showGeoLocation}/>Hide Geographical Location</Label>
+                        </FormGroup>
+                        <FormGroup>
+                            <Label><Input name="Hide Leg Distances" type="checkbox" onChange={this.showDistances}/>Hide Leg Distances</Label>
+                        </FormGroup>
+                        <FormGroup>
+                            <Label><Input name="Hide Total Distance" type="checkbox" onChange={this.showTotalDistance}/>Hide Total Distance</Label>
+                        </FormGroup>
                     </FormGroup>
                 </CardBody>
             </Card>
@@ -230,7 +274,7 @@ class Itinerary extends Component {
         if (this.props.trip.distances !== undefined && this.props.trip.distances.length !== 0 && this.props.trip.places !== undefined) {
             return this.renderTripRows();
         }
-        return <Container></Container>;
+        return <Container> </Container>;
     }
 }
 

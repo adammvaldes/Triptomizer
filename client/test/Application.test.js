@@ -282,7 +282,6 @@ function testRender() {
                       clearTrip={wrapper.instance().clearTrip}
                       updateTFFI={wrapper.instance().updateTFFI}/>,
                 <Itinerary trip={wrapper.state().trip}
-                           planRequest={wrapper.instance().planRequest}
                            removeLeg={wrapper.instance().removeLeg}
                            reverseTrip={wrapper.instance().reverseTrip}
                            setStartLeg={wrapper.instance().setStartLeg}

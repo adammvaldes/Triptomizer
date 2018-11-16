@@ -103,23 +103,26 @@ class Trip extends Component {
         return (
             <Card>
                 <CardBody>
-                    <Button style={{backgroundColor: "407157"}} onClick={this.plan} type="button" block> RENDER </Button>
+                    <Button style={{backgroundColor: "407157"}} onClick={this.plan} type="button" block> PLAN </Button>
                     <Button style={{backgroundColor: "cea12b"}} onClick={this.saveFile} type="button" block> Save Trip </Button>
                     <Button style={{backgroundColor: "cea12b"}} onClick={this.props.clearTrip} type="button" block> CLEAR </Button>
                     <Button style={{backgroundColor: "cea12b"}} onClick={this.toggle} type="button" block> Calculate Distance </Button>
                     <Collapse isOpen={this.state.collapse}>
-                        <p> Choose the desired units in the options above  </p>
+                        <h5>Origin:</h5>
                         <FormGroup>
-                            <Input type="text" placeholder="Origin Name" onChange={(e) => this.updateValue("origin", "name", e.target.value)}/>
-                            <Input type="number" placeholder="Origin Latitude" onChange={(e) => this.updateValue("origin", "latitude", e.target.value)}/>
-                            <Input type="number" placeholder="Origin Longitude" onChange={(e) => this.updateValue("origin", "longitude", e.target.value)}/>
+                            <Input type="text" placeholder="Name" onChange={(e) => this.updateValue("origin", "name", e.target.value)}/>
+                            <Input type="number" placeholder="Latitude" onChange={(e) => this.updateValue("origin", "latitude", e.target.value)}/>
+                            <Input type="number" placeholder="Longitude" onChange={(e) => this.updateValue("origin", "longitude", e.target.value)}/>
                         </FormGroup>
+
+                        <h5>Destination:</h5>
                         <FormGroup>
-                            <Input type="text" placeholder="Destination Name"onChange={(e) => this.updateValue("destination", "name", e.target.value)}/>
-                            <Input type="number" placeholder="Destination Latitude" onChange={(e) => this.updateValue("destination", "latitude", e.target.value)}/>
-                            <Input type="number" placeholder="Destination Longitude" onChange={(e) => this.updateValue("destination", "longitude", e.target.value)}/>
+                            <Input type="text" placeholder="Name" onChange={(e) => this.updateValue("destination", "name", e.target.value)}/>
+                            <Input type="number" placeholder="Latitude" onChange={(e) => this.updateValue("destination", "latitude", e.target.value)}/>
+                            <Input type="number" placeholder="Longitude" onChange={(e) => this.updateValue("destination", "longitude", e.target.value)}/>
                             <Button style={{backgroundColor: "000000"}} type="button" onClick={this.calcDist}> Calculate </Button>
-                            <p> Distance: {this.state.distance.distance} </p>
+                            <br/><br/>
+                            <h5> Distance: {this.state.distance.distance} </h5>
                         </FormGroup>
                     </Collapse>
                 </CardBody>
