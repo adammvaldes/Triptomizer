@@ -253,7 +253,8 @@ class Application extends Component {
                        setStartLeg={this.setStartLeg}
                        addDestination={this.addDestination}
                        addLeg={this.addLeg} config={this.state.config}
-            />
+            />,
+            <Interop changeServer={this.changeServer} updateNumber={this.updateNumber}/>
         ];
 
         let infoTab = [
@@ -278,7 +279,6 @@ class Application extends Component {
                 {this.renderTabContents(tripPlanTab, 'Trip Plan')}
                 {this.renderTabContents(infoTab, 'Info')}
                 {this.renderTabContents(optionsTab, 'Options')}
-                <Interop changeServer={this.changeServer} updateNumber={this.updateNumber}/>
             </Container>
         )
     }
