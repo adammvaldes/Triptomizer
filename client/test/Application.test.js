@@ -278,6 +278,7 @@ function testRender() {
                          updateOptions={wrapper.instance().updateOptions}
                          updateDistances={wrapper.instance().updateDistances}/>,
                 <Trip trip={wrapper.state().trip}
+                      planRequest={wrapper.instance().planRequest}
                       clearTrip={wrapper.instance().clearTrip}
                       updateTFFI={wrapper.instance().updateTFFI}/>,
                 <Itinerary trip={wrapper.state().trip}
