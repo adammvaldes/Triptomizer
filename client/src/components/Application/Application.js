@@ -84,6 +84,10 @@ class Application extends Component {
     }
 
     planRequest() {
+        if((this.state.trip.options.optimization == "short" && this.state.trip.places.length > 550) || (this.state.trip.options.optimization == "shorter" && this.state.trip.places.length > 240)){
+            return(
+                alert("Your trip of length " + this.state.trip.places.length + " was too large for the " + this.state.trip.options.optimization + " optimization"));
+        }
         if (this.state.URL === "" || this.state.port === "314") {
             this.updateOptions('unitName', this.state.trip.options.units);
             request(this.state.trip, "plan").then(serverResponse => {
