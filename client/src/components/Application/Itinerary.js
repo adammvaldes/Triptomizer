@@ -11,8 +11,6 @@ class Itinerary extends Component {
             textField1 : "",
             textField2 : "",
             collapse : false,
-            showPlace : true,
-            showGeoLocation : true,
             showDistances : true,
             showTotalDistance : true,
             displayedAttributes : []
@@ -20,8 +18,8 @@ class Itinerary extends Component {
         this.removeLeg = this.removeLeg.bind(this);
         this.reverseTrip = this.reverseTrip.bind(this);
         this.setStartLeg = this.setStartLeg.bind(this);
-        this.handleChange1  = this.handleChange1.bind(this);
-        this.handleChange2  = this.handleChange2.bind(this);
+        this.showDistances = this.showDistances.bind(this);
+        this.showTotalDistance = this.showTotalDistance.bind(this);
         this.toggle = this.toggle.bind(this);
 
         this.updateTable = this.updateTable.bind(this);
@@ -45,15 +43,6 @@ class Itinerary extends Component {
         this.props.setStartLeg(value);
     }
 
-    handleChange1(event) {
-        this.setState({textField1: event.target.value})
-    }
-
-    handleChange2(event) {
-        this.setState({textField2: event.target.value})
-    }
-
-
     calculateTotalDistance() { //calculates cumulative distance between towns
         let counter = 0;
         let sum = 0;
@@ -71,6 +60,14 @@ class Itinerary extends Component {
                 </tr>
             );
         }
+    }
+
+    showDistances(){
+        this.setState({showDistances : !this.state.showDistances});
+    }
+
+    showTotalDistance(){
+        this.setState({showTotalDistance : !this.state.showTotalDistance});
     }
 
     renderLegDistances() {
@@ -203,7 +200,6 @@ class Itinerary extends Component {
     updateAttributes(){
         let attributes = [];
         for(let i = 0; i < this.props.config.attributes.length; i++){
-            //if(this.props.config.attributes[i] === "place")
             attributes.push([this.props.config.attributes[i], "true"]);
         }
         this.setState({ displayedAttributes : attributes });
@@ -223,11 +219,17 @@ class Itinerary extends Component {
             );
             attributes.push(checkBox);
         }
-        return (
-            <FormGroup>
-                {attributes}
-            </FormGroup>
-        );
+        attributes.push(
+            <FormGroup key="Leg Distances" check inline>
+                <Label><Input key="Leg Distances" type="checkbox" defaultChecked={true}
+                              onChange={this.showDistances} />Leg Distances</Label>
+            </FormGroup>);
+        attributes.push(
+            <FormGroup key="Total Distances" check inline>
+                <Label><Input key="Total Distances" type="checkbox" defaultChecked={true}
+                              onChange={this.showTotalDistance} />Total Distances</Label>
+            </FormGroup>);
+        return (<FormGroup>{attributes}</FormGroup>);
     }
 
     toggle(){
