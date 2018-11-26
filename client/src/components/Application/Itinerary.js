@@ -22,19 +22,20 @@ class Itinerary extends Component {
         this.setStartLeg = this.setStartLeg.bind(this);
         this.handleChange1  = this.handleChange1.bind(this);
         this.handleChange2  = this.handleChange2.bind(this);
-        this.renderButtons = this.renderButtons.bind(this);
-        this.showPlace = this.showPlace.bind(this);
-        this.showGeoLocation = this.showGeoLocation.bind(this);
-        this.showDistances = this.showDistances.bind(this);
-        this.showTotalDistance = this.showTotalDistance.bind(this);
         this.toggle = this.toggle.bind(this);
-        this.getConfigAttributes = this.getConfigAttributes.bind(this);
+
+        this.updateTable = this.updateTable.bind(this);
+        this.attributeButtons = this.attributeButtons.bind(this);
+        this.updateAttributes = this.updateAttributes.bind(this);
+        this.theTable = this.theTable.bind(this);
+        this.getAttribute = this.getAttribute.bind(this);
+        this.checkChildren = this.checkChildren.bind(this);
+
     }
 
     removeLeg(value){
         this.props.removeLeg(value);
     }
-
 
     reverseTrip(){
         this.props.reverseTrip();
@@ -68,81 +69,6 @@ class Itinerary extends Component {
                     <td>0</td>
                     {tripDistances}
                 </tr>
-            );
-        }
-    }
-
-    showPlace(){
-        this.setState({showPlace : !this.state.showPlace});
-    }
-
-    showGeoLocation(){
-        this.setState({showGeoLocation : !this.state.showGeoLocation});
-    }
-
-    showDistances(){
-        this.setState({showDistances : !this.state.showDistances});
-    }
-
-    showTotalDistance(){
-        this.setState({showTotalDistance : !this.state.showTotalDistance});
-    }
-
-    /*showAttribute(value){
-        this.setState({value} : {!this.state.showTotalDistance});
-    }*/
-
-
-    renderButtons(){
-        return(
-            <div id="div2">
-                <div id="div3">
-                    <Button className="btn text-white" type="button" style={{backgroundColor: "407157"}} onClick={this.reverseTrip}>Reverse Trip Order</Button>
-                </div>
-                <InputGroup>
-                    <InputGroupAddon addonType="prepend"><Button className="btn text-white" type="button" style={{backgroundColor: "407157"}} onClick={this.removeLeg}>Remove Leg</Button></InputGroupAddon>
-                    <Input type="number" placeholder="Number of leg to remove (Starting position is 0)" onChange={this.handleChange1}/>
-                </InputGroup>
-                <InputGroup>
-                    <InputGroupAddon addonType="prepend"><Button className="btn text-white" type="button" style={{backgroundColor: "407157"}} onClick={this.setStartLeg}>Set Start Leg</Button></InputGroupAddon>
-                    <Input type="number" placeholder="Enter leg number to set to start (Starting position is 0)" onChange={this.handleChange2} />
-                </InputGroup>
-            </div>
-        );
-    }
-
-
-    renderTripPlaces() {
-        let counter = 0;
-        let tripPlaces = this.props.trip.places.map((place) => {
-            counter += 1;
-            return <td key={'place ' + counter}>{place.name}</td>;
-        });
-        if(this.state.showPlace) {
-            return (
-                <tr>
-                    <th scope="row">Place</th>
-                    {tripPlaces}
-                    {tripPlaces[0]}
-                </tr>
-            );
-        }
-    }
-
-    renderTripGeoLocations() {
-        let counter = 0;
-        let tripGeoLocations = this.props.trip.places.map((place) => {
-            counter += 1;
-            return <td key={'geo ' + counter}>{place.latitude}, {place.longitude}</td>;
-        });
-        if(this.state.showGeoLocation){
-            return (
-                <tr>
-                    <th scope="row">Geographical Location</th>
-                    {tripGeoLocations}
-                    {tripGeoLocations[0]}
-                </tr>
-
             );
         }
     }
@@ -181,88 +107,126 @@ class Itinerary extends Component {
         );
     }
 
+    getAttribute(name){
+        let answer = [0,0];
+        for(let i = 0; i < this.state.displayedAttributes.length; i++){
+            if(this.state.displayedAttributes[i][0] === name){
+                answer = this.state.displayedAttributes[i];
+            }
+        }
+        return answer;
+    }
+
+    checkChildren(temp){
+        let check = false;
+        for(let i = 0; i < temp.length; i++){
+            if(temp[i].props.children !== undefined){
+                check = true;
+            }
+        }
+        return check;
+    }
+
+    theTable(value, count){
+        let counter = 0;
+        let temp = this.props.trip.places.map((place) => {
+            counter++;
+            return <td key={'place ' + counter}>{place[value]}</td>;
+        });
+        let attribute = this.getAttribute(value);
+        let check = this.checkChildren(temp);
+        if(attribute[1] === "true" && check){
+            return (
+                <tr key={count}>
+                    <th scope="row">{value}</th>
+                    {temp}
+                    {temp[0]}
+                </tr>
+            );
+        }
+        return <tr key={count}>
+
+        </tr>;
+    }
+
     renderTripRows(){
-        let idCounter = 0;
+        if(this.state.displayedAttributes.length !== this.props.config.attributes.length){
+            this.updateAttributes();
+        }
+        let places = [];
+        for(let i = 0; i < this.state.displayedAttributes.length; i++){
+            places.push(this.theTable(this.state.displayedAttributes[i][0], i));
+        }
         return (
             <div id="parent">
                 <div id="div1">
                     <Card>
                         <CardBody>
-                            <Row>
-                                <Col lg="3">
-                                    {this.renderCheckboxes()}
-                                </Col>
-                                <Col lg="9">
                             <Table responsive><tbody>
-                            {this.renderTripPlaces()}
-                            {this.renderTripGeoLocations()}
+                            {places}
                             {this.renderLegDistances()}
                             {this.calculateTotalDistance()}
                             {this.renderItineraryButtons()}
                             </tbody>
                             </Table>
-                                </Col>
-                            </Row>
                         </CardBody>
                     </Card>
-
                 </div>
-                <Button onClick={this.toggle} type="button" style={{backgroundColor: "000000"}}> Edit Trip </Button>
-                <Collapse isOpen={this.state.collapse}>
-                    <Card>
-                        <CardBody>
-                            {this.renderButtons()}
-                            <SearchBar addDestination={this.props.addDestination} config={this.props.config}/>
-                            <AddByName addLeg={this.props.addLeg}/>
-                        </CardBody>
-                    </Card>
-                </Collapse>
+                <Form>
+                    <Button onClick={this.toggle} type="button" style={{backgroundColor: "000000"}}> Itinerary Attributes </Button>
+                    <Collapse isOpen={this.state.collapse}>
+                        {this.attributeButtons()}
+                    </Collapse>
+                </Form>
             </div>
         );
     }
 
-    getConfigAttributes(){
-        if(this.props.config.attributes !== null){
-            let attributes = [];
-            for(let i = 0; i < this.props.config.attributes.length; i++){
-                let name = this.props.config.attributes[i];
-                let value = "Hide/Show " + name.charAt(0).toUpperCase() + name.slice(1);
-                let checkBox = (
-                    <FormGroup>
-                        <Label><Input key={name} type="checkbox" />{value}</Label>
-                    </FormGroup>
-                )
-                attributes.push(checkBox);
+    updateTable(name, bool){
+        let attributes = [];
+        for(let i = 0; i < this.state.displayedAttributes.length; i++){
+            if(this.state.displayedAttributes[i][0] === name.name){
+                if(bool.bool === "true"){
+                    attributes.push([this.state.displayedAttributes[i][0], "false"]);
+                }
+                else{
+                    attributes.push([this.state.displayedAttributes[i][0], "true"]);
+                }
             }
-            this.setState({displayedAttributes : {attributes}});
-            return (
-                <FormGroup>
-                    {attributes}
-                </FormGroup>
-            )
+            else{
+                attributes.push(this.state.displayedAttributes[i])
+            }
         }
+        this.setState({ displayedAttributes : attributes });
     }
 
-    renderCheckboxes(){
-        return(
-            <Card>
-                <CardBody>
-                    <FormGroup>
-                        <FormGroup>
-                            <Label><Input name="Hide Places" type="checkbox" onChange={this.showPlace}/>Hide Places</Label>
-                        </FormGroup>
-                        <FormGroup>
-                            <Label><Input name="Hide Geographical Location" type="checkbox" onChange={this.showGeoLocation}/>Hide Geographical Location</Label>
-                        </FormGroup>
-                        <FormGroup>
-                            <Label><Input name="Hide Leg Distances" type="checkbox" onChange={this.showDistances}/>Hide Leg Distances</Label>
-                        </FormGroup>
-                        <FormGroup>
-                            <Label><Input name="Hide Total Distance" type="checkbox" onChange={this.showTotalDistance}/>Hide Total Distance</Label>
-                        </FormGroup>
-                    </FormGroup>
-                </CardBody>
-            </Card>
+    updateAttributes(){
+        let attributes = [];
+        for(let i = 0; i < this.props.config.attributes.length; i++){
+            //if(this.props.config.attributes[i] === "place")
+            attributes.push([this.props.config.attributes[i], "true"]);
+        }
+        this.setState({ displayedAttributes : attributes });
+    }
+
+    attributeButtons(){
+        let attributes = [];
+        for(let i = 0; i < this.state.displayedAttributes.length; i++){
+            let name = this.state.displayedAttributes[i][0];
+            let bool = this.state.displayedAttributes[i][1];
+            let value = name.charAt(0).toUpperCase() + name.slice(1);
+            let checkBox = (
+                <FormGroup key={name + i} check inline>
+                    <Label><Input key={name} type="checkbox" defaultChecked={true}
+                                  onChange={(e) => this.updateTable({name}, {bool})} />{value}</Label>
+                </FormGroup>
+            );
+            attributes.push(checkBox);
+        }
+        return (
+            <FormGroup>
+                {attributes}
+            </FormGroup>
         );
     }
 
@@ -274,6 +238,7 @@ class Itinerary extends Component {
         if (this.props.trip.distances !== undefined && this.props.trip.distances.length !== 0 && this.props.trip.places !== undefined) {
             return this.renderTripRows();
         }
+
         return <Container> </Container>;
     }
 }
