@@ -73,7 +73,7 @@ public class TestShortAlgorithm {
 
     @Test
     public void testTravelingSalesman() {
-        pointerPlaces = ShortOptimization.travelingSalesman(places.indexOf(place1), places, distanceLibrary, pointerPlaces);
+        pointerPlaces = ShortOptimization.travelingSalesman(places.indexOf(place1), places, distanceLibrary);
 
         assertEquals("Origin", places.get(pointerPlaces[0]).name);
         assertEquals("closeToOrigin", places.get(pointerPlaces[1]).name);
@@ -84,7 +84,7 @@ public class TestShortAlgorithm {
             pointerPlaces[i] = i;
         }
         pointerPlaces[pointerPlaces.length - 1] = pointerPlaces[0];
-        pointerPlaces = ShortOptimization.travelingSalesman(places.indexOf(place3), places, distanceLibrary, pointerPlaces);
+        pointerPlaces = ShortOptimization.travelingSalesman(places.indexOf(place3), places, distanceLibrary);
         assertEquals("midPointOnMap", places.get(pointerPlaces[0]).name);
         assertEquals("longAwayFromOrigin", places.get(pointerPlaces[1]).name);
         assertEquals("closeToOrigin", places.get(pointerPlaces[2]).name);
@@ -125,7 +125,7 @@ public class TestShortAlgorithm {
         }
         pointerPlaces[pointerPlaces.length - 1] = pointerPlaces[0];
 
-        int shortestLocation = ShortOptimization.calculateDistances(places.indexOf(origin), visitedPlaces, distanceLibrary, pointerPlaces);
+        int shortestLocation = ShortOptimization.calculateDistances(places.indexOf(origin), visitedPlaces, distanceLibrary);
 
         assertEquals("Denver", places.get(shortestLocation).name); //Foco is closer to Denver than coSprings
 
@@ -152,7 +152,7 @@ public class TestShortAlgorithm {
             pointerPlaces[i] = i;
         }
         pointerPlaces[pointerPlaces.length - 1] = pointerPlaces[0];
-        shortestLocation = ShortOptimization.calculateDistances(places.indexOf(castleRock), visitedPlaces, distanceLibrary, pointerPlaces);
+        shortestLocation = ShortOptimization.calculateDistances(places.indexOf(castleRock), visitedPlaces, distanceLibrary);
 
         assertEquals("Denver", places.get(shortestLocation).name);
 
@@ -161,7 +161,7 @@ public class TestShortAlgorithm {
         }
         pointerPlaces[pointerPlaces.length - 1] = pointerPlaces[0];
 
-        shortestLocation = ShortOptimization.calculateDistances(places.indexOf(coSprings), visitedPlaces, distanceLibrary, pointerPlaces);
+        shortestLocation = ShortOptimization.calculateDistances(places.indexOf(coSprings), visitedPlaces, distanceLibrary);
 
         assertEquals("Castle Rock", places.get(shortestLocation).name);
     }

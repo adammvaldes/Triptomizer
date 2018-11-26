@@ -61,11 +61,7 @@ public class TripCalculate {
         // the  + 1 is responsible for containing the round trip element.
         int[] pointerPlaces = new int[retainOriginalPlaces.size() + 1];
 
-        //Initially we have pointers all in the same order as the places array.
-        for (int i = 0; i < retainOriginalPlaces.size(); i++) {
-            pointerPlaces[i] = i;
-        }
-        pointerPlaces[pointerPlaces.length - 1] = pointerPlaces[0];
+
 
         double radius = trip.options.getRadius();
         int[][] distanceLibrary = new int[retainOriginalPlaces.size() + 1][retainOriginalPlaces.size() + 1];
@@ -81,12 +77,13 @@ public class TripCalculate {
         //Loop through all locations in original places array, performing shortest trip algorithm to see which place
         //is shortest.
         for (int place = 0; place < retainOriginalPlaces.size(); place++) {
-            if (place == 37) {
-                System.out.println();
+            //Initially we have pointers all in the same order as the places array.
+            for (int i = 0; i < retainOriginalPlaces.size(); i++) {
+                pointerPlaces[i] = i;
             }
-            pointerPlaces = ShortOptimization.travelingSalesman(place, retainOriginalPlaces, distanceLibrary, pointerPlaces);
+            pointerPlaces[pointerPlaces.length - 1] = pointerPlaces[0];     //Making it a round trip.
+            pointerPlaces = ShortOptimization.travelingSalesman(place, retainOriginalPlaces, distanceLibrary);
             int tempCumulativeDistance = 0;
-
 
             if (trip.options.optimization.equals("shorter")) {
                 twoOpt(retainOriginalPlaces, distanceLibrary, pointerPlaces);
@@ -97,6 +94,7 @@ public class TripCalculate {
 //                        Distance.getDistanceNum(retainOriginalPlaces, pointerPlaces[i],
 //                        pointerPlaces[i+1], radius);
             }
+
             tempCumulativeDistance += distanceLibrary[pointerPlaces[retainOriginalPlaces.size()]][pointerPlaces[0]]; //Round Trip
 
             if (tempCumulativeDistance < shortestCumulativeDistance) {
@@ -109,7 +107,8 @@ public class TripCalculate {
         }
         if (tempPointerPlaces != null) {
             for (int i = 0; i < retainOriginalPlaces.size(); i++) {
-                trip.places.set(i, trip.places.get(tempPointerPlaces[i]));
+                //trip.places.set(i, trip.places.get(tempPointerPlaces[i]));
+                trip.places.set(i, retainOriginalPlaces.get(tempPointerPlaces[i]));
             }
             trip.places.add(trip.places.get(0)); //Make it a round trip.
         }
@@ -172,7 +171,6 @@ public class TripCalculate {
         catch(Exception e){
             return;
         }
-
     }
 
     public String drawVectorWorld(Trip trip) {
@@ -203,10 +201,8 @@ public class TripCalculate {
                         "\" style=\"stroke:rgb(255,0,0);stroke-width:2\" />";
             }
         }
-
         //Hardcode test
         return vectors;
-
     }
 
     public String drawVectorCO(Trip trip) {
@@ -240,32 +236,24 @@ public class TripCalculate {
         return vectors;
     }
 
-
-
-
-
     public boolean validateTripRequestFormat(Trip trip) {
         //check if format of request if correct: type:"trip", version 1 or 2 or 3 or 4
         if(     Objects.equals(trip.type, "trip")&&
                 (trip.version<=4)&&
                 trip.places!=null&&trip.options!=null){
-
             return true;
         }
 
         return false;
     }
 
-
     public String getTripJson () {
         Gson gson = new Gson();
         if(isCorrectFormat){
             return gson.toJson(trip);
-
         }
         else{
             return "{}"; //return {} if incorrect request format
         }
     }
-
 }
