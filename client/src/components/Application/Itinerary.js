@@ -180,19 +180,19 @@ class Itinerary extends Component {
     }
 
     updateTable(name, bool){
-        let attributes = [];
+        let attributes = this.state.displayedAttributes;
         for(let i = 0; i < this.state.displayedAttributes.length; i++){
             if(this.state.displayedAttributes[i][0] === name.name){
                 if(bool.bool === "true"){
-                    attributes.push([this.state.displayedAttributes[i][0], "false"]);
+                    attributes[i] = [this.state.displayedAttributes[i][0], "false"];
                 }
                 else{
-                    attributes.push([this.state.displayedAttributes[i][0], "true"]);
+                    attributes[i] = [this.state.displayedAttributes[i][0], "true"];
                 }
             }
-            else{
+            /*else{
                 attributes.push(this.state.displayedAttributes[i])
-            }
+            }*/
         }
         this.setState({ displayedAttributes : attributes });
     }
