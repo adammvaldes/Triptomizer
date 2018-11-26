@@ -92,11 +92,11 @@ Epics from the previous sprint.
 
 | Statistic | Planned | Completed |
 | --- | ---: | ---: |
-| Epics | *total* | *total* |
-| Tasks |  *total*   | *total* | 
-| Story Points |  *total*  | *total* | 
+| Epics | 10 | *total* |
+| Tasks |  34   | *total* | 
+| Story Points |  51  | *total* | 
 
-*Enter the `# Planned` at the beginning of the sprint.  Include a discussion of planning decisions based on the planned number of story points versus how many were completed in previous sprints.*
+We had 34 planned tasks at the beginning of the sprint. We broke tasks up into sections for the client and the server sides. Our main focus is to catch up on unfinished task from last sprint, such as optimizing 2-opt. Then we will move on to the client side tasks. These task mirror the changes suggested from Dave, along with additions of the "team info" section.
 
 *Enter the `# Completed` at the end of the sprint.  Include a discussion about any difference in the number planned versus completed tasks and story points.*
 
@@ -105,7 +105,9 @@ Epics from the previous sprint.
 
 | Date | Tasks closed  | Tasks in progress | Impediments |
 | :--- | :--- | :--- | :--- |
-| 11/14/018 | #414, #400 | #402, #397 | *none* | 
+| 11/14/2018 | #414, #400 | #402, #397 | *none* |
+| 11/16/2018 | #414, #400, #405, #430, #421, #424, #423, #397 | #402, #434 | *none* | 
+| 11/26/2018 | #414, #400, $405, #430, #421, #424, #423, #397, #402, #434 | #435, #439, #425 | *none* | 
 
 *Add a new row for the scrum session after each lecture. *
 
