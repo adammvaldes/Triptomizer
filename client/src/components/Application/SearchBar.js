@@ -130,10 +130,28 @@ class SearchBar extends Component{
                     {this.searchRow("Location Latitude", searchResultLat)}{this.searchRow("Location Longitude", searchResultLong)}
                     {this.searchRow("Location Region", searchResultRegion)}{this.searchRow("Location Country", searchResultCountry)}
                     {this.searchRow("Location Continent", searchResultContinent)}{this.searchRow("Location Type", searchResultType)}
+                    {this.renderSearchResultButtons()}
                     </tbody>
                 );
             }}
     }
+
+    renderSearchResultButtons(){
+        let counter = 0;
+        let buttons = this.state.searchResults.map((place) => {
+            counter += 1;
+            return <td align="center" key={counter}>
+                <Button onClick={() => this.props.addDestination(place)}>+</Button>
+            </td>;
+        });
+        return(
+            <tr>
+                <th scope="row"> </th>
+                {buttons}
+            </tr>
+        );
+    }
+
     /*
     let inc = 0;
             let searchResultNames = this.state.searchResults.map((place) => {

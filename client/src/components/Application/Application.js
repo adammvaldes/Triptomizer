@@ -166,8 +166,10 @@ class Application extends Component {
 
   addDestination(value){
       let trip = this.state.trip;
-      trip.places.push(value);
-      this.setState(trip);
+      if(trip.places[trip.places.length-1] != value){
+          trip.places.push(value);
+          this.setState(trip);
+      }
   }
 
   reverseTrip(){
