@@ -95,6 +95,7 @@ class Application extends Component {
             request(this.state.trip, "plan").then(serverResponse => {
                 this.updateMap(serverResponse["map"]);
                 this.updateDistances(serverResponse["distances"]);
+                this.updatePlaces(serverResponse["places"]);
             });
         }
         else {
@@ -102,6 +103,7 @@ class Application extends Component {
             request(this.state.trip, "plan", this.state.port, this.state.URL).then(serverResponse => {
                 this.updateMap(serverResponse["map"]);
                 this.updateDistances(serverResponse["distances"]);
+                this.updatePlaces(serverResponse["places"]);
             });
         }
     }
@@ -130,6 +132,11 @@ class Application extends Component {
         this.setState(trip);
     }
 
+    updatePlaces(value){
+        let trip = this.state.trip;
+        trip.places = value;
+        this.setState(trip);
+    }
     //Functions to update the state in the Trip Class
     updateMap(value) {
         let trip = this.state.trip;
@@ -164,8 +171,10 @@ class Application extends Component {
 
   addDestination(value){
       let trip = this.state.trip;
-      trip.places.push(value);
-      this.setState(trip);
+      if(trip.places[trip.places.length-1] != value){
+          trip.places.push(value);
+          this.setState(trip);
+      }
   }
 
   reverseTrip(){
