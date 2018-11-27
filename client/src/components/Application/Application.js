@@ -59,6 +59,8 @@ class Application extends Component {
         this.setStartLeg = this.setStartLeg.bind(this);
 
         this.toggleTab = this.toggleTab.bind(this);
+        this.saveMap = this.saveMap.bind(this);
+        this.saveTrip = this.saveTrip.bind(this);
 
     }
 
@@ -121,10 +123,6 @@ class Application extends Component {
         trip[field] = value;
         this.setState(trip);
     }
-
-    // updateBasedOnResponse(value) {
-    //   this.setState({'trip': value});
-    // }
 
     updateOptions(option, value) {
         let trip = this.state.trip;
@@ -201,6 +199,57 @@ class Application extends Component {
       this.setState(trip);
   }
 
+    saveMap(){
+        let userMap = this.state.trip.map;
+        let userTitle = "Map";
+        userTitle += ".svg";
+
+        if (window.navigator.msSaveBlob) {
+            let blob = new Blob([userMap], {type: 'svg'});
+            window.navigator.msSaveBlob(blob, userTitle);
+        }
+        else{
+            let link = document.createElement('a');
+            let content = userMap;
+            let uriScheme = ['data:','svg',','].join('');
+            link.href = uriScheme + content;
+            link.download = userTitle;
+
+            document.body.appendChild(link);
+            link.click();
+            document.body.removeChild(link);
+        }
+    }
+    saveTrip(){
+        let userVersion = this.state.trip.version;
+        let userType = this.state.trip.type;
+        let userTitle = this.state.trip.title;
+        let userPlaces = this.state.trip.places;
+        let userDistances = this.state.trip.distances;
+        let userOptions = this.state.trip.options;
+
+        let userObject = {version: userVersion, type: userType, title: userTitle, options: userOptions, places:userPlaces, distances:userDistances};
+        let json = JSON.stringify(userObject);
+
+        userTitle += '.json';
+
+        if (window.navigator.msSaveBlob) {
+            let blob = new Blob([json], {type: 'json'});
+            window.navigator.msSaveBlob(blob, userTitle);
+        }
+        else{
+            let link = document.createElement('a');
+            let content = json;
+            let uriScheme = ['data:','json',','].join('');
+            link.href = uriScheme + content;
+            link.download = userTitle;
+
+            document.body.appendChild(link);
+            link.click();
+            document.body.removeChild(link);
+        }
+    }
+
     toggleTab(tabID) {
         if (this.state.activeTab !== tabID) {
             this.setState({
@@ -257,6 +306,7 @@ class Application extends Component {
                        setStartLeg={this.setStartLeg}
                        addDestination={this.addDestination}
                        addLeg={this.addLeg} config={this.state.config}
+                       saveMap={this.saveMap} saveTrip={this.saveTrip}
             />,
             <Interop changeServer={this.changeServer} updateNumber={this.updateNumber}/>
         ];
