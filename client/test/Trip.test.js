@@ -72,7 +72,7 @@ function testRender() {
     // let actualFormText = tripWrapper.find('FormText').text();
     // expect(actualFormText).toEqual('The file needs to be a JSON file, with the ".json" tag at the end of the name.');
     expect(tripWrapper.prop('URL')).toEqual("");
-    let expectedButtonTexts = [' PLAN ', ' Save Trip ', ' CLEAR '];
+    let expectedButtonTexts = [' PLAN ', ' CLEAR '];
     expect(actualButtonTexts).toEqual(expectedButtonTexts)
     // expect(buttonNames).toEqual(["test", "test2"]);
 }
