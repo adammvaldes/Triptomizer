@@ -4,29 +4,6 @@ import {Button, Media, Container, Card, CardBody} from 'reactstrap'
 class Map extends Component {
     constructor(props) {
         super(props);
-        this.saveFile = this.saveFile.bind(this);
-    }
-
-    saveFile(){
-        let userMap = this.props.trip.map;
-        let userTitle = "Map";
-
-        if (window.navigator.msSaveBlob) {
-            let blob = new Blob([userMap], {type: 'svg'});
-            window.navigator.msSaveBlob(blob, userTitle);
-        }
-        else{
-            let link = document.createElement('a');
-            let content = userMap;
-            let uriScheme = ['data:','json',','].join('');
-            link.href = uriScheme + content;
-            link.download = userTitle;
-
-            document.body.appendChild(link);
-            link.click();
-            document.body.removeChild(link);
-        }
-
     }
 
     render() {
@@ -35,12 +12,11 @@ class Map extends Component {
             return (
                 <Card>
                     <CardBody>
-                    <Media>
-                        <Media body>
-                            <Media id="map" object src={dataUri} alt="Map of Colorado"/>
+                        <Media>
+                            <Media body>
+                                <Media id="map" object src={dataUri} alt="Map of Colorado"/>
+                            </Media>
                         </Media>
-                    </Media>
-                    <Button href='#' style={{backgroundColor: "cea12b"}} onClick={this.saveFile} type="button" block> Save Map </Button>
                     </CardBody>
                 </Card>
             );
@@ -53,3 +29,4 @@ class Map extends Component {
     }
 }
 export default Map;
+//<Button href='#' style={{backgroundColor: "cea12b"}} onClick={this.saveFile} type="button" block> Save Map </Button>

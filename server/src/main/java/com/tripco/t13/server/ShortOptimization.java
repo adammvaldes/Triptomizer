@@ -5,55 +5,53 @@ import java.util.ArrayList;
 public class ShortOptimization {
 
     //Performs shortest trip calculation based on what place of origin has been received.
-    static ArrayList<Location> travelingSalesman(Location currentOrigin, ArrayList<Location> places, Options options) {
+    static int[] travelingSalesman(int currentOrigin, ArrayList<Location> places, int[][] distancesLibrary) {
         boolean[] visitedPlaces = new boolean[places.size()];
         boolean allPlacesVisited = false;
-        ArrayList<Location> sortedPlaces = new ArrayList<>(places.size() + 1);
-        sortedPlaces.add(currentOrigin);
-        visitedPlaces[places.indexOf(currentOrigin)] = true;
+
+        int counter = 0;
+        int[] tempPointerPlaces = new int[places.size() + 1];
+        tempPointerPlaces[counter] = currentOrigin;
+        visitedPlaces[currentOrigin] = true;
+        counter++;
 
         while (!allPlacesVisited) {
-            currentOrigin = calculateDistances(currentOrigin, visitedPlaces, places, options);
-            visitedPlaces[places.indexOf(currentOrigin)] = true;
-            sortedPlaces.add(currentOrigin);
+            currentOrigin = calculateDistances(currentOrigin, visitedPlaces, distancesLibrary);
+            visitedPlaces[currentOrigin] = true;
+            tempPointerPlaces[counter] = currentOrigin;
+            counter++;
 
             for (boolean visitedPlace : visitedPlaces) {
-
                 if (!visitedPlace) {
                     allPlacesVisited = false;
                     break;
                 }
-
                 allPlacesVisited = true;
             }
         }
-
-        sortedPlaces.add(sortedPlaces.get(0)); //Make it a round trip.
-        return sortedPlaces;
+        tempPointerPlaces[places.size()] = tempPointerPlaces[0];        //Make the trip round.
+        return tempPointerPlaces;
     }
 
     /*This method calculates the shortest distance between the starting origin, and all the other places
     this method has been given.
     */
-    static Location calculateDistances(Location origin, boolean[] visitedPlaces, ArrayList<Location> places, Options options) {
-        Distance distance = new Distance();
+    static Integer calculateDistances(int origin, boolean[] visitedPlaces, int[][] distancesLibrary) {
         int shortestDistance = Integer.MAX_VALUE;
-        Location closestPlace = null;
+        Integer closestPlace = null;
 
-        for (int place = 0; place < places.size(); place++) {
+        for (int place = 0; place < visitedPlaces.length; place++) {
 
-            if (!places.get(place).equals(origin) && !visitedPlaces[place]) {
+            if (place != origin && !visitedPlaces[place]) {
 
-                int tempDistance = Distance.getDistanceNum(origin.latitude, origin.longitude, places.get(place).latitude,
-                        places.get(place).longitude, options.getRadius());
+                int tempDistance = distancesLibrary[origin][place];
 
                 if (tempDistance < shortestDistance) {
                     shortestDistance = tempDistance;
-                    closestPlace = places.get(place);
+                    closestPlace = place;
                 }
             }
         }
-
         return closestPlace;
     }
 }

@@ -154,7 +154,6 @@ class Itinerary extends Component {
                 <tr key={count}>
                     <th scope="row">{value}</th>
                     {temp}
-                    {temp[0]}
                 </tr>
             );
         }
@@ -188,7 +187,12 @@ class Itinerary extends Component {
                     </Card>
                 </div>
                 <Form>
-                    <Button onClick={this.toggle} type="button" style={{backgroundColor: "000000"}}> Itinerary Attributes </Button>
+                    <Row>
+                        <Col xs="3"> <Button onClick={this.toggle} type="button" style={{backgroundColor: "000000"}}> Attributes </Button> </Col>
+                        <Col xs="3"> <Button onClick={this.reverseTrip} type="button" style={{backgroundColor: "000000"}}>  Reverse  </Button> </Col>
+                        <Col xs="3"> <Button onClick={this.props.saveTrip} type="button" style={{backgroundColor: "000000"}}> Save Trip </Button> </Col>
+                        <Col xs="3"> <Button onClick={this.props.saveMap} type="button" style={{backgroundColor: "000000"}}> Save Map </Button> </Col>
+                    </Row>
                     <Collapse isOpen={this.state.collapse}>
                         {this.attributeButtons()}
                     </Collapse>
@@ -208,9 +212,6 @@ class Itinerary extends Component {
                     attributes[i] = [this.state.displayedAttributes[i][0], "true"];
                 }
             }
-            /*else{
-                attributes.push(this.state.displayedAttributes[i])
-            }*/
         }
         this.setState({ displayedAttributes : attributes });
     }
