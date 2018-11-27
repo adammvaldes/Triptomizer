@@ -137,7 +137,6 @@ class Itinerary extends Component {
                 <tr key={count}>
                     <th scope="row">{value}</th>
                     {temp}
-                    {temp[0]}
                 </tr>
             );
         }
