@@ -11,7 +11,6 @@ class SaveButton extends Component{
     saveTrip(){
         this.props.saveTrip();
     }
-    //TODO: Sets state equivalent to having chose the load option
 
     render() {
         return (
