@@ -111,6 +111,7 @@ public class TripCalculate {
                 trip.places.set(i, retainOriginalPlaces.get(tempPointerPlaces[i]));
             }
             trip.places.add(trip.places.get(0)); //Make it a round trip.
+            trip.distances = trip.getTripDistances();
         }
     }
 
