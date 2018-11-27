@@ -297,7 +297,7 @@ class Application extends Component {
             return <Container/>
         }
 
-        let tabs = ['Trip Plan', 'Distance Calculator', 'Info', 'Options'];
+        let tabs = ['Trip Plan', 'Options', 'Distance Calculator', 'Info'];
 
         let tripPlanTab = [
             <ChooseFile trip={this.state.trip} updateTFFI={this.updateTFFI} addDestination={this.addDestination}
@@ -320,16 +320,20 @@ class Application extends Component {
             <Interop changeServer={this.changeServer} updateNumber={this.updateNumber}/>
         ];
 
-        let infoTab = [
-            <Info/>
-        ];
-
         let optionsTab = [
             <Options options={this.state.trip.options}
                      config={this.state.config}
                      updateDistances={this.updateDistances}
                      updateOptions={this.updateOptions}
             />
+        ];
+
+        let distanceCalculatorTab = [
+            <DistanceCalculator trip={this.state.trip} URL={this.state.URL} port={this.state.port}/>
+        ];
+
+        let infoTab = [
+            <Info/>
         ];
 
         return (
@@ -340,8 +344,9 @@ class Application extends Component {
                     })}
                 </Nav>
                 {this.renderTabContents(tripPlanTab, 'Trip Plan')}
-                {this.renderTabContents(infoTab, 'Info')}
                 {this.renderTabContents(optionsTab, 'Options')}
+                {this.renderTabContents(distanceCalculatorTab, 'Distance Calculator')}
+                {this.renderTabContents(infoTab, 'Info')}
             </Container>
         )
     }

@@ -47,9 +47,7 @@ class Options extends Component{
     hideOptions(){
         this.state.showOptions = false;
     }
-    toggle(){
 
-    }
     render() {
         const buttons = this.props.config.units.map((unit) =>
             <Button
@@ -89,20 +87,17 @@ class Options extends Component{
         return(
             <Card>
                 <CardBody>
-                    <Button onClick={this.showOptions} style={{backgroundColor: "000000"}}> Toggle Options </Button>
-                    <Collapse isOpen={this.state.showOptions}>
-                        <Form>
-                            <p>Select the units you wish to use.</p>
-                            <ButtonGroup>
-                                {buttons}
-                            </ButtonGroup>
-                            <FormGroup/>
-                            <OptimizationButtons options={this.props.options}
-                                                 config={this.props.config}
-                                                 updateOptions={this.props.updateOptions}/>
-
-                        </Form>
-                    </Collapse>
+                    <Form>
+                        <p>Select the units you wish to use.</p>
+                        <ButtonGroup>
+                            {buttons}
+                        </ButtonGroup>
+                        <FormGroup/>
+                        <OptimizationButtons options={this.props.options}
+                                             config={this.props.config}
+                                             updateOptions={this.props.updateOptions}
+                        />
+                    </Form>
                 </CardBody>
             </Card>
         );
