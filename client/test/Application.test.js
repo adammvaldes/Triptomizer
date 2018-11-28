@@ -260,7 +260,8 @@ function testRender() {
         "optimization":[
             {"label":"none","description":"The trip is not optimized."},
             {"label":"short","description":"Nearest neighbor."}
-        ]
+        ],
+        "attributes":["name", "latitude", "longitude", "id"]
     };
     wrapper.setState({'config': mockConfig});
 

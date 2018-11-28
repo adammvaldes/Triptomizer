@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import {Button, Card, CardBody,  FormGroup, FormText, Input, Label} from 'reactstrap';
+import {Button, Card, CardBody,  FormGroup, FormText, Input, Label, Row, Col} from 'reactstrap';
 import SearchBar from "./SearchBar";
 import AddByName from "./AddByName";
 
@@ -37,15 +37,15 @@ class ChooseFile extends Component {
             <Card>
                 <CardBody>
                     <h2> Plan your trip with the Spaghetti Coders!</h2>
-                    <Label> Choose the file with trip you want to plan: </Label>
-                    <Input type="file" name="file" id="userFile" onChange={ this.readFile } />
-                    <FormText>
-                        The file needs to be a JSON file, with the ".json" tag at the end of the name.
-                    </FormText>
-                    <h2> Or plan your trip from scratch below! </h2>
-                    <p> Enter your trip title below! </p>
-                    <Input type="text" placeholder={this.props.trip.title} onChange={this.updateTitle}/>
-                    <SearchBar addDestination={this.props.addDestination} config={this.props.config}/>
+                    <Row>
+                        <Col xs="6">
+                        <Label> Choose the JSON file with the trip you want to plan </Label>
+                        <Input type="file" name="file" id="userFile" onChange={ this.readFile }/>
+                        </Col>
+                        <Col xs="6">
+                        <Input type="text" placeholder={this.props.trip.title} onChange={this.updateTitle}/>
+                        </Col>
+                    </Row>
                 </CardBody>
             </Card>
         );

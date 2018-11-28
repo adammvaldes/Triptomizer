@@ -151,6 +151,9 @@ class Application extends Component {
     }
 
     updateTFFI(value) {
+        if(value.distances === undefined){
+            value.distances = [];
+        }
         this.setState({'trip': value});
     }
 

@@ -52,12 +52,19 @@ class Itinerary extends Component {
             counter = counter + 1;
             return <td key={'distance ' + sum + counter}>{sum}</td>
         });
-        if(this.state.showTotalDistance){
+        if(this.state.showTotalDistance && this.props.trip.distances.length !== 0){
             return (
                 <tr>
                     <th scope="row">Total Distance, {this.props.trip.options.units}</th>
                     <td>0</td>
                     {tripDistances}
+                </tr>
+            );
+        }
+        else{
+            return (
+                <tr>
+                    <th scope="row">Total Distance, {this.props.trip.options.units}</th>
                 </tr>
             );
         }
@@ -73,7 +80,7 @@ class Itinerary extends Component {
 
     renderLegDistances() {
         let counter = 0;
-        if(this.state.showDistances){
+        if(this.state.showDistances && this.props.trip.distances.length !== 0){
                 return (
                     <tr>
                         <th scope="row">Leg Distances</th>
@@ -84,6 +91,13 @@ class Itinerary extends Component {
                         })}
                     </tr>
                 );
+        }
+        else{
+            return (
+                <tr>
+                    <th scope="row">Leg Distances</th>
+                </tr>
+            );
         }
     }
 
@@ -122,6 +136,7 @@ class Itinerary extends Component {
                 check = true;
             }
         }
+        if(temp.length === 0){return true;}
         return check;
     }
 
@@ -146,7 +161,6 @@ class Itinerary extends Component {
                         </th>
                         {temp}
                         {temp[0]}
-
                     </tr>
                 );
             }
@@ -196,6 +210,7 @@ class Itinerary extends Component {
                     <Collapse isOpen={this.state.collapse}>
                         {this.attributeButtons()}
                     </Collapse>
+                    <SearchBar addDestination={this.props.addDestination} config={this.props.config}/>
                 </Form>
             </div>
         );
@@ -219,7 +234,9 @@ class Itinerary extends Component {
     updateAttributes(){
         let attributes = [];
         for(let i = 0; i < this.props.config.attributes.length; i++){
-            attributes.push([this.props.config.attributes[i], "true"]);
+            if(this.props.config.attributes[i] === "name" || this.props.config.attributes[i] === "latitude" ||
+                this.props.config.attributes[i] === "longitude"){attributes.push([this.props.config.attributes[i], "true"]);}
+            else{attributes.push([this.props.config.attributes[i], "false"]);}
         }
         this.setState({ displayedAttributes : attributes });
     }
@@ -229,10 +246,13 @@ class Itinerary extends Component {
         for(let i = 0; i < this.state.displayedAttributes.length; i++){
             let name = this.state.displayedAttributes[i][0];
             let bool = this.state.displayedAttributes[i][1];
+            let def;
+            if(bool === "true"){def=true;}
+            else{def=false;}
             let value = name.charAt(0).toUpperCase() + name.slice(1);
             let checkBox = (
                 <FormGroup key={name + i} check inline>
-                    <Label><Input key={name} type="checkbox" defaultChecked={true}
+                    <Label><Input key={name} type="checkbox" defaultChecked={def}
                                   onChange={(e) => this.updateTable({name}, {bool})} />{value}</Label>
                 </FormGroup>
             );
@@ -256,11 +276,7 @@ class Itinerary extends Component {
     }
 
     render() {
-        if (this.props.trip.distances !== undefined && this.props.trip.distances.length !== 0 && this.props.trip.places !== undefined) {
-            return this.renderTripRows();
-        }
-
-        return <Container> </Container>;
+        return this.renderTripRows();
     }
 }
 
