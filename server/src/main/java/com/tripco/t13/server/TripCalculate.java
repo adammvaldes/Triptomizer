@@ -31,8 +31,10 @@ public class TripCalculate {
             if (trip.options.optimization != null && (optimization.equals("short") || optimization.equals("shorter"))) {
                 shortOptimization();
             } else {
-                trip.places.add(trip.places.get(0));
+                //if(trip.places.get(0) != trip.places.get(trip.places.size()-1))
+                trip.places.add(trip.places.get(0)); //Make it a round trip.
                 trip.getTripDistances();
+                trip.places.remove(trip.places.size()-1);
             }
             setMap("/world_map.svg");
 
@@ -113,6 +115,7 @@ public class TripCalculate {
             trip.places.add(trip.places.get(0)); //Make it a round trip.
             trip.distances = trip.getTripDistances();
         }
+        trip.places.remove(trip.places.size()-1);
     }
 
     public void twoOpt(ArrayList<Location> places, int[][] distanceLibrary, int[] pPlaces) {
@@ -145,7 +148,6 @@ public class TripCalculate {
 
             i1++; k--;
         }
-
         return pPlaces;
     }
 
