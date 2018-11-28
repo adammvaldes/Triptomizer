@@ -1,7 +1,5 @@
 import React, {Component} from 'react'
-import {Button, ButtonGroup, Form, Label, Input, FormText, FormGroup, Card, CardBody, Collapse} from 'reactstrap'
-import SearchBar from "./SearchBar";
-import AddByName from "./AddByName";
+import {Button, Row, Col, Card, CardBody, ButtonGroup} from 'reactstrap'
 import {request} from "../../api/api";
 
 class Trip extends Component {
@@ -27,8 +25,12 @@ class Trip extends Component {
         return (
             <Card>
                 <CardBody>
-                    <Button style={{backgroundColor: "407157"}} onClick={this.plan} type="button" block> PLAN </Button>
-                    <Button style={{backgroundColor: "cea12b"}} onClick={this.props.clearTrip} type="button" block> CLEAR </Button>
+                    <Row className="justify-content-center">
+                        <ButtonGroup>
+                            <Button style={{backgroundColor: "407157"}} onClick={this.plan} type="button" size="lg"> PLAN </Button>
+                            <Button style={{backgroundColor: "cea12b"}} onClick={this.props.clearTrip} type="button" size="lg"> CLEAR </Button>
+                        </ButtonGroup>
+                    </Row>
                 </CardBody>
             </Card>
         );

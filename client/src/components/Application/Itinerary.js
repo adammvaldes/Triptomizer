@@ -194,6 +194,7 @@ class Itinerary extends Component {
                     <Collapse isOpen={this.state.collapse}>
                         {this.attributeButtons()}
                     </Collapse>
+                    <SearchBar addDestination={this.props.addDestination} config={this.props.config}/>
                 </Form>
             </div>
         );
