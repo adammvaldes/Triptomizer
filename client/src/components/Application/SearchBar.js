@@ -231,7 +231,7 @@ class SearchBar extends Component{
             <div>
                 <Button onClick={this.toggle} type="button" style={{backgroundColor: "000000"}} >Search for locations</Button>
                 <Collapse isOpen={this.state.collapse}>
-                    <Form>
+                    <FormGroup>
                         <InputGroup>
                             <Input type="text" placeholder="Search for a destination to add to your trip" onChange={this.handleChange} />
                         </InputGroup>
@@ -241,7 +241,7 @@ class SearchBar extends Component{
                                 {this.setFilters()}
                             </Collapse>
                         </Container>
-                    </Form>
+                    </FormGroup>
                     <Button className="btn text-white" type="button" style={{backgroundColor: "407157"}} onClick={this.search}>Search</Button>
                     <div id="grandparent">
                         {this.renderFoundNumbers()}
