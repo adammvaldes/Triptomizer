@@ -74,7 +74,6 @@ class Itinerary extends Component {
     renderLegDistances() {
         let counter = 0;
         if(this.state.showDistances){
-            //if(this.props.trip.distances.length == 0){
                 return (
                     <tr>
                         <th scope="row">Leg Distances</th>
@@ -167,7 +166,6 @@ class Itinerary extends Component {
             this.updateAttributes();
         }
         let places = [];
-        //places.push("Test");
         for(let i = 0; i < this.state.displayedAttributes.length; i++){
             places.push(this.theTable(this.state.displayedAttributes[i][0], i));
         }
