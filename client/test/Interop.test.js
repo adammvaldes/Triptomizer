@@ -59,7 +59,7 @@ function testRender() {
         return button.text();
     });
 
-    let expectedButtonTexts = ['Change Server', 'Change Port'];
+    let expectedButtonTexts = ['Change Port', 'Change Server'];
     expect(actualButtonTexts).toEqual(expectedButtonTexts)
 }
 
