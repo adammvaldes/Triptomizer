@@ -46,7 +46,6 @@ class ChooseFile extends Component {
                     <p> Enter your trip title below! </p>
                     <Input type="text" placeholder={this.props.trip.title} onChange={this.updateTitle}/>
                     <SearchBar addDestination={this.props.addDestination} config={this.props.config}/>
-                    <AddByName addLeg={this.props.addLeg}/>
                 </CardBody>
             </Card>
         );

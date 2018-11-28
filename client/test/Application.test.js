@@ -271,8 +271,7 @@ function testRender() {
                 <Interop changeServer={wrapper.instance().changeServer} updateNumber={wrapper.instance().updateNumber}/>,
                 <ChooseFile trip={wrapper.state().trip}
                             updateTFFI={wrapper.instance().updateTFFI}
-                            addDestination={wrapper.instance().addDestination}
-                            addLeg={wrapper.instance().addLeg}/>,
+                            addDestination={wrapper.instance().addDestination}/>,
                 <Options options={wrapper.state().trip.options}
                          config={wrapper.state().config}
                          updateOptions={wrapper.instance().updateOptions}

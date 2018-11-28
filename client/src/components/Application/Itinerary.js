@@ -13,7 +13,8 @@ class Itinerary extends Component {
             collapse : false,
             showDistances : true,
             showTotalDistance : true,
-            displayedAttributes : []
+            displayedAttributes : [],
+            modal : false
         };
         this.removeLeg = this.removeLeg.bind(this);
         this.reverseTrip = this.reverseTrip.bind(this);
@@ -21,7 +22,7 @@ class Itinerary extends Component {
         this.showDistances = this.showDistances.bind(this);
         this.showTotalDistance = this.showTotalDistance.bind(this);
         this.toggle = this.toggle.bind(this);
-
+        this.toggleModal = this.toggleModal.bind(this);
         this.updateTable = this.updateTable.bind(this);
         this.attributeButtons = this.attributeButtons.bind(this);
         this.updateAttributes = this.updateAttributes.bind(this);
@@ -73,16 +74,16 @@ class Itinerary extends Component {
     renderLegDistances() {
         let counter = 0;
         if(this.state.showDistances){
-            return (
-                <tr>
-                    <th scope="row">Leg Distances</th>
-                    <td>0</td>
-                    {this.props.trip.distances.map((el) => {
-                        counter += 1;
-                        return <td key={'leg ' + counter}>{el}</td>;
-                    })}
-                </tr>
-            );
+                return (
+                    <tr>
+                        <th scope="row">Leg Distances</th>
+                        <td>0</td>
+                        {this.props.trip.distances.map((el) => {
+                            counter += 1;
+                            return <td key={'leg ' + counter}>{el}</td>;
+                        })}
+                    </tr>
+                );
         }
     }
 
@@ -124,6 +125,10 @@ class Itinerary extends Component {
         return check;
     }
 
+    toggleModal(){
+        this.setState({modal : !this.state.modal});
+    }
+
     theTable(value, count){
         let counter = 0;
         let temp = this.props.trip.places.map((place) => {
@@ -133,6 +138,17 @@ class Itinerary extends Component {
         let attribute = this.getAttribute(value);
         let check = this.checkChildren(temp);
         if(attribute[1] === "true" && check){
+            if(count === 0){
+                return (
+                    <tr key={count}>
+                        <th scope="row">{value}<p><Button onClick={this.toggleModal}>+</Button></p>
+                            <AddByName addLeg={this.props.addLeg} modal={this.state.modal} toggleModal={this.toggleModal}/>
+                        </th>
+                        {temp}
+                        {temp[0]}
+                    </tr>
+                );
+            }
             return (
                 <tr key={count}>
                     <th scope="row">{value}</th>

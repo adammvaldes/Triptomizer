@@ -301,7 +301,7 @@ class Application extends Component {
 
         let tripPlanTab = [
             <ChooseFile trip={this.state.trip} updateTFFI={this.updateTFFI} addDestination={this.addDestination}
-                        addLeg={this.addLeg} updateTrip={this.updateTrip} config={this.state.config}
+                        updateTrip={this.updateTrip} config={this.state.config}
             />,
             <Trip trip={this.state.trip}
                   planRequest={this.planRequest}
