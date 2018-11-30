@@ -10,7 +10,7 @@
 
 | Name | Preparation Time |
 | ---- | ---- |
-|  |  |
+|  John Miller| 2 hrs |
 |  |  |
 
 ### Problems found
@@ -18,4 +18,4 @@
 | file:line | problem | hi/med/low | who found | github#  |
 | --- | --- | :---: | :---: | --- |
 | Itinerary.js:182 | Attributes are not tied through properties of config. | med | Vlad | |
-|  | | | | |
+| Itinerary.js: | When leg/total distance atribute is removed for the itinerary the | low | pqalzm6| |
