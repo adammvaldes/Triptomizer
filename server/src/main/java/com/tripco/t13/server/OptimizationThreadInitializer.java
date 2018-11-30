@@ -5,12 +5,64 @@ import com.google.gson.JsonElement;
 import com.google.gson.JsonParser;
 import spark.Request;
 
-import java.util.ArrayList;
-import java.util.Objects;
+import java.util.*;
+import java.util.concurrent.*;
 
 public class OptimizationThreadInitializer {
     Trip trip = null;
     boolean isCorrectFormat;
+
+    public OptimizationThreadInitializer(Trip trip) {
+        this.trip = trip;
+        isCorrectFormat = false;
+        isCorrectFormat = validateTripRequestFormat(trip);
+        String optimization = trip.options.optimization;
+        if (optimization != null && (optimization.equals("short") || optimization.equals("shorter"))) {
+            Set<Callable<int []>> threads = new HashSet<>();
+            for (int i = 0; i < trip.places.size(); i++) {
+                threads.add(new TripCalculate(i, trip));
+            }
+
+            int cores = Runtime.getRuntime().availableProcessors();
+            ExecutorService executorService = Executors.newFixedThreadPool(cores);
+            List<Future<int[]>> results = null;
+            try {
+                results = executorService.invokeAll(threads);
+
+                executorService.shutdown();
+
+                int shortestDistance = Integer.MAX_VALUE;
+                int[] shortestTrip = new int[trip.places.size()];
+
+                for (Future<int[]> places : results) {
+                    int tempShortestDistance = places.get()[places.get().length - 1];
+                    if (tempShortestDistance < shortestDistance) {
+                        shortestDistance = tempShortestDistance;
+                        shortestTrip = places.get();
+                    }
+                }
+
+                ArrayList<Location> retainOriginalPlaces = new ArrayList<>(trip.places.size());
+                retainOriginalPlaces.addAll(trip.places);
+
+                for (int i = 0; i < trip.places.size(); i++) {
+                    trip.places.set(i, retainOriginalPlaces.get(shortestTrip[i]));
+                }
+
+                trip.places.add(trip.places.get(0)); //Make it a round trip.
+                trip.getTripDistances();
+                trip.places.remove(trip.places.size() - 1);
+            } catch (InterruptedException e) {
+                e.printStackTrace();
+            } catch (Exception e) {
+            }
+        } else {
+            //if(trip.places.get(0) != trip.places.get(trip.places.size()-1))
+            trip.places.add(trip.places.get(0)); //Make it a round trip.
+            trip.getTripDistances();
+            trip.places.remove(trip.places.size()-1);
+        }
+    }
 
     OptimizationThreadInitializer(Request request) {
         JsonParser jsonParser = new JsonParser();
@@ -23,7 +75,37 @@ public class OptimizationThreadInitializer {
 
             String optimization = trip.options.optimization;
             if (optimization != null && (optimization.equals("short") || optimization.equals("shorter"))) {
-                // TODO Implement Thread Functionality Here
+                Set<Callable<int []>> threads = new HashSet<>();
+                for (int i = 0; i < trip.places.size(); i++) {
+                    threads.add(new TripCalculate(i, trip));
+                }
+
+                int cores = Runtime.getRuntime().availableProcessors();
+                ExecutorService executorService = Executors.newFixedThreadPool(cores);
+                List<Future<int[]>> results = executorService.invokeAll(threads);
+                executorService.shutdown();
+
+                int shortestDistance = Integer.MAX_VALUE;
+                int[] shortestTrip = new int[trip.places.size()];
+
+                for (Future<int[]> places : results) {
+                    int tempShortestDistance = places.get()[places.get().length-1];
+                    if(tempShortestDistance < shortestDistance) {
+                        shortestDistance = tempShortestDistance;
+                        shortestTrip = places.get();
+                    }
+                }
+
+                ArrayList<Location> retainOriginalPlaces = new ArrayList<>(trip.places.size());
+                retainOriginalPlaces.addAll(trip.places);
+
+                for (int i = 0; i < trip.places.size(); i++) {
+                    trip.places.set(i, retainOriginalPlaces.get(shortestTrip[i]));
+                }
+
+                trip.places.add(trip.places.get(0)); //Make it a round trip.
+                trip.getTripDistances();
+                trip.places.remove(trip.places.size()-1);
             } else {
                 //if(trip.places.get(0) != trip.places.get(trip.places.size()-1))
                 trip.places.add(trip.places.get(0)); //Make it a round trip.
@@ -46,4 +128,15 @@ public class OptimizationThreadInitializer {
 
         return false;
     }
+
+    public String getTripJson () {
+        Gson gson = new Gson();
+        if(isCorrectFormat){
+            return gson.toJson(trip);
+        }
+        else{
+            return "{}"; //return {} if incorrect request format
+        }
+    }
+
 }

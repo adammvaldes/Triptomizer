@@ -122,8 +122,8 @@ public class MicroServer {
     response.type("application/json");
     response.header("Access-Control-Allow-Origin", "*");
 
-    TripCalculate tCalculate = new TripCalculate(request);
-    return tCalculate.getTripJson();
+    OptimizationThreadInitializer optimizationThreadInitializer = new OptimizationThreadInitializer(request);
+    return optimizationThreadInitializer.getTripJson();
   }
 
   /** A REST API that returns the team information associated with the server.

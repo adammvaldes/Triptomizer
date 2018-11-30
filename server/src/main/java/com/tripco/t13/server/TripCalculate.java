@@ -11,7 +11,7 @@ import java.io.InputStreamReader;
 import java.util.*;
 import java.util.concurrent.Callable;
 
-public class TripCalculate implements Callable<ArrayList<Location>> {
+public class TripCalculate implements Callable<int []> {
 
     public Trip trip = null;
     private boolean isCorrectFormat; //verify correct format of POST request
@@ -29,7 +29,7 @@ public class TripCalculate implements Callable<ArrayList<Location>> {
         isCorrectFormat = validateTripRequestFormat(trip);
     }
 
-    void shortOptimization(Integer place) {
+    int [] shortOptimization(Integer place) {
         int[] tempPointerPlaces = null;
         int shortestCumulativeDistance = 0;
         trip.distances = trip.getTripDistances();
@@ -87,14 +87,9 @@ public class TripCalculate implements Callable<ArrayList<Location>> {
         }
 
         if (tempPointerPlaces != null) {
-            for (int i = 0; i < retainOriginalPlaces.size(); i++) {
-                //trip.places.set(i, trip.places.get(tempPointerPlaces[i]));
-                trip.places.set(i, retainOriginalPlaces.get(tempPointerPlaces[i]));
-            }
+            tempPointerPlaces[tempPointerPlaces.length - 1] = shortestCumulativeDistance;
         }
-        trip.places.add(trip.places.get(0)); //Make it a round trip.
-        trip.distances = trip.getTripDistances();
-        trip.places.remove(trip.places.size()-1);
+        return tempPointerPlaces;
     }
 
     public void twoOpt(ArrayList<Location> places, int[][] distanceLibrary, int[] pPlaces) {
@@ -239,9 +234,10 @@ public class TripCalculate implements Callable<ArrayList<Location>> {
         }
     }
 
+
     @Override
-    public ArrayList<Location> call() throws Exception {
-        shortOptimization(place);
-        return trip.places;
+    public int[] call() throws Exception {
+
+        return shortOptimization(place);
     }
 }
