@@ -13,7 +13,7 @@ import java.util.concurrent.Callable;
 
 public class TripCalculate implements Callable<int []> {
 
-    public Trip trip = null;
+    public Trip trip;
     private boolean isCorrectFormat; //verify correct format of POST request
     Integer place = null;
 

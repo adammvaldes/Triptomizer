@@ -12,7 +12,7 @@ public class OptimizationThreadInitializer {
     Trip trip = null;
     boolean isCorrectFormat;
 
-    public OptimizationThreadInitializer(Trip trip) {
+     OptimizationThreadInitializer(Trip trip) {
         this.trip = trip;
         isCorrectFormat = false;
         isCorrectFormat = validateTripRequestFormat(trip);
@@ -25,7 +25,7 @@ public class OptimizationThreadInitializer {
 
             int cores = Runtime.getRuntime().availableProcessors();
             ExecutorService executorService = Executors.newFixedThreadPool(cores);
-            List<Future<int[]>> results = null;
+            List<Future<int[]>> results;
             try {
                 results = executorService.invokeAll(threads);
 
@@ -55,6 +55,7 @@ public class OptimizationThreadInitializer {
             } catch (InterruptedException e) {
                 e.printStackTrace();
             } catch (Exception e) {
+                e.printStackTrace();
             }
         } else {
             //if(trip.places.get(0) != trip.places.get(trip.places.size()-1))
