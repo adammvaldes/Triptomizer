@@ -10,8 +10,8 @@
 
 | Name | Preparation Time |
 | ---- | ---- |
-| Vlad | 2 Hours |
-|  John Miller| 2 hrs |
+| Vlad | 1 Hours |
+|  John Miller| 1 hrs |
 | Adam Valdes | 1 hr |
 | EJ Lee | 1 hr |
 
