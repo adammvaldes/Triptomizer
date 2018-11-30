@@ -13,6 +13,7 @@
 | Vlad | 2 Hours |
 |  John Miller| 2 hrs |
 | Adam Valdes | 1 hr |
+| EJ Lee | 1 hr |
 
 ### Problems found
 
@@ -23,7 +24,10 @@
 | Itinerary.js:241 | Is it possible to not set state in Itinerary but to inherit as prop? | low | Vlad | |
 | Itinerary.js:68,98 | When leg/total distance atribute is removed form the itinerary only the distances are removed. The row remains. | low | pqalzm6| |
 | Itinerary.js:83 | Render method does not check if the elements being rendered are undefined. | low | Adam | |
-| Itinerary.js:155 | Rendering attributes from config does not check if each individual atribute is undefined. | med | Adam | |
+| Itinerary.js:155 | Rendering attributes from config does not check if each individual attribute is undefined. | med | Adam | |
 | Itinerary.js:204 | Row of itinerary-modifying buttons suffers from high code duplication between buttons. | low | Adam | |
 | Itinerary.js:213 | Search functionality needs more separation from the row of itinerary modifying buttons. | low | Adam | |
+| Itinerary.js:11,12 | textField1 and textField2 in state are not being used in the class | low | EJ | |
+| Itinerary.js:158-164 | Itinerary Rendered on default covers entire card on site. | low | EJ | |
+| Itinerary.js:50,88 | The state of distances is incorrect when trip is updated before PLAN click | med | EJ | |
 
