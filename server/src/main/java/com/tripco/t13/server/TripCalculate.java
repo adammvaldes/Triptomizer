@@ -91,8 +91,10 @@ public class TripCalculate implements Callable<ArrayList<Location>> {
                 //trip.places.set(i, trip.places.get(tempPointerPlaces[i]));
                 trip.places.set(i, retainOriginalPlaces.get(tempPointerPlaces[i]));
             }
-            trip.places.add(trip.places.get(0)); //Make it a round trip.
         }
+        trip.places.add(trip.places.get(0)); //Make it a round trip.
+        trip.distances = trip.getTripDistances();
+        trip.places.remove(trip.places.size()-1);
     }
 
     public void twoOpt(ArrayList<Location> places, int[][] distanceLibrary, int[] pPlaces) {

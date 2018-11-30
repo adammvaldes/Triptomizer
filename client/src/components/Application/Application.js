@@ -272,8 +272,8 @@ class Application extends Component {
 
     renderTab(tabID) {
         return (
-            <NavItem>
-                <NavLink
+            <NavItem key={tabID}>
+                <NavLink key={tabID}
                     className={classnames({active: this.state.activeTab === tabID})}
                     onClick={() => {
                         this.toggleTab(tabID);
@@ -287,8 +287,8 @@ class Application extends Component {
 
     renderTabContents(tabContents, tabID) {
         return (
-            <TabContent activeTab={this.state.activeTab}>
-                <TabPane tabId={tabID}>
+            <TabContent key={tabID} activeTab={this.state.activeTab}>
+                <TabPane key={tabID} tabId={tabID}>
                     {tabContents}
                 </TabPane>
             </TabContent>
@@ -303,16 +303,16 @@ class Application extends Component {
         let tabs = ['Trip Plan', 'Options', 'Distance Calculator', 'Info'];
 
         let tripPlanTab = [
-            <ChooseFile trip={this.state.trip} updateTFFI={this.updateTFFI} addDestination={this.addDestination}
+            <ChooseFile key="cfkey" trip={this.state.trip} updateTFFI={this.updateTFFI} addDestination={this.addDestination}
                         updateTrip={this.updateTrip} config={this.state.config}
             />,
-            <Trip trip={this.state.trip}
+            <Trip key="tkey" trip={this.state.trip}
                   planRequest={this.planRequest}
                   clearTrip={this.clearTrip}
                   updateTFFI={this.updateTFFI}
             />,
-            <Map trip={this.state.trip}/>,
-            <Itinerary trip={this.state.trip}
+            <Map key="mkey" trip={this.state.trip}/>,
+            <Itinerary key="itinkey" trip={this.state.trip}
                        removeLeg={this.removeLeg}
                        reverseTrip={this.reverseTrip}
                        setStartLeg={this.setStartLeg}
@@ -320,11 +320,11 @@ class Application extends Component {
                        addLeg={this.addLeg} config={this.state.config}
                        saveMap={this.saveMap} saveTrip={this.saveTrip}
             />,
-            <Interop changeServer={this.changeServer} updateNumber={this.updateNumber}/>
+            <Interop key="intkey" changeServer={this.changeServer} updateNumber={this.updateNumber}/>
         ];
 
         let optionsTab = [
-            <Options options={this.state.trip.options}
+            <Options key="okey" options={this.state.trip.options}
                      config={this.state.config}
                      updateDistances={this.updateDistances}
                      updateOptions={this.updateOptions}
@@ -332,16 +332,16 @@ class Application extends Component {
         ];
 
         let distanceCalculatorTab = [
-            <DistanceCalculator trip={this.state.trip} URL={this.state.URL} port={this.state.port}/>
+            <DistanceCalculator key="dkey" trip={this.state.trip} URL={this.state.URL} port={this.state.port}/>
         ];
 
         let infoTab = [
-            <Info/>
+            <Info key="infkey"/>
         ];
 
         return (
             <Container id="Application">
-                <Nav tabs>
+                <Nav tabs key="2">
                     {tabs.map((tabToRender) => {
                         return this.renderTab(tabToRender);
                     })}
