@@ -2,9 +2,9 @@
  
 | Inspection | Details |
 | ----- | ----- |
-| Subject | *file and methods/line range to review for meeting* |
-| Meeting | *date, time, location* |
-| Checklist | *reference, URL, etc.* |
+| Subject | Itinerary.js |
+| Meeting | 30 November 2018 |
+| Checklist | http://www.cs.toronto.edu/~sme/CSC444F/handouts/java_checklist.pdf |
 
 ### Roles
 
@@ -17,5 +17,5 @@
 
 | file:line | problem | hi/med/low | who found | github#  |
 | --- | --- | :---: | :---: | --- |
-|  | | | | |
+| Itinerary.js:182 | Attributes are not tied through properties of config. | med | Vlad | |
 |  | | | | |
