@@ -10,7 +10,7 @@
 
 | Name | Preparation Time |
 | ---- | ---- |
-|  |  |
+|  John Miller  | 2 hrs |
 |  |  |
 
 ### Problems found
