@@ -10,7 +10,7 @@
 
 | Name | Preparation Time |
 | ---- | ---- |
-|  |  |
+| Vlad | 2 Hours |
 |  |  |
 
 ### Problems found
@@ -18,4 +18,5 @@
 | file:line | problem | hi/med/low | who found | github#  |
 | --- | --- | :---: | :---: | --- |
 | Itinerary.js:182 | Attributes are not tied through properties of config. | med | Vlad | |
-|  | | | | |
+| Itinerary.js:223 | bool.bool variable is a confusing name | low | Vlad | |
+| Itinerary.js:241 | Is it possible to not set state in Itinerary but to inherit as prop? | low | Vlad | |
