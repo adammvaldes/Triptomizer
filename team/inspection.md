@@ -4,7 +4,7 @@
 | ----- | ----- |
 | Subject | Itinerary.js |
 | Meeting | 30 November 2018 |
-| Checklist | http://www.cs.toronto.edu/~sme/CSC444F/handouts/java_checklist.pdf |
+| Checklist | https://github.com/csu18fa314/t13/blob/master/team/pqalzm6/20181130_104640.jpg |
 
 ### Roles
 
