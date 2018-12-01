@@ -229,11 +229,9 @@ class SearchBar extends Component{
     render(){
         return (
             <Card>
-            <div>
+                <CardBody>
                 <FormGroup>
-                    <InputGroup>
-                        <Input type="text" placeholder="Search for a destination to add to your trip" onChange={this.handleChange} />
-                    </InputGroup>
+                    <Col xs="5"><Input type="text" placeholder="Search for a destinations" onChange={this.handleChange} /> </Col>
                     <Container>
                         <Button onClick={this.toggleFilter} type="button">Filter Your Search</Button>
                         <Collapse isOpen={this.state.collapseFilter}>
@@ -249,7 +247,7 @@ class SearchBar extends Component{
                     <div id="div1"><Table responsive>{this.renderResults()}</Table></div>
                 </div>
                 <Button className="btn text-white" type="button" style={{backgroundColor: "cea12b"}} onClick={this.addAllDestinations}>Add all destinations to Trip</Button>
-            </div>
+            </CardBody>
             </Card>);
     }
 }

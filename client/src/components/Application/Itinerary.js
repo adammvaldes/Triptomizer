@@ -202,7 +202,7 @@ class Itinerary extends Component {
                 <div id="div1">
                     <Card>
                         <CardBody>
-                            <Table responsive><tbody>
+                            <Table striped responsive><tbody>
                             {places}
                             {this.renderLegDistances()}
                             {this.calculateTotalDistance()}
