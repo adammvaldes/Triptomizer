@@ -228,32 +228,29 @@ class SearchBar extends Component{
 
     render(){
         return (
+            <Card>
             <div>
-                <Button onClick={this.toggle} type="button" style={{backgroundColor: "000000"}} >Search for locations</Button>
-                <Collapse isOpen={this.state.collapse}>
-                    <FormGroup>
-                        <InputGroup>
-                            <Input type="text" placeholder="Search for a destination to add to your trip" onChange={this.handleChange} />
-                        </InputGroup>
-                        <Container>
-                            <Button onClick={this.toggleFilter} type="button" style={{backgroundColor: "cea12b"}} >Filter Your Search</Button>
-                            <Collapse isOpen={this.state.collapseFilter}>
-                                {this.setFilters()}
+                <FormGroup>
+                    <InputGroup>
+                        <Input type="text" placeholder="Search for a destination to add to your trip" onChange={this.handleChange} />
+                    </InputGroup>
+                    <Container>
+                        <Button onClick={this.toggleFilter} type="button">Filter Your Search</Button>
+                        <Collapse isOpen={this.state.collapseFilter}>
+                            {this.setFilters()}
                             </Collapse>
-                        </Container>
-                    </FormGroup>
-                    <Button className="btn text-white" type="button" style={{backgroundColor: "407157"}} onClick={this.search}>Search</Button>
-                    <div id="grandparent">
-                        {this.renderFoundNumbers()}
+                    </Container>
+                </FormGroup>
+                <Button className="btn text-white" type="button" style={{backgroundColor: "407157"}} onClick={this.search}>Search</Button>
+                <div id="grandparent">
+                    {this.renderFoundNumbers()}
                     </div>
-                    <div id="parent">
-                        <div id="div1"><Table responsive>{this.renderResults()}</Table></div>
-                    </div>
-                    <Input type="number" placeholder="Enter the index of the location you want to add to your trip" onChange={this.handleChange2} />
-                    <Button className="btn text-white" type="button" style={{backgroundColor: "407157"}} onClick={this.addDestination}>Add destination to Trip</Button>
-                    <Button className="btn text-white" type="button" style={{backgroundColor: "407157"}} onClick={this.addAllDestinations}>Add all destinations to Trip</Button>
-                </Collapse>
-            </div>);
+                <div id="parent">
+                    <div id="div1"><Table responsive>{this.renderResults()}</Table></div>
+                </div>
+                <Button className="btn text-white" type="button" style={{backgroundColor: "cea12b"}} onClick={this.addAllDestinations}>Add all destinations to Trip</Button>
+            </div>
+            </Card>);
     }
 }
 
@@ -263,3 +260,11 @@ export default SearchBar;
 
 //https://reactstrap.github.io/components/form/
 //<Input type="number" placeholder="Number of search results" onChange={this.updateSearchNumber} />
+/*
+<Input type="number" placeholder="Enter the index of the location you want to add to your trip" onChange={this.handleChange2} />
+                    <Button className="btn text-white" type="button" style={{backgroundColor: "cea12b"}} onClick={this.addDestination}>Add destination to Trip</Button>
+ */
+/*
+<Button onClick={this.toggle} type="button" style={{backgroundColor: "000000"}} >Search for locations</Button>
+                <Collapse isOpen={this.state.collapse}>
+ */
