@@ -300,7 +300,7 @@ class Application extends Component {
             return <Container/>
         }
 
-        let tabs = ['Trip Plan', 'Options', 'Distance Calculator', 'Info'];
+        let tabs = ['Trip Plan', 'Options', 'Distance Calculator', 'About Us'];
 
         let tripPlanTab = [
             <ChooseFile key="cfkey" trip={this.state.trip} updateTFFI={this.updateTFFI} addDestination={this.addDestination}
@@ -349,7 +349,7 @@ class Application extends Component {
                 {this.renderTabContents(tripPlanTab, 'Trip Plan')}
                 {this.renderTabContents(optionsTab, 'Options')}
                 {this.renderTabContents(distanceCalculatorTab, 'Distance Calculator')}
-                {this.renderTabContents(infoTab, 'Info')}
+                {this.renderTabContents(infoTab, 'About Us')}
             </Container>
         )
     }
