@@ -1,5 +1,5 @@
 import React, {Component} from 'react';
-import {Container, Nav, NavItem, NavLink, TabContent, TabPane} from 'reactstrap';
+import {Container, Nav, NavItem, NavLink, TabContent, TabPane, Card} from 'reactstrap';
 import Info from './Info';
 import Options from './Options';
 import Interop from "./Interop";
@@ -39,7 +39,8 @@ class Application extends Component {
                 distances: [],
                 map: ''
             },
-            activeTab: 'Trip Plan'
+            activeTab: 'Trip Plan',
+            displayedAttributes : []
         };
         this.planRequest = this.planRequest.bind(this);
         this.clearTrip = this.clearTrip.bind(this);
@@ -61,6 +62,8 @@ class Application extends Component {
         this.toggleTab = this.toggleTab.bind(this);
         this.saveMap = this.saveMap.bind(this);
         this.saveTrip = this.saveTrip.bind(this);
+        this.setDisplayedAttributes = this.setDisplayedAttributes.bind(this);
+        this.updateTable = this.updateTable.bind(this);
 
     }
 
@@ -68,25 +71,38 @@ class Application extends Component {
         if (this.state.port === "" || this.state.URL === "") {
             get_config().then(
                 config => {
-                    this.setState({
-                        config: config
-                    })
+                    this.setState({ config: config });
+                    this.setDisplayedAttributes();
                 }
             );
         }
         else {
             get_config("type", this.state.port, this.state.URL).then(
                 config => {
-                    this.setState({
-                        config: config
-                    })
+                    this.setState({ config: config });
+                    this.setDisplayedAttributes();
                 }
             );
         }
     }
+    setDisplayedAttributes() {
+        let attributes = [];
+        for(let i = 0; i < this.state.config.attributes.length; i++){
+            if(this.state.config.attributes[i] === "name" ||
+                this.state.config.attributes[i] === "latitude" || this.state.config.attributes[i] === "longitude"){
+                attributes.push([this.state.config.attributes[i], "true"]);
+            }
+            else{attributes.push([this.state.config.attributes[i], "false"]);}
+        }
+        this.setState({ displayedAttributes : attributes });
+    }
+
+    updateTable(attributes){
+        this.setState({ displayedAttributes : attributes });
+    }
 
     planRequest() {
-        if((this.state.trip.options.optimization == "short" && this.state.trip.places.length > 550) || (this.state.trip.options.optimization == "shorter" && this.state.trip.places.length > 240)){
+        if((this.state.trip.options.optimization === "short" && this.state.trip.places.length > 550) || (this.state.trip.options.optimization === "shorter" && this.state.trip.places.length > 240)){
             return(
                 alert("Your trip of length " + this.state.trip.places.length + " was too large for the " + this.state.trip.options.optimization + " optimization"));
         }
@@ -174,7 +190,7 @@ class Application extends Component {
 
   addDestination(value){
       let trip = this.state.trip;
-      if(trip.places[trip.places.length-1] != value){
+      if(trip.places[trip.places.length-1] !== value){
           trip.places.push(value);
           this.setState(trip);
       }
@@ -319,8 +335,8 @@ class Application extends Component {
                        addDestination={this.addDestination}
                        addLeg={this.addLeg} config={this.state.config}
                        saveMap={this.saveMap} saveTrip={this.saveTrip}
-            />,
-            <Interop key="intkey" changeServer={this.changeServer} updateNumber={this.updateNumber}/>
+                       updateTable={this.updateTable} displayedAttributes={this.state.displayedAttributes}
+            />
         ];
 
         let optionsTab = [
@@ -328,7 +344,7 @@ class Application extends Component {
                      config={this.state.config}
                      updateDistances={this.updateDistances}
                      updateOptions={this.updateOptions}
-            />
+            />,<Interop key="intkey" changeServer={this.changeServer} updateNumber={this.updateNumber}/>
         ];
 
         let distanceCalculatorTab = [
