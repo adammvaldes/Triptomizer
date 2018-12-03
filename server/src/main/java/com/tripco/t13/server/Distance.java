@@ -18,9 +18,9 @@ public class Distance {
     String unitName = null;
     Double unitRadius = null;
 
-    Integer distance = null;
+    Long distance = null;
 
-    public static int getDistanceNum(double theta1, double lambda1, double theta2, double lambda2, double radius) {
+    public static Long getDistanceNum(double theta1, double lambda1, double theta2, double lambda2, double radius) {
 
         //convert all degree definitions to radians.
         theta1 = Math.toRadians(theta1);
@@ -29,13 +29,13 @@ public class Distance {
         lambda2 = Math.toRadians(lambda2);
 
         //implement Vincenty formulae of d = r * arctan definition.
-        return (int)Math.round(radius * Math.atan2((Math.sqrt(Math.pow(Math.cos(theta2) * Math.sin(lambda2 - lambda1), 2) +
+        return Math.round(radius * Math.atan2((Math.sqrt(Math.pow(Math.cos(theta2) * Math.sin(lambda2 - lambda1), 2) +
                         Math.pow((Math.cos(theta1) * Math.sin(theta2) - Math.sin(theta1) * Math.cos(theta2) *
                 Math.cos(lambda2 - lambda1)), 2))), (Math.sin(theta1) * Math.sin(theta2) +
                 Math.cos(theta1) * Math.cos(theta2) * Math.cos(lambda2 - lambda1))));
     }
 
-    public static int getDistanceNum(ArrayList<Location> route, int i, int j, double radius){
+    public static Long getDistanceNum(ArrayList<Location> route, int i, int j, double radius){
         Location location1 = route.get(i);
         Location location2 = route.get(j);
         return getDistanceNum(location1.latitude, location1.longitude, location2.latitude, location2.longitude, radius);

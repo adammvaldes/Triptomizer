@@ -17,7 +17,7 @@ public class Trip{
     String title;
     ArrayList<Location> places;
     Options options;
-    ArrayList<Integer> distances;
+    ArrayList<Long> distances;
     //TODO: ADD MAP
     String map;
     /*
@@ -43,8 +43,8 @@ public class Trip{
 
     //fills distances arraylist with distance between each Location in places arraylist and fills final space in
     //distances arraylist with round trip distance. Distances are calculated using getDistanceNum method from Distance class.
-    public ArrayList<Integer> getTripDistances(){
-        distances = new ArrayList<Integer>();
+    public ArrayList<Long> getTripDistances(){
+        distances = new ArrayList<Long>();
         for(int i = 0; i < places.size() - 1; i++) {
             distances.add(Distance.getDistanceNum(places.get(i).latitude, places.get(i).longitude, places.get(i+1).latitude, places.get(i+1).longitude, options.getRadius()));
         }

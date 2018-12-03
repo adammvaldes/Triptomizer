@@ -51,10 +51,10 @@ public class TripCalculate {
 
     void shortOptimization() {
         int[] tempPointerPlaces = null;
-        int shortestCumulativeDistance = 0;
+        long shortestCumulativeDistance = 0;
         trip.distances = trip.getTripDistances();
 
-        for (int distance : trip.distances) {
+        for (long distance : trip.distances) {
             shortestCumulativeDistance += distance;
         }
 
@@ -66,7 +66,7 @@ public class TripCalculate {
 
 
         double radius = trip.options.getRadius();
-        int[][] distanceLibrary = new int[retainOriginalPlaces.size() + 1][retainOriginalPlaces.size() + 1];
+        long[][] distanceLibrary = new long[retainOriginalPlaces.size() + 1][retainOriginalPlaces.size() + 1];
         for (int i = 0; i < retainOriginalPlaces.size(); i++) {
             for (int k = 0; k < retainOriginalPlaces.size(); k++) {
                 distanceLibrary[i][k] = Distance.getDistanceNum(retainOriginalPlaces, i, k, radius);
@@ -85,7 +85,7 @@ public class TripCalculate {
             }
             pointerPlaces[pointerPlaces.length - 1] = pointerPlaces[0];     //Making it a round trip.
             pointerPlaces = ShortOptimization.travelingSalesman(place, retainOriginalPlaces, distanceLibrary);
-            int tempCumulativeDistance = 0;
+            long tempCumulativeDistance = 0;
 
             if (trip.options.optimization.equals("shorter")) {
                 twoOpt(retainOriginalPlaces, distanceLibrary, pointerPlaces);
@@ -118,7 +118,7 @@ public class TripCalculate {
         trip.places.remove(trip.places.size()-1);
     }
 
-    public void twoOpt(ArrayList<Location> places, int[][] distanceLibrary, int[] pPlaces) {
+    public void twoOpt(ArrayList<Location> places, long[][] distanceLibrary, int[] pPlaces) {
         boolean improvement = true;
         while (improvement) {
             improvement = false;
