@@ -40,7 +40,7 @@ class Itinerary extends Component {
         this.attributeButtons = this.attributeButtons.bind(this);
         this.theTable = this.theTable.bind(this);
         this.getAttribute = this.getAttribute.bind(this);
-        this.checkChildren = this.checkChildren.bind(this);
+        //this.checkChildren = this.checkChildren.bind(this);
         this.renderTabContents = this.renderTabContents.bind(this);
         this.renderTab = this.renderTab.bind(this);
         this.toggleTab = this.toggleTab.bind(this);
@@ -144,7 +144,7 @@ class Itinerary extends Component {
         return answer;
     }
 
-    checkChildren(temp){
+    /*checkChildren(temp){
         let check = false;
         for(let i = 0; i < temp.length; i++){
             if(temp[i].props.children !== undefined){
@@ -153,7 +153,7 @@ class Itinerary extends Component {
         }
         if(temp.length === 0){return true;}
         return check;
-    }
+    }*/
 
     toggleModal(){
         this.setState({modal : !this.state.modal});
@@ -162,29 +162,37 @@ class Itinerary extends Component {
     theTable(value, count){
         let tempName = value.charAt(0).toUpperCase() + value.slice(1);
         let counter = 0;
+        let x = [];
         let temp = this.props.trip.places.map((place) => {
             counter++;
-            return <td key={'place ' + counter}>{place[value]}</td>;
+            return <td key={'place ' + tempName + " " +  counter}>{place[value]}</td>;
         });
+        for(let i = 0; i < temp.length; i++){
+            if(temp[i].props.children === undefined){
+                x.push(<td key={'place ' + " " +  i}>  ---  </td>);
+            }
+            else{
+                x.push(temp[i]);
+            }
+        }
         let attribute = this.getAttribute(value);
-        let check = this.checkChildren(temp);
-        if(attribute[1] === "true" && check){
+        if(attribute[1] === "true"){
             if(count === 0){
                 return (
                     <tr key={count}>
                         <th scope="row">{tempName}<p><Button onClick={this.toggleModal}>+</Button></p>
                             <AddByName addLeg={this.props.addLeg} modal={this.state.modal} toggleModal={this.toggleModal}/>
                         </th>
-                        {temp}
-                        {temp[0]}
+                        {x}
+                        {x[0]}
                     </tr>
                 );
             }
             return (
                 <tr key={count}>
                     <th scope="row">{tempName}</th>
-                    {temp}
-                    {temp[0]}
+                    {x}
+                    {x[0]}
                 </tr>
             );
         }

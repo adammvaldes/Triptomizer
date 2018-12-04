@@ -55,8 +55,8 @@ public class TestTrip {
         trip.options.units = "miles";
         trip.getTripDistances();
         assertEquals(3959, trip.options.getRadius(), 0.001);
-        ArrayList<Integer> expectedDistances = new ArrayList<Integer>();
-        Collections.addAll(expectedDistances, 24, 41);
+        ArrayList<Long> expectedDistances = new ArrayList<Long>();
+        Collections.addAll(expectedDistances, (long)24, (long)41);
         assertEquals(expectedDistances, trip.distances);
     }
 
@@ -65,8 +65,8 @@ public class TestTrip {
         trip.options.units = "kilometers";
         trip.getTripDistances();
         assertEquals(6371, trip.options.getRadius(), 0.001);
-        ArrayList<Integer> expectedDistances = new ArrayList<Integer>();
-        Collections.addAll(expectedDistances, 39, 65);
+        ArrayList<Long> expectedDistances = new ArrayList<Long>();
+        Collections.addAll(expectedDistances, (long)39, (long)65);
         assertEquals(expectedDistances, trip.distances);
     }
 
@@ -75,8 +75,8 @@ public class TestTrip {
         trip.options.units = "nautical miles";
         trip.getTripDistances();
         assertEquals(3440, trip.options.getRadius(), 0.001);
-        ArrayList<Integer> expectedDistances = new ArrayList<Integer>();
-        Collections.addAll(expectedDistances, 21, 35);
+        ArrayList<Long> expectedDistances = new ArrayList<Long>();
+        Collections.addAll(expectedDistances, (long)21, (long)35);
         assertEquals(expectedDistances, trip.distances);
     }
 
@@ -87,8 +87,8 @@ public class TestTrip {
         trip.options.unitRadius = 3958.7613;
         trip.getTripDistances();
         assertEquals(3958.7613, trip.options.getRadius(), 0.001);
-        ArrayList<Integer> expectedDistances = new ArrayList<Integer>();
-        Collections.addAll(expectedDistances, 24, 41);
+        ArrayList<Long> expectedDistances = new ArrayList<Long>();
+        Collections.addAll(expectedDistances, (long)24, (long)41);
         assertEquals(expectedDistances, trip.distances);
     }
 
@@ -99,8 +99,8 @@ public class TestTrip {
         trip.options.unitRadius = 35828571.0;
         trip.getTripDistances();
         assertEquals(35828571.0, trip.options.getRadius(), 1);
-        ArrayList<Integer> expectedDistances = new ArrayList<Integer>();
-        Collections.addAll(expectedDistances, 218699, 367486);
+        ArrayList<Long> expectedDistances = new ArrayList<Long>();
+        Collections.addAll(expectedDistances, (long)218699, (long)367486);
         assertEquals(expectedDistances, trip.distances);
     }
 

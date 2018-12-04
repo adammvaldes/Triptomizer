@@ -263,9 +263,9 @@ public class TestTripCalculate {
             tripCalculate.trip.places.add(tripCalculate.trip.places.get(0));
         }
         int totalDist = 0;
-        ArrayList<Integer> distances = tripCalculate.trip.distances;
+        ArrayList<Long> distances = tripCalculate.trip.distances;
 
-        for (Integer distance: distances) {
+        for (Long distance: distances) {
             totalDist += distance;
         }
 
@@ -294,9 +294,9 @@ public class TestTripCalculate {
             tripCalculate.trip.places.add(tripCalculate.trip.places.get(0));
         }
         int totalDist = 0;
-        ArrayList<Integer> distances = tripCalculate.trip.distances;
+        ArrayList<Long> distances = tripCalculate.trip.distances;
 
-        for (Integer distance: distances) {
+        for (Long distance: distances) {
             totalDist += distance;
         }
 
