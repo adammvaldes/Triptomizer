@@ -77,11 +77,7 @@ class Itinerary extends Component {
             );
         }
         else{
-            return (
-                <tr>
-                    <th scope="row">Total Distance, {this.props.trip.options.units}</th>
-                </tr>
-            );
+            return (<tr> </tr>);
         }
     }
 
@@ -108,11 +104,7 @@ class Itinerary extends Component {
                 );
         }
         else{
-            return (
-                <tr>
-                    <th scope="row">Leg Distances</th>
-                </tr>
-            );
+            return (<tr> </tr>);
         }
     }
 
