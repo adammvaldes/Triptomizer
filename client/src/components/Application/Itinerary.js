@@ -77,7 +77,7 @@ class Itinerary extends Component {
             );
         }
         else{
-            return (<tr> </tr>);
+            return (<tr> <th scope="row">Total Distance, {this.props.trip.options.units}</th> </tr>);
         }
     }
 
@@ -104,7 +104,7 @@ class Itinerary extends Component {
                 );
         }
         else{
-            return (<tr> </tr>);
+            return (<tr> <th scope="row">Leg Distances</th> </tr>);
         }
     }
 
@@ -134,17 +134,6 @@ class Itinerary extends Component {
         }
         return answer;
     }
-
-    /*checkChildren(temp){
-        let check = false;
-        for(let i = 0; i < temp.length; i++){
-            if(temp[i].props.children !== undefined){
-                check = true;
-            }
-        }
-        if(temp.length === 0){return true;}
-        return check;
-    }*/
 
     toggleModal(){
         this.setState({modal : !this.state.modal});
