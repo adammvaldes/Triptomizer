@@ -65,9 +65,8 @@ public class Search {
             for(Filter filter : filters){
                 name = filter.name;
                 values = filter.values;
-                if(name.equals("type")){
-                    search += " and world_airports.type in (";
-                }
+                if(values.size() != 0){
+                search += " and world_airports." + name + " in (";
                 int i = 0;
                 while(i < values.size()) {
                         if(i < values.size()-1){
@@ -77,7 +76,7 @@ public class Search {
                             search += "'" + values.get(i) + "')";
                         }
                         i++;
-                }
+                }}
             }
             return search;
         }

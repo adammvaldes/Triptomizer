@@ -17,8 +17,8 @@ export default class Info extends Component {
                     <Media heading>
                         Edward(EJ) Lee
                     </Media>
-                  <Row> 4th Year </Row> <Row> CS Major </Row> <Row> Favorite Language: C++ </Row>
-                    <Row> True Love: Cheese </Row> <Row> Smash Bros. Main: Pokemon Trainer </Row>
+                  <Row> 4th Year </Row> <Row> Major: Computer Science </Row> <Row> Favorite Language: C++ </Row>
+                    <Row> Weakness: Cheese </Row> <Row> Smash Bros. Main: Pokemon Trainer </Row>
                 </Col>
               </Media>
             </Media>
@@ -28,11 +28,6 @@ export default class Info extends Component {
     )
   }
 }
-/*
-Edward Lee(AKA EJ) is a fourth-year computer science student. He's dedicated to giving 100% effort to everything he does, from programming to having fun.
-                    Still trying to find his place in CS, he is working to become the best programmer he can be. If he's not programming, you can probably find
-                    him playing video games, leading a bible study, or lost in thought.
- */
 //https://getavataaars.com/?accessoriesType=Prescription02&clotheColor=Black&clotheType=Hoodie&eyeType=Surprised&eyebrowType=UpDown&facialHairColor=Black&facialHairType=Blank&hairColor=Black&mouthType=Serious&skinColor=DarkBrown&topType=ShortHairTheCaesar
 /*
 <p className="lead">"Want to travel far and wide?"</p>
