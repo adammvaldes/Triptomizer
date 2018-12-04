@@ -122,6 +122,7 @@ class Itinerary extends Component {
             counter += 1;
             return <td align="center" key={counter}>
                     <Button size="sm" onClick={() => this.setStartLeg(this.props.trip.places.indexOf(place))}>Start</Button>{' '}
+                <p> </p>
                     <Button size="sm" onClick={() => this.removeLeg(this.props.trip.places.indexOf(place))} style={{backgroundColor: "C03232"}} >X</Button>
                    </td>;
         });
@@ -231,11 +232,11 @@ class Itinerary extends Component {
         );
     }
 
-    updateTable(name, bool){
+    updateTable(name, boolParameter){
         let attributes = this.props.displayedAttributes;
         for(let i = 0; i < this.props.displayedAttributes.length; i++){
             if(this.props.displayedAttributes[i][0] === name.name){
-                if(bool.bool === "true"){
+                if(boolParameter.bool === "true"){
                     attributes[i] = [this.props.displayedAttributes[i][0], "false"];
                 }
                 else{
