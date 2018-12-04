@@ -170,6 +170,18 @@ class Application extends Component {
         if(value.distances === undefined){
             value.distances = [];
         }
+        if(value.options === undefined){
+            value.options = {
+                units: "miles",
+                optimization: "none"
+            };
+        }
+        if(value.options.units === undefined){
+            value.options.units = "miles";
+        }
+        if(value.options.optimization === undefined){
+            value.options.optimization = "none";
+        }
         this.setState({'trip': value});
     }
 
