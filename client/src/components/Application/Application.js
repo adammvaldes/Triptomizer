@@ -102,7 +102,8 @@ class Application extends Component {
     }
 
     planRequest() {
-        if((this.state.trip.options.optimization === "short" && this.state.trip.places.length > 550) || (this.state.trip.options.optimization === "shorter" && this.state.trip.places.length > 240)){
+        //checks if trip size will take >25 seconds to calculate on current optimization(1600 for short(nearest neighbor), 90 for shorter(2-opt)
+        if((this.state.trip.options.optimization === "short" && this.state.trip.places.length > 1600) || (this.state.trip.options.optimization === "shorter" && this.state.trip.places.length > 900)){
             return(
                 alert("Your trip of length " + this.state.trip.places.length + " was too large for the " + this.state.trip.options.optimization + " optimization"));
         }
