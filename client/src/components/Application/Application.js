@@ -170,6 +170,18 @@ class Application extends Component {
         if(value.distances === undefined){
             value.distances = [];
         }
+        if(value.options === undefined){
+            value.options = {
+                units: "miles",
+                optimization: "none"
+            };
+        }
+        if(value.options.units === undefined){
+            value.options.units = "miles";
+        }
+        if(value.options.optimization === undefined){
+            value.options.optimization = "none";
+        }
         this.setState({'trip': value});
     }
 
@@ -192,6 +204,7 @@ class Application extends Component {
       let trip = this.state.trip;
       if(trip.places[trip.places.length-1] !== value){
           trip.places.push(value);
+          trip.distances = [];
           this.setState(trip);
       }
   }
@@ -199,6 +212,7 @@ class Application extends Component {
   reverseTrip(){
       let trip = this.state.trip;
       trip.places.reverse();
+      trip.distances = [];
       this.setState(trip);
   }
 
@@ -208,12 +222,14 @@ class Application extends Component {
       }
       let trip = this.state.trip;
       trip.places.splice(value,1);
+      trip.distances = [];
       this.setState(trip);
   }
 
   addLeg(leg){
       let trip = this.state.trip;
       trip.places.push(leg);
+      trip.distances = [];
       this.setState(trip);
   }
   setStartLeg(value){
@@ -224,6 +240,7 @@ class Application extends Component {
       let temp = trip.places[value];
       trip.places.splice(value, 1);
       trip.places.splice(0, 0, temp);
+      trip.distances = [];
       this.setState(trip);
   }
 
