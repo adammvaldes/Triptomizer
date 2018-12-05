@@ -13,13 +13,10 @@ class Options extends Component{
     constructor(props) {
         super(props);
 
-        this.state = {showOptions : true};
         this.updateName = this.updateName.bind(this);
         this.updateRadius = this.updateRadius.bind(this);
         this.updateDefault = this.updateDefault.bind(this);
         this.updateOptimization = this.updateOptimization.bind(this);
-        this.hideOptions = this.hideOptions.bind(this);
-        this.showOptions = this.showOptions.bind(this);
     }
 
     updateDefault(name){
@@ -40,14 +37,6 @@ class Options extends Component{
         this.props.updateOptions('optimization',name.target.value);
     }
 
-    showOptions(){
-        this.setState({showOptions : !this.state.showOptions});
-    }
-
-    hideOptions(){
-        this.state.showOptions = false;
-    }
-
     render() {
         const buttons = this.props.config.units.map((unit) =>
             <Button
@@ -64,8 +53,6 @@ class Options extends Component{
             return(
                 <Card>
                     <CardBody>
-                        <Button onClick={this.showOptions} style={{backgroundColor: "000000"}}> Toggle Options </Button>
-                        <Collapse isOpen={this.state.showOptions}>
                             <Form>
                                 <p>Select the units you wish to use.</p>
                                 <ButtonGroup>
@@ -79,7 +66,6 @@ class Options extends Component{
                                                      config={this.props.config}
                                                      updateOptions={this.props.updateOptions}/>
                             </Form>
-                        </Collapse>
                     </CardBody>
                 </Card>
             );
