@@ -228,11 +228,9 @@ class SearchBar extends Component{
 
     enterSearch(e){
         if(e.keyCode === 13){
-            console.log("Enter");
             this.search();
         }
     }
-
 
     render(){
         let add;
