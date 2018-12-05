@@ -129,9 +129,9 @@ class Application extends Component {
         let trip = this.state.trip;
         trip.places.length = 0;
         trip.distances.length = 0;
-        trip.options.units = "";
+        trip.options.units = "miles";
         trip.options.unitName = "";
-        trip.options.unitRadius = "";
+        trip.options.unitRadius = "3959";
         trip.options.optimization = "none";
         trip.map = "";
         this.setState(trip);
