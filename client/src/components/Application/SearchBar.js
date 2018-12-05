@@ -159,14 +159,6 @@ class SearchBar extends Component{
         );
     }
 
-    /*
-    let inc = 0;
-            let searchResultNames = this.state.searchResults.map((place) => {
-                inc++;
-                return <td key={'place ' + inc}>{inc-1}:<p> </p>{place.name}</td>;
-            });
-     */
-
     addDestination(){
         if(this.state.addIndex < 0 || this.state.addIndex > 30){
             return;
