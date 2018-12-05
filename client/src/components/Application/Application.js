@@ -31,7 +31,7 @@ class Application extends Component {
                 title: "Your Trip's Title",
                 options: {
                     units: "miles",
-                    //unitName: null,
+                    unitName : undefined || '',
                     //unitRadius: null,
                     optimization: "none"
                 },
@@ -365,7 +365,7 @@ class Application extends Component {
         ];
 
         let distanceCalculatorTab = [
-            <DistanceCalculator key="dkey" trip={this.state.trip} URL={this.state.URL} port={this.state.port}/>
+            <DistanceCalculator key="dkey" trip={this.state.trip} URL={this.state.URL} port={this.state.port} options={this.state.trip.options}/>
         ];
 
         let infoTab = [
