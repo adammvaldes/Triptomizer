@@ -9,7 +9,6 @@ export default class Info extends Component {
     let imgVlad = <img height={"150"} src={Vlad} alt={"Vlad's picture"}/>;
     let imgAdam = <img height={"150"} src={Adam} alt={"Adam's picture"}/>;
     return (
-      <div>
         <Card>
           <CardBody>
               <h1 align="center"> The Spaghetti Coders </h1>
@@ -65,7 +64,6 @@ export default class Info extends Component {
             </Media>
           </CardBody>
         </Card>
-      </div>
     )
   }
 }
