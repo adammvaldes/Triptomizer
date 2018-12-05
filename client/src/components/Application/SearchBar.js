@@ -35,6 +35,7 @@ class SearchBar extends Component{
         this.updateFilter = this.updateFilter.bind(this);
         this.searchRow = this.searchRow.bind(this);
         this.setResults = this.setResults.bind(this);
+        this.enterSearch = this.enterSearch.bind(this);
     }
 
     search(){
@@ -225,6 +226,12 @@ class SearchBar extends Component{
         );
     }
 
+    enterSearch(e){
+        if(e.keyCode === 13){
+            this.search();
+        }
+    }
+
     render(){
         let add;
         if(this.state.showAdd){
@@ -237,7 +244,7 @@ class SearchBar extends Component{
                     <Row className="justify-content-left">
                     <Col xs="12" sm="8" md="6" lg="5">
                         <InputGroup>
-                            <Input type="text" placeholder="Search for a destinations" onChange={this.handleChange} />
+                            <Input type="text" placeholder="Search for a destinations" onChange={this.handleChange} onKeyDown={this.enterSearch}/>
                             <InputGroupAddon addonType="append">
                                 <Button className="btn text-white" type="button" style={{backgroundColor: "407157"}} onClick={this.search}>Search</Button>
                             </InputGroupAddon>
