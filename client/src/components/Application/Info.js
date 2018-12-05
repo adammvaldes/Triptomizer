@@ -2,10 +2,12 @@ import React, {Component} from 'react'
 import {Card, CardHeader, CardBody, Col, Row, Media} from 'reactstrap'
 import EJ from '../resources/EJPic.png';
 import Vlad from '../resources/Vlad.png';
+import Adam from '../resources/AdamPic.png';
 export default class Info extends Component {
   render() {
     let imgEJ = <img height="150" src={EJ} alt="EJ's picture"/>;
     let imgVlad = <img height={"150"} src={Vlad} alt={"Vlad's picture"}/>;
+    let imgAdam = <img height={"150"} src={Adam} alt={"Adam's picture"}/>;
     return (
       <div>
         <Card>
@@ -26,6 +28,12 @@ export default class Info extends Component {
                               Vlad Stepanuga
                           </Media>
                       </Col>
+                      <Col xs={"3"}>
+                          {imgAdam}
+                          <Media heading>
+                              Adam Valdes
+                          </Media>
+                      </Col>
                   </Row>
                   <Row>
                       <Col xs={"3"}>
@@ -44,6 +52,13 @@ export default class Info extends Component {
                           <a href={"https://pp.userapi.com/c836322/v836322938/50ad4/cEAClbspE5M.jpg"}>
                                Batignolles-Chatillon Char 25T
                           </a>
+                      </Col>
+                      <Col xs={"3"}>
+                          Transfer Student <br/>
+                          Major: Computer Science <br/>
+                          Favorite Language: C++ <br/>
+                          Weakness: Sunlight <br/>
+                          Smash Bros Main: Luigi <br/>
                       </Col>
                   </Row>
               </Media>
