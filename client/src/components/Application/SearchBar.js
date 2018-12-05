@@ -1,5 +1,5 @@
 import React, {Component} from 'react';
-import {Card, CardBody, FormGroup, Table, Collapse, InputGroup, Label, Container, Row, Col} from 'reactstrap';
+import {Card, CardBody, FormGroup, Table, Collapse, InputGroup, InputGroupAddon, Label, Container, Row, Col} from 'reactstrap';
 import {Button, Form, Input} from 'reactstrap';
 import {request} from "../../api/api";
 import Info from "./Info";
@@ -18,7 +18,8 @@ class SearchBar extends Component{
             filters : [],
             type : [],
             collapse : false,
-            collapseFilter : false
+            collapseFilter : false,
+            showAdd : false
         };
         this.search = this.search.bind(this);
         this.setSearchResults = this.setSearchResults.bind(this);
@@ -68,9 +69,15 @@ class SearchBar extends Component{
     }
 
     setSearchResults(value){
-        this.setState({
-            searchResults : value
-        });
+        if(value !== undefined) {
+            this.setState({
+                searchResults: value,
+                showAdd: true
+            });
+        }
+        else{
+            this.setState({ searchResults: value });
+        }
     }
 
 
@@ -227,26 +234,40 @@ class SearchBar extends Component{
     }
 
     render(){
+        let add;
+        if(this.state.showAdd){
+            add = <Button className="btn text-white" type="button" style={{backgroundColor: "cea12b"}} onClick={this.addAllDestinations}>Add all destinations to Trip</Button>;
+        }
         return (
             <Card>
                 <CardBody>
                 <FormGroup>
-                    <Col xs="5"><Input type="text" placeholder="Search for a destinations" onChange={this.handleChange} /> </Col>
-                    <Container>
-                        <Button onClick={this.toggleFilter} type="button">Filter Your Search</Button>
-                        <Collapse isOpen={this.state.collapseFilter}>
-                            {this.setFilters()}
-                            </Collapse>
-                    </Container>
+                    <Row className="justify-content-left">
+                    <Col xs="12" sm="8" md="6" lg="5">
+                        <InputGroup>
+                            <Input type="text" placeholder="Search for a destinations" onChange={this.handleChange} />
+                            <InputGroupAddon addonType="append">
+                                <Button className="btn text-white" type="button" style={{backgroundColor: "407157"}} onClick={this.search}>Search</Button>
+                            </InputGroupAddon>
+                        </InputGroup>
+                    </Col>
+                    </Row>
                 </FormGroup>
-                <Button className="btn text-white" type="button" style={{backgroundColor: "407157"}} onClick={this.search}>Search</Button>
+                    <Row className="justify-content-left">
+                        <Container>
+                            <Button onClick={this.toggleFilter} type="button">Filter Your Search</Button>
+                            <Collapse isOpen={this.state.collapseFilter}>
+                                {this.setFilters()}
+                            </Collapse>
+                        </Container>
+                    </Row>
                 <div id="grandparent">
                     {this.renderFoundNumbers()}
                     </div>
                 <div id="parent">
                     <div id="div1"><Table responsive>{this.renderResults()}</Table></div>
                 </div>
-                <Button className="btn text-white" type="button" style={{backgroundColor: "cea12b"}} onClick={this.addAllDestinations}>Add all destinations to Trip</Button>
+                    {add}
             </CardBody>
             </Card>);
     }
@@ -265,4 +286,23 @@ export default SearchBar;
 /*
 <Button onClick={this.toggle} type="button" style={{backgroundColor: "000000"}} >Search for locations</Button>
                 <Collapse isOpen={this.state.collapse}>
+ */
+/*
+
+                    <Row className="justify-content-left">
+                    <Container>
+                        <Button onClick={this.toggleFilter} type="button">Filter Your Search</Button>
+                        <Collapse isOpen={this.state.collapseFilter}>
+                            {this.setFilters()}
+                            </Collapse>
+                    </Container>
+                    </Row>
+ */
+/*
+<Col xs="12" sm="6">
+                            <Button onClick={this.toggleFilter} type="button">Filter Your Search</Button>
+                            <Collapse isOpen={this.state.collapseFilter}>
+                                {this.setFilters()}
+                            </Collapse>
+                        </Col>
  */
