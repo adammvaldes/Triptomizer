@@ -1,10 +1,11 @@
 import React, {Component} from 'react'
 import {Card, CardHeader, CardBody, Col, Row, Media} from 'reactstrap'
 import EJ from '../resources/EJPic.png';
-
+import Vlad from '../resources/Vlad.png';
 export default class Info extends Component {
   render() {
-    let img = <img height="150" src={EJ} alt="EJ's picture"/>;
+    let imgEJ = <img height="150" src={EJ} alt="EJ's picture"/>;
+    let imgVlad = <img height={"150"} src={Vlad} alt={"Vlad's picture"}/>;
     return (
       <div>
         <Card>
@@ -12,14 +13,39 @@ export default class Info extends Component {
               <h1 align="center"> The Spaghetti Coders </h1>
             <Media>
               <Media body>
-                <Col xs="3">
-                  {img}
-                    <Media heading>
-                        Edward(EJ) Lee
-                    </Media>
-                  <Row> 4th Year </Row> <Row> Major: Computer Science </Row> <Row> Favorite Language: C++ </Row>
-                    <Row> Weakness: Cheese </Row> <Row> Smash Bros. Main: Pokemon Trainer </Row>
-                </Col>
+                  <Row>
+                      <Col xs="3">
+                          {imgEJ}
+                          <Media heading>
+                              Edward(EJ) Lee
+                          </Media>
+                      </Col>
+                      <Col xs={"3"}>
+                          {imgVlad}
+                          <Media heading>
+                              Vlad Stepanuga
+                          </Media>
+                      </Col>
+                  </Row>
+                  <Row>
+                      <Col xs={"3"}>
+                          4th Year <br/>
+                          Major: Computer Science <br/>
+                          Favorite Language: C++ <br/>
+                          Weakness: Cheese <br/>
+                          Smash Bros Main: Pokemon Trainer <br/>
+                      </Col>
+                      <Col xs={"3"}>
+                          3rd Year <br/>
+                          Major: Computer Science <br/>
+                          Favorite Language: C# <br/>
+                          Weakness: Good TV Shows <br/>
+                          Favorite Tank:
+                          <a href={"https://pp.userapi.com/c836322/v836322938/50ad4/cEAClbspE5M.jpg"}>
+                               Batignolles-Chatillon Char 25T
+                          </a>
+                      </Col>
+                  </Row>
               </Media>
             </Media>
           </CardBody>
