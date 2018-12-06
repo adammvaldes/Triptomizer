@@ -1,5 +1,6 @@
 import React, {Component} from 'react'
 import {Button, Media, Container, Card, CardBody} from 'reactstrap'
+import emptyMap from "../resources/world_map.svg";
 
 class Map extends Component {
     constructor(props) {
@@ -7,25 +8,23 @@ class Map extends Component {
     }
 
     render() {
-        if(this.props.trip.map !== '' && this.props.trip.map !== void(0)){
-            const dataUri = "data:image/svg+xml;utf8," + this.props.trip.map;
-            return (
-                <Card>
-                    <CardBody>
-                        <Media>
-                            <Media body>
-                                <Media id="map" object src={dataUri} alt="Map of Colorado"/>
-                            </Media>
-                        </Media>
-                    </CardBody>
-                </Card>
-            );
+        let map;
+        if(this.props.trip.map === '' || this.props.trip.map === void(0) || this.props.trip.map === undefined){
+            map = <img src={emptyMap} alt="Empty Map"/>;
         }
         else{
-            return (
-                <Media></Media>
-            )
+            let dataUri = "data:image/svg+xml;utf8," + this.props.trip.map;
+            map = <Media id="map" object src={dataUri} alt="World Map"/>;
         }
+        return (
+            <Card>
+                <CardBody>
+                    <Media>
+                        <Media body>{map}</Media>
+                    </Media>
+                </CardBody>
+            </Card>
+        );
     }
 }
 export default Map;

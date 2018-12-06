@@ -31,7 +31,7 @@ class Application extends Component {
                 title: "Your Trip's Title",
                 options: {
                     units: "miles",
-                    unitName : undefined || '',
+                    unitName: undefined || '',
                     //unitRadius: null,
                     optimization: "none"
                 },
