@@ -1,5 +1,5 @@
 import React, {Component} from 'react';
-import {Container, Nav, NavItem, NavLink, TabContent, TabPane, Card} from 'reactstrap';
+import {Container, Nav, NavItem, NavLink, TabContent, TabPane, Card, CardBody} from 'reactstrap';
 import Info from './Info';
 import Options from './Options';
 import Interop from "./Interop";
@@ -31,7 +31,7 @@ class Application extends Component {
                 title: "Your Trip's Title",
                 options: {
                     units: "miles",
-                    unitName : undefined || '',
+                    unitName: undefined || '',
                     //unitRadius: null,
                     optimization: "none"
                 },
@@ -102,7 +102,8 @@ class Application extends Component {
     }
 
     planRequest() {
-        if((this.state.trip.options.optimization === "short" && this.state.trip.places.length > 550) || (this.state.trip.options.optimization === "shorter" && this.state.trip.places.length > 240)){
+        //checks if trip size will take >25 seconds to calculate on current optimization(1600 for short(nearest neighbor), 90 for shorter(2-opt)
+        if((this.state.trip.options.optimization === "short" && this.state.trip.places.length > 1600) || (this.state.trip.options.optimization === "shorter" && this.state.trip.places.length > 900)){
             return(
                 alert("Your trip of length " + this.state.trip.places.length + " was too large for the " + this.state.trip.options.optimization + " optimization"));
         }
@@ -128,9 +129,9 @@ class Application extends Component {
         let trip = this.state.trip;
         trip.places.length = 0;
         trip.distances.length = 0;
-        trip.options.units = "";
+        trip.options.units = "miles";
         trip.options.unitName = "";
-        trip.options.unitRadius = "";
+        trip.options.unitRadius = "3959";
         trip.options.optimization = "none";
         trip.map = "";
         this.setState(trip);
@@ -336,15 +337,21 @@ class Application extends Component {
         let tabs = ['Trip Plan', 'Options', 'Distance Calculator', 'About Us'];
 
         let tripPlanTab = [
+            <Card key="cardkey">
+                <CardBody key="cardbodykey">
+            <div key="divkey">
+                <br></br>
             <ChooseFile key="cfkey" trip={this.state.trip} updateTFFI={this.updateTFFI} addDestination={this.addDestination}
                         updateTrip={this.updateTrip} config={this.state.config}
-            />,
+            /></div>
             <Trip key="tkey" trip={this.state.trip}
                   planRequest={this.planRequest}
                   clearTrip={this.clearTrip}
                   updateTFFI={this.updateTFFI}
-            />,
-            <Map key="mkey" trip={this.state.trip}/>,
+            />
+                    <br></br>
+            <Map key="mkey" trip={this.state.trip}/>
+                    <br></br>
             <Itinerary key="itinkey" trip={this.state.trip}
                        removeLeg={this.removeLeg}
                        reverseTrip={this.reverseTrip}
@@ -354,6 +361,8 @@ class Application extends Component {
                        saveMap={this.saveMap} saveTrip={this.saveTrip}
                        updateTable={this.updateTable} displayedAttributes={this.state.displayedAttributes}
             />
+                </CardBody>
+            </Card>
         ];
 
         let optionsTab = [

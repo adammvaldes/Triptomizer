@@ -34,8 +34,6 @@ class ChooseFile extends Component {
 
     render() {
         return (
-            <Card>
-                <CardBody>
                     <Row>
                         <Col xs="6">
                             <Input type="file" name="file" id="userFile" onChange={ this.readFile }/>
@@ -45,8 +43,6 @@ class ChooseFile extends Component {
                         <Input type="text" placeholder={this.props.trip.title} onChange={this.updateTitle}/>
                         </Col>
                     </Row>
-                </CardBody>
-            </Card>
         );
     }
 }
