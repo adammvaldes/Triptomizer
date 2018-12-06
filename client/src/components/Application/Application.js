@@ -1,5 +1,5 @@
 import React, {Component} from 'react';
-import {Container, Nav, NavItem, NavLink, TabContent, TabPane, Card} from 'reactstrap';
+import {Container, Nav, NavItem, NavLink, TabContent, TabPane, Card, CardBody} from 'reactstrap';
 import Info from './Info';
 import Options from './Options';
 import Interop from "./Interop";
@@ -337,15 +337,21 @@ class Application extends Component {
         let tabs = ['Trip Plan', 'Options', 'Distance Calculator', 'About Us'];
 
         let tripPlanTab = [
+            <Card key="cardkey">
+                <CardBody key="cardbodykey">
+            <div key="divkey">
+                <br></br>
             <ChooseFile key="cfkey" trip={this.state.trip} updateTFFI={this.updateTFFI} addDestination={this.addDestination}
                         updateTrip={this.updateTrip} config={this.state.config}
-            />,
+            /></div>
             <Trip key="tkey" trip={this.state.trip}
                   planRequest={this.planRequest}
                   clearTrip={this.clearTrip}
                   updateTFFI={this.updateTFFI}
-            />,
-            <Map key="mkey" trip={this.state.trip}/>,
+            />
+                    <br></br>
+            <Map key="mkey" trip={this.state.trip}/>
+                    <br></br>
             <Itinerary key="itinkey" trip={this.state.trip}
                        removeLeg={this.removeLeg}
                        reverseTrip={this.reverseTrip}
@@ -355,6 +361,8 @@ class Application extends Component {
                        saveMap={this.saveMap} saveTrip={this.saveTrip}
                        updateTable={this.updateTable} displayedAttributes={this.state.displayedAttributes}
             />
+                </CardBody>
+            </Card>
         ];
 
         let optionsTab = [

@@ -10,15 +10,11 @@ class Map extends Component {
         if(this.props.trip.map !== '' && this.props.trip.map !== void(0)){
             const dataUri = "data:image/svg+xml;utf8," + this.props.trip.map;
             return (
-                <Card>
-                    <CardBody>
                         <Media>
                             <Media body>
                                 <Media id="map" object src={dataUri} alt="Map of Colorado"/>
                             </Media>
                         </Media>
-                    </CardBody>
-                </Card>
             );
         }
         else{
