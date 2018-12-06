@@ -3,11 +3,13 @@ import {Card, CardHeader, CardBody, Col, Row, Media} from 'reactstrap'
 import EJ from '../resources/EJPic.png';
 import Vlad from '../resources/Vlad.png';
 import Adam from '../resources/AdamPic.png';
+import john from '../resources/avataaars.png';
 export default class Info extends Component {
   render() {
     let imgEJ = <img height="150" src={EJ} alt="EJ's picture"/>;
     let imgVlad = <img height={"150"} src={Vlad} alt={"Vlad's picture"}/>;
     let imgAdam = <img height={"150"} src={Adam} alt={"Adam's picture"}/>;
+    let imgjohn = <img height={"150"} src={john} alt={"John's picture"}/>
     return (
         <Card>
           <CardBody>
@@ -31,6 +33,12 @@ export default class Info extends Component {
                           {imgAdam}
                           <Media heading>
                               Adam Valdes
+                          </Media>
+                      </Col>
+                      <Col xs={"3"}>
+                          {imgjohn}
+                          <Media heading>
+                              John Miller
                           </Media>
                       </Col>
                   </Row>
@@ -58,6 +66,13 @@ export default class Info extends Component {
                           Favorite Language: C++ <br/>
                           Weakness: Sunlight <br/>
                           Smash Bros Main: Luigi <br/>
+                      </Col>
+                      <Col xs={"3"}>
+                          4th Year <br/>
+                          Major: Computer Science <br/>
+                          Favorite Language: English <br/>
+                          Weakness: The Letter W. <br/>
+                          Smash Bros Main: Kirby <br/>
                       </Col>
                   </Row>
               </Media>
