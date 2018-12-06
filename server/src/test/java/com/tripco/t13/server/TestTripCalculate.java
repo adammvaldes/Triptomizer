@@ -253,7 +253,10 @@ public class TestTripCalculate {
 
     @Test
     public void testShortOptimization() {
+        long lStartTime = System.nanoTime();
         tripCalculate = new OptimizationThreadInitializer(tripShort);
+        tripCalculate.threadCreator();
+        System.out.println("Elapsed time for short in milliseconds: " + (System.nanoTime() - lStartTime) / 1000000);
 
         int totalDist = 0;
         ArrayList<Long> distances = tripCalculate.trip.distances;
@@ -264,8 +267,11 @@ public class TestTripCalculate {
 
         String test = "";
         for (Location place : tripCalculate.trip.places) {
+            //System.out.print(place.name + " --> ");
             test += place.name + " --> ";
         }
+       // System.out.println();
+        //System.out.println("Total distance: " + totalDist);
 
         assertEquals("Einstök Ölgerð --> Nordic Brewery --> Tanker Brewery --> Oceanbryggeriet --> BRUS --> Loch Lomond Brewery --> Wicklow Wolf Brewery --> Heineken Brewery --> Delirium Café --> Bofferding --> Bitburger Brewery Group GmbH --> BAPBAP --> WhiteFrontier Brewery --> Liechtensteiner Brauhaus --> U Fleků --> Muttermilch Vienna Brewery --> Etyeki Sörmanufaktúra --> Carlsberg Croatia Brewery --> Dogma Brewery & Tap Room --> Bräuhaus --> Hilltop Brewery --> Dois Corvos Cervejeira --> Brasserie Star d'Algerie --> Edge Brewing --> Cervesa Alpha --> Hophead Brewing --> Zlatna Varna --> Torch Brewery --> Dancing Camel --> Al Ahram Beverages Company --> Dargett Craft Beer --> Baltika-Baku (Xirdalan) --> Republica Brewing --> Aujan Industries Co. --> Eisenbahn --> 2SIX8 Craft Brewery --> Banks Beer Brewery Tour --> Asia Pacific Breweries --> United Breweries Nepal --> Murree Brewery --> Line Brew --> Great Leap Brewing --> Taedonggang Beer Brewery --> Amazing Brewing Company --> Korea Craft Brewery --> Sapporo Breweries -->  Zhang Men Brewing --> Great Islands Craft Brewery --> Kingdom Breweries --> Thai Asia Pacific Brewery --> Lao Brewery Company --> Myanmar Brewery --> Antigua Brewing Company --> Cadejo Brewing Company --> D&D Brewery, Lodge, and Restaurant --> Fuego Brew Company --> Animal Brew --> Lion Brewery --> LeVeL33 --> Nail Brewing Australia --> Speights Brewery --> Pyatyy Okean --> Star Brewing --> Fabrica De Cerveja Da Biera --> National Breweries Plc Ndola --> Tanzania Breweries Limited --> St. George Brewery --> Champion Brewery Plc --> Brasserie BB Lomé --> Accra Brewery Limited --> Pela Cuca (BGI) --> Delta Beverages --> Namibian Breweries Limited --> El Camino Brewing Co --> The Sexton Beer Company --> Chester Beer --> Sureña --> Barranco Beer Company --> Bandido Brewing --> Bogota Beer Company --> Cerveceria Polar --> Surinaamse Brouwerij --> Red Stripe --> The Bahamian Brewery --> Los Muertos Brewing --> Homie Brewhouse --> Odell Brewing Company --> Big Rock Brewery --> Godthåb Bryghus --> Ægir Microbrewery --> ", test);
         assertEquals(70598, totalDist);
@@ -273,7 +279,10 @@ public class TestTripCalculate {
 
     @Test
     public void testShorterOptimization(){
+        long lStartTime = System.nanoTime();
         tripCalculate = new OptimizationThreadInitializer(tripShorter);
+        tripCalculate.threadCreator();
+        System.out.println("Elapsed time for shorter in milliseconds: " + (System.nanoTime() - lStartTime) / 1000000);
 
         int totalDist = 0;
         ArrayList<Long> distances = tripCalculate.trip.distances;
@@ -284,10 +293,13 @@ public class TestTripCalculate {
 
         String test = "";
         for (Location place : tripCalculate.trip.places) {
+            //System.out.print(place.name + " --> ");
             test += place.name + " --> ";
         }
+        //System.out.println();
+        //System.out.println("Total distance: " + totalDist);
 
-        assertEquals("Delirium Café --> BAPBAP --> Bofferding --> Bitburger Brewery Group GmbH --> Liechtensteiner Brauhaus --> WhiteFrontier Brewery --> Cervesa Alpha --> Edge Brewing --> Brasserie Star d'Algerie --> Dois Corvos Cervejeira --> Hilltop Brewery --> Bräuhaus --> Dogma Brewery & Tap Room --> Carlsberg Croatia Brewery --> Muttermilch Vienna Brewery --> U Fleků --> Etyeki Sörmanufaktúra --> Hophead Brewing --> Zlatna Varna --> Torch Brewery --> Al Ahram Beverages Company --> Dancing Camel --> Dargett Craft Beer --> Baltika-Baku (Xirdalan) --> Eisenbahn --> Republica Brewing --> Aujan Industries Co. --> Banks Beer Brewery Tour --> 2SIX8 Craft Brewery --> Asia Pacific Breweries --> United Breweries Nepal --> Murree Brewery --> Line Brew --> Great Leap Brewing --> Taedonggang Beer Brewery --> Sapporo Breweries --> Amazing Brewing Company --> Korea Craft Brewery -->  Zhang Men Brewing --> Great Islands Craft Brewery --> Kingdom Breweries --> Thai Asia Pacific Brewery --> Lao Brewery Company --> Myanmar Brewery --> Antigua Brewing Company --> Cadejo Brewing Company --> D&D Brewery, Lodge, and Restaurant --> Fuego Brew Company --> Animal Brew --> Lion Brewery --> LeVeL33 --> Nail Brewing Australia --> Speights Brewery --> Pyatyy Okean --> Star Brewing --> Fabrica De Cerveja Da Biera --> National Breweries Plc Ndola --> Tanzania Breweries Limited --> St. George Brewery --> Champion Brewery Plc --> Brasserie BB Lomé --> Accra Brewery Limited --> Pela Cuca (BGI) --> Namibian Breweries Limited --> Delta Beverages --> El Camino Brewing Co --> The Sexton Beer Company --> Chester Beer --> Sureña --> Barranco Beer Company --> Bandido Brewing --> Bogota Beer Company --> Surinaamse Brouwerij --> Cerveceria Polar --> Red Stripe --> The Bahamian Brewery --> Homie Brewhouse --> Los Muertos Brewing --> Odell Brewing Company --> Big Rock Brewery --> Godthåb Bryghus --> Einstök Ölgerð --> Nordic Brewery --> Tanker Brewery --> BRUS --> Oceanbryggeriet --> Ægir Microbrewery --> Loch Lomond Brewery --> Wicklow Wolf Brewery --> Heineken Brewery --> ", test);
+        assertEquals("Liechtensteiner Brauhaus --> WhiteFrontier Brewery --> Cervesa Alpha --> Edge Brewing --> Brasserie Star d'Algerie --> Dois Corvos Cervejeira --> Hilltop Brewery --> Bräuhaus --> Dogma Brewery & Tap Room --> Carlsberg Croatia Brewery --> Muttermilch Vienna Brewery --> U Fleků --> Etyeki Sörmanufaktúra --> Hophead Brewing --> Zlatna Varna --> Torch Brewery --> Al Ahram Beverages Company --> Dancing Camel --> Dargett Craft Beer --> Baltika-Baku (Xirdalan) --> Eisenbahn --> Republica Brewing --> Aujan Industries Co. --> Banks Beer Brewery Tour --> 2SIX8 Craft Brewery --> Asia Pacific Breweries --> United Breweries Nepal --> Murree Brewery --> Line Brew --> Great Leap Brewing --> Taedonggang Beer Brewery --> Sapporo Breweries --> Amazing Brewing Company --> Korea Craft Brewery -->  Zhang Men Brewing --> Great Islands Craft Brewery --> Kingdom Breweries --> Thai Asia Pacific Brewery --> Lao Brewery Company --> Myanmar Brewery --> Antigua Brewing Company --> Cadejo Brewing Company --> D&D Brewery, Lodge, and Restaurant --> Fuego Brew Company --> Animal Brew --> Lion Brewery --> LeVeL33 --> Nail Brewing Australia --> Speights Brewery --> Pyatyy Okean --> Star Brewing --> Fabrica De Cerveja Da Biera --> National Breweries Plc Ndola --> Tanzania Breweries Limited --> St. George Brewery --> Champion Brewery Plc --> Brasserie BB Lomé --> Accra Brewery Limited --> Pela Cuca (BGI) --> Namibian Breweries Limited --> Delta Beverages --> El Camino Brewing Co --> The Sexton Beer Company --> Chester Beer --> Sureña --> Barranco Beer Company --> Bandido Brewing --> Bogota Beer Company --> Surinaamse Brouwerij --> Cerveceria Polar --> Red Stripe --> The Bahamian Brewery --> Homie Brewhouse --> Los Muertos Brewing --> Odell Brewing Company --> Big Rock Brewery --> Godthåb Bryghus --> Einstök Ölgerð --> Nordic Brewery --> Tanker Brewery --> BRUS --> Oceanbryggeriet --> Ægir Microbrewery --> Loch Lomond Brewery --> Wicklow Wolf Brewery --> Heineken Brewery --> Delirium Café --> BAPBAP --> Bofferding --> Bitburger Brewery Group GmbH --> ", test);
         assertEquals(68794, totalDist);
     }
 

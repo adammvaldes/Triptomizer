@@ -15,12 +15,20 @@ public class TripCalculate implements Callable<int []> {
 
     public Trip trip;
     private boolean isCorrectFormat; //verify correct format of POST request
+    int shortestCumulativeDistance = 0;
+    long[][] distanceLibrary;
     Integer place = null;
+    int[] chunk;
+    int[] pointerPlaces;
+    int[] tempPointerPlaces;
 
 
-    public TripCalculate(Integer place, Trip trip) {
-        this.trip = trip;
+    public TripCalculate(int[] chunk, Trip trip, int shortestCumulativeDistance, long[][] distanceLibrary) {
+        this.trip = new Trip(trip);
         this.place = place;
+        this.shortestCumulativeDistance = shortestCumulativeDistance;
+        this.distanceLibrary = distanceLibrary;
+        this.chunk = chunk;
     }
 
     public TripCalculate(Trip trip) {
@@ -29,66 +37,41 @@ public class TripCalculate implements Callable<int []> {
         isCorrectFormat = validateTripRequestFormat(trip);
     }
 
-    int [] shortOptimization(Integer place) {
-        int[] tempPointerPlaces = null;
-        int shortestCumulativeDistance = 0;
-        trip.distances = trip.getTripDistances();
+    int [] shortOptimization(int[] chunk) {
 
-        for (long distance : trip.distances) {
-            shortestCumulativeDistance += distance;
-        }
-
-        ArrayList<Location> retainOriginalPlaces = new ArrayList<>(trip.places.size());
-        retainOriginalPlaces.addAll(trip.places);
         // the  + 1 is responsible for containing the round trip element.
-        int[] pointerPlaces = new int[retainOriginalPlaces.size() + 1];
-
-
-
-        double radius = trip.options.getRadius();
-        long[][] distanceLibrary = new long[retainOriginalPlaces.size() + 1][retainOriginalPlaces.size() + 1];
-        for (int i = 0; i < retainOriginalPlaces.size(); i++) {
-            for (int k = 0; k < retainOriginalPlaces.size(); k++) {
-                distanceLibrary[i][k] = Distance.getDistanceNum(retainOriginalPlaces, i, k, radius);
-            }
-            distanceLibrary[i][retainOriginalPlaces.size()] = Distance.getDistanceNum(retainOriginalPlaces, i, 0,
-                    radius); //Round trip calculation.
-        }
-        distanceLibrary[retainOriginalPlaces.size()] = distanceLibrary[0]; //Round trip calculation
-
-        //Loop through all locations in original places array, performing shortest trip algorithm to see which place
-        //is shortest.
+        pointerPlaces = new int[trip.places.size() + 1];
+        tempPointerPlaces = new int[trip.places.size() + 1];
         //Initially we have pointers all in the same order as the places array.
-        for (int i = 0; i < retainOriginalPlaces.size(); i++) {
+        for (int i = 0; i < trip.places.size(); i++) {
             pointerPlaces[i] = i;
-        }
-        pointerPlaces[pointerPlaces.length - 1] = pointerPlaces[0];     //Making it a round trip.
-        pointerPlaces = ShortOptimization.travelingSalesman(place, retainOriginalPlaces, distanceLibrary);
-        int tempCumulativeDistance = 0;
-
-        if (trip.options.optimization.equals("shorter")) {
-            twoOpt(retainOriginalPlaces, distanceLibrary, pointerPlaces);
+            tempPointerPlaces[i] = i;
         }
 
-        for(int i = 0; i < retainOriginalPlaces.size(); i++) {
-            tempCumulativeDistance += distanceLibrary[pointerPlaces[i]][pointerPlaces[i+1]];
-//                        Distance.getDistanceNum(retainOriginalPlaces, pointerPlaces[i],
-//                        pointerPlaces[i+1], radius);
-        }
+        long lStartTime = System.nanoTime();
 
-        tempCumulativeDistance += distanceLibrary[pointerPlaces[retainOriginalPlaces.size()]][pointerPlaces[0]]; //Round Trip
+        for(int place = chunk[0]; place <= chunk[1]; place++){
+            pointerPlaces = ShortOptimization.travelingSalesman(place, trip.places, distanceLibrary);
 
-        if (tempCumulativeDistance < shortestCumulativeDistance) {
-            shortestCumulativeDistance = tempCumulativeDistance;
-            tempPointerPlaces = new int[retainOriginalPlaces.size() + 1];
-            for (int i = 0; i < retainOriginalPlaces.size() + 1; i++) {
-                tempPointerPlaces[i] = pointerPlaces[i];
+            int tempCumulativeDistance = 0;
+
+            if (trip.options.optimization.equals("shorter")) {
+                twoOpt(trip.places, distanceLibrary, pointerPlaces);
+            }
+
+            for(int i = 0; i < trip.places.size(); i++) {
+                tempCumulativeDistance += distanceLibrary[pointerPlaces[i]][pointerPlaces[i+1]];
+            }
+
+            tempCumulativeDistance += distanceLibrary[pointerPlaces[trip.places.size()]][pointerPlaces[0]]; //Round Trip
+
+            if (tempCumulativeDistance < shortestCumulativeDistance) {
+                shortestCumulativeDistance = tempCumulativeDistance;
+                tempPointerPlaces = pointerPlaces;
             }
         }
-
-        if (tempPointerPlaces != null) {
-            tempPointerPlaces[tempPointerPlaces.length - 1] = shortestCumulativeDistance;
-        }
+        System.out.println("Elapsed time for inside in milliseconds: " + (System.nanoTime() - lStartTime) / 1000000 + " from chunk [" + chunk[0] + "][" + chunk[1] + "]");
+        tempPointerPlaces[pointerPlaces.length - 1] = shortestCumulativeDistance;
         return tempPointerPlaces;
     }
 
@@ -237,7 +220,6 @@ public class TripCalculate implements Callable<int []> {
 
     @Override
     public int[] call() throws Exception {
-
-        return shortOptimization(place);
+        return shortOptimization(chunk);
     }
 }
