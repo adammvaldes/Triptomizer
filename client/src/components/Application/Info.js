@@ -9,7 +9,6 @@ export default class Info extends Component {
     let imgVlad = <img height={"150"} src={Vlad} alt={"Vlad's picture"}/>;
     let imgAdam = <img height={"150"} src={Adam} alt={"Adam's picture"}/>;
     return (
-      <div>
         <Card>
           <CardBody>
               <h1 align="center"> The Spaghetti Coders </h1>
@@ -65,23 +64,7 @@ export default class Info extends Component {
             </Media>
           </CardBody>
         </Card>
-      </div>
     )
   }
 }
 //https://getavataaars.com/?accessoriesType=Prescription02&clotheColor=Black&clotheType=Hoodie&eyeType=Surprised&eyebrowType=UpDown&facialHairColor=Black&facialHairType=Blank&hairColor=Black&mouthType=Serious&skinColor=DarkBrown&topType=ShortHairTheCaesar
-/*
-<p className="lead">"Want to travel far and wide?"</p>
-            <ol >
-              <li>
-                Choose options for trip planning, information to display about locations,
-                and how the trip map and itinerary should be saved.</li>
-              <li>
-                Choose your destinations by loading existing sets of destinations or
-                find more in an extensive database of locations worldwide.</li>
-              <li>
-                Plan the trip with the options you selected.
-                Review and revise the trip origin and order.
-                Save the trip map and itinerary for future reference.</li>
-            </ol>
- */
