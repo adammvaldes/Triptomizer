@@ -70,7 +70,7 @@ public class TripCalculate implements Callable<int []> {
                 tempPointerPlaces = pointerPlaces;
             }
         }
-        System.out.println("Elapsed time for inside in milliseconds: " + (System.nanoTime() - lStartTime) / 1000000 + " from chunk[" + chunk[0] + "][" + chunk[1] + "]");
+        System.out.println("Elapsed time for inside in milliseconds: " + (System.nanoTime() - lStartTime) / 1000000 + " from chunk [" + chunk[0] + "][" + chunk[1] + "]");
         tempPointerPlaces[pointerPlaces.length - 1] = shortestCumulativeDistance;
         return tempPointerPlaces;
     }

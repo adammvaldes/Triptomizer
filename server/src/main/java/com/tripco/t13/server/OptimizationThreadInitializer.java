@@ -11,6 +11,7 @@ import java.util.concurrent.*;
 public class OptimizationThreadInitializer {
     Trip trip = null;
     boolean isCorrectFormat;
+    long[][] distanceLibrary;
 
     OptimizationThreadInitializer(Request request) {
         JsonParser jsonParser = new JsonParser();
@@ -35,37 +36,18 @@ public class OptimizationThreadInitializer {
          String optimization = trip.options.optimization;
          double radius = trip.options.getRadius();
          if (optimization != null && (optimization.equals("short") || optimization.equals("shorter"))) {
-
-             long lStartTime2 = System.nanoTime();
-             long[][] distanceLibrary = new long[trip.places.size() + 1][trip.places.size() + 1];
-             for (int i = 0; i < trip.places.size(); i++) {
-                 for (int k = 0; k < trip.places.size(); k++) {
-                     distanceLibrary[i][k] = Distance.getDistanceNum(trip.places, i, k, radius);
-                 }
-                 distanceLibrary[i][trip.places.size()] = Distance.getDistanceNum(trip.places, i, 0,
-                         radius); //Round trip calculation.
-             }
-             distanceLibrary[trip.places.size()] = distanceLibrary[0]; //Round trip calculation
-             System.out.println("Elapsed time for for distanceLibrary in milliseconds: " + (System.nanoTime() - lStartTime2) / 1000000);
-
              long lStartTime0 = System.nanoTime();
+             calculateDistanceTable(radius);
+
              int shortestCumulativeDistance = 0;
              for(int i = 0; i < trip.places.size(); i++) {
                  shortestCumulativeDistance += distanceLibrary[i][i+1];
              }
-
              shortestCumulativeDistance += distanceLibrary[trip.places.size()][0]; //Round Trip
-             System.out.println("Elapsed time for for shortestCumulativeDistance in milliseconds: " + (System.nanoTime() - lStartTime0) / 1000000);
-             trip.places.add(trip.places.get(0)); //Make it a round trip.
-             trip.getTripDistances();
-             trip.places.remove(trip.places.size()-1);
-
-             for (long distance : trip.distances) {
-                 shortestCumulativeDistance += distance;
-             }
 
              ArrayList<Location> retainOriginalPlaces = new ArrayList<>(trip.places.size());
              retainOriginalPlaces.addAll(trip.places);
+
              Set<Callable<int []>> threads = new HashSet<>();
              int cores = Runtime.getRuntime().availableProcessors();
              int start = 0;
@@ -74,17 +56,18 @@ public class OptimizationThreadInitializer {
                  if(i == cores-1){
                      end += trip.places.size()%cores;
                  }
-                 int[] param = {start, end-1};
+                 //Set of starting locations that each thread will look at.
+                 int[] chunk = {start, end-1};
                  start = end;
-                 threads.add(new TripCalculate(param, trip, shortestCumulativeDistance, distanceLibrary));
+                 threads.add(new TripCalculate(chunk, trip, shortestCumulativeDistance, distanceLibrary));
              }
 
              ExecutorService executorService = Executors.newFixedThreadPool(cores);
             try {
+                System.out.println("Elapsed time before invokeAll in milliseconds: " + (System.nanoTime() - lStartTime0) / 1000000);
                 long lStartTime1 = System.nanoTime();
                 List<Future<int[]>> results = executorService.invokeAll(threads);
                 System.out.println("Elapsed time for invokeAll in milliseconds: " + (System.nanoTime() - lStartTime1) / 1000000);
-
                 executorService.shutdown();
 
                 int shortestDistance = Integer.MAX_VALUE;
@@ -115,6 +98,18 @@ public class OptimizationThreadInitializer {
              trip.getTripDistances();
              trip.places.remove(trip.places.size()-1);
          }
+    }
+
+    public void calculateDistanceTable(double radius) {
+        distanceLibrary = new long[trip.places.size() + 1][trip.places.size() + 1];
+        for (int i = 0; i < trip.places.size(); i++) {
+            for (int k = 0; k < trip.places.size(); k++) {
+                distanceLibrary[i][k] = Distance.getDistanceNum(trip.places, i, k, radius);
+            }
+            distanceLibrary[i][trip.places.size()] = Distance.getDistanceNum(trip.places, i, 0,
+                    radius); //Round trip calculation.
+        }
+        distanceLibrary[trip.places.size()] = distanceLibrary[0]; //Round trip calculation
     }
 
     public boolean validateTripRequestFormat(Trip trip) {
