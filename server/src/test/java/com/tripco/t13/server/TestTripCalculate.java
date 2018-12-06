@@ -256,9 +256,9 @@ public class TestTripCalculate {
         tripCalculate = new OptimizationThreadInitializer(tripShort);
 
         int totalDist = 0;
-        ArrayList<Integer> distances = tripCalculate.trip.distances;
+        ArrayList<Long> distances = tripCalculate.trip.distances;
 
-        for (Integer distance: distances) {
+        for (Long distance: distances) {
             totalDist += distance;
         }
 
@@ -276,9 +276,9 @@ public class TestTripCalculate {
         tripCalculate = new OptimizationThreadInitializer(tripShorter);
 
         int totalDist = 0;
-        ArrayList<Integer> distances = tripCalculate.trip.distances;
+        ArrayList<Long> distances = tripCalculate.trip.distances;
 
-        for (Integer distance: distances) {
+        for (Long distance: distances) {
             totalDist += distance;
         }
 

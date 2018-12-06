@@ -1,5 +1,5 @@
 import React, {Component} from 'react';
-import {Container, Nav, NavItem, NavLink, TabContent, TabPane} from 'reactstrap';
+import {Container, Nav, NavItem, NavLink, TabContent, TabPane, Card, CardBody} from 'reactstrap';
 import Info from './Info';
 import Options from './Options';
 import Interop from "./Interop";
@@ -31,7 +31,7 @@ class Application extends Component {
                 title: "Your Trip's Title",
                 options: {
                     units: "miles",
-                    //unitName: null,
+                    unitName: undefined || '',
                     //unitRadius: null,
                     optimization: "none"
                 },
@@ -39,7 +39,8 @@ class Application extends Component {
                 distances: [],
                 map: ''
             },
-            activeTab: 'Trip Plan'
+            activeTab: 'Trip Plan',
+            displayedAttributes : []
         };
         this.planRequest = this.planRequest.bind(this);
         this.clearTrip = this.clearTrip.bind(this);
@@ -61,6 +62,8 @@ class Application extends Component {
         this.toggleTab = this.toggleTab.bind(this);
         this.saveMap = this.saveMap.bind(this);
         this.saveTrip = this.saveTrip.bind(this);
+        this.setDisplayedAttributes = this.setDisplayedAttributes.bind(this);
+        this.updateTable = this.updateTable.bind(this);
 
     }
 
@@ -68,25 +71,39 @@ class Application extends Component {
         if (this.state.port === "" || this.state.URL === "") {
             get_config().then(
                 config => {
-                    this.setState({
-                        config: config
-                    })
+                    this.setState({ config: config });
+                    this.setDisplayedAttributes();
                 }
             );
         }
         else {
             get_config("type", this.state.port, this.state.URL).then(
                 config => {
-                    this.setState({
-                        config: config
-                    })
+                    this.setState({ config: config });
+                    this.setDisplayedAttributes();
                 }
             );
         }
     }
+    setDisplayedAttributes() {
+        let attributes = [];
+        for(let i = 0; i < this.state.config.attributes.length; i++){
+            if(this.state.config.attributes[i] === "name" ||
+                this.state.config.attributes[i] === "latitude" || this.state.config.attributes[i] === "longitude"){
+                attributes.push([this.state.config.attributes[i], "true"]);
+            }
+            else{attributes.push([this.state.config.attributes[i], "false"]);}
+        }
+        this.setState({ displayedAttributes : attributes });
+    }
+
+    updateTable(attributes){
+        this.setState({ displayedAttributes : attributes });
+    }
 
     planRequest() {
-        if((this.state.trip.options.optimization == "short" && this.state.trip.places.length > 550) || (this.state.trip.options.optimization == "shorter" && this.state.trip.places.length > 240)){
+        //checks if trip size will take >25 seconds to calculate on current optimization(1600 for short(nearest neighbor), 90 for shorter(2-opt)
+        if((this.state.trip.options.optimization === "short" && this.state.trip.places.length > 1600) || (this.state.trip.options.optimization === "shorter" && this.state.trip.places.length > 900)){
             return(
                 alert("Your trip of length " + this.state.trip.places.length + " was too large for the " + this.state.trip.options.optimization + " optimization"));
         }
@@ -112,9 +129,9 @@ class Application extends Component {
         let trip = this.state.trip;
         trip.places.length = 0;
         trip.distances.length = 0;
-        trip.options.units = "";
+        trip.options.units = "miles";
         trip.options.unitName = "";
-        trip.options.unitRadius = "";
+        trip.options.unitRadius = "3959";
         trip.options.optimization = "none";
         trip.map = "";
         this.setState(trip);
@@ -154,6 +171,18 @@ class Application extends Component {
         if(value.distances === undefined){
             value.distances = [];
         }
+        if(value.options === undefined){
+            value.options = {
+                units: "miles",
+                optimization: "none"
+            };
+        }
+        if(value.options.units === undefined){
+            value.options.units = "miles";
+        }
+        if(value.options.optimization === undefined){
+            value.options.optimization = "none";
+        }
         this.setState({'trip': value});
     }
 
@@ -174,8 +203,9 @@ class Application extends Component {
 
   addDestination(value){
       let trip = this.state.trip;
-      if(trip.places[trip.places.length-1] != value){
+      if(trip.places[trip.places.length-1] !== value){
           trip.places.push(value);
+          trip.distances = [];
           this.setState(trip);
       }
   }
@@ -183,6 +213,7 @@ class Application extends Component {
   reverseTrip(){
       let trip = this.state.trip;
       trip.places.reverse();
+      trip.distances = [];
       this.setState(trip);
   }
 
@@ -192,12 +223,14 @@ class Application extends Component {
       }
       let trip = this.state.trip;
       trip.places.splice(value,1);
+      trip.distances = [];
       this.setState(trip);
   }
 
   addLeg(leg){
       let trip = this.state.trip;
       trip.places.push(leg);
+      trip.distances = [];
       this.setState(trip);
   }
   setStartLeg(value){
@@ -208,6 +241,7 @@ class Application extends Component {
       let temp = trip.places[value];
       trip.places.splice(value, 1);
       trip.places.splice(0, 0, temp);
+      trip.distances = [];
       this.setState(trip);
   }
 
@@ -300,18 +334,24 @@ class Application extends Component {
             return <Container/>
         }
 
-        let tabs = ['Trip Plan', 'Options', 'Distance Calculator', 'Info'];
+        let tabs = ['Trip Plan', 'Options', 'Distance Calculator', 'About Us'];
 
         let tripPlanTab = [
+            <Card key="cardkey">
+                <CardBody key="cardbodykey">
+            <div key="divkey">
+                <br></br>
             <ChooseFile key="cfkey" trip={this.state.trip} updateTFFI={this.updateTFFI} addDestination={this.addDestination}
                         updateTrip={this.updateTrip} config={this.state.config}
-            />,
+            /></div>
             <Trip key="tkey" trip={this.state.trip}
                   planRequest={this.planRequest}
                   clearTrip={this.clearTrip}
                   updateTFFI={this.updateTFFI}
-            />,
-            <Map key="mkey" trip={this.state.trip}/>,
+            />
+                    <br></br>
+            <Map key="mkey" trip={this.state.trip}/>
+                    <br></br>
             <Itinerary key="itinkey" trip={this.state.trip}
                        removeLeg={this.removeLeg}
                        reverseTrip={this.reverseTrip}
@@ -319,8 +359,10 @@ class Application extends Component {
                        addDestination={this.addDestination}
                        addLeg={this.addLeg} config={this.state.config}
                        saveMap={this.saveMap} saveTrip={this.saveTrip}
-            />,
-            <Interop key="intkey" changeServer={this.changeServer} updateNumber={this.updateNumber}/>
+                       updateTable={this.updateTable} displayedAttributes={this.state.displayedAttributes}
+            />
+                </CardBody>
+            </Card>
         ];
 
         let optionsTab = [
@@ -328,11 +370,11 @@ class Application extends Component {
                      config={this.state.config}
                      updateDistances={this.updateDistances}
                      updateOptions={this.updateOptions}
-            />
+            />,<Interop key="intkey" changeServer={this.changeServer} updateNumber={this.updateNumber}/>
         ];
 
         let distanceCalculatorTab = [
-            <DistanceCalculator key="dkey" trip={this.state.trip} URL={this.state.URL} port={this.state.port}/>
+            <DistanceCalculator key="dkey" trip={this.state.trip} URL={this.state.URL} port={this.state.port} options={this.state.trip.options}/>
         ];
 
         let infoTab = [
@@ -349,7 +391,7 @@ class Application extends Component {
                 {this.renderTabContents(tripPlanTab, 'Trip Plan')}
                 {this.renderTabContents(optionsTab, 'Options')}
                 {this.renderTabContents(distanceCalculatorTab, 'Distance Calculator')}
-                {this.renderTabContents(infoTab, 'Info')}
+                {this.renderTabContents(infoTab, 'About Us')}
             </Container>
         )
     }

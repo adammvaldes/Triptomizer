@@ -34,22 +34,18 @@ class ChooseFile extends Component {
 
     render() {
         return (
-            <Card>
-                <CardBody>
-                    <h2> Plan your trip with the Spaghetti Coders!</h2>
                     <Row>
                         <Col xs="6">
-                        <Label> Choose the JSON file with the trip you want to plan </Label>
-                        <Input type="file" name="file" id="userFile" onChange={ this.readFile }/>
+                            <Input type="file" name="file" id="userFile" onChange={ this.readFile }/>
+                            <FormText color="muted"> The file must be JSON </FormText>
                         </Col>
                         <Col xs="6">
                         <Input type="text" placeholder={this.props.trip.title} onChange={this.updateTitle}/>
                         </Col>
                     </Row>
-                </CardBody>
-            </Card>
         );
     }
 }
 
 export default ChooseFile;
+//<h6> Plan your trip! </h6>

@@ -1,5 +1,5 @@
 import React, {Component} from 'react';
-import {Card, CardBody, FormGroup, Table, Collapse, InputGroup, Label, Container, Row, Col} from 'reactstrap';
+import {Card, CardBody, FormGroup, Table, Collapse, InputGroup, InputGroupAddon, Label, Container, Row, Col} from 'reactstrap';
 import {Button, Form, Input} from 'reactstrap';
 import {request} from "../../api/api";
 import Info from "./Info";
@@ -18,7 +18,8 @@ class SearchBar extends Component{
             filters : [],
             type : [],
             collapse : false,
-            collapseFilter : false
+            collapseFilter : false,
+            showAdd : false
         };
         this.search = this.search.bind(this);
         this.setSearchResults = this.setSearchResults.bind(this);
@@ -34,6 +35,7 @@ class SearchBar extends Component{
         this.updateFilter = this.updateFilter.bind(this);
         this.searchRow = this.searchRow.bind(this);
         this.setResults = this.setResults.bind(this);
+        this.enterSearch = this.enterSearch.bind(this);
     }
 
     search(){
@@ -68,9 +70,15 @@ class SearchBar extends Component{
     }
 
     setSearchResults(value){
-        this.setState({
-            searchResults : value
-        });
+        if(value !== undefined) {
+            this.setState({
+                searchResults: value,
+                showAdd: true
+            });
+        }
+        else{
+            this.setState({ searchResults: value });
+        }
     }
 
 
@@ -152,14 +160,6 @@ class SearchBar extends Component{
         );
     }
 
-    /*
-    let inc = 0;
-            let searchResultNames = this.state.searchResults.map((place) => {
-                inc++;
-                return <td key={'place ' + inc}>{inc-1}:<p> </p>{place.name}</td>;
-            });
-     */
-
     addDestination(){
         if(this.state.addIndex < 0 || this.state.addIndex > 30){
             return;
@@ -226,34 +226,55 @@ class SearchBar extends Component{
         );
     }
 
+    enterSearch(e){
+        if(e.keyCode === 13){
+            this.search();
+        }
+    }
+
     render(){
+        let add;
+        if(this.state.showAdd){
+            add = <Button className="btn text-white" type="button" style={{backgroundColor: "cea12b"}} onClick={this.addAllDestinations}>Add all destinations to Trip</Button>;
+        }
         return (
-            <div>
-                <Button onClick={this.toggle} type="button" style={{backgroundColor: "000000"}} >Search for locations</Button>
-                <Collapse isOpen={this.state.collapse}>
-                    <FormGroup>
+            <Card>
+                <CardBody>
+                <FormGroup>
+                    <Row className="justify-content-left">
+                    <Col xs="12" sm="8" md="6" lg="5">
                         <InputGroup>
-                            <Input type="text" placeholder="Search for a destination to add to your trip" onChange={this.handleChange} />
+                            <Input type="text" placeholder="Search for a destinations" onChange={this.handleChange} onKeyDown={this.enterSearch}/>
+                            <InputGroupAddon addonType="append">
+                                <Button className="btn text-white" type="button" style={{backgroundColor: "407157"}} onClick={this.search}>Search</Button>
+                            </InputGroupAddon>
                         </InputGroup>
+                    </Col>
+                    </Row>
+                </FormGroup>
+                    <Row className="justify-content-left">
                         <Container>
-                            <Button onClick={this.toggleFilter} type="button" style={{backgroundColor: "cea12b"}} >Filter Your Search</Button>
+                            <Row>
+                                <Col xs="2">
+                                    <Button onClick={this.toggleFilter} type="button">Filter Your Search</Button>
+                                </Col>
+                                <Col xs="2  ">
+                                    {add}
+                                </Col>
+                            </Row>
                             <Collapse isOpen={this.state.collapseFilter}>
                                 {this.setFilters()}
                             </Collapse>
                         </Container>
-                    </FormGroup>
-                    <Button className="btn text-white" type="button" style={{backgroundColor: "407157"}} onClick={this.search}>Search</Button>
-                    <div id="grandparent">
-                        {this.renderFoundNumbers()}
+                    </Row>
+                <div id="grandparent">
+                    {this.renderFoundNumbers()}
                     </div>
-                    <div id="parent">
-                        <div id="div1"><Table responsive>{this.renderResults()}</Table></div>
-                    </div>
-                    <Input type="number" placeholder="Enter the index of the location you want to add to your trip" onChange={this.handleChange2} />
-                    <Button className="btn text-white" type="button" style={{backgroundColor: "407157"}} onClick={this.addDestination}>Add destination to Trip</Button>
-                    <Button className="btn text-white" type="button" style={{backgroundColor: "407157"}} onClick={this.addAllDestinations}>Add all destinations to Trip</Button>
-                </Collapse>
-            </div>);
+                <div id="parent">
+                    <div id="div1"><Table responsive>{this.renderResults()}</Table></div>
+                </div>
+            </CardBody>
+            </Card>);
     }
 }
 
@@ -263,3 +284,30 @@ export default SearchBar;
 
 //https://reactstrap.github.io/components/form/
 //<Input type="number" placeholder="Number of search results" onChange={this.updateSearchNumber} />
+/*
+<Input type="number" placeholder="Enter the index of the location you want to add to your trip" onChange={this.handleChange2} />
+                    <Button className="btn text-white" type="button" style={{backgroundColor: "cea12b"}} onClick={this.addDestination}>Add destination to Trip</Button>
+ */
+/*
+<Button onClick={this.toggle} type="button" style={{backgroundColor: "000000"}} >Search for locations</Button>
+                <Collapse isOpen={this.state.collapse}>
+ */
+/*
+
+                    <Row className="justify-content-left">
+                    <Container>
+                        <Button onClick={this.toggleFilter} type="button">Filter Your Search</Button>
+                        <Collapse isOpen={this.state.collapseFilter}>
+                            {this.setFilters()}
+                            </Collapse>
+                    </Container>
+                    </Row>
+ */
+/*
+<Col xs="12" sm="6">
+                            <Button onClick={this.toggleFilter} type="button">Filter Your Search</Button>
+                            <Collapse isOpen={this.state.collapseFilter}>
+                                {this.setFilters()}
+                            </Collapse>
+                        </Col>
+ */

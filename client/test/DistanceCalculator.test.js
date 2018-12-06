@@ -114,7 +114,7 @@ function testRender() {
                         <br/>
                         <Button style={{backgroundColor: "000000"}} type="button" onClick={wrapper.instance().calcDist}> Calculate </Button>
                         <br/><br/>
-                        <h5> Distance: {wrapper.state().distance.distance} </h5>
+                        <h5> Distance: {wrapper.state().distance.distance} {wrapper.state().distance.units} </h5>
                     </FormGroup>
 
                 </CardBody>

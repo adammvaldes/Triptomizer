@@ -41,7 +41,7 @@ public class TestDistance {
     public void testMiles(){
         distance.units = "miles";
         //distance.getRadius(distance.units);
-        int testDistance = Distance.getDistanceNum(distance.origin.latitude, distance.origin.longitude, distance.destination.latitude, distance.destination.longitude, distance.getRadius(distance.units));
+        long testDistance = Distance.getDistanceNum(distance.origin.latitude, distance.origin.longitude, distance.destination.latitude, distance.destination.longitude, distance.getRadius(distance.units));
         assertEquals(8347, testDistance);
     }
 
@@ -49,7 +49,7 @@ public class TestDistance {
     public void testKilometers(){
         distance.units = "kilometers";
         //distance.getRadius(distance.units);
-        int testDistance = Distance.getDistanceNum(distance.origin.latitude, distance.origin.longitude, distance.destination.latitude, distance.destination.longitude, distance.getRadius(distance.units));
+        long testDistance = Distance.getDistanceNum(distance.origin.latitude, distance.origin.longitude, distance.destination.latitude, distance.destination.longitude, distance.getRadius(distance.units));
         assertEquals(13432, testDistance);
     }
 
@@ -57,7 +57,7 @@ public class TestDistance {
     public void testNauticalMiles(){
         distance.units = "nautical miles";
         //distance.getRadius(distance.units);
-        int testDistance = Distance.getDistanceNum(distance.origin.latitude, distance.origin.longitude, distance.destination.latitude, distance.destination.longitude, distance.getRadius(distance.units));
+        long testDistance = Distance.getDistanceNum(distance.origin.latitude, distance.origin.longitude, distance.destination.latitude, distance.destination.longitude, distance.getRadius(distance.units));
         assertEquals(7252, testDistance);
     }
 
@@ -67,7 +67,7 @@ public class TestDistance {
         distance.unitName = "meters";
         distance.unitRadius = 6371000.0;
         //distance.getRadius(distance.units);
-        int testDistance = Distance.getDistanceNum(distance.origin.latitude, distance.origin.longitude, distance.destination.latitude, distance.destination.longitude, distance.getRadius(distance.units));
+        long testDistance = Distance.getDistanceNum(distance.origin.latitude, distance.origin.longitude, distance.destination.latitude, distance.destination.longitude, distance.getRadius(distance.units));
         assertEquals(13431841, testDistance);
     }
 
@@ -77,7 +77,7 @@ public class TestDistance {
         distance.unitName = "feet";
         distance.unitRadius = 20903520.0;
         //distance.getRadius(distance.units);
-        int testDistance = Distance.getDistanceNum(distance.origin.latitude, distance.origin.longitude, distance.destination.latitude, distance.destination.longitude, distance.getRadius(distance.units));
+        long testDistance = Distance.getDistanceNum(distance.origin.latitude, distance.origin.longitude, distance.destination.latitude, distance.destination.longitude, distance.getRadius(distance.units));
         assertEquals(44070438, testDistance);
     }
 
