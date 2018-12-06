@@ -199,24 +199,25 @@ class Itinerary extends Component {
                             {this.renderItineraryButtons()}
                             </tbody>
                             </Table>
+                            <br></br>
                             <Button onClick={this.toggle} type="button" > Attributes </Button>
                             <Button onClick={this.reverseTrip} type="button" className="float-right">  Reverse  </Button>
                             <Collapse isOpen={this.state.collapse}>
+                                <br></br>
                                 {this.attributeButtons()}
                             </Collapse>
                         </CardBody>
                     </Card>
                 </div>
-                <Card>
-                    <CardBody>
+                <div>
+                    <br></br>
                         <Row className="justify-content-center">
                             <ButtonGroup>
                                 <Button onClick={this.props.saveTrip} type="button" style={{backgroundColor: "407157"}} size="lg"> Save Trip </Button>
                                 <Button onClick={this.props.saveMap} type="button" style={{backgroundColor: "cea12b"}} size="lg"> Save Map </Button>
                             </ButtonGroup>
                         </Row>
-                    </CardBody>
-                </Card>
+                </div>
             </div>
         );
     }

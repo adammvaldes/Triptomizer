@@ -23,16 +23,14 @@ class Trip extends Component {
 
     render() {
         return (
-            <Card>
-                <CardBody>
+            <div>
                     <Row className="justify-content-center">
                         <ButtonGroup>
                             <Button style={{backgroundColor: "407157"}} onClick={this.plan} type="button" size="lg"> PLAN </Button>
                             <Button style={{backgroundColor: "cea12b"}} onClick={this.props.clearTrip} type="button" size="lg"> CLEAR </Button>
                         </ButtonGroup>
                     </Row>
-                </CardBody>
-            </Card>
+            </div>
         );
     }
 }

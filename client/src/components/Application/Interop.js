@@ -48,6 +48,7 @@ class Interop extends Component {
                         <InputGroupAddon addonType="prepend"><Button className="btn text-white" type="button" style={{backgroundColor: "407157"}} onClick={this.updatePort}>Change Port</Button></InputGroupAddon>
                         <Input type="number" placeholder="Enter the port number you want to use" onChange={this.handlePortChange} value={this.state.port}/>
                     </InputGroup>
+                    <br></br>
                     <InputGroup>
                         <InputGroupAddon addonType="prepend"><Button className="btn text-white" type="button" style={{backgroundColor: "407157"}} onClick={this.changeServer}>Change Server</Button></InputGroupAddon>
                         <Input type="text" placeholder="Enter the URL of the server you want to use" onChange={this.handleServerChange} value={this.state.server}/>

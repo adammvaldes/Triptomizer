@@ -254,7 +254,14 @@ class SearchBar extends Component{
                 </FormGroup>
                     <Row className="justify-content-left">
                         <Container>
-                            <Button onClick={this.toggleFilter} type="button">Filter Your Search</Button>
+                            <Row>
+                                <Col xs="2">
+                                    <Button onClick={this.toggleFilter} type="button">Filter Your Search</Button>
+                                </Col>
+                                <Col xs="2  ">
+                                    {add}
+                                </Col>
+                            </Row>
                             <Collapse isOpen={this.state.collapseFilter}>
                                 {this.setFilters()}
                             </Collapse>
@@ -266,7 +273,6 @@ class SearchBar extends Component{
                 <div id="parent">
                     <div id="div1"><Table responsive>{this.renderResults()}</Table></div>
                 </div>
-                    {add}
             </CardBody>
             </Card>);
     }

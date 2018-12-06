@@ -17,13 +17,9 @@ class Map extends Component {
             map = <Media id="map" object src={dataUri} alt="World Map"/>;
         }
         return (
-            <Card>
-                <CardBody>
                     <Media>
                         <Media body>{map}</Media>
                     </Media>
-                </CardBody>
-            </Card>
         );
     }
 }
