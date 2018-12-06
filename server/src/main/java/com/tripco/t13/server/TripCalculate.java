@@ -9,38 +9,26 @@ import spark.Request;
 import java.io.BufferedReader;
 import java.io.InputStreamReader;
 import java.util.*;
+import java.util.concurrent.Callable;
 
-public class TripCalculate {
+public class TripCalculate implements Callable<int []> {
 
     public Trip trip;
     private boolean isCorrectFormat; //verify correct format of POST request
+    int shortestCumulativeDistance = 0;
+    long[][] distanceLibrary;
+    Integer place = null;
+    int[] chunk;
+    int[] pointerPlaces;
+    int[] tempPointerPlaces;
 
-    public TripCalculate(Request request) {
-        isCorrectFormat = false;
 
-        // extract the information from the body of the request.
-        JsonParser jsonParser = new JsonParser();
-        JsonElement requestBody = jsonParser.parse(request.body());
-        //Converting to a Java class
-        Gson gson = new Gson();
-        try {
-            trip = gson.fromJson(requestBody, Trip.class);
-            isCorrectFormat = validateTripRequestFormat(trip);
-
-            String optimization = trip.options.optimization;
-            if (trip.options.optimization != null && (optimization.equals("short") || optimization.equals("shorter"))) {
-                shortOptimization();
-            } else {
-                //if(trip.places.get(0) != trip.places.get(trip.places.size()-1))
-                trip.places.add(trip.places.get(0)); //Make it a round trip.
-                trip.getTripDistances();
-                trip.places.remove(trip.places.size()-1);
-            }
-            setMap("/world_map.svg");
-
-        } catch (Exception e) {
-            isCorrectFormat = false;
-        }
+    public TripCalculate(int[] chunk, Trip trip, int shortestCumulativeDistance, long[][] distanceLibrary) {
+        this.trip = new Trip(trip);
+        this.place = place;
+        this.shortestCumulativeDistance = shortestCumulativeDistance;
+        this.distanceLibrary = distanceLibrary;
+        this.chunk = chunk;
     }
 
     public TripCalculate(Trip trip) {
@@ -49,73 +37,42 @@ public class TripCalculate {
         isCorrectFormat = validateTripRequestFormat(trip);
     }
 
-    void shortOptimization() {
-        int[] tempPointerPlaces = null;
-        long shortestCumulativeDistance = 0;
-        trip.distances = trip.getTripDistances();
+    int [] shortOptimization(int[] chunk) {
 
-        for (long distance : trip.distances) {
-            shortestCumulativeDistance += distance;
-        }
-
-        ArrayList<Location> retainOriginalPlaces = new ArrayList<>(trip.places.size());
-        retainOriginalPlaces.addAll(trip.places);
         // the  + 1 is responsible for containing the round trip element.
-        int[] pointerPlaces = new int[retainOriginalPlaces.size() + 1];
-
-
-
-        double radius = trip.options.getRadius();
-        long[][] distanceLibrary = new long[retainOriginalPlaces.size() + 1][retainOriginalPlaces.size() + 1];
-        for (int i = 0; i < retainOriginalPlaces.size(); i++) {
-            for (int k = 0; k < retainOriginalPlaces.size(); k++) {
-                distanceLibrary[i][k] = Distance.getDistanceNum(retainOriginalPlaces, i, k, radius);
-            }
-            distanceLibrary[i][retainOriginalPlaces.size()] = Distance.getDistanceNum(retainOriginalPlaces, i, 0,
-                    radius); //Round trip calculation.
+        pointerPlaces = new int[trip.places.size() + 1];
+        tempPointerPlaces = new int[trip.places.size() + 1];
+        //Initially we have pointers all in the same order as the places array.
+        for (int i = 0; i < trip.places.size(); i++) {
+            pointerPlaces[i] = i;
+            tempPointerPlaces[i] = i;
         }
-        distanceLibrary[retainOriginalPlaces.size()] = distanceLibrary[0]; //Round trip calculation
 
-        //Loop through all locations in original places array, performing shortest trip algorithm to see which place
-        //is shortest.
-        for (int place = 0; place < retainOriginalPlaces.size(); place++) {
-            //Initially we have pointers all in the same order as the places array.
-            for (int i = 0; i < retainOriginalPlaces.size(); i++) {
-                pointerPlaces[i] = i;
-            }
-            pointerPlaces[pointerPlaces.length - 1] = pointerPlaces[0];     //Making it a round trip.
-            pointerPlaces = ShortOptimization.travelingSalesman(place, retainOriginalPlaces, distanceLibrary);
-            long tempCumulativeDistance = 0;
+        long lStartTime = System.nanoTime();
+
+        for(int place = chunk[0]; place <= chunk[1]; place++){
+            pointerPlaces = ShortOptimization.travelingSalesman(place, trip.places, distanceLibrary);
+
+            int tempCumulativeDistance = 0;
 
             if (trip.options.optimization.equals("shorter")) {
-                twoOpt(retainOriginalPlaces, distanceLibrary, pointerPlaces);
+                twoOpt(trip.places, distanceLibrary, pointerPlaces);
             }
 
-            for(int i = 0; i < retainOriginalPlaces.size(); i++) {
+            for(int i = 0; i < trip.places.size(); i++) {
                 tempCumulativeDistance += distanceLibrary[pointerPlaces[i]][pointerPlaces[i+1]];
-//                        Distance.getDistanceNum(retainOriginalPlaces, pointerPlaces[i],
-//                        pointerPlaces[i+1], radius);
             }
 
-            tempCumulativeDistance += distanceLibrary[pointerPlaces[retainOriginalPlaces.size()]][pointerPlaces[0]]; //Round Trip
+            tempCumulativeDistance += distanceLibrary[pointerPlaces[trip.places.size()]][pointerPlaces[0]]; //Round Trip
 
             if (tempCumulativeDistance < shortestCumulativeDistance) {
                 shortestCumulativeDistance = tempCumulativeDistance;
-                tempPointerPlaces = new int[retainOriginalPlaces.size() + 1];
-                for (int i = 0; i < retainOriginalPlaces.size() + 1; i++) {
-                    tempPointerPlaces[i] = pointerPlaces[i];
-                }
+                tempPointerPlaces = pointerPlaces;
             }
         }
-        if (tempPointerPlaces != null) {
-            for (int i = 0; i < retainOriginalPlaces.size(); i++) {
-                //trip.places.set(i, trip.places.get(tempPointerPlaces[i]));
-                trip.places.set(i, retainOriginalPlaces.get(tempPointerPlaces[i]));
-            }
-        }
-        trip.places.add(trip.places.get(0)); //Make it a round trip.
-        trip.distances = trip.getTripDistances();
-        trip.places.remove(trip.places.size()-1);
+        System.out.println("Elapsed time for inside in milliseconds: " + (System.nanoTime() - lStartTime) / 1000000 + " from chunk[" + chunk[0] + "][" + chunk[1] + "]");
+        tempPointerPlaces[pointerPlaces.length - 1] = shortestCumulativeDistance;
+        return tempPointerPlaces;
     }
 
     public void twoOpt(ArrayList<Location> places, long[][] distanceLibrary, int[] pPlaces) {
@@ -258,5 +215,11 @@ public class TripCalculate {
         else{
             return "{}"; //return {} if incorrect request format
         }
+    }
+
+
+    @Override
+    public int[] call() throws Exception {
+        return shortOptimization(chunk);
     }
 }
