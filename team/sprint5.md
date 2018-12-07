@@ -134,10 +134,14 @@ We had 34 planned tasks at the beginning of the sprint. We broke tasks up into s
 
 #### What Went Well
 
-*Describe what went well during the sprint in general terms followed by a more detailed list.*
+During Sprint 5, like the previous sprints, our teamwork improved. We were able to split tasks up fairly evenly, and coded together as a group more frequently. While updating and improving our client's functionality and design we often times asked each other for opinions. This led to our site being built by a team of people, rather than being built by one person and reviewed by the rest.
+We did fairly well in taking on tasks as the sprint continued on. We tried to be sure to work on tasks that we were confident that we could get done before the sprint deadline. We made a few decisions as a group to leave certain tasks in the icebox that we figured we couldn't finish. This led us to not have any incomplete works in our master in time for the check and the deadline.
 
-* *something*
-*
+* We focused as a team in our nearly-complete website redesign, emphasizing user experience 
+* We spent time analyzing and fine-tuning output and our client for errors
+* We spent much more time talking to other teams and testing between servers for functionality
+* We fixed bugs and errors found in a reasonable amount of time
+* The team's time managment was better, having less independent coding
 
 #### Problems Encountered and Resolutions
 
