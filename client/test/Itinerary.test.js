@@ -1,16 +1,61 @@
 import './enzyme.config.js'                   // (1)
 import React from 'react'
 import { mount , shallow} from 'enzyme'              // (2)
-import {Button, Media} from "reactstrap";
-import Itinerary from "../src/components/Application/Itinerary";
+import Application from "../src/components/Application/Application";
+import Itinerary from '../src/components/Application/Itinerary'
+import {Button} from "reactstrap";
 
+let testTrip = {
+    type: "trip",
+    version: "3",
+    title: "Itinerary Test Trip",
+    options : {
+        units: "miles",
+        optimization: "none"
+    },
+    places: [{id: 'csrk',
+        name: 'Castle Rock',
+        latitude: 40,
+        longitude: -106
+    }, {id: 'blrd',
+        name: 'Boulder',
+        latitude: 45,
+        longitude: -101}, {id: 'dn',
+        name: 'Denver',
+        latitude: 42,
+        longitude: -103}],
+    distances: [20, 15, 24, 31],
+    map: 'test'
+};
 
-const testProps = {
+let actualPlace1 = {
+    id: 'csrk',
+    name: 'Castle Rock',
+    latitude: 40,
+    longitude: -106
+};
+let actualPlace2 = {
+    id: 'blrd',
+    name: 'Boulder',
+    latitude: 45,
+    longitude: -101
+};
+let actualPlace3 = {
+    id: 'dn',
+    name: 'Denver',
+    latitude: 42,
+    longitude: -103
+};
+
+let testState = {
+    config: null,
+    port: "",
+    URL: "",
     trip: {
         type: "trip",
         version: "3",
-        title: "Stuffity",
-        options: {
+        title: "Itinerary Test Trip",
+        options : {
             units: "miles",
             unitName: "miles",
             unitRadius: "3959",
@@ -18,35 +63,24 @@ const testProps = {
         },
         places: [],
         distances: [],
-        map: '<svg width="1920" height="20" xmlns="http://www.w3.org/2000/svg" xmlns:svg="http://www.w3.org/2000/svg"><g></g></svg>'
-    },
-    config: {
-        optimization:[
-            {label:"none",description:"The trip is not optimized."},
-            {label:"short",description:"Nearest neighbor."},
-            {label:"shorter",description:"2-opt."}]
-    },
-    displayedAttributes : [["name", "true"], ["id", "true"]]
+        map: ''
+    }
 };
 
-
 function testRender() {
-    const fileWrapper = mount((
-        <Itinerary
-            trip={testProps.trip}
-            config={testProps.config}
-            displayedAttributes={testProps.displayedAttributes}
-        />
+
+    let wrapper = mount((
+        <Application/>
     ));
+    wrapper.setState({'trip' : testTrip});
 
-
-    let actualButtonTexts = fileWrapper.find('Button').map((button)=>{
-        return button.text();
+    let actualButtonTexts = wrapper.find('Card').map((input)=>{
+        return input.text();
     });
 
-    let expectedButtonTexts = ['+', ' Attributes ', '  Reverse  ', ' Save Trip ', ' Save Map ', 'Search', 'Filter Your Search'];
-
-    expect(actualButtonTexts).toEqual(expectedButtonTexts);
+    console.log(actualButtonTexts);
+    let expectedButtonTexts = [];
+    expect(actualButtonTexts).toEqual(expectedButtonTexts)
 }
 
-test('Testing Button render', testRender);
+test('Testing render function in Itinerary.js', testRender);

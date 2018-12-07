@@ -1,0 +1,5 @@
+#!/bin/bash
+
+rm ./target/server*.jar
+mvn package
+java -jar target/server-*.jar $*
