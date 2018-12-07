@@ -143,6 +143,10 @@ class Application extends Component {
     updateOptions(option, value) {
         let trip = this.state.trip;
         trip.options[option] = value;
+        if(value === "miles" || value === "kilometers" || value === "nautical miles"){
+            trip.options["unitName"] = undefined;
+            trip.options["unitRadius"] = undefined;
+        }
         this.setState(trip);
     }
 
@@ -270,7 +274,6 @@ class Application extends Component {
         let userPlaces = this.state.trip.places;
         let userDistances = this.state.trip.distances;
         let userOptions;
-        console.log(this.state.trip.options)
         if(this.state.trip.options.unitName === this.state.trip.options.units){
             userOptions = {
                 units : this.state.trip.options.units,
