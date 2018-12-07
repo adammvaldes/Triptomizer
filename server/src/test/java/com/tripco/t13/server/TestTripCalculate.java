@@ -254,11 +254,9 @@ public class TestTripCalculate {
     public void testShortOptimization() {
         tripCalculate = new TripCalculate(tripShort);
         if (tripCalculate.trip.options.optimization != null && tripCalculate.trip.options.optimization.equals("short")) {
-            Timestamp check = new Timestamp(System.currentTimeMillis());
-            System.out.println(check);
+            long lStartTime = System.nanoTime();
             tripCalculate.shortOptimization();
-            check = new Timestamp(System.currentTimeMillis());
-            System.out.println(check);
+            System.out.println("Elapsed time for short in milliseconds: " + (System.nanoTime() - lStartTime) / 1000000);
         } else {
             tripCalculate.trip.places.add(tripCalculate.trip.places.get(0));
         }
@@ -285,11 +283,9 @@ public class TestTripCalculate {
     public void testShorterOptimization(){
         tripCalculate = new TripCalculate(tripShorter);
         if (tripCalculate.trip.options.optimization != null && tripCalculate.trip.options.optimization.equals("shorter")) {
-            Timestamp check = new Timestamp(System.currentTimeMillis());
-            System.out.println(check);
+            long lStartTime = System.nanoTime();
             tripCalculate.shortOptimization();
-            check = new Timestamp(System.currentTimeMillis());
-            System.out.println(check);
+            System.out.println("Elapsed time for shorter in milliseconds: " + (System.nanoTime() - lStartTime) / 1000000);
         } else {
             tripCalculate.trip.places.add(tripCalculate.trip.places.get(0));
         }

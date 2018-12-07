@@ -331,7 +331,7 @@ class Application extends Component {
             return <Container/>
         }
 
-        let tabs = ['Trip Plan', 'Options', 'Distance Calculator', 'About Us'];
+        let tabs = ['Trip Plan', 'Options', 'Distance Calculator', 'About The Site'];
 
         let tripPlanTab = [
             <Card key="cardkey">
@@ -388,7 +388,7 @@ class Application extends Component {
                 {this.renderTabContents(tripPlanTab, 'Trip Plan')}
                 {this.renderTabContents(optionsTab, 'Options')}
                 {this.renderTabContents(distanceCalculatorTab, 'Distance Calculator')}
-                {this.renderTabContents(infoTab, 'About Us')}
+                {this.renderTabContents(infoTab, 'About The Site')}
             </Container>
         )
     }
