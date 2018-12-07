@@ -92,9 +92,9 @@ Epics from the previous sprint.
 
 | Statistic | Planned | Completed |
 | --- | ---: | ---: |
-| Epics | 10 | *total* |
-| Tasks |  34   | *total* | 
-| Story Points |  51  | *total* | 
+| Epics | 10 | 6 |
+| Tasks |  34   | 78 | 
+| Story Points |  51  | 66 | 
 
 #### Planned
 We had 34 planned tasks at the beginning of the sprint. We broke tasks up into sections for the client and the server sides. Our main focus is to catch up on unfinished task from last sprint, such as optimizing 2-opt. Then we will move on to the client side tasks. These task mirror the changes suggested from Dave, along with additions of the "team info" section.
