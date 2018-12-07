@@ -14,7 +14,14 @@ class Trip extends Component {
         };
     }
     plan(){
-        this.props.planRequest();
+        if(this.props.trip.places.length === 0 || this.props.trip.places === undefined){
+            return (
+                alert("Add places to your Trip to plan")
+            );
+        }
+        else{
+            this.props.planRequest();
+        }
     }
 
     toggle(){
