@@ -47,7 +47,7 @@ We also want to "clean up" the code for our page in general. This includes simpl
 We want to implement the new epics and tasks assigned specifically for sprint 5, but those tasks are at the bottom of priority as we work to complete the tasks from the last sprint, such as implementation on of the KML map.
 
 ### Diagrams
-<img src="https://raw.githubusercontent.com/csu18fa314/t13/master/images/SP5Sketch.jpg?token=AoljlLfU73gPpS4Du_qMjjdLxvrZ35KSks5b9fTJwA%3D%3D" width=400px>
+<img src="https://github.com/csu18fa314/t13/blob/master/images/SP5Sketch.jpg" width=400px>
 *Sprint 5 release website sketch. The main focus for this sprint is to improve and finalize all current features, and optionally add more features once the base has been finalized.*
 
 <img src="https://user-images.githubusercontent.com/42558356/47400444-6b969980-d6fa-11e8-86cc-70fd6958b691.jpg" width=400px>
@@ -141,10 +141,9 @@ We had 34 planned tasks at the beginning of the sprint. We broke tasks up into s
 
 #### Problems Encountered and Resolutions
 
-*Describe what problems occurred during the sprint in general terms followed by a more detailed list.*
-
-* *something*
-*
+ One of the biggest issues we encountered in this sprint overall was the need for a website redesign.  We had not done much work in redesigning the client in previous sprints, which left various parts of the functionality out of place, outdated or simply not working.  We resolved this by getting feedback from Dave, and meeting as a team to set up clear goals for our website's layout and functionality. By the end of the sprint we were able to complete the redesign of our website to the point agreed upon by each of our team members.
+ 
+ One of our team's ongoing issues was our slow runtimes for our optimizations, and as such another one of our main issues this sprint was to improve our performance for our optimizations.  We were ultimately able to greatly improve our optimization performance after an extensive review of the relevant code and modifying our implementation accordingly.
 
 ## Retrospective
 
