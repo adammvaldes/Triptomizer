@@ -11,7 +11,7 @@ const testProps = {
     URL: "",
     trip: {
         type: "trip",
-        version: "3",
+        version: "4",
         title: "Stuffity",
         options: {
             units: "miles",
@@ -25,6 +25,46 @@ const testProps = {
     }
 };
 
+function testCalcDist() {
+    let wrapper = mount(
+        <DistanceCalculator
+            trip={testProps.trip}
+            port={testProps.port}
+            URL={testProps.URL}
+        />
+    );
+
+    wrapper.props().trip.options.units = "user defined";
+    wrapper.props().trip.options.unitName = "bananas";
+    wrapper.props().trip.options.unitRadius = 1234;
+    let expectedDistance = {
+    type : "distance",
+    version : 4,
+    origin : {
+        name : "",
+        latitude : 0,
+        longitude : 0
+    },
+    destination : {
+        name : "",
+        latitude : 0,
+        longitude : 0
+    },
+    units : "user defined",
+    unitRadius : 1234,
+    distance : 0
+    };
+
+    wrapper.instance().calcDist();
+    expect(wrapper.state().distance).toEqual(expectedDistance);
+
+    wrapper.props().trip.options.units = "nautical miles";
+    wrapper.props().trip.options.unitRadius = 1234;
+    expectedDistance.units = "nautical miles";
+    wrapper.instance().calcDist();
+    expect(wrapper.state().distance).toEqual(expectedDistance);
+}
+test("Branch testing calcDist", testCalcDist);
 
 function testUpdateDistance() {
     let wrapper = mount(
@@ -69,6 +109,29 @@ function testUpdateValue() {
 }
 
 test('Testing updateValue', testUpdateValue);
+
+function testRenderDistance() {
+    let wrapper = mount(
+        <DistanceCalculator
+            trip={testProps.trip}
+            port={testProps.port}
+            URL={testProps.URL}
+        />
+    );
+
+    wrapper.props().trip.options.units = "user defined";
+    let response = wrapper.instance().renderDistance();
+    expect(response).toEqual(
+        <h5> Distance: {wrapper.state().distance.distance} {wrapper.props().trip.options.unitName} </h5>
+    );
+
+    wrapper.props().trip.options.units = "miles";
+    response = wrapper.instance().renderDistance();
+    expect(response).toEqual(
+        <h5> Distance: {wrapper.state().distance.distance} {wrapper.state().distance.units} </h5>
+    );
+}
+test("Branch testing renderDistance", testRenderDistance);
 
 function testRender() {
     let wrapper = mount(

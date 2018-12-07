@@ -36,7 +36,7 @@ class DistanceCalculator extends Component{
         tempDistance.units = this.props.trip.options.units;
         tempDistance.unitRadius = this.props.trip.options.unitRadius;
         this.setState({distance : tempDistance});
-       if(this.props.trip.options.units === "user defined"){
+        if(this.props.trip.options.units === "user defined"){
            this.setState({units : this.props.trip.options.unitName});
         }
         if(this.props.URL === "" || this.props.port==="314") {
