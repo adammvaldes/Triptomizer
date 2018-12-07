@@ -20,7 +20,7 @@ public class TestShortAlgorithm {
     Location place2 = new Location();
     Location place3 = new Location();
     Location place4 = new Location();
-    long[][] distanceLibrary = null;
+    Long[][] distanceLibrary = null;
     int[] pointerPlaces = null;
     @Before
     public void initialize() {
@@ -52,7 +52,7 @@ public class TestShortAlgorithm {
         places.add(place3);
         places.add(place4);
 
-        distanceLibrary = new long[places.size()][places.size()];
+        distanceLibrary = new Long[places.size()][places.size()];
         for (int i = 0; i < places.size(); i++) {
             for (int k = 0; k < places.size(); k++) {
                 distanceLibrary[i][k] = Distance.getDistanceNum(places, i, k, options.getRadius());
@@ -112,7 +112,7 @@ public class TestShortAlgorithm {
         places.add(denver);
         places.add(coSprings);
 
-        distanceLibrary = new long[places.size()][places.size()];
+        distanceLibrary = new Long[places.size()][places.size()];
         for (int i = 0; i < places.size(); i++) {
             for (int k = 0; k < places.size(); k++) {
                 distanceLibrary[i][k] = Distance.getDistanceNum(places, i, k, options.getRadius());
@@ -141,7 +141,7 @@ public class TestShortAlgorithm {
         places.add(denver);
         places.add(coSprings);
         visitedPlaces = new boolean[places.size()];
-        distanceLibrary = new long[places.size()][places.size()];
+        distanceLibrary = new Long[places.size()][places.size()];
         for (int i = 0; i < places.size(); i++) {
             for (int k = 0; k < places.size(); k++) {
                 distanceLibrary[i][k] = Distance.getDistanceNum(places, i, k, options.getRadius());

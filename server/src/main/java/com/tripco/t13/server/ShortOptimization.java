@@ -5,7 +5,7 @@ import java.util.ArrayList;
 public class ShortOptimization {
 
     //Performs shortest trip calculation based on what place of origin has been received.
-    static int[] travelingSalesman(int currentOrigin, ArrayList<Location> places, long[][] distancesLibrary) {
+    static int[] travelingSalesman(int currentOrigin, ArrayList<Location> places, Long[][] distancesLibrary) {
         boolean[] visitedPlaces = new boolean[places.size()];
         boolean allPlacesVisited = false;
 
@@ -36,7 +36,7 @@ public class ShortOptimization {
     /*This method calculates the shortest distance between the starting origin, and all the other places
     this method has been given.
     */
-    static Integer calculateDistances(int origin, boolean[] visitedPlaces, long[][] distancesLibrary) {
+    static Integer calculateDistances(int origin, boolean[] visitedPlaces, Long[][] distancesLibrary) {
         long shortestDistance = Long.MAX_VALUE;
         Integer closestPlace = null;
 

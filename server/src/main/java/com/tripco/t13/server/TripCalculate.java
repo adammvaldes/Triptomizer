@@ -16,14 +16,14 @@ public class TripCalculate implements Callable<int []> {
     public Trip trip;
     private boolean isCorrectFormat; //verify correct format of POST request
     int shortestCumulativeDistance = 0;
-    long[][] distanceLibrary;
+    Long[][] distanceLibrary;
     Integer place = null;
     int[] chunk;
     int[] pointerPlaces;
     int[] tempPointerPlaces;
 
 
-    public TripCalculate(int[] chunk, Trip trip, int shortestCumulativeDistance, long[][] distanceLibrary) {
+    public TripCalculate(int[] chunk, Trip trip, int shortestCumulativeDistance, Long[][] distanceLibrary) {
         this.trip = new Trip(trip);
         this.place = place;
         this.shortestCumulativeDistance = shortestCumulativeDistance;
@@ -48,17 +48,16 @@ public class TripCalculate implements Callable<int []> {
             tempPointerPlaces[i] = i;
         }
 
-        long lStartTime = System.nanoTime();
 
         for(int place = chunk[0]; place <= chunk[1]; place++){
             pointerPlaces = ShortOptimization.travelingSalesman(place, trip.places, distanceLibrary);
 
             int tempCumulativeDistance = 0;
 
+
             if (trip.options.optimization.equals("shorter")) {
                 twoOpt(trip.places, distanceLibrary, pointerPlaces);
             }
-
             for(int i = 0; i < trip.places.size(); i++) {
                 tempCumulativeDistance += distanceLibrary[pointerPlaces[i]][pointerPlaces[i+1]];
             }
@@ -70,12 +69,11 @@ public class TripCalculate implements Callable<int []> {
                 tempPointerPlaces = pointerPlaces;
             }
         }
-        System.out.println("Elapsed time for inside in milliseconds: " + (System.nanoTime() - lStartTime) / 1000000 + " from chunk [" + chunk[0] + "][" + chunk[1] + "]");
         tempPointerPlaces[pointerPlaces.length - 1] = shortestCumulativeDistance;
         return tempPointerPlaces;
     }
 
-    public void twoOpt(ArrayList<Location> places, long[][] distanceLibrary, int[] pPlaces) {
+    public void twoOpt(ArrayList<Location> places, Long[][] distanceLibrary, int[] pPlaces) {
         boolean improvement = true;
         while (improvement) {
             improvement = false;
@@ -108,7 +106,7 @@ public class TripCalculate implements Callable<int []> {
         return pPlaces;
     }
 
-    public void setMap(String filepath){
+    public  void setMap(String filepath){
         BufferedReader read;
         try {
             read = new BufferedReader(new InputStreamReader(getClass().getResourceAsStream(filepath)));
@@ -133,7 +131,7 @@ public class TripCalculate implements Callable<int []> {
         }
     }
 
-    public String drawVectorWorld(Trip trip) {
+    public static String drawVectorWorld(Trip trip) {
         String vectors = "";
         double mapW = 1024.0, mapH = 512.0, mapLat = 180.0, mapLon = 360.0,
                 pixPerLat = mapH / mapLat, pixPerLon = mapW / mapLon;
