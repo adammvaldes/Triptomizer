@@ -120,20 +120,16 @@ function testRenderDistance() {
     );
 
     wrapper.props().trip.options.units = "user defined";
-    wrapper.instance().renderDistance();
-    expect(
-        wrapper.containsMatchingElement(
-            <h5> Distance: {wrapper.state().distance.distance} {wrapper.props().trip.options.unitName} </h5>
-        )
-    ).toEqual(true);
+    let response = wrapper.instance().renderDistance();
+    expect(response).toEqual(
+        <h5> Distance: {wrapper.state().distance.distance} {wrapper.props().trip.options.unitName} </h5>
+    );
 
     wrapper.props().trip.options.units = "miles";
-    wrapper.instance().renderDistance();
-    expect(
-        wrapper.containsMatchingElement(
-            <h5> Distance: {wrapper.state().distance.distance} {wrapper.state().distance.units} </h5>
-        )
-    ).toEqual(true);
+    response = wrapper.instance().renderDistance();
+    expect(response).toEqual(
+        <h5> Distance: {wrapper.state().distance.distance} {wrapper.state().distance.units} </h5>
+    );
 }
 test("Branch testing renderDistance", testRenderDistance);
 
