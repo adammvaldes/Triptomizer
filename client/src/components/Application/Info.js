@@ -11,6 +11,24 @@ export default class Info extends Component {
         let imgAdam = <img height={"150"} src={Adam} alt={"Adam's picture"}/>;
         let imgjohn = <img height={"150"} src={john} alt={"John's picture"}/>
         return (
+            <div>
+            <card>
+                <CardBody>
+                    <p className="lead">How It Works.</p>
+                    <ol >
+                        <li>
+                            Choose destinations by loading from a file,
+                            searching for locations from the database, or adding a custom destination in the itinerary.</li>
+                        <li>
+                            Choose options for your trip in the options tab.</li>
+                        <li>
+                            Plan your trip with the selected options.
+                            Revise the trip as necessary and replan.
+                            Choose what is displayed in the itinerary.</li>
+                        <li>Save the trip or the map for future reference.</li>
+                    </ol>
+                </CardBody>
+            </card>
             <Card>
                 <CardBody>
                     <h1 align="center"> The Spaghetti Coders </h1>
@@ -79,6 +97,7 @@ export default class Info extends Component {
                     </Media>
                 </CardBody>
             </Card>
+            </div>
         )
     }
 }

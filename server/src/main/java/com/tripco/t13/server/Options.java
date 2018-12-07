@@ -24,11 +24,7 @@ public class Options {
                 return 3959.0; //undefined so return default miles
         }
     }
-
-
     public String toString(){
         return units+unitName + unitRadius;
     }
-
-
 }
