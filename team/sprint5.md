@@ -113,11 +113,10 @@ At the end of sprint 5, total completed tasks equal 78. As usual, 34 tasks were 
 | 11/30/2018 | #414, #400, $405, #430, #421, #424, #423, #397, #402, #434, #425, #436, #445, #429, #447, #435, #449, #439, #444, #428, #455, #459, #455, #461, #440, #462, #270, #428 | #410 | *none* | 
 | 12/3/2018 | #414, #400, $405, #430, #421, #424, #423, #397, #402, #434, #425, #436, #445, #429, #447, #435, #449, #439, #444, #428, #455, #459, #455, #461, #440, #462, #270, #428, #479, #409, #410 | #485, #488, #480, #403 | *none* |
 | 12/5/2018 | #414, #400, $405, #430, #421, #424, #423, #397, #402, #434, #425, #436, #445, #429, #447, #435, #449, #439, #444, #428, #455, #459, #455, #461, #440, #462, #270, #428, #479, #409, #410, #485, #488, #480, #477, #481, #483, #496, #494, #482 | #403, #499, #501, #502 | *none* |
-*Add a new row for the scrum session after each lecture. *
 
 ## Review
 
-*An introductory paragraph describing the overall results of the sprint.*
+Overall, our team successfully refactored our website to create a better user experience. We spent time making certain that all aspects of our site worked as expected. However, at the beginning of the sprint, we over estimated the amount of work we could get done, so this sprint there were not many new features added to the website. Despite this, our team came together to create an efficient and functional website that we are all proud of.
 
 #### Completed Epics in Sprint Backlog 
 -I want trip planning to be fast: Vlad and John had worked in a duo fashion throughout the entire section of making 2-opt faster as well as making 2-opt concurrent. Although concurrency will not be making it into the production deployment for this sprint, it is fully implemented in the branch "vstepanuga-sprint5-2optConcurrency" for future review. <br/>
