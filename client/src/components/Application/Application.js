@@ -105,7 +105,7 @@ class Application extends Component {
                 alert("Your trip of length " + this.state.trip.places.length + " was too large for the " + this.state.trip.options.optimization + " optimization"));
         }
         if (this.state.URL === "" || this.state.port === "314") {
-            this.updateOptions('unitName', this.state.trip.options.units);
+            //this.updateOptions('unitName', this.state.trip.options.units);
             request(this.state.trip, "plan").then(serverResponse => {
                 this.updateMap(serverResponse["map"]);
                 this.updateDistances(serverResponse["distances"]);
@@ -113,7 +113,7 @@ class Application extends Component {
             });
         }
         else {
-            this.updateOptions('unitName', this.state.trip.options.units);
+            //this.updateOptions('unitName', this.state.trip.options.units);
             request(this.state.trip, "plan", this.state.port, this.state.URL).then(serverResponse => {
                 this.updateMap(serverResponse["map"]);
                 this.updateDistances(serverResponse["distances"]);
@@ -270,6 +270,7 @@ class Application extends Component {
         let userPlaces = this.state.trip.places;
         let userDistances = this.state.trip.distances;
         let userOptions;
+        console.log(this.state.trip.options)
         if(this.state.trip.options.unitName === this.state.trip.options.units){
             userOptions = {
                 units : this.state.trip.options.units,
