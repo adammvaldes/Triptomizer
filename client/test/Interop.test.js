@@ -6,46 +6,47 @@ import {Button} from "reactstrap";
 
 
 const testProps = {
-    server : "black-bottle.cs.colostate.edu",
-    port : "31413"
+    URL : "localhost",
+    port : "31400"
 };
 
 //Function tests to be added after kml is implemented
 
-function changeServer(){
-
+function changeServer(server){
+    testProps.URL = server;
 }
 
-function updateNumber(){
-
+function updateNumber(port){
+    testProps.port = port;
 }
 
-/*function testChangeServer(value) {
-    testProps.server = "black-bottle.cs.colostate.edu";
-    expect(2).toEqual(2);
-}
-
-test('Testing changeServer', testChangeServer);
-
-function testUpdateNumber() {
+function testChangeServer(){
     let interopWrapper = mount((
         <Interop
-            port={testProps.port}
             changeServer={changeServer}
             updateNumber={updateNumber}
         />
     ));
-    interopWrapper.instance().updatePort();
-    //let temp = interopWrapper.state().port);
-    //console.log("Temp:", temp);
-    expect(interopWrapper.state().port).toEqual("31413");
-    //console.log(interopWrapper.state().port);
-    //console.log(testProps.port);
-    let temp2 = 1;
-    //expect(2).toEqual(3);
+    interopWrapper.instance().changeServer("black-bottle.cs.colostate.edu");
+    let expectedServer = "black-bottle.cs.colostate.edu";
+    expect(interopWrapper.state().server).toEqual(expectedServer);
 }
 
-test('Testing updateNumber', testUpdateNumber);*/
+test('Testing changeServer', testChangeServer);
+
+function testUpdatePort(){
+    let interopWrapper = mount((
+        <Interop
+            changeServer={changeServer}
+            updateNumber={updateNumber}
+        />
+    ));
+    interopWrapper.instance().updatePort("31413");
+    let expectedPort = "31413";
+    expect(interopWrapper.state().port).toEqual(expectedPort);
+}
+
+test('Testing updatePort', testUpdatePort);
 
 function testRender() {
     let interopWrapper = mount((
@@ -60,7 +61,7 @@ function testRender() {
     });
 
     let expectedButtonTexts = ['Change Port', 'Change Server'];
-    expect(actualButtonTexts).toEqual(expectedButtonTexts)
+    expect(actualButtonTexts).toEqual(expectedButtonTexts);
 }
 
 test('Testing render function in Interop.js', testRender);
