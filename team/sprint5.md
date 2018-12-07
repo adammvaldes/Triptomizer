@@ -148,22 +148,24 @@ We did fairly well in taking on tasks as the sprint continued on. We tried to be
  One of the biggest issues we encountered in this sprint overall was the need for a website redesign.  We had not done much work in redesigning the client in previous sprints, which left various parts of the functionality out of place, outdated or simply not working.  We resolved this by getting feedback from Dave, and meeting as a team to set up clear goals for our website's layout and functionality. By the end of the sprint we were able to complete the redesign of our website to the point agreed upon by each of our team members.
  
  One of our team's ongoing issues was our slow runtimes for our optimizations, and as such another one of our main issues this sprint was to improve our performance for our optimizations.  We were ultimately able to greatly improve our optimization performance after an extensive review of the relevant code and modifying our implementation accordingly.
+ 
+ What was probably our biggest problem this sprint was our struggle to implement concurrency in time to deploy our final product.  Although we were able to thread our optimization process, we were unable to get the threaded version to run faster than the non-threaded one.  As such, we ultimately had to decide that we were not going to be able to implement the feature before the deadline.  This essentially meant that most of our time spent on that feature unfortunately did not change anything in our final deployed website.
 
 ## Retrospective
 
-*An introductory paragraph for your retrospective.*
+During this sprint we were able to close tasks consistently and frequently and were also able to deploy regularly.  We also identified which epics we thought we could complete and worked in a more focused manner to complete them.  Although our burndown report was behind schedule, we believe that we were close to in line with what could be expected given that the break essentially extended our chart with a week of no progress.
 
 #### What we changed this sprint
 
-*Articulate specifically what you will do differently based on the retrospective from the previous sprint before the sprint starts.*
+One thing we changed this sprint is that we were able to deploy more consistently. We were also able to more clearly identify which tasks and epics we felt were of the highest priority.
 
 #### What we did well
 
-*Articulate what went well at the end of the sprint.*
+This sprint we were able to more clearly identify which epics we should prioritize completing by the end of the sprint and as such our overall workflow was much more well focused. We were also able to deploy more regularly with a working product throughout the sprint.
 
 #### What we need to work on
 
-*Articulate things you could improve at the end of the sprint.*
+One thing we could improve on is being able to more accurately estimate how much time certain tasks will take to complete, as we lost a significant portion of our time to some tasks that we were unable to complete by the end of the sprint, effectively invalidating a portion of our work on this sprint.
 
 #### What we will change next sprint 
 
