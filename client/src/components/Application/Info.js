@@ -12,7 +12,7 @@ export default class Info extends Component {
         let imgjohn = <img height={"150"} src={john} alt={"John's picture"}/>
         return (
             <div>
-            <card>
+            <Card>
                 <CardBody>
                     <p className="lead">How It Works.</p>
                     <ol >
@@ -28,7 +28,7 @@ export default class Info extends Component {
                         <li>Save the trip or the map for future reference.</li>
                     </ol>
                 </CardBody>
-            </card>
+            </Card>
             <Card>
                 <CardBody>
                     <h1 align="center"> The Spaghetti Coders </h1>
