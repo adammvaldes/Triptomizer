@@ -269,7 +269,16 @@ class Application extends Component {
         let userTitle = this.state.trip.title;
         let userPlaces = this.state.trip.places;
         let userDistances = this.state.trip.distances;
-        let userOptions = this.state.trip.options;
+        let userOptions;
+        if(this.state.trip.options.unitName === this.state.trip.options.units){
+            userOptions = {
+                units : this.state.trip.options.units,
+                optimization : this.state.trip.options.optimization
+            };
+        }
+        else{
+            userOptions = this.state.trip.options;
+        }
 
         let userObject = {version: userVersion, type: userType, title: userTitle, options: userOptions, places:userPlaces, distances:userDistances};
         let json = JSON.stringify(userObject);
