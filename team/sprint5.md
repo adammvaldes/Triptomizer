@@ -128,11 +128,10 @@ At the end of sprint 5, total completed tasks equal 78. As usual, 34 tasks were 
 -I want to choose what information is displayed in the itinerary and map: Our team implemented a dynamic set of checkboxes such that upon clicking a checkbox, a specific row of our itinerary will be hidden away.
 
 #### Incomplete Epics in Sprint Backlog 
-
-*Describe capabilities not included in the release and list the epics below with an explanation.*
-
-* *## epic title: explanation*
-*
+* User: I want to view my trip in other tools: We did not have time to implement any map types other than svg.
+* User: I want an interactive map: Since we were only able to display a map in svg, we could not make the map interactive.
+* User: I want my options remembered so I don't have to fix them all the time: Cookies were the last item on our list of features to implement so they were not prioritized.
+* User: I want the shortest trips possible: We spent so much time tying to get our concurency faster that we ran out of time to implement three-opt.
 
 #### What Went Well
 
