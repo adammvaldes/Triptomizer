@@ -96,10 +96,11 @@ Epics from the previous sprint.
 | Tasks |  34   | *total* | 
 | Story Points |  51  | *total* | 
 
+#### Planned
 We had 34 planned tasks at the beginning of the sprint. We broke tasks up into sections for the client and the server sides. Our main focus is to catch up on unfinished task from last sprint, such as optimizing 2-opt. Then we will move on to the client side tasks. These task mirror the changes suggested from Dave, along with additions of the "team info" section.
 
-*Enter the `# Completed` at the end of the sprint.  Include a discussion about any difference in the number planned versus completed tasks and story points.*
-
+#### Completed
+At the end of sprint 5, total completed tasks equal 78. As usual, 34 tasks were not nearly enough to accomodate the amount of work our team members had to do for this sprint. Attempting to implement features which did not originally belong in our sprint plan took more points than we planned, as well as testing improvements and various other miniature tasks were also not accounted for.
 
 ## Scrums
 
@@ -119,11 +120,12 @@ We had 34 planned tasks at the beginning of the sprint. We broke tasks up into s
 *An introductory paragraph describing the overall results of the sprint.*
 
 #### Completed Epics in Sprint Backlog 
-
-*Describe the solution based on the completed epics and list the epics below.*
-
-* *## epic title: comments*
-* 
+-I want trip planning to be fast: Vlad and John had worked in a duo fashion throughout the entire section of making 2-opt faster as well as making 2-opt concurrent. Although concurrency will not be making it into the production deployment for this sprint, it is fully implemented in the branch "vstepanuga-sprint5-2optConcurrency" for future review. <br/>
+-I want to know who to thank for this application: This was a standard for each team, and did not take a long time to implement. <br/>
+-All code must be tested: Our team tried their best to test all code, putting us at roughly a 50% range of code testing.<br/>
+-All code must be clean: Following the course text, our team cleaned up nearly all code smells, thus putting our project at A maintainability.<br/>
+-Make the system easier to use: Our team completely revamped our website to account for much more simplistic and obvious view of our website. We are proud of this design.<br/>
+-I want to choose what information is displayed in the itinerary and map: Our team implemented a dynamic set of checkboxes such that upon clicking a checkbox, a specific row of our itinerary will be hidden away.
 
 #### Incomplete Epics in Sprint Backlog 
 
